@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  bill_number: MyString
+  domain: MyString
+  summary: MyText
+  full_text: MyText
+  reason_for_revision: MyText
+  current_status: MyString
+  view_count: 1
+  public_comment_start_date: 2025-02-15
+  public_comment_end_date: 2025-02-15
+  department: one
+
+two:
+  title: MyString
+  bill_number: MyString
+  domain: MyString
+  summary: MyText
+  full_text: MyText
+  reason_for_revision: MyText
+  current_status: MyString
+  view_count: 1
+  public_comment_start_date: 2025-02-15
+  public_comment_end_date: 2025-02-15
+  department: two

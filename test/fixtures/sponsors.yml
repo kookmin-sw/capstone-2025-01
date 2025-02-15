@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sponsor_type: MyString
+  name: MyString
+  party: MyString
+  region: MyString
+  contact_info: MyString
+
+two:
+  sponsor_type: MyString
+  name: MyString
+  party: MyString
+  region: MyString
+  contact_info: MyString

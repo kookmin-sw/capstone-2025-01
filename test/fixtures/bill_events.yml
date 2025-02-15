@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bill: one
+  event_type: MyString
+  event_date: 2025-02-15
+  description: MyText
+
+two:
+  bill: two
+  event_type: MyString
+  event_date: 2025-02-15
+  description: MyText
