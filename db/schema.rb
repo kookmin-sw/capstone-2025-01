@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_15_111035) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_18_082010) do
   create_table "bill_events", force: :cascade do |t|
     t.integer "bill_id", null: false
     t.string "event_type"
@@ -33,7 +33,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_15_111035) do
 
   create_table "bills", force: :cascade do |t|
     t.string "title", null: false
-    t.string "bill_number", null: false
+    t.string "bill_number"
     t.string "domain"
     t.text "summary"
     t.text "full_text"
