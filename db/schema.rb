@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_18_082010) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_22_021519) do
   create_table "bill_events", force: :cascade do |t|
     t.integer "bill_id", null: false
     t.string "event_type"
@@ -45,6 +45,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_18_082010) do
     t.integer "department_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "bill_type"
+    t.index ["bill_type"], name: "index_bills_on_bill_type"
     t.index ["department_id"], name: "index_bills_on_department_id"
   end
 
