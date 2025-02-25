@@ -1,6 +1,12 @@
 class BillsController < ApplicationController
   def index
-    @pagy, @bills = pagy(Bill.all)
+    @bills = Bill.all
+                 .by_title(params[:q])
+                 .by_department(params[:department_id])
+                 .by_domain(params[:domain])
+                 .by_bill_type(params[:bill_type])
+
+    @pagy, @bills = pagy(@bills.order(created_at: :desc))
   end
 
   def show
