@@ -1,0 +1,122 @@
+<div class="bill-details">
+  <div class="back-link">
+    <%= link_to "← 목록으로 돌아가기", bills_path %>
+  </div>
+
+  <div class="bill-header">
+    <h1><%= @bill.title %></h1>
+    <div class="bill-meta">
+      <div class="meta-item">
+        <span class="label">법안번호:</span>
+        <span><%= @bill.bill_number || "없음" %></span>
+      </div>
+      <div class="meta-item">
+        <span class="label">법령종류:</span>
+        <span><%= @bill.bill_type || "미지정" %></span>
+      </div>
+      <div class="meta-item">
+        <span class="label">소관부처:</span>
+        <span><%= @bill.department&.name || "미지정" %></span>
+      </div>
+      <div class="meta-item">
+        <span class="label">분야:</span>
+        <span><%= @bill.domain || "미지정" %></span>
+      </div>
+      <div class="meta-item">
+        <span class="label">진행상황:</span>
+        <span><%= @bill.current_status || "미지정" %></span>
+      </div>
+      <div class="meta-item">
+        <span class="label">의견수렴기간:</span>
+        <% if @bill.public_comment_start_date && @bill.public_comment_end_date %>
+          <span><%= @bill.public_comment_start_date.strftime('%Y-%m-%d') %> ~ <%= @bill.public_comment_end_date.strftime('%Y-%m-%d') %></span>
+        <% else %>
+          <span>미지정</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <!-- 발의자/제안자 정보 -->
+  <div class="bill-sponsors">
+    <h2>발의자/제안자</h2>
+    <% if @bill.sponsors.any? %>
+      <ul>
+        <% @bill.sponsors.each do |sponsor| %>
+          <li>
+            <strong><%= sponsor.name %></strong>
+            <% if sponsor.party.present? %>
+              (<%= sponsor.party %>)
+            <% end %>
+            <% if sponsor.region.present? %>
+              - <%= sponsor.region %>
+            <% end %>
+            <% if role = @bill.bill_sponsors.find_by(sponsor_id: sponsor.id)&.sponsor_role %>
+              [<%= role %>]
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>등록된 발의자/제안자 정보가 없습니다.</p>
+    <% end %>
+  </div>
+
+  <!-- 법안 요약 -->
+  <div class="bill-summary">
+    <h2>법안 요약</h2>
+    <% if @bill.summary.present? %>
+      <div class="summary-text">
+        <%= simple_format @bill.summary %>
+      </div>
+    <% else %>
+      <p>요약 정보가 없습니다.</p>
+    <% end %>
+  </div>
+
+  <!-- 개정 이유 -->
+  <% if @bill.reason_for_revision.present? %>
+    <div class="bill-revision-reason">
+      <h2>개정 이유</h2>
+      <div class="revision-text">
+        <%= simple_format @bill.reason_for_revision %>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- 법안 전문 -->
+  <div class="bill-full-text">
+    <h2>법안 전문</h2>
+    <% if @bill.full_text.present? %>
+      <div class="full-text-content">
+        <%= simple_format @bill.full_text %>
+      </div>
+    <% else %>
+      <p>법안 전문이 등록되지 않았습니다.</p>
+    <% end %>
+  </div>
+
+  <!-- 처리 일정/현황 -->
+  <div class="bill-events">
+    <h2>처리 일정/현황</h2>
+    <% if @bill_events.any? %>
+      <div class="timeline">
+        <% @bill_events.each do |event| %>
+          <div class="timeline-item">
+            <div class="timeline-date">
+              <%= event.event_date&.strftime('%Y-%m-%d') || "날짜 미지정" %>
+            </div>
+            <div class="timeline-content">
+              <h3><%= event.event_type %></h3>
+              <% if event.description.present? %>
+                <p><%= simple_format event.description %></p>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p>등록된 처리 일정/현황이 없습니다.</p>
+    <% end %>
+  </div>
+</div>
