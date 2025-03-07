@@ -1,0 +1,112 @@
+// 색상 변수 정의
+
+// Background Colors
+$background-primary-color: #ffffff;
+$background-secondary-color: #f2f2f2;
+
+// Surface Colors
+$surface-primary-color: #ecf2f8;
+$surface-secondary-color: #fcefa4;  
+$surface-tertiary-color: #999999;
+$surface-inverse-color: #e6e6e6;
+$surface-system-safe-color: #baeabb;
+$surface-system-warn-color: #fbe67a;
+$surface-system-danger-color: #e98873;
+
+// Text Colors
+$text-primary-color: #1b2c4d;
+$text-secondary-color: #333333;
+$text-tertiary-color: #666666;
+$text-inverse-color: #ffffff;
+$text-system-safe-color: #3d7b37;
+$text-system-warn-color: #c6ab38;
+$text-system-danger-color: #b3351e;
+
+// Border Colors
+$border-primary-color: #6a8dcd;
+$border-secondary-color: #333333;
+$border-tertiary-color: #666666;
+$border-inverse-color: #e6e6e6;
+$border-system-safe-color: #3d7b37;
+$border-system-warn-color: #c6ab38;
+$border-system-danger-color: #b3351e;
+
+// Button Colors
+$button-primary-color: #8fa9d9;
+$button-secondary-color: #4c4c4c;
+$button-tertiary-color: #808080;
+$button-inverse-color: #e6e6e6;
+$button-system-safe-color: #52a44a;
+$button-system-warn-color: #f8d849;
+$button-system-danger-color: #e04327;
+
+// Color Palette
+$color-palettes: (
+  "grayscale": (
+    1: #000000,
+    2: #0d0d0d,
+    3: #191919,
+    4: #333333,
+    5: #4c4c4c,
+    6: #666666,
+    7: #808080,
+    8: #999999,
+    9: #b3b3b3,
+    10: #cccccc,
+    11: #e6e6e6,
+    12: #f2f2f2,
+    13: #ffffff,
+  ),
+  "blue": (
+    1: #070b13,
+    2: #0e1727,
+    3: #1b2c4d,
+    4: #2a4373,
+    5: #385a9a,
+    6: #4770c0,
+    7: #6a8dcd,
+    8: #8fa9d9,
+    9: #b3c5e5,
+    10: #d9e3f2,
+    11: #ecf1f8,
+  ),
+  "red": (
+    1: #160602,
+    2: #2d0c04,
+    3: #591a0d,
+    4: #862815,
+    5: #b3351e,
+    6: #e04327,
+    7: #e46348,
+    8: #e98873,
+    9: #eeaea1,
+    10: #f7d7cf,
+    11: #fbebe8,
+  ),
+  "green": (
+    1: #081508,
+    2: #132912,
+    3: #275225,
+    4: #3d7b37,
+    5: #52a44a,
+    6: #67cd5c,
+    7: #7dd67a,
+    8: #99e19a,
+    9: #baeabb,
+    10: #dbf5dd,
+    11: #edfaee,
+  ),
+  "yellow": (
+    1: #171402,
+    2: #302907,
+    3: #605416,
+    4: #927f27,
+    5: #c4a937,
+    6: #f8d849,
+    7: #f9de59,
+    8: #fbe67a,
+    9: #fcefa4,
+    10: #fdf6d0,
+    11: #fefbe7,
+  )
+);
