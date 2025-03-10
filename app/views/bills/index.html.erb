@@ -7,8 +7,17 @@
     <label for="q"></label>
     <%= text_field_tag :q, params[:q], placeholder: "어떤 법안을 찾으시나요?" %>
   </div>
+
+  <!-- 정부/국회 탭 -->
+  <div class="selection-tabs">
+    <%= link_to "정부입법현황", bills_path(tab: "government"), class: "selection-tab #{params[:tab] == 'government' || params[:tab].nil? ? 'active' : ''}" %>
+    <%= link_to "국회입법현황", bills_path(tab: "assembly"), class: "selection-tab #{params[:tab] == 'assembly' ? 'active' : ''}" %>
+  </div>
+
   <div class="selection-tab-content">
     <%= form_with url: bills_path, method: :get, local: true do %>
+      <!-- 정부/국회 탭 값 추가 -->
+      <%= hidden_field_tag :tab, params[:tab] %>
       <div class="option-container">
         <!-- 부처 필터 -->
         <label for="department_id" class="dropbox-label">소관부처</label>
@@ -27,6 +36,7 @@
     <% end %>
   </div>
 <% end %>
+
 
 <div class="legal-list-container">
     <table>

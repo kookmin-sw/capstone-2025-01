@@ -28,6 +28,31 @@
   color: #666666;
 }
 
+.selection-tabs {
+  display: flex;
+}
+
+.selection-tab {
+  margin-top: 20px;
+  width: 153px;
+  height: 57.61px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  padding-top: 12px;
+  padding-right: 20px;
+  padding-bottom: 12px;
+  padding-left: 20px;
+  gap: 10px;
+  background: #ffffff;
+  border: 2px solid #6a8dcd;
+  border-bottom: none;
+}
+
+.selection-tab.active {
+  background: #8fa9d9;
+  color: #ffffff;
+}
+
 .option-container {
   width: 1152px;
   height: 141px;
