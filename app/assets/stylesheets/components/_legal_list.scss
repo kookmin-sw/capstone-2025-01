@@ -1,0 +1,38 @@
+@use "../colors/color_variables";
+
+// 법령 테이블 컨테이너 스타일
+.legal-list-container {
+    width: 1152px;
+    min-height: 661px;
+    gap: 10px;
+    margin-top: 20px;
+}
+  
+.legal-list-guide {
+    text-align: center;  
+    vertical-align: middle; 
+    width: 1152px;
+    height: 60px;
+    background: color_variables.$surface-primary-color;
+    padding-top: 10px;
+    padding-left: 40px;
+    padding-bottom: 10px;
+    padding-right: 40px;
+    border: 2px solid color_variables.$border-primary-color;
+}
+  
+.legal-list-body {
+    text-align: center;  
+    vertical-align: middle; 
+    width: 1152px;
+    height: 600px;
+    border: 2px solid color_variables.$border-primary-color;
+}
+  
+table {
+    border-collapse: separate; 
+    border-spacing: 0; 
+    border-radius: 20px;
+    border: 2px solid color_variables.$border-primary-color;
+    overflow: hidden; 
+}

@@ -1,0 +1,33 @@
+@use "../colors/color_variables";
+
+// 최상단 검색바 컨테이너
+.search-bar {
+    width: 892px;
+    height: 89px;
+    border-width: 1px;
+    padding: 24px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box; 
+  
+    input[type="text"] {
+      border: 1px solid color_variables.$border-primary-color; 
+      padding: 13px; 
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      border-bottom-left-radius: 20px;
+      width: 100%; 
+      box-sizing: border-box; 
+      font-weight: 400;
+      font-size: 24px; 
+      line-height: 150%; 
+      letter-spacing: -4%; 
+      vertical-align: middle; 
+    }
+      
+    input[type="text"]::placeholder {
+      color: color_variables.$text-tertiary-color; 
+    }
+}

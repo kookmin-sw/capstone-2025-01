@@ -1,0 +1,14 @@
+@use "sass:map";
+@use "color_palettes";
+
+// 색상 팔레트를 받아서 색상을 적용
+@function palette-color($palette, $index: null) {
+    @if not map.has-key(color_palettes.$color-palettes, $palette) {
+        @error "Palette `#{$palette}` does not exist.";
+    }
+    $selected-palette: map.get(color_palettes.$color-palettes, $palette);
+    @if not map.has-key($selected-palette, $index) {
+        @error "Index `#{$index}` does not exist in palette `#{$palette}`.";
+    }
+    @return map.get($selected-palette, $index);
+}  

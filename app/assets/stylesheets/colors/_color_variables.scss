@@ -1,0 +1,43 @@
+@use "color_functions" as *;
+
+// Color Palette 기반 색상 변수 정의
+
+// Background Colors
+$background-primary-color: palette-color('grayscale', 13);
+$background-secondary-color: palette-color('grayscale', 12);
+
+// Surface Colors
+$surface-primary-color: palette-color('blue', 11);
+$surface-secondary-color: palette-color('yellow', 9);
+$surface-tertiary-color: palette-color('grayscale', 8);
+$surface-inverse-color: palette-color('grayscale', 11);
+$surface-system-safe-color: palette-color('green', 9);
+$surface-system-warn-color: palette-color('yellow', 8);
+$surface-system-danger-color: palette-color('red', 8);
+
+// Text Colors
+$text-primary-color: palette-color('blue', 3);
+$text-secondary-color: palette-color('grayscale', 4);
+$text-tertiary-color: palette-color('grayscale', 6);
+$text-inverse-color: palette-color('grayscale', 13);
+$text-system-safe-color: palette-color('green', 4);
+$text-system-warn-color: palette-color('yellow', 5);
+$text-system-danger-color: palette-color('red', 5);
+
+// Border Colors
+$border-primary-color: palette-color('blue', 7);
+$border-secondary-color: palette-color('grayscale', 4);
+$border-tertiary-color: palette-color('grayscale', 6);
+$border-inverse-color: palette-color('grayscale', 11);
+$border-system-safe-color: palette-color('green', 4);
+$border-system-warn-color: palette-color('yellow', 5);
+$border-system-danger-color: palette-color('red', 5);
+
+// Button Colors
+$button-primary-color: palette-color('blue', 8);
+$button-secondary-color: palette-color('grayscale', 5);
+$button-tertiary-color: palette-color('grayscale', 7);
+$button-inverse-color: palette-color('grayscale', 11);
+$button-system-safe-color: palette-color('green', 5);
+$button-system-warn-color: palette-color('yellow', 6);
+$button-system-danger-color: palette-color('red', 6);

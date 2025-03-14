@@ -3,59 +3,79 @@
 <!-- 검색/필터링 form -->
 <%= form_with url: bills_path, method: :get, local: true do %>
   <!-- 텍스트 검색 -->
-  <label for="q">검색</label>
-  <%= text_field_tag :q, params[:q], placeholder: "어떤 법안을 찾으시나요?" %>
+  <div class="search-bar">
+    <label for="q"></label>
+    <%= text_field_tag :q, params[:q], placeholder: "어떤 법안을 찾으시나요?" %>
+  </div>
 
-  <!-- 부처 필터 -->
-  <label for="department_id">소관부처</label>
-  <%= select_tag :department_id, options_from_collection_for_select(Department.all, :id, :name, params[:department_id]), include_blank: "전체" %>
-    
-  <!-- 분야 필터 -->
-  <label for="domain">분야</label>
-  <%= select_tag :domain, options_for_select(Bill.pluck(:domain).compact.uniq, params[:domain]), include_blank: "전체" %>
-    
-  <!-- 진행상황 필터 -->
-  <label for="status">진행상황</label>
-  <%= select_tag :status, options_for_select(Bill.pluck(:current_status).compact.uniq, params[:status]), include_blank: "전체" %>
+  <!-- 정부/국회 탭 -->
+  <div class="selection-tabs">
+    <%= link_to "정부입법현황", bills_path(tab: "government"), class: "selection-tab #{params[:tab] == 'government' || params[:tab].nil? ? 'active' : ''}" %>
+    <%= link_to "국회입법현황", bills_path(tab: "assembly"), class: "selection-tab #{params[:tab] == 'assembly' ? 'active' : ''}" %>
+  </div>
 
-  <%= submit_tag "검색하기" %>
+  <div class="selection-tab-content">
+    <%= form_with url: bills_path, method: :get, local: true do %>
+      <!-- 정부/국회 탭 값 추가 -->
+      <%= hidden_field_tag :tab, params[:tab] %>
+      <div class="option-container">
+        <!-- 부처 필터 -->
+        <label for="department_id" class="dropbox-label">소관부처</label>
+        <%= select_tag :department_id, options_from_collection_for_select(Department.all, :id, :name, params[:department_id]), include_blank: "전체" %>
+
+        <!-- 분야 필터 -->
+        <label for="domain" class="dropbox-label">분야</label>
+        <%= select_tag :domain, options_for_select(Bill.pluck(:domain).compact.uniq, params[:domain]), include_blank: "전체" %>
+          
+        <!-- 진행상황 필터 -->
+        <label for="status" class="dropbox-label">진행상황</label>
+        <%= select_tag :status, options_for_select(Bill.pluck(:current_status).compact.uniq, params[:status]), include_blank: "전체" %>
+
+        <%= submit_tag "검색하기" %>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>법령명</th>
-      <th>법안번호</th>
-      <th>법령종류</th>
-      <th>소관부처</th>
-      <th>분야</th>
-      <th>진행상황</th>
-      <th>의견수렴기간</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @bills.each do |bill| %>
-      <tr>
-        <td>
-          <%= link_to bill.title, bill_path(bill) %>
-        </td>
-        <td><%= bill.bill_number %></td>
-        <td><%= bill.department&.name %></td>
-        <td><%= bill.bill_type %></td>
-        <td><%= bill.domain %></td>
-        <td><%= bill.current_status %></td>
-        <td>
-          <% if bill.public_comment_start_date && bill.public_comment_end_date %>
-            <%= bill.public_comment_start_date.strftime('%Y-%m-%d') %> ~ 
-            <%= bill.public_comment_end_date.strftime('%Y-%m-%d') %>
-          <% else %>
-            -
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+
+<div class="legal-list-container">
+    <table>
+      <thead class="legal-list-guide">
+        <tr>
+          <th>법령명</th>
+          <th>법안번호</th>
+          <th>법령종류</th>
+          <th>소관부처</th>
+          <th>분야</th>
+          <th>진행상황</th>
+          <th>의견수렴기간</th>
+        </tr>
+      </thead>
+      <tbody class="legal-list-body">
+        <% @bills.each do |bill| %>
+          <tr>
+            <td>
+              <%= link_to bill.title, bill_path(bill) %>
+            </td>
+            <td><%= bill.bill_number %></td>
+            <td><%= bill.department&.name %></td>
+            <td><%= bill.bill_type %></td>
+            <td><%= bill.domain %></td>
+            <td><%= bill.current_status %></td>
+            <td>
+              <% if bill.public_comment_start_date && bill.public_comment_end_date %>
+                <%= bill.public_comment_start_date.strftime('%Y-%m-%d') %> ~ 
+                <%= bill.public_comment_end_date.strftime('%Y-%m-%d') %>
+              <% else %>
+                -
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        
+      </tbody>
+    </table>
+</div>
 
 <!-- Pagination -->
 <%= pagy_nav(@pagy) if @pagy.pages > 1 %>
