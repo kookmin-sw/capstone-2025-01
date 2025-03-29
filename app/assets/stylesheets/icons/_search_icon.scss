@@ -1,0 +1,10 @@
+@use "../colors/color_variables";
+
+$icon-width: 16.68px; 
+$icon-height: 17.85px; 
+
+.search-icon {
+  width: $icon-width;
+  height: $icon-height;
+  color: color_variables.$icon-search-color;
+}
