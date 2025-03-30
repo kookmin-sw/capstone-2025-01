@@ -1,0 +1,123 @@
+// 텍스트 스타일 변수 설정
+$font-family-base: "Noto Sans KR", sans-serif;// 기본 폰트
+
+$headline-large-font-size: 60px; 
+$headline-medium-font-size: 54px; 
+$title-large-font-size: 40px;
+$title-medium-font-size: 34px;
+$title-small-font-size: 30px;
+$body-large-font-size: 24px;
+$body-medium-font-size: 20px;
+$body-small-font-size: 18px;
+$button-medium-font-size: 18px;
+$button-small-font-size: 16px;
+$caption-medium-font-size: 14px;
+$caption-small-font-size: 12px;
+
+$semibold-font-weight: 600; // SemiBold
+$medium-font-weight: 500; // Medium
+$regular-font-weight: 400; // Regular
+$light-font-weight: 300; // Light
+
+$line-height: 1.5; // 150%
+$letter-spacing: -0.04em; // -4% 자간
+
+// Headline L 스타일
+.headline-large {
+  font-family: $font-family-base;
+  font-size: $headline-large-font-size;
+  font-weight: $semibold-font-weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+}
+
+// Headline M 스타일
+.headline-medium {
+  font-family: $font-family-base;
+  font-size: $headline-medium-font-size;
+  font-weight: $semibold-font-weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+}
+
+.title-large {
+  font-family: $font-family-base;
+  font-size: $title-large-font-size;
+  font-weight: $medium-font-weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+}
+
+.title-medium {
+  font-family: $font-family-base;
+  font-size: $title-medium-font-size;
+  font-weight: $medium-font-weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+}
+
+.title-small {
+  font-family: $font-family-base;
+  font-size: $title-small-font-size;
+  font-weight: $medium-font-weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+}
+
+.body-large {
+  font-family: $font-family-base;
+  font-size: $body-large-font-size;
+  font-weight: $regular-font-weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+}
+
+.body-medium {
+  font-family: $font-family-base;
+  font-size: $body-medium-font-size;
+  font-weight: $regular-font-weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+}
+
+.body-small {
+  font-family: $font-family-base;
+  font-size: $body-small-font-size;
+  font-weight: $regular-font-weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+}
+
+.button-medium {
+  font-family: $font-family-base;
+  font-size: $button-medium-font-size;
+  font-weight: $medium-font-weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+}
+
+.button-small {
+  font-family: $font-family-base;
+  font-size: $button-small-font-size;
+  font-weight: $medium-font-weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+}
+
+.caption-medium {
+  font-family: $font-family-base;
+  font-size: $caption-medium-font-size;
+  font-weight: $light-font-weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+}
+
+.caption-small {
+  font-family: $font-family-base;
+  font-size: $caption-small-font-size;
+  font-weight: $light-font-weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+}
+
+
