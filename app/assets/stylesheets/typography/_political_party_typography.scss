@@ -1,0 +1,23 @@
+@use "../colors/color_variables";
+@use "../typography/typography.scss" as typography;
+
+%political-common-text-component {
+    @extend .button-small;  // button-small을 확장
+    text-align: center;
+    letter-spacing: -0.64px;
+}
+
+.democratic-party-text {
+    @extend %political-common-text-component;
+    color: #152484;
+}
+
+.people-power-text {
+    @extend %political-common-text-component;
+    color: #E61E2B;
+}
+
+.rebuilding-korea-text {
+    @extend %political-common-text-component;
+    color: #0073CF;
+}

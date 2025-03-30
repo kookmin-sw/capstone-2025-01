@@ -9,7 +9,7 @@ module IconHelper
       svg = doc.at_css("svg")
 
       # 모든 fill 속성을 제거하고 currentColor로 설정
-      svg.search('[fill]').each { |node| node['fill'] = 'currentColor' }
+      svg.search("[fill]").each { |node| node["fill"] = "currentColor" }
 
       options.each { |key, value| svg[key.to_s] = value }
       doc.to_html.html_safe
@@ -18,4 +18,3 @@ module IconHelper
     end
   end
 end
-  
