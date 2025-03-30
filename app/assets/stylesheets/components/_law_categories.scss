@@ -1,0 +1,100 @@
+@use "../colors/color_variables";
+
+.law-component-layer {
+    display: flex;
+    width: 1440px;
+    height: 170px;
+    padding: 10px 30px;
+
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    background: color_variables.$background-primary-color;
+}
+
+// 공통 스타일 정의
+%law-common-shape-component {
+    height: 57px;
+    border-radius: 20px; 
+    border-width: 1px;
+    padding: 4px 25px;
+    gap: 10px;
+
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    white-space: nowrap; // 자동 줄 바꿈이 안되게 설정 
+
+    background: color_variables.$background-primary-color;
+    border: 1px solid color_variables.$border-primary-color;
+}
+
+// 정부 행정과 공공제도 컴포넌트
+.government-administration-comp {
+    @extend %law-common-shape-component;
+    width: 227px;
+}
+
+// 입법 사법과 선거제도 컴포넌트
+.jegislative-judicial-comp {
+    @extend %law-common-shape-component;
+    width: 227px;
+}
+
+// 치안 사법과 국방 컴포넌트
+.publicsecurity-nationaldefense-comp {
+    @extend %law-common-shape-component;
+    width: 196px;
+}
+
+// 경제 재정과 공정거래 컴포넌트
+.economy-finance-comp {
+    @extend %law-common-shape-component;
+    width: 227px;
+}
+
+// 산업 과학 기술과 정보통신 컴포넌트
+.industry-sciencetechnology-comp {
+    @extend %law-common-shape-component;
+    width: 259px;
+}
+
+// 국토 도시 개발과 환경 컴포넌트
+.land-urbandevelopment-comp {
+    @extend %law-common-shape-component;
+    width: 227px;
+}
+
+// 보건 복지와 안전망 컴포넌트
+.health-welfare-comp {
+    @extend %law-common-shape-component;
+    width: 211px;
+}
+
+// 교육 문화와 관광 컴포넌트
+.education-culture-comp {
+    @extend %law-common-shape-component;
+    width: 196px;
+}
+
+// 노동 인권과 성평등 컴포넌트
+.labor-humanrights-comp {
+    @extend %law-common-shape-component;
+    width: 211px;
+}
+
+// 외교 통일과 국제협력 컴포넌트
+.diplomacy-unification-comp {
+    @extend %law-common-shape-component;
+    width: 227px;
+}
+
+// 재난 기후와 원자력 안전 컴포넌트
+.disaster-climate-comp {
+    @extend %law-common-shape-component;
+    width: 246px;
+}
+
