@@ -43,6 +43,8 @@ gem "thruster", require: false
 # For pagination
 gem "pagy", "~> 9.3"
 
+gem "sorbet-runtime"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
@@ -52,11 +54,17 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  # Tools for generating RBI files
+  gem "tapioca", require: false
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+
+  # Static type checking [https://sorbet.org/]
+  gem "sorbet"
 end
 
 group :test do
