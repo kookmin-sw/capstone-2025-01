@@ -13,4 +13,9 @@ class BillsController < ApplicationController
     @bill = Bill.find(params[:id])
     @bill_events = @bill.bill_events.order(:event_date)
   end
+
+  def categories
+    @tab = params[:tab] 
+  end
+  
 end

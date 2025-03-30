@@ -1,0 +1,50 @@
+@use "../colors/color_variables";
+@use "../typography/typography.scss" as typography;
+
+.political-component-layer {
+    display: flex;
+    width: 148px;
+    height: 193px;
+    border-radius: 5px; 
+    border-width: 1px;
+
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    background: color_variables.$background-primary-color;
+}
+
+%political-common-shape-component {
+    width: 108px;
+    height: 35px;
+    border-radius: 10px; 
+    border-width: 1px;
+    padding: 4px 33px;
+    gap: 20px;
+
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    white-space: nowrap; // 자동 줄 바꿈이 안되게 설정 
+
+    background: color_variables.$background-primary-color;
+}
+
+.democratic-party-shape {
+    @extend %political-common-shape-component;
+    border: 1px solid #152484;
+}
+
+.people-power-shape {
+    @extend %political-common-shape-component;
+    border: 1px solid #E61E2B;
+}
+
+.rebuilding-korea-shape {
+    @extend %political-common-shape-component;
+    border: 1px solid #0073CF;
+}

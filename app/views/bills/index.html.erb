@@ -12,6 +12,8 @@
   <div class="selection-tabs">
     <%= link_to "정부입법현황", bills_path(tab: "government"), class: "selection-tab #{params[:tab] == 'government' || params[:tab].nil? ? 'active' : ''} body-small" %>
     <%= link_to "국회입법현황", bills_path(tab: "assembly"), class: "selection-tab #{params[:tab] == 'assembly' ? 'active' : ''} body-small" %>
+    <!-- 카테고리 페이지로 이동하기 위해 생성 -->
+    <%= link_to "정부 카테고리", bills_categories_path(tab: "government") %>
   </div>
 
   <div class="selection-tab-content">
