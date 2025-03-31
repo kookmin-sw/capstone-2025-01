@@ -1,5 +1,19 @@
 @use "../colors/color_variables";
 
+$law-components: (
+    government-administration-comp: 227px,
+    legislative-judicial-comp: 227px,
+    publicsecurity-nationaldefense-comp: 196px,
+    economy-finance-comp: 227px,
+    industry-sciencetechnology-comp: 259px,
+    land-urbandevelopment-comp: 227px,
+    health-welfare-comp: 211px,
+    education-culture-comp: 196px,
+    labor-humanrights-comp: 211px,
+    diplomacy-unification-comp: 227px,
+    disaster-climate-comp: 246px
+);
+
 .law-component-layer {
     display: flex;
     width: 1440px;
@@ -32,69 +46,19 @@
     border: 1px solid color_variables.$border-primary-color;
 }
 
-// 정부 행정과 공공제도 컴포넌트
-.government-administration-comp {
-    @extend %law-common-shape-component;
-    width: 227px;
+// 각 컴포넌트의 스타일 생성
+@each $name, $width in $law-components {
+    .#{$name} {
+        @extend %law-common-shape-component;
+        width: $width;
+    }
 }
 
-// 입법 사법과 선거제도 컴포넌트
-.jegislative-judicial-comp {
-    @extend %law-common-shape-component;
-    width: 227px;
+// 동적으로 선택된 탭에 대한 스타일 생성
+@each $name, $width in $law-components {
+    .#{$name}.active {
+        @extend %law-common-shape-component;
+        background: color_variables.$surface-primary-color;
+        width: $width;
+    }
 }
-
-// 치안 사법과 국방 컴포넌트
-.publicsecurity-nationaldefense-comp {
-    @extend %law-common-shape-component;
-    width: 196px;
-}
-
-// 경제 재정과 공정거래 컴포넌트
-.economy-finance-comp {
-    @extend %law-common-shape-component;
-    width: 227px;
-}
-
-// 산업 과학 기술과 정보통신 컴포넌트
-.industry-sciencetechnology-comp {
-    @extend %law-common-shape-component;
-    width: 259px;
-}
-
-// 국토 도시 개발과 환경 컴포넌트
-.land-urbandevelopment-comp {
-    @extend %law-common-shape-component;
-    width: 227px;
-}
-
-// 보건 복지와 안전망 컴포넌트
-.health-welfare-comp {
-    @extend %law-common-shape-component;
-    width: 211px;
-}
-
-// 교육 문화와 관광 컴포넌트
-.education-culture-comp {
-    @extend %law-common-shape-component;
-    width: 196px;
-}
-
-// 노동 인권과 성평등 컴포넌트
-.labor-humanrights-comp {
-    @extend %law-common-shape-component;
-    width: 211px;
-}
-
-// 외교 통일과 국제협력 컴포넌트
-.diplomacy-unification-comp {
-    @extend %law-common-shape-component;
-    width: 227px;
-}
-
-// 재난 기후와 원자력 안전 컴포넌트
-.disaster-climate-comp {
-    @extend %law-common-shape-component;
-    width: 246px;
-}
-

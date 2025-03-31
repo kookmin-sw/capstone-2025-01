@@ -34,17 +34,17 @@
     background: color_variables.$background-primary-color;
 }
 
-.democratic-party-shape {
-    @extend %political-common-shape-component;
-    border: 1px solid #152484;
-}
+// 정당 관련 컴포넌트의 이름과 색상 맵
+$political-shape-components-color: (
+    democratic-party-shape: #152484,
+    people-power-shape: #E61E2B,
+    rebuilding-korea-shape: #0073CF
+);
 
-.people-power-shape {
-    @extend %political-common-shape-component;
-    border: 1px solid #E61E2B;
-}
-
-.rebuilding-korea-shape {
-    @extend %political-common-shape-component;
-    border: 1px solid #0073CF;
+// 각 컴포넌트의 스타일을 자동으로 생성
+@each $name, $color in $political-shape-components-color {
+    .#{$name} {
+        @extend %political-common-shape-component;
+        border: 1px solid $color;
+    }
 }

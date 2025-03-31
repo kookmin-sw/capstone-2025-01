@@ -1,65 +1,65 @@
 <div class="law-component-layer">
-  <%= link_to bills_categories_path(tab: 'government-administration'), class: "government-administration-comp #{'select-government-administration-comp' if params[:tab] == 'government-administration'}" do %>
+  <%= link_to bills_categories_path(tab: 'government-administration'), class: "government-administration-comp #{'active' if params[:tab] == 'government-administration'}" do %>
     <div class="law-common-text-component">
       🏛 정부·행정과 공공제도
     </div>
   <% end %>
 
-  <%= link_to bills_categories_path(tab: 'legislative-judicial'), class: "jegislative-judicial-comp #{'select-jegislative-judicial-comp' if params[:tab] == 'legislative-judicial'}" do %>
+  <%= link_to bills_categories_path(tab: 'legislative-judicial'), class: "legislative-judicial-comp #{'active' if params[:tab] == 'legislative-judicial'}" do %>
     <div class="law-common-text-component">
       ⚖ 입법·사법과 선거제도
     </div>
   <% end %>
 
-  <%= link_to bills_categories_path(tab: 'publicsecurity-nationaldefense'), class: "publicsecurity-nationaldefense-comp #{'select-publicsecurity-nationaldefense-comp' if params[:tab] == 'publicsecurity-nationaldefense'}" do %>
+  <%= link_to bills_categories_path(tab: 'publicsecurity-nationaldefense'), class: "publicsecurity-nationaldefense-comp #{'active' if params[:tab] == 'publicsecurity-nationaldefense'}" do %>
     <div class="law-common-text-component">
       🚔 치안·사법과 국방
     </div>
   <% end %>
 
-  <%= link_to bills_categories_path(tab: 'economy-finance'), class: "economy-finance-comp #{'select-economy-finance-comp' if params[:tab] == 'economy-finance'}" do %>
+  <%= link_to bills_categories_path(tab: 'economy-finance'), class: "economy-finance-comp #{'active' if params[:tab] == 'economy-finance'}" do %>
     <div class="law-common-text-component">
       💰 경제·재정과 공정거래
     </div>
   <% end %>
 
-  <%= link_to bills_categories_path(tab: 'industry-sciencetechnology'), class: "industry-sciencetechnology-comp #{'select-industry-sciencetechnology-comp' if params[:tab] == 'industry-sciencetechnology'}" do %>
+  <%= link_to bills_categories_path(tab: 'industry-sciencetechnology'), class: "industry-sciencetechnology-comp #{'active' if params[:tab] == 'industry-sciencetechnology'}" do %>
     <div class="law-common-text-component">
       🔬 산업·과학기술과 정보통신
     </div>
   <% end %>
 
-  <%= link_to bills_categories_path(tab: 'land-urbandevelopment'), class: "land-urbandevelopment-comp #{'select-land-urbandevelopment-comp' if params[:tab] == 'land-urbandevelopment'}" do %>
+  <%= link_to bills_categories_path(tab: 'land-urbandevelopment'), class: "land-urbandevelopment-comp #{'active' if params[:tab] == 'land-urbandevelopment'}" do %>
     <div class="law-common-text-component">
       🏗 국토·도시개발과 환경
     </div>
   <% end %>
 
-  <%= link_to bills_categories_path(tab: 'health-welfare'), class: "health-welfare-comp #{'select-health-welfare-comp' if params[:tab] == 'health-welfare'}" do %>
+  <%= link_to bills_categories_path(tab: 'health-welfare'), class: "health-welfare-comp #{'active' if params[:tab] == 'health-welfare'}" do %>
     <div class="law-common-text-component">
       🏥 보건·복지와 안전망
     </div>
   <% end %>
 
-  <%= link_to bills_categories_path(tab: 'education-culture'), class: "education-culture-comp #{'select-education-culture-comp' if params[:tab] == 'education-culture'}" do %>
+  <%= link_to bills_categories_path(tab: 'education-culture'), class: "education-culture-comp #{'active' if params[:tab] == 'education-culture'}" do %>
     <div class="law-common-text-component">
       🎓 교육·문화와 관광
     </div>
   <% end %>
 
-  <%= link_to bills_categories_path(tab: 'labor-humanrights'), class: "labor-humanrights-comp #{'select-labor-humanrights-comp' if params[:tab] == 'labor-humanrights'}" do %>
+  <%= link_to bills_categories_path(tab: 'labor-humanrights'), class: "labor-humanrights-comp #{'active' if params[:tab] == 'labor-humanrights'}" do %>
     <div class="law-common-text-component">
       👥 노동·인권과 성평등
     </div>
   <% end %>
 
-  <%= link_to bills_categories_path(tab: 'diplomacy-unification'), class: "diplomacy-unification-comp #{'select-diplomacy-unification-comp' if params[:tab] == 'diplomacy-unification'}" do %>
+  <%= link_to bills_categories_path(tab: 'diplomacy-unification'), class: "diplomacy-unification-comp #{'active' if params[:tab] == 'diplomacy-unification'}" do %>
     <div class="law-common-text-component">
       🌍 외교·통일과 국제협력
     </div>
   <% end %>
 
-  <%= link_to bills_categories_path(tab: 'disaster-climate'), class: "disaster-climate-comp #{'select-disaster-climate-comp' if params[:tab] == 'disaster-climate'}" do %>
+  <%= link_to bills_categories_path(tab: 'disaster-climate'), class: "disaster-climate-comp #{'active' if params[:tab] == 'disaster-climate'}" do %>
     <div class="law-common-text-component">
       🆘 재난·기후와 원자력 안전
     </div>
