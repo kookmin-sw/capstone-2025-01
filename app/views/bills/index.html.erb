@@ -1,80 +1,50 @@
-<h1>법령안 목록</h1>
-
-<!-- 검색/필터링 form -->
-<%= form_with url: bills_path, method: :get, local: true do %>
-  <!-- 텍스트 검색 -->
-  <div class="search-bar">
-    <label for="q"></label>
-    <%= text_field_tag :q, params[:q], placeholder: "어떤 법안을 찾으시나요?" %>
-  </div>
-
-  <!-- 정부/국회 탭 -->
-  <div class="selection-tabs">
-    <%= link_to "정부입법현황", bills_path(tab: "government"), class: "selection-tab #{params[:tab] == 'government' || params[:tab].nil? ? 'active' : ''}" %>
-    <%= link_to "국회입법현황", bills_path(tab: "assembly"), class: "selection-tab #{params[:tab] == 'assembly' ? 'active' : ''}" %>
-  </div>
-
-  <div class="selection-tab-content">
-    <%= form_with url: bills_path, method: :get, local: true do %>
-      <!-- 정부/국회 탭 값 추가 -->
-      <%= hidden_field_tag :tab, params[:tab] %>
-      <div class="option-container">
-        <!-- 부처 필터 -->
-        <label for="department_id" class="dropbox-label">소관부처</label>
-        <%= select_tag :department_id, options_from_collection_for_select(Department.all, :id, :name, params[:department_id]), include_blank: "전체" %>
-
-        <!-- 분야 필터 -->
-        <label for="domain" class="dropbox-label">분야</label>
-        <%= select_tag :domain, options_for_select(Bill.pluck(:domain).compact.uniq, params[:domain]), include_blank: "전체" %>
-          
-        <!-- 진행상황 필터 -->
-        <label for="status" class="dropbox-label">진행상황</label>
-        <%= select_tag :status, options_for_select(Bill.pluck(:current_status).compact.uniq, params[:status]), include_blank: "전체" %>
-
-        <%= submit_tag "검색하기" %>
+<div class="bill-card-container">
+  <!-- 실제 데이터
+  <% @bills.each do |bill| %>
+    <div class="bill-card">
+      <div class="bill-header">
+        <div class="bill-title"><%= link_to bill.title, bill_path(bill) %></div>
+        <div class="bill-header-tag">
+          <div class="bill-tag-party"><%= bill.party_name %></div>
+          <div class="bill-tag-status"><%= bill.current_status %></div>
+        </div>
       </div>
-    <% end %>
+        <div class="bill-description">
+          <%= bill.summary || "" %>
+        </div>
+    </div>
+  <% end %>
+-->
+
+  <!-- 법안 카드 예시 -->
+  <div class="bill-card">
+    <!-- 법안 헤더(제목, 태그) -->
+    <div class="bill-header">
+      <!-- 법안 제목 -->
+      <div class="bill-title">근로자퇴직급여 보장법 일부개정법률안</div>
+      <!-- 법안 태그(정당, 상태) -->
+      <div class="bill-header-tag">
+        <div class="bill-tag-party">국민의 힘</div>
+        <div class="bill-tag-status">접수</div>
+      </div>
+    </div>
+    <!-- 법안 설명 -->
+    <div class="bill-description">
+      퇴직연금 기금제도의 가입 대상을 기존 30인 이하 사업장에서 50인 미만 사업장으로 확대하여 더 많은 중소기업 근로자가 혜택을 받을 수 있도록 하는 개정안이에요.
+    </div>
   </div>
-<% end %>
-
-
-<div class="legal-list-container">
-    <table>
-      <thead class="legal-list-guide">
-        <tr>
-          <th>법령명</th>
-          <th>법안번호</th>
-          <th>법령종류</th>
-          <th>소관부처</th>
-          <th>분야</th>
-          <th>진행상황</th>
-          <th>의견수렴기간</th>
-        </tr>
-      </thead>
-      <tbody class="legal-list-body">
-        <% @bills.each do |bill| %>
-          <tr>
-            <td>
-              <%= link_to bill.title, bill_path(bill) %>
-            </td>
-            <td><%= bill.bill_number %></td>
-            <td><%= bill.department&.name %></td>
-            <td><%= bill.bill_type %></td>
-            <td><%= bill.domain %></td>
-            <td><%= bill.current_status %></td>
-            <td>
-              <% if bill.public_comment_start_date && bill.public_comment_end_date %>
-                <%= bill.public_comment_start_date.strftime('%Y-%m-%d') %> ~ 
-                <%= bill.public_comment_end_date.strftime('%Y-%m-%d') %>
-              <% else %>
-                -
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-        
-      </tbody>
-    </table>
+  <div class="bill-card">
+    <div class="bill-header">
+        <div class="bill-title">산업안전보건법 일부개정법률안</div>
+      <div class="bill-header-tag">
+        <div class="bill-tag-party">더불어민주당</div>
+        <div class="bill-tag-status">심사중</div>
+      </div>
+    </div>
+    <div class="bill-description">
+      산업 현장에서의 안전 관리 기준을 강화하고, 사업주의 안전 교육 의무를 확대하는 내용의 개정안입니다. 특히 중소기업 작업장의 안전 점검 주기를 단축하고 위반 시 벌금을 상향 조정하는 내용을 담고 있어요.
+    </div>
+  </div>
 </div>
 
 <!-- Pagination -->
