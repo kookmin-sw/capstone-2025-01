@@ -1,0 +1,23 @@
+@use "../colors/color_variables";
+@use "../typography/typography.scss" as typography;
+
+%political-common-text-component {
+    @extend .button-small;  // button-small을 확장
+    text-align: center;
+    letter-spacing: -0.64px;
+}
+
+// 정당 관련 텍스트 컴포넌트의 이름과 색상 맵
+$political-text-components-color: (
+    democratic-party-text: #152484,
+    people-power-text: #E61E2B,
+    rebuilding-korea-text: #0073CF
+);
+
+// 각 텍스트 컴포넌트의 스타일을 자동으로 생성
+@each $name, $color in $political-text-components-color {
+    .#{$name} {
+        @extend %political-common-text-component;
+        color: $color;
+    }
+}

@@ -1,0 +1,64 @@
+@use "../colors/color_variables";
+
+$law-components: (
+    government-administration-comp: 227px,
+    legislative-judicial-comp: 227px,
+    publicsecurity-nationaldefense-comp: 196px,
+    economy-finance-comp: 227px,
+    industry-sciencetechnology-comp: 259px,
+    land-urbandevelopment-comp: 227px,
+    health-welfare-comp: 211px,
+    education-culture-comp: 196px,
+    labor-humanrights-comp: 211px,
+    diplomacy-unification-comp: 227px,
+    disaster-climate-comp: 246px
+);
+
+.law-component-layer {
+    display: flex;
+    width: 1440px;
+    height: 170px;
+    padding: 10px 30px;
+
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    background: color_variables.$background-primary-color;
+}
+
+// 공통 스타일 정의
+%law-common-shape-component {
+    height: 57px;
+    border-radius: 20px; 
+    border-width: 1px;
+    padding: 4px 25px;
+    gap: 10px;
+
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    white-space: nowrap; // 자동 줄 바꿈이 안되게 설정 
+
+    background: color_variables.$background-primary-color;
+    border: 1px solid color_variables.$border-primary-color;
+}
+
+// 각 컴포넌트의 스타일 생성
+@each $name, $width in $law-components {
+    .#{$name} {
+        @extend %law-common-shape-component;
+        width: $width;
+    }
+}
+
+// 동적으로 선택된 탭에 대한 스타일 생성
+@each $name, $width in $law-components {
+    .#{$name}.active {
+        @extend %law-common-shape-component;
+        background: color_variables.$surface-primary-color;
+        width: $width;
+    }
+}
