@@ -1,0 +1,21 @@
+<!-- 검색/필터링 form -->
+<%= form_with url: bills_path, method: :get, local: true do %>
+  <!-- 상단 배너 검색바 -->
+  <nav class="banner-component-layer">
+    <!-- 왼쪽 브랜드 로고 -->
+    <div class="brand-logo">
+      <%= link_to root_path do %>
+        <%= inline_svg("brand_logo", class: "brand_logo-icon") %>
+      <% end %>
+    </div>
+    <!-- 법안 검색 -->
+    <div class="search-bar">
+      <label for="q"></label>
+      <%= text_field_tag :q, params[:q], placeholder: "무슨 법이 만들어지고 있나요?" %>
+      <!-- 검색 버튼 -->
+      <button type="submit" class="search-button">
+        <%= inline_svg("search", class: "search-icon") %>
+      </button>
+    </div>
+  </nav>
+<% end %>

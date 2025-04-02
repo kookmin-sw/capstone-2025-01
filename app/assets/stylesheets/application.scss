@@ -1,9 +1,11 @@
 @use "colors/color_variables";
 @use "colors/color_functions";
 
+@use "components/banner_search";
 @use "components/bill_table";
 @use "components/law_categories";
 @use "components/political_party";
+@use "components/banner";
 
 @use "layouts/_layout";
 
@@ -19,3 +21,4 @@
 @use "icons/previous_icon";
 @use "icons/profile_icon";
 @use "icons/search_icon";
+@use "icons/brand_logo";
