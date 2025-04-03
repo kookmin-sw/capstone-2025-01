@@ -10,24 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_01_023901) do
-  create_table "bill_events", force: :cascade do |t|
-    t.integer "bill_id", null: false
-    t.string "event_type"
-    t.date "event_date"
-    t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["bill_id"], name: "index_bill_events_on_bill_id"
-  end
-
+ActiveRecord::Schema[8.0].define(version: 2025_04_02_163956) do
   create_table "bills", force: :cascade do |t|
     t.string "title", null: false
     t.string "bill_number"
     t.text "summary"
-    t.date "public_comment_start_date"
-    t.date "public_comment_end_date"
-    t.integer "department_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "bill_type", null: false
@@ -35,14 +22,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_01_023901) do
     t.datetime "proposed_at"
     t.index ["assembly_bill_id"], name: "index_bills_on_assembly_bill_id", unique: true
     t.index ["bill_type"], name: "index_bills_on_bill_type"
-    t.index ["department_id"], name: "index_bills_on_department_id"
-  end
-
-  create_table "departments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "contact_info"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "government_bill_sponsors", force: :cascade do |t|
@@ -98,8 +77,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_01_023901) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "bill_events", "bills"
-  add_foreign_key "bills", "departments"
   add_foreign_key "government_bill_sponsors", "proposers"
   add_foreign_key "government_legislation_notices", "bills"
   add_foreign_key "national_assembly_people", "proposers"
