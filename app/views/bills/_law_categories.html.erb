@@ -1,3 +1,5 @@
+<!-- 법안 카테고리 컴포넌튼 -->
+
 <div class="law-component-layer">
   <%= link_to bills_categories_path(tab: 'government-administration'), class: "government-administration-comp #{'active' if params[:tab] == 'government-administration'}" do %>
     <div class="law-common-text-component">
@@ -64,22 +66,4 @@
       🆘 재난·기후와 원자력 안전
     </div>
   <% end %>
-</div>
-
-<div class="political-component-layer">
-  <div class="democratic-party-shape">
-    <div class="democratic-party-text">
-      더불어 민주당
-    </div>
-  </div>
-  <div class="people-power-shape">
-    <div class="people-power-text">
-      국민의 힘
-    </div>
-  </div>
-  <div class="rebuilding-korea-shape">
-    <div class="rebuilding-korea-text">
-      조국혁신당
-    </div>
-  </div>
 </div>
