@@ -65,6 +65,9 @@ group :development do
 
   # Static type checking [https://sorbet.org/]
   gem "sorbet"
+
+  # Static analysis for ERB templates [https://github.com/Shopify/erb_lint]
+  gem "erb_lint"
 end
 
 group :test do

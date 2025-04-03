@@ -1,0 +1,11 @@
+---
+glob: "**/*.erb"
+linters:
+  FinalNewline:
+    enabled: true
+  SpaceAroundErbTag:
+    enabled: true
+  NoUnusedDisable:
+    enabled: true
+  RequireInputAutocomplete:
+    enabled: false
