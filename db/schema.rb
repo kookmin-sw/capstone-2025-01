@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_22_021519) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_01_023901) do
   create_table "bill_events", force: :cascade do |t|
     t.integer "bill_id", null: false
     t.string "event_type"
@@ -21,31 +21,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_22_021519) do
     t.index ["bill_id"], name: "index_bill_events_on_bill_id"
   end
 
-  create_table "bill_sponsors", force: :cascade do |t|
-    t.integer "bill_id", null: false
-    t.integer "sponsor_id", null: false
-    t.string "sponsor_role"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["bill_id"], name: "index_bill_sponsors_on_bill_id"
-    t.index ["sponsor_id"], name: "index_bill_sponsors_on_sponsor_id"
-  end
-
   create_table "bills", force: :cascade do |t|
     t.string "title", null: false
     t.string "bill_number"
-    t.string "domain"
     t.text "summary"
-    t.text "full_text"
-    t.text "reason_for_revision"
-    t.string "current_status"
-    t.integer "view_count", default: 0
     t.date "public_comment_start_date"
     t.date "public_comment_end_date"
     t.integer "department_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "bill_type"
+    t.string "bill_type", null: false
+    t.string "assembly_bill_id"
+    t.datetime "proposed_at"
+    t.index ["assembly_bill_id"], name: "index_bills_on_assembly_bill_id", unique: true
     t.index ["bill_type"], name: "index_bills_on_bill_type"
     t.index ["department_id"], name: "index_bills_on_department_id"
   end
@@ -57,18 +45,65 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_22_021519) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "sponsors", force: :cascade do |t|
-    t.string "sponsor_type", null: false
+  create_table "government_bill_sponsors", force: :cascade do |t|
+    t.integer "proposer_id", null: false
+    t.string "ministry_name"
+    t.string "department_name"
+    t.string "manager_name"
+    t.string "manager_contact"
+    t.string "manager_email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proposer_id"], name: "index_government_bill_sponsors_on_proposer_id"
+  end
+
+  create_table "government_legislation_notices", force: :cascade do |t|
+    t.string "law_card_id"
+    t.integer "bill_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bill_id"], name: "index_government_legislation_notices_on_bill_id"
+    t.index ["law_card_id"], name: "index_government_legislation_notices_on_law_card_id", unique: true
+  end
+
+  create_table "national_assembly_people", force: :cascade do |t|
+    t.integer "proposer_id", null: false
+    t.string "department_code", null: false
+    t.string "member_id", null: false
     t.string "name", null: false
-    t.string "party"
-    t.string "region"
-    t.string "contact_info"
+    t.string "english_name"
+    t.string "hanja_name"
+    t.string "latest_age"
+    t.string "election_count"
+    t.string "constituency"
+    t.string "photo_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proposer_id"], name: "index_national_assembly_people_on_proposer_id"
+  end
+
+  create_table "proposals", force: :cascade do |t|
+    t.integer "bill_id", null: false
+    t.integer "proposer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "representative_proposal"
+    t.index ["bill_id"], name: "index_proposals_on_bill_id"
+    t.index ["proposer_id"], name: "index_proposals_on_proposer_id"
+  end
+
+  create_table "proposers", force: :cascade do |t|
+    t.string "proposer_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_foreign_key "bill_events", "bills"
-  add_foreign_key "bill_sponsors", "bills"
-  add_foreign_key "bill_sponsors", "sponsors"
   add_foreign_key "bills", "departments"
+  add_foreign_key "government_bill_sponsors", "proposers"
+  add_foreign_key "government_legislation_notices", "bills"
+  add_foreign_key "national_assembly_people", "proposers"
+  add_foreign_key "proposals", "bills"
+  add_foreign_key "proposals", "proposers"
+  add_foreign_key "proposals", "proposers"
 end
