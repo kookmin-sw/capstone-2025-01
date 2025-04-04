@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_03_174739) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_03_192557) do
   create_table "bills", force: :cascade do |t|
     t.string "title", null: false
     t.string "bill_number"
@@ -63,12 +63,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_03_174739) do
 
   create_table "proposals", force: :cascade do |t|
     t.integer "bill_id", null: false
-    t.integer "proposer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "representative_proposal"
+    t.integer "specific_proposer_id"
+    t.string "specific_proposer_type"
     t.index ["bill_id"], name: "index_proposals_on_bill_id"
-    t.index ["proposer_id"], name: "index_proposals_on_proposer_id"
   end
 
   create_table "proposers", force: :cascade do |t|
@@ -81,6 +81,4 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_03_174739) do
   add_foreign_key "government_legislation_notices", "bills"
   add_foreign_key "national_assembly_people", "proposers"
   add_foreign_key "proposals", "bills"
-  add_foreign_key "proposals", "proposers"
-  add_foreign_key "proposals", "proposers"
 end
