@@ -1,21 +1,6 @@
 @use "../colors/color_variables";
 @use "../typography/typography.scss" as typography;
 
-.political-component-layer {
-    display: flex;
-    width: 148px;
-    height: 193px;
-    border-radius: 5px; 
-    border-width: 1px;
-
-    align-items: center;
-    align-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-
-    background: color_variables.$background-primary-color;
-}
-
 %political-common-shape-component {
     width: 108px;
     height: 35px;
