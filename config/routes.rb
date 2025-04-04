@@ -9,10 +9,6 @@ Rails.application.routes.draw do
     # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
     # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
-    if Rails.env.development?
-      get "bills/categories", to: "bills#categories"
-    end
-
     resources :bills, only: [ :index, :show ] do
       # resources :bill_events, only: [ :index, :show ]
     end

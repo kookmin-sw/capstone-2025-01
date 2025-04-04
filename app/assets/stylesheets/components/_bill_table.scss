@@ -1,4 +1,5 @@
 @use "../colors/color_variables";
+@use "../typography/typography";
 
 // 법안 카드 컨테이너 스타일
 .bill-card-container {
@@ -31,11 +32,9 @@
  
 // 법안 헤더 제목 스타일
 .bill-title {
+    @extend .title-small; 
     color: color_variables.$text-primary-color;
     flex: 1;
-
-    font-size: 30px;
-    font-weight: 600;
 }
 
 // 법안 헤더 태그 스타일
@@ -47,33 +46,28 @@
  
 // 법안 태그 정당 스타일
 .bill-tag-party {
+    @extend .button-small;
     width: 125;
     height: 25;
     padding: 1px 33px;
     background-color: color_variables.$background-primary-color;
     text-align: center;
     border-radius: 10px;
-
-    font-weight: 400;
-    font-size: 16px;
 }
  
 // 법안 태그 상태 스타일
 .bill-tag-status {
+    @extend .button-small;
     padding: 1px 18px;
     background-color: color_variables.$background-primary-color;
     text-align: center;
     width: 65;
     height: 25;
     border-radius: 10px;
-
-    font-weight: 400;
-    font-size: 16px;
 }
 
 // 법안 상세정보 스타일
 .bill-description {
-    font-size: 24px;
-    font-weight: 400;
+    @extend .body-large;
 }
   
