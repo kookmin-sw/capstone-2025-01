@@ -1,5 +1,5 @@
 class NationalAssemblyPerson < ApplicationRecord
-  belongs_to :proposer
+  has_many :proposals, as: :specific_proposer
 
   validates :department_code, presence: true
   validates :member_id, presence: true

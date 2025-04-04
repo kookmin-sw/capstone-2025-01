@@ -1,3 +1,3 @@
 class GovernmentBillSponsor < ApplicationRecord
-  belongs_to :proposer
+  has_many :proposals, as: :specific_proposer
 end
