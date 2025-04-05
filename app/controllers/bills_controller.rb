@@ -1,6 +1,7 @@
 class BillsController < ApplicationController
   def index
-    @bills = Bill.all
+    @bills = Bill.includes(proposals: :specific_proposer)
+                 .all
                  .by_title(params[:q])
                  .by_bill_type(params[:bill_type])
 
