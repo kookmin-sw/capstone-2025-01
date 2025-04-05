@@ -21,6 +21,32 @@
   <%# end %>
   -->
 
+  <% @bills.each do |bill| %>
+    <div class="bill-card">
+      <div class="bill-header">
+        <div class="bill-title"><%= link_to bill.title, bill_path(bill) %></div>
+        <div class="bill-header-tag">
+          <div class="bill-tag-party">
+            <%# TODO: national_assembly_people / government_bill_sponsors 가 공유할 수 있는 인터페이스 작업 필요 %>
+            <%# 국회의원 전체목록 API에서 정당을 제공하지 않아 현재는 이름을 표시 중이나, 추후 필드 추가 후 수정 예정 %>
+            <%= bill.proposals.first.specific_proposer.try(:name) || "" %>
+          </div>
+          <div class="bill-tag-status">
+            <%# TODO: 법안 상태 추가 필요 %>
+            <%#= bill.current_status %>
+          </div>
+        </div>
+      </div>
+      <div class="bill-description">
+        <%# TODO: AI 요약 지원 추가 필요 %>
+        <%= truncate(
+          (bill.summary || "").gsub(/\A(?:제안이유 및 주요내용|제안이유)[:\s]*/, ""),
+          length: 120
+        ) %>
+      </div>
+    </div>
+  <% end %>
+
   <!-- 법안 카드 예시 -->
   <div class="bill-card">
     <!-- 법안 헤더(제목, 태그) -->
@@ -52,5 +78,5 @@
   </div>
 </div>
 
-<!-- Pagination -->
+<%# Pagination %>
 <%= pagy_nav(@pagy) if @pagy.pages > 1 %>
