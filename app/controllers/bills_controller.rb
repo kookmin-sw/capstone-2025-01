@@ -2,8 +2,6 @@ class BillsController < ApplicationController
   def index
     @bills = Bill.all
                  .by_title(params[:q])
-                 .by_department(params[:department_id])
-                 .by_domain(params[:domain])
                  .by_bill_type(params[:bill_type])
 
     @pagy, @bills = pagy(@bills.order(created_at: :desc))
@@ -11,7 +9,6 @@ class BillsController < ApplicationController
 
   def show
     @bill = Bill.find(params[:id])
-    @bill_events = @bill.bill_events.order(:event_date)
   end
 
   def categories
