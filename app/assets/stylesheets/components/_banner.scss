@@ -4,8 +4,8 @@
 .banner-component-layer {
     width: 100vw; 
     height: 140px;
+    min-height: 140px;
     display: flex;
-    justify-content: center; 
     padding-left: 50px;
     padding-right: 50px;
     background-color: color_variables.$background-primary-color;
@@ -15,6 +15,5 @@
 // 배너-브랜드 로고
 .brand-logo {
     display: flex;
-    justify-content: center; 
     align-items: center; 
 }
