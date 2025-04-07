@@ -30,6 +30,7 @@ $law-components: (
 // 공통 스타일 정의
 %law-common-shape-component {
     height: 57px;
+    min-height: 57px;
     border-radius: 20px; 
     border-width: 1px;
     padding: 4px 25px;
@@ -43,6 +44,12 @@ $law-components: (
 
     background: color_variables.$background-primary-color;
     border: 1px solid color_variables.$border-primary-color;
+
+    &:focus, &:active, &:hover {
+        outline: none !important;
+        border-color: color_variables.$border-primary-color !important;
+        box-shadow: none !important;
+    }
 }
 
 // 각 컴포넌트의 스타일 생성
