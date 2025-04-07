@@ -2,7 +2,8 @@
 @use "colors/color_functions";
 
 @use "components/banner_search";
-@use "components/bill_table";
+@use "components/bill/bill_table";
+@use "components/bill_detail/bill_detail";
 @use "components/law_categories";
 @use "components/political_party";
 @use "components/banner";

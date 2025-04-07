@@ -1,122 +1,93 @@
-<div class="bill-details">
-  <div class="back-link">
-    <%= link_to "← 목록으로 돌아가기", bills_path %>
-  </div>
+<!-- 상단 배너 -->
+<%= render "banner" %>
 
-  <div class="bill-header">
-    <h1><%= @bill.title %></h1>
-    <div class="bill-meta">
-      <div class="meta-item">
-        <span class="label">법안번호:</span>
-        <span><%= @bill.bill_number || "없음" %></span>
-      </div>
-      <div class="meta-item">
-        <span class="label">법령종류:</span>
-        <span><%= @bill.bill_type || "미지정" %></span>
-      </div>
-      <div class="meta-item">
-        <span class="label">소관부처:</span>
-        <span><%= @bill.department&.name || "미지정" %></span>
-      </div>
-      <div class="meta-item">
-        <span class="label">분야:</span>
-        <span><%= @bill.domain || "미지정" %></span>
-      </div>
-      <div class="meta-item">
-        <span class="label">진행상황:</span>
-        <span><%= @bill.current_status || "미지정" %></span>
-      </div>
-      <div class="meta-item">
-        <span class="label">의견수렴기간:</span>
-        <% if @bill.public_comment_start_date && @bill.public_comment_end_date %>
-          <span><%= @bill.public_comment_start_date.strftime('%Y-%m-%d') %> ~ <%= @bill.public_comment_end_date.strftime('%Y-%m-%d') %></span>
-        <% else %>
-          <span>미지정</span>
-        <% end %>
-      </div>
+<div class="bill-detail-layer">
+  <!-- 법안, 정당 태그 -->
+  <div class="bill-detail-tags">
+    <!-- 법안 카테고리 태그 -->
+    <%= law_category_button('government-administration', disabled: true) %>
+    <!-- 정당 태그 -->
+    <%= political_party_tab('people-power') %>
+  </div>
+  <!-- 법안 제목 -->
+  <div class="bill-detail-title"><%= @bill.title %></div>
+  <!-- 법안 메타데이터 -->
+  <div class="bill-detail-meta">
+    <!-- 법안 번호 -->
+    <div class="bill-detail-meta-item">
+      <span class="bill-detail-meta-label">의안번호</span>
+      <span class="bill-detail-meta-value"><%= @bill.bill_number || "" %></span>
+    </div>
+    <!-- 제안일자 -->
+    <div class="bill-detail-meta-item">
+      <span class="bill-detail-meta-label">제안일자</span>
+      <span class="bill-detail-meta-value"><%= @bill.proposed_at.strftime('%Y-%m-%d') || "" %></span>
+    </div>
+    <!-- 소관부처 -->
+    <div class="bill-detail-meta-item">
+      <span class="bill-detail-meta-label">소관부처</span>
+      <span class="bill-detail-meta-value"><%#= @bill.department_name || "" %></span>
+    </div>
+    <!-- 제안회기 -->
+    <div class="bill-detail-meta-item">
+      <span class="bill-detail-meta-label">제안회기</span>
+      <span class="bill-detail-meta-value"><%#= @bill.propsal_session || "" %></span>
+    </div>
+    <!-- 제안자 -->
+    <div class="bill-detail-meta-item">
+      <span class="bill-detail-meta-label">제안자</span>
+      <span class="bill-detail-meta-value">
+        <%
+        # 정부입법의 경우 부처명
+        # 국회입법의 경우 법안 제목에서 가져와 표시
+        proposer_name = if @proposer_type == "GovernmentBillSponsor"
+                          @government_sponsor&.department_name || ""
+                        elsif @proposer_type == "NationalAssemblyPerson"
+                          @bill.title[/\((.*?)\)/, 1] || ""
+                        else
+                          ""
+                        end
+        %>
+        <%= proposer_name %>
+      </span>
+    </div>
+    <!-- 법안 원본 문서 -->
+    <div class="bill-detail-meta-item">
+      <span class="bill-detail-meta-label">문서</span>
+      <span class="bill-detail-meta-value"><%#= @bill.document_url || "" %></span>
     </div>
   </div>
 
-  <!-- 발의자/제안자 정보 -->
-  <div class="bill-sponsors">
-    <h2>발의자/제안자</h2>
-    <% if @bill.sponsors.any? %>
-      <ul>
-        <% @bill.sponsors.each do |sponsor| %>
-          <li>
-            <strong><%= sponsor.name %></strong>
-            <% if sponsor.party.present? %>
-              (<%= sponsor.party %>)
-            <% end %>
-            <% if sponsor.region.present? %>
-              - <%= sponsor.region %>
-            <% end %>
-            <% if role = @bill.bill_sponsors.find_by(sponsor_id: sponsor.id)&.sponsor_role %>
-              [<%= role %>]
-            <% end %>
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <p>등록된 발의자/제안자 정보가 없습니다.</p>
-    <% end %>
-  </div>
-
-  <!-- 법안 요약 -->
-  <div class="bill-summary">
-    <h2>법안 요약</h2>
-    <% if @bill.summary.present? %>
-      <div class="summary-text">
-        <%= simple_format @bill.summary %>
-      </div>
-    <% else %>
-      <p>요약 정보가 없습니다.</p>
-    <% end %>
-  </div>
-
-  <!-- 개정 이유 -->
-  <% if @bill.reason_for_revision.present? %>
-    <div class="bill-revision-reason">
-      <h2>개정 이유</h2>
-      <div class="revision-text">
-        <%= simple_format @bill.reason_for_revision %>
-      </div>
+  <!-- 법안 AI 요약 -->
+  <div class="bill-detail-container">
+    <div class="bill-detail-label">
+      <%= inline_svg("list", class: "list-icon") %>
+      AI 요약
     </div>
-  <% end %>
-
-  <!-- 법안 전문 -->
-  <div class="bill-full-text">
-    <h2>법안 전문</h2>
-    <% if @bill.full_text.present? %>
-      <div class="full-text-content">
-        <%= simple_format @bill.full_text %>
-      </div>
-    <% else %>
-      <p>법안 전문이 등록되지 않았습니다.</p>
-    <% end %>
+    <div class="bill-detail-content">
+      AI 요약 내용
+    </div>
   </div>
 
-  <!-- 처리 일정/현황 -->
-  <div class="bill-events">
-    <h2>처리 일정/현황</h2>
-    <% if @bill_events.any? %>
-      <div class="timeline">
-        <% @bill_events.each do |event| %>
-          <div class="timeline-item">
-            <div class="timeline-date">
-              <%= event.event_date&.strftime('%Y-%m-%d') || "날짜 미지정" %>
-            </div>
-            <div class="timeline-content">
-              <h3><%= event.event_type %></h3>
-              <% if event.description.present? %>
-                <p><%= simple_format event.description %></p>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    <% else %>
-      <p>등록된 처리 일정/현황이 없습니다.</p>
-    <% end %>
+  <!-- 법안 진행 상태 -->
+  <div class="bill-detail-container">
+    <div class="bill-detail-label">
+      <%= inline_svg("list", class: "list-icon") %>
+      추진 현황
+    </div>
+    <div class="bill-detail-content">
+      추진 현황 내용
+    </div>
+  </div>
+
+  <!-- 법안 주요 내용 -->
+  <div class="bill-detail-container">
+    <div class="bill-detail-label">
+      <%= inline_svg("list", class: "list-icon") %>
+      제안 이유 및 주요 내용
+    </div>
+    <div class="bill-detail-content">
+      <%= (@bill.summary || "").gsub(/\A(?:제안이유 및 주요내용|제안이유)[:\s]*/, "") %>
+    </div>
   </div>
 </div>
