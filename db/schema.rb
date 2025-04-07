@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_07_103917) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_07_131117) do
   create_table "bill_details", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -32,7 +32,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_07_103917) do
     t.string "exhaust_xml"
     t.string "bill_gbn_cd_xml"
     t.integer "bill_id", null: false
-    t.index ["bill_id"], name: "index_bill_details_on_bill_id"
+    t.index ["bill_id"], name: "index_bill_details_on_bill_id", unique: true
   end
 
   create_table "bills", force: :cascade do |t|
