@@ -12,7 +12,7 @@ class BillsController < ApplicationController
     @bill = Bill.find(params[:id])
 
     # 법안 제안자(국회/정부)
-    @proposer_type = @bill.proposals.first.specific_proposer_type
+    @proposer_type = @bill.proposals.first&.specific_proposer_type if @bill.proposals.any?
     # 정부입법 제안자(부처)
     @government_sponsor = @bill.proposals.find_by(specific_proposer_type: "GovernmentBillSponsor")&.specific_proposer
   end

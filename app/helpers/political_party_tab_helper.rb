@@ -6,7 +6,7 @@ module PoliticalPartyTabHelper
         parties = {
             "democratic-party" => "더불어 민주당",
             "people-power" => "국민의 힘",
-            "rebuilding-korea" => "조국혁신당",
+            "rebuilding-korea" => "조국혁신당"
         }
         content_tag(:div, class: "#{party}-shape") do
             content_tag(:div, parties[party], class: "#{party}-text")
