@@ -54,6 +54,15 @@ if Rails.env.development?
   Proposal.find_or_create_by!(bill: gov_bill1, specific_proposer: gov_sponsor1)
   Proposal.find_or_create_by!(bill: gov_bill2, specific_proposer: gov_sponsor2)
 
+  BillDetail.find_or_create_by!(bill_id: gov_bill1.id) do |detail|
+    detail.jurisdiction_examination_xml = "<committeeName>농림축산식품해양수산위원회</committeeName><presentDt/><procDt/><procResultCd/><submitDt>2025-03-21</submitDt>"
+    detail.law_title = "양봉산업의 육성 및 지원에 관한 법률"
+  end
+  BillDetail.find_or_create_by!(bill_id: gov_bill2.id) do |detail|
+    detail.jurisdiction_examination_xml = "<committeeName>정무위원회</committeeName><presentDt/><procDt/><procResultCd/><submitDt>2025-01-16</submitDt>"
+    detail.law_title = "하도급거래 공정화에 관한 법률"
+    detail.comm_memo_xml = "<commMemo>비용추계요구서 제출됨.</commMemo>"
+  end
 
   # 국회의원 제안주체 생성
   assembly_proposer = Proposer.find_by(proposer_type: "의원")
@@ -266,6 +275,12 @@ if Rails.env.development?
   Proposal.find_or_create_by!(bill: assembly_bill1, specific_proposer: assembly_proposer9, representative_proposal: false)
   Proposal.find_or_create_by!(bill: assembly_bill1, specific_proposer: assembly_proposer10, representative_proposal: false)
   Proposal.find_or_create_by!(bill: assembly_bill1, specific_proposer: assembly_proposer11, representative_proposal: false)
+
+  BillDetail.find_or_create_by!(bill_id: assembly_bill1.id) do |detail|
+    detail.jurisdiction_examination_xml = "<committeeName>정무위원회</committeeName><presentDt/><procDt/><procResultCd/><submitDt>2025-04-02</submitDt>"
+    detail.law_title = "갈등관리 및 공론화에 관한 법률"
+    detail.comm_memo_xml = "<commMemo>비용추계요구서 제출됨.</commMemo>"
+  end
 
   # TODO(@greenstar1151): 추후 정부입법예고 생성 필요
 end

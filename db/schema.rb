@@ -10,7 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_07_081835) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_07_103917) do
+  create_table "bill_details", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "jurisdiction_examination_xml"
+    t.string "jurisdiction_meeting_xml"
+    t.string "proc_examination_xml"
+    t.string "proc_meeting_xml"
+    t.string "comit_examination_xml"
+    t.string "comit_meeting_xml"
+    t.string "plenary_session_examination_xml"
+    t.string "plenary_session_modify_xml"
+    t.string "plenary_session_gov_recon_xml"
+    t.datetime "bill_transferred_at"
+    t.datetime "bill_promulgated_at"
+    t.string "bill_promulgation_number"
+    t.string "law_bon_url"
+    t.string "law_title"
+    t.string "comm_memo_xml"
+    t.string "exhaust_xml"
+    t.string "bill_gbn_cd_xml"
+    t.integer "bill_id", null: false
+    t.index ["bill_id"], name: "index_bill_details_on_bill_id"
+  end
+
   create_table "bills", force: :cascade do |t|
     t.string "title", null: false
     t.string "bill_number"
@@ -86,6 +110,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_07_081835) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "bill_details", "bills"
   add_foreign_key "government_bill_sponsors", "proposers"
   add_foreign_key "government_legislation_notices", "bills"
   add_foreign_key "national_assembly_people", "proposers"
