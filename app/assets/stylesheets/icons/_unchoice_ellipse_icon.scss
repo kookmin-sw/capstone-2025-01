@@ -1,0 +1,12 @@
+@use "../colors/color_variables";
+
+$icon-width: 31px; 
+$icon-height: 31px; 
+
+.unchoice-ellipse-icon {
+  width: $icon-width;
+  height: $icon-height;
+  fill: color_variables.$icon-fill-color;
+  stroke-width: 4px;
+  stroke: color_variables.$icon-unchoice-color;
+}

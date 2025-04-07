@@ -1,3 +1,5 @@
+@use "sass:map";
+
 // 텍스트 스타일 변수 설정
 
 // 기본 속성
@@ -31,11 +33,11 @@ $font-weights: (
 
 // 타이포그래피 타입별 폰트 두께 매핑
 $type-weights: (
-  "headline": map-get($font-weights, "semibold"),
-  "title": map-get($font-weights, "medium"),
-  "body": map-get($font-weights, "regular"),
-  "button": map-get($font-weights, "medium"),
-  "caption": map-get($font-weights, "light")
+  "headline": map.get($font-weights, "semibold"),
+  "title": map.get($font-weights, "medium"),
+  "body": map.get($font-weights, "regular"),
+  "button": map.get($font-weights, "medium"),
+  "caption": map.get($font-weights, "light")
 );
 
 // 타이포그래피 스타일 mixin
@@ -47,10 +49,10 @@ $type-weights: (
   
   // 폰트 크기 설정
   $key: "#{$type}-#{$size}";
-  font-size: map-get($font-sizes, $key);
+  font-size: map.get($font-sizes, $key);
   
   // 폰트 두께 설정
-  font-weight: map-get($type-weights, $type);
+  font-weight: map.get($type-weights, $type);
 }
 
 // 각 타이포그래피 클래스

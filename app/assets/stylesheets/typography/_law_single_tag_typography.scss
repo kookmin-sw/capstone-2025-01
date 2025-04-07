@@ -1,0 +1,9 @@
+@use "../colors/color_variables";
+@use "../typography/typography.scss" as typography;
+
+.law-common-text-component {
+    @extend .button-small;
+    color: color_variables.$text-primary-color;
+    text-align: center;
+    letter-spacing: -0.64px;
+}

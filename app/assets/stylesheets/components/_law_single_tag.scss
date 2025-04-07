@@ -1,0 +1,38 @@
+@use "../colors/color_variables";
+
+// 법안 카테고리 컴포넌트 스타일
+$law-components: (
+  government-administration-comp: 147px,
+  legislative-judicial-comp: 147px,
+  publicsecurity-nationaldefense-comp: 127px,
+  economy-finance-comp: 147px,
+  industry-sciencetechnology-comp: 168px,
+  land-urbandevelopment-comp: 147px,
+  health-welfare-comp: 137px,
+  education-culture-comp: 127px,
+  labor-humanrights-comp: 137px,
+  diplomacy-unification-comp: 147px,
+  disaster-climate-comp: 160px
+);
+
+// 공통 컴포넌트 모양
+%law-common-shape-component {
+  height: 35px;
+  border-radius: 10px;
+  border-width: 1px;
+  padding: 4px 20px;
+  gap: 10px;
+
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  white-space: nowrap;
+
+  background: color_variables.$background-primary-color;
+  border: 1px solid color_variables.$border-primary-color;
+}
+
+.single-law-category {
+    @extend %law-common-shape-component;
+}

@@ -1,0 +1,117 @@
+@use "../colors/color_variables";
+@use "../typography/typography";
+@use "../icons/choice_ellipse_icon";
+@use "../icons/unchoice_ellipse_icon";
+@use "../icons/choice_triangle_icon";
+@use "../icons/unchoice_triangle_icon";
+@use "../icons/choice_next_icon";
+
+.progress-bar-layer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 514px;
+  margin: 0 auto;
+  padding: 32px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex-shrink: 0;
+
+  &.active {
+    .step-bubble {
+      background-color: color_variables.$icon-choice-color;
+      color: color_variables.$text-inverse-color;
+    }
+
+    .triangle-icon {
+      @extend .choice-triangle-icon;
+    }
+
+    .next-icon {
+      @extend .choice-next-icon;
+    }
+
+    .ellipse-icon {
+      @extend .choice-ellipse-icon;
+    }
+  }
+
+  &:not(.active) {
+    .step-bubble {
+      background-color: color_variables.$icon-unchoice-color;
+      color: color_variables.$text-inverse-color;
+    }
+
+    .triangle-icon {
+      @extend .unchoice-triangle-icon;
+    }
+
+    .next-icon {
+      @extend .choice-next-icon;
+    }
+
+    .ellipse-icon {
+      @extend .unchoice-ellipse-icon;
+    }
+  }
+}
+
+.step-bubble-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.step-bubble {
+  padding: 8px 16px;
+  border-radius: 12px;
+  @extend .body-large;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  z-index: 1;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.step-label {
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.triangle-icon {
+  margin-top: -8px;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.step-line {
+  position: absolute;
+  top: 88px; 
+  left: 140px;
+  transform: translate(-46%, -50%); 
+  width: 210px;
+  height: 5px;
+  background-color: color_variables.$icon-unchoice-color;
+  z-index: 0;
+}
+
+.next-icon {
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.ellipse-icon {
+  margin-top: 10px;
+  z-index: 1;
+}

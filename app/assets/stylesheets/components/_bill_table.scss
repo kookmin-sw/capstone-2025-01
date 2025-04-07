@@ -70,4 +70,12 @@
 .bill-description {
     @extend .body-large;
 }
-  
+
+// 법안, 정당 수평 배치
+.bill-meta-top {
+    display: flex;
+    gap: 16px;
+    margin-top: 41px;
+    align-items: center; 
+    flex-wrap: wrap; 
+}

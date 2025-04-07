@@ -1,0 +1,37 @@
+@use "../colors/color_variables";
+@use "../typography/typography.scss" as typography;
+
+%political-common-shape-component {
+  width: 108px;
+  height: 35px;
+  border-radius: 10px;
+  border-width: 1px;
+  padding: 4px 33px;
+  gap: 20px;
+
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  white-space: nowrap;
+
+  background: color_variables.$background-primary-color;
+}
+
+$political-shape-components-color: (
+  democratic-party-shape: #152484,
+  people-power-shape: #E61E2B,
+  rebuilding-korea-shape: #0073CF
+);
+
+@each $name, $color in $political-shape-components-color {
+  .#{$name} {
+    @extend %political-common-shape-component;
+    border: 1px solid $color;
+  }
+}
+
+.party-single-tag {
+  @extend %political-common-shape-component;
+}

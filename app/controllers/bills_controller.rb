@@ -12,6 +12,11 @@ class BillsController < ApplicationController
   def show
     @bill = Bill.find(params[:id])
     @bill_events = @bill.bill_events.order(:event_date)
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def categories

@@ -1,59 +1,87 @@
-<div class="bill-details">
-  <div class="back-link">
-    <%= link_to "← 목록으로 돌아가기", bills_path %>
+<!-- 상단 배너 검색바 -->
+<nav class="banner-component-layer">
+  <!-- 왼쪽 브랜드 로고 -->
+  <div class="brand-logo">
+    <%= link_to root_path do %>
+      <%= inline_svg("brand_logo", class: "brand_logo-icon") %>
+    <% end %>
   </div>
+</nav>
 
+<div class="bill-details">
+  <!-- 법안 종류 및 정당 컴포넌트 -->
+  <div class="bill-meta-top">
+  <%# domain(분야)가 있는 경우만 보여줌 %>
+  <% if @bill.domain.present? %>
+    <% category_class_map = {
+      "정부·행정과 공공제도" => "government-administration-comp",
+      "입법·사법과 선거제도" => "legislative-judicial-comp",
+      "치안·사법과 국방" => "publicsecurity-nationaldefense-comp",
+      "경제·재정과 공정거래" => "economy-finance-comp",
+      "산업·과학기술과 정보통신" => "industry-sciencetechnology-comp",
+      "국토·도시개발과 환경" => "land-urbandevelopment-comp",
+      "보건·복지와 안전망" => "health-welfare-comp",
+      "교육·문화와 관광" => "education-culture-comp",
+      "노동·인권과 성평등" => "labor-humanrights-comp",
+      "외교·통일과 국제협력" => "diplomacy-unification-comp",
+      "재난·기후와 원자력 안전" => "disaster-climate-comp"
+    } %>
+
+    <% class_name = category_class_map[@bill.domain] || "government-administration-comp" %>
+
+    <%= render partial: "bills/single_law_category", locals: {
+      category: @bill.domain,
+      css_class: class_name
+    } %>
+  <% end %>
+
+  <%# 첫 번째 발의자의 정당 정보가 있는 경우만 보여줌 %>
+  <% if (first_party = @bill.sponsors.first&.party).present? %>
+  <% party_shape_class_map = {
+    "더불어민주당" => "democratic-party-shape",
+    "국민의 힘" => "people-power-shape",
+    "조국혁신당" => "rebuilding-korea-shape"
+  } %>
+
+  <% party_text_class_map = {
+    "더불어민주당" => "democratic-party-text",
+    "국민의 힘" => "people-power-text",
+    "조국혁신당" => "rebuilding-korea-text"
+  } %>
+
+  <% shape_class = party_shape_class_map[first_party] || "democratic-party-shape" %>
+  <% text_class = party_text_class_map[first_party] || "democratic-party-text" %>
+
+  <%= render partial: "bills/single_political_party", locals: {
+    party: first_party,
+    css_class: shape_class,
+    text_class: text_class
+  } %>
+<% end %>
+</div>
+
+  <!-- 법안 제목 -->
   <div class="bill-header">
     <h1><%= @bill.title %></h1>
-    <div class="bill-meta">
-      <div class="meta-item">
-        <span class="label">법안번호:</span>
-        <span><%= @bill.bill_number || "없음" %></span>
-      </div>
-      <div class="meta-item">
-        <span class="label">법령종류:</span>
-        <span><%= @bill.bill_type || "미지정" %></span>
-      </div>
-      <div class="meta-item">
-        <span class="label">소관부처:</span>
-        <span><%= @bill.department&.name || "미지정" %></span>
-      </div>
-      <div class="meta-item">
-        <span class="label">분야:</span>
-        <span><%= @bill.domain || "미지정" %></span>
-      </div>
-      <div class="meta-item">
-        <span class="label">진행상황:</span>
-        <span><%= @bill.current_status || "미지정" %></span>
-      </div>
-      <div class="meta-item">
-        <span class="label">의견수렴기간:</span>
-        <% if @bill.public_comment_start_date && @bill.public_comment_end_date %>
-          <span><%= @bill.public_comment_start_date.strftime('%Y-%m-%d') %> ~ <%= @bill.public_comment_end_date.strftime('%Y-%m-%d') %></span>
-        <% else %>
-          <span>미지정</span>
-        <% end %>
-      </div>
-    </div>
+  </div>
+
+  <!-- 입법 단계 프로그래스 바 -->
+  <div class="bill-progress-section" style="margin-bottom: 40px;">
+    <h2>추진 현황</h2>
+    <%= render partial: "bills/progress_bar", locals: { bill: @bill } %>
   </div>
 
   <!-- 발의자/제안자 정보 -->
-  <div class="bill-sponsors">
+  <div class="bill-sponsors" style="margin-top: 20px;">
     <h2>발의자/제안자</h2>
     <% if @bill.sponsors.any? %>
       <ul>
         <% @bill.sponsors.each do |sponsor| %>
           <li>
             <strong><%= sponsor.name %></strong>
-            <% if sponsor.party.present? %>
-              (<%= sponsor.party %>)
-            <% end %>
-            <% if sponsor.region.present? %>
-              - <%= sponsor.region %>
-            <% end %>
-            <% if role = @bill.bill_sponsors.find_by(sponsor_id: sponsor.id)&.sponsor_role %>
-              [<%= role %>]
-            <% end %>
+            <% if sponsor.party.present? %>(<%= sponsor.party %>)<% end %>
+            <% if sponsor.region.present? %> - <%= sponsor.region %><% end %>
+            <% if role = @bill.bill_sponsors.find_by(sponsor_id: sponsor.id)&.sponsor_role %> [<%= role %>]<% end %>
           </li>
         <% end %>
       </ul>
