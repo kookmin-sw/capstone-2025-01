@@ -38,6 +38,8 @@ if Rails.env.development?
     b.assembly_bill_id = "ARC_O2N5Y0K3V1H9W2Z1F1C2K2U6Q8N7E8"
     b.summary = "제안이유 및 주요내용 지방자치단체 수행 사무에 관한 규범을 지방자치단체가 자기 책임하에 자율적으로 정할 수 있도록 자치입법권을 확대하기 위하여 지방자치단체가 밀원식물(蜜原植物)*의 조성에 필요한 사항을 해당 지방자치단체의 조례로 정할 수 있도록 하려는 것임. * 밀원식물(蜜原植物): 꿀벌이 꽃꿀, 꽃가루와 수액의 수집을 위하여 찾아가는 식물로서 농림축산식품부령으로 정하는 식물"
     b.proposed_at = Date.new(2025, 3, 20)
+    b.committee_name = "농림축산식품해양수산위원회"
+    b.bill_stage = "소관위접수"
   end
   gov_bill2 = Bill.find_or_create_by!(bill_number: "2207522") do |b|
     b.title = "하도급거래 공정화에 관한 법률 일부개정법률안(정부)"
@@ -45,6 +47,8 @@ if Rails.env.development?
     b.assembly_bill_id = "ARC_D2L5R0Z1E1D5O1A1B0X2P5Z7E1S4O5"
     b.summary = "제안이유 및 주요내용 행정기관 소속 위원회를 효율적으로 운영하기 위하여 설치ㆍ운영 필요성이 줄어든 상습법위반사업자명단공표심의위원회를 폐지하고, 그 기능을 공정거래위원회가 수행하도록 하려는 것임."
     b.proposed_at = Date.new(2025, 1, 15)
+    b.committee_name = "정무위원회"
+    b.bill_stage = "소관위접수"
   end
 
   Proposal.find_or_create_by!(bill: gov_bill1, specific_proposer: gov_sponsor1)

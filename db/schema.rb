@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_07_065051) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_07_073239) do
   create_table "bills", force: :cascade do |t|
     t.string "title", null: false
     t.string "bill_number"
@@ -20,7 +20,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_07_065051) do
     t.string "bill_type"
     t.string "assembly_bill_id", null: false
     t.datetime "proposed_at"
+    t.string "bill_stage"
+    t.string "committee_name"
     t.index ["assembly_bill_id"], name: "index_bills_on_assembly_bill_id", unique: true
+    t.index ["bill_stage"], name: "index_bills_on_bill_stage"
     t.index ["bill_type"], name: "index_bills_on_bill_type"
     t.index ["proposed_at"], name: "index_bills_on_proposed_at"
   end
