@@ -38,6 +38,8 @@ if Rails.env.development?
     b.assembly_bill_id = "ARC_O2N5Y0K3V1H9W2Z1F1C2K2U6Q8N7E8"
     b.summary = "제안이유 및 주요내용 지방자치단체 수행 사무에 관한 규범을 지방자치단체가 자기 책임하에 자율적으로 정할 수 있도록 자치입법권을 확대하기 위하여 지방자치단체가 밀원식물(蜜原植物)*의 조성에 필요한 사항을 해당 지방자치단체의 조례로 정할 수 있도록 하려는 것임. * 밀원식물(蜜原植物): 꿀벌이 꽃꿀, 꽃가루와 수액의 수집을 위하여 찾아가는 식물로서 농림축산식품부령으로 정하는 식물"
     b.proposed_at = Date.new(2025, 3, 20)
+    b.committee_name = "농림축산식품해양수산위원회"
+    b.bill_stage = "소관위접수"
   end
   gov_bill2 = Bill.find_or_create_by!(bill_number: "2207522") do |b|
     b.title = "하도급거래 공정화에 관한 법률 일부개정법률안(정부)"
@@ -45,11 +47,22 @@ if Rails.env.development?
     b.assembly_bill_id = "ARC_D2L5R0Z1E1D5O1A1B0X2P5Z7E1S4O5"
     b.summary = "제안이유 및 주요내용 행정기관 소속 위원회를 효율적으로 운영하기 위하여 설치ㆍ운영 필요성이 줄어든 상습법위반사업자명단공표심의위원회를 폐지하고, 그 기능을 공정거래위원회가 수행하도록 하려는 것임."
     b.proposed_at = Date.new(2025, 1, 15)
+    b.committee_name = "정무위원회"
+    b.bill_stage = "소관위접수"
   end
 
   Proposal.find_or_create_by!(bill: gov_bill1, specific_proposer: gov_sponsor1)
   Proposal.find_or_create_by!(bill: gov_bill2, specific_proposer: gov_sponsor2)
 
+  BillDetail.find_or_create_by!(bill_id: gov_bill1.id) do |detail|
+    detail.jurisdiction_examination_xml = "<committeeName>농림축산식품해양수산위원회</committeeName><presentDt/><procDt/><procResultCd/><submitDt>2025-03-21</submitDt>"
+    detail.law_title = "양봉산업의 육성 및 지원에 관한 법률"
+  end
+  BillDetail.find_or_create_by!(bill_id: gov_bill2.id) do |detail|
+    detail.jurisdiction_examination_xml = "<committeeName>정무위원회</committeeName><presentDt/><procDt/><procResultCd/><submitDt>2025-01-16</submitDt>"
+    detail.law_title = "하도급거래 공정화에 관한 법률"
+    detail.comm_memo_xml = "<commMemo>비용추계요구서 제출됨.</commMemo>"
+  end
 
   # 국회의원 제안주체 생성
   assembly_proposer = Proposer.find_by(proposer_type: "의원")
@@ -63,7 +76,11 @@ if Rails.env.development?
     constituency: "전남 순천시광양시곡성군구례군갑",
     election_count: "초선",
     latest_age: "22",
-    photo_url: "http://www.assembly.go.kr/photo/9771327.jpg"
+    photo_url: "http://www.assembly.go.kr/photo/9771327.jpg",
+    party_name: "더불어민주당",
+    birth_date: "19681001",
+    homepage_url: "https://www.assembly.go.kr/members/22nd/KIMMOONSOO",
+    affiliated_committee: "교육위원회,예산결산특별위원회"
   ) do |member|
     member.proposer_id = assembly_proposer.id
   end
@@ -76,7 +93,11 @@ if Rails.env.development?
     constituency: "서울 서대문구갑",
     election_count: "초선",
     latest_age: "22",
-    photo_url: "http://www.assembly.go.kr/photo/9771326.jpg"
+    photo_url: "http://www.assembly.go.kr/photo/9771326.jpg",
+    party_name: "더불어민주당",
+    birth_date: "19871030",
+    homepage_url: "https://www.assembly.go.kr/members/22nd/KIMDONGAH",
+    affiliated_committee: "산업통상자원중소벤처기업위원회"
   ) do |member|
     member.proposer_id = assembly_proposer.id
   end
@@ -89,7 +110,11 @@ if Rails.env.development?
     constituency: "서울 은평구을",
     election_count: "초선",
     latest_age: "22",
-    photo_url: "http://www.assembly.go.kr/photo/9771336.jpg"
+    photo_url: "http://www.assembly.go.kr/photo/9771336.jpg",
+    party_name: "더불어민주당",
+    birth_date: "19690805",
+    homepage_url: "https://www.assembly.go.kr/members/22nd/KIMWOOYOUNG",
+    affiliated_committee: "과학기술정보방송통신위원회"
   ) do |member|
     member.proposer_id = assembly_proposer.id
   end
@@ -102,7 +127,11 @@ if Rails.env.development?
     constituency: "전남 해남군완도군진도군",
     election_count: "5선",
     latest_age: "22",
-    photo_url: "http://www.assembly.go.kr/photo/9771366.jpg"
+    photo_url: "http://www.assembly.go.kr/photo/9771366.jpg",
+    party_name: "더불어민주당",
+    birth_date: "19420605",
+    homepage_url: "https://www.assembly.go.kr/members/22nd/PARKJIEWON",
+    affiliated_committee: "법제사법위원회,정보위원회"
   ) do |member|
     member.proposer_id = assembly_proposer.id
   end
@@ -115,7 +144,11 @@ if Rails.env.development?
     constituency: "경기 안산시병",
     election_count: "초선",
     latest_age: "22",
-    photo_url: "http://www.assembly.go.kr/photo/9771369.jpg"
+    photo_url: "http://www.assembly.go.kr/photo/9771369.jpg",
+    party_name: "더불어민주당",
+    birth_date: "19650914",
+    homepage_url: "https://www.assembly.go.kr/members/22nd/PARKHAECHEOL",
+    affiliated_committee: "환경노동위원회"
   ) do |member|
     member.proposer_id = assembly_proposer.id
   end
@@ -128,7 +161,11 @@ if Rails.env.development?
     constituency: "비례대표",
     election_count: "초선",
     latest_age: "22",
-    photo_url: "http://www.assembly.go.kr/photo/9771376.jpg"
+    photo_url: "http://www.assembly.go.kr/photo/9771376.jpg",
+    party_name: "더불어민주당",
+    birth_date: "19671106",
+    homepage_url: "https://www.assembly.go.kr/members/22nd/SEOMIHWA",
+    affiliated_committee: "국회운영위원회,보건복지위원회"
   ) do |member|
     member.proposer_id = assembly_proposer.id
   end
@@ -141,7 +178,11 @@ if Rails.env.development?
     constituency: "경기 성남시중원구",
     election_count: "재선",
     latest_age: "22",
-    photo_url: "http://www.assembly.go.kr/photo/9771269.jpg"
+    photo_url: "http://www.assembly.go.kr/photo/9771269.jpg",
+    party_name: "더불어민주당",
+    birth_date: "19690514",
+    homepage_url: "https://www.assembly.go.kr/members/22nd/LEESOOJIN",
+    affiliated_committee: "12.29여객기참사진상규명과피해자및유가족의피해구제를위한특별위원회,보건복지위원회"
   ) do |member|
     member.proposer_id = assembly_proposer.id
   end
@@ -154,7 +195,11 @@ if Rails.env.development?
     constituency: "서울 양천구을",
     election_count: "재선",
     latest_age: "22",
-    photo_url: "http://www.assembly.go.kr/photo/9771115.jpg"
+    photo_url: "http://www.assembly.go.kr/photo/9771115.jpg",
+    party_name: "더불어민주당",
+    birth_date: "19580212",
+    homepage_url: "https://www.assembly.go.kr/members/22nd/LEEYONGSUN",
+    affiliated_committee: "외교통일위원회"
   ) do |member|
     member.proposer_id = assembly_proposer.id
   end
@@ -167,7 +212,11 @@ if Rails.env.development?
     constituency: "충남 천안시을",
     election_count: "초선",
     latest_age: "22",
-    photo_url: "http://www.assembly.go.kr/photo/9771412.jpg"
+    photo_url: "http://www.assembly.go.kr/photo/9771412.jpg",
+    party_name: "더불어민주당",
+    birth_date: "19650301",
+    homepage_url: "https://www.assembly.go.kr/members/22nd/LEEJAEKWAN",
+    affiliated_committee: "산업통상자원중소벤처기업위원회"
   ) do |member|
     member.proposer_id = assembly_proposer.id
   end
@@ -180,7 +229,11 @@ if Rails.env.development?
     constituency: "경기 고양시을",
     election_count: "재선",
     latest_age: "22",
-    photo_url: "http://www.assembly.go.kr/photo/9771182.jpg"
+    photo_url: "http://www.assembly.go.kr/photo/9771182.jpg",
+    party_name: "더불어민주당",
+    birth_date: "19740220",
+    homepage_url: "https://www.assembly.go.kr/members/22nd/HANJUNHO",
+    affiliated_committee: "국토교통위원회"
   ) do |member|
     member.proposer_id = assembly_proposer.id
   end
@@ -193,7 +246,11 @@ if Rails.env.development?
     constituency: "경남 창원시성산구",
     election_count: "초선",
     latest_age: "22",
-    photo_url: "http://www.assembly.go.kr/photo/9771456.jpg"
+    photo_url: "http://www.assembly.go.kr/photo/9771456.jpg",
+    party_name: "더불어민주당",
+    birth_date: "19631029",
+    homepage_url: "https://www.assembly.go.kr/members/22nd/HUHSUNGMOO",
+    affiliated_committee: "2025 아시아태평양경제협력체(APEC) 정상회의 지원 특별위원회,산업통상자원중소벤처기업위원회,예산결산특별위원회"
   ) do |member|
     member.proposer_id = assembly_proposer.id
   end
@@ -218,6 +275,12 @@ if Rails.env.development?
   Proposal.find_or_create_by!(bill: assembly_bill1, specific_proposer: assembly_proposer9, representative_proposal: false)
   Proposal.find_or_create_by!(bill: assembly_bill1, specific_proposer: assembly_proposer10, representative_proposal: false)
   Proposal.find_or_create_by!(bill: assembly_bill1, specific_proposer: assembly_proposer11, representative_proposal: false)
+
+  BillDetail.find_or_create_by!(bill_id: assembly_bill1.id) do |detail|
+    detail.jurisdiction_examination_xml = "<committeeName>정무위원회</committeeName><presentDt/><procDt/><procResultCd/><submitDt>2025-04-02</submitDt>"
+    detail.law_title = "갈등관리 및 공론화에 관한 법률"
+    detail.comm_memo_xml = "<commMemo>비용추계요구서 제출됨.</commMemo>"
+  end
 
   # TODO(@greenstar1151): 추후 정부입법예고 생성 필요
 end
