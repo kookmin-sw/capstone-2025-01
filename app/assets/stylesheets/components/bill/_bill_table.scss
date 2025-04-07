@@ -20,6 +20,12 @@
     align-items: center;
     flex-direction: column;
     gap: 16px;
+
+    &:focus, &:active, &:hover {
+        outline: none !important;
+        border-color: color_variables.$border-primary-color !important;
+        box-shadow: none !important;
+    }
 }
  
 // 법안 카드 헤더 스타일

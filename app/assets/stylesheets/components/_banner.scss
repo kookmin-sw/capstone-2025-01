@@ -16,4 +16,12 @@
 .brand-logo {
     display: flex;
     align-items: center; 
+
+    a {
+        &:focus, &:active, &:hover {
+            outline: none !important;
+            border-color: color_variables.$border-primary-color !important;
+            box-shadow: none !important;
+        }
+    }
 }
