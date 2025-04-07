@@ -38,6 +38,7 @@
       <span class="bill-detail-meta-label">제안자</span>
       <span class="bill-detail-meta-value">
         <%
+        # TODO(@greenstar1151): Polymorphic 모델(인터페이스) 생성 후 동일한 name 필드로 접근할 수 있도록 수정
         # 정부입법의 경우 부처명
         # 국회입법의 경우 법안 제목에서 가져와 표시
         proposer_name = if @proposer_type == "GovernmentBillSponsor"
