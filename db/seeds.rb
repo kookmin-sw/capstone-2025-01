@@ -67,7 +67,11 @@ if Rails.env.development?
     constituency: "전남 순천시광양시곡성군구례군갑",
     election_count: "초선",
     latest_age: "22",
-    photo_url: "http://www.assembly.go.kr/photo/9771327.jpg"
+    photo_url: "http://www.assembly.go.kr/photo/9771327.jpg",
+    party_name: "더불어민주당",
+    birth_date: "19681001",
+    homepage_url: "https://www.assembly.go.kr/members/22nd/KIMMOONSOO",
+    affiliated_committee: "교육위원회,예산결산특별위원회"
   ) do |member|
     member.proposer_id = assembly_proposer.id
   end
@@ -80,7 +84,11 @@ if Rails.env.development?
     constituency: "서울 서대문구갑",
     election_count: "초선",
     latest_age: "22",
-    photo_url: "http://www.assembly.go.kr/photo/9771326.jpg"
+    photo_url: "http://www.assembly.go.kr/photo/9771326.jpg",
+    party_name: "더불어민주당",
+    birth_date: "19871030",
+    homepage_url: "https://www.assembly.go.kr/members/22nd/KIMDONGAH",
+    affiliated_committee: "산업통상자원중소벤처기업위원회"
   ) do |member|
     member.proposer_id = assembly_proposer.id
   end
@@ -93,7 +101,11 @@ if Rails.env.development?
     constituency: "서울 은평구을",
     election_count: "초선",
     latest_age: "22",
-    photo_url: "http://www.assembly.go.kr/photo/9771336.jpg"
+    photo_url: "http://www.assembly.go.kr/photo/9771336.jpg",
+    party_name: "더불어민주당",
+    birth_date: "19690805",
+    homepage_url: "https://www.assembly.go.kr/members/22nd/KIMWOOYOUNG",
+    affiliated_committee: "과학기술정보방송통신위원회"
   ) do |member|
     member.proposer_id = assembly_proposer.id
   end
@@ -106,7 +118,11 @@ if Rails.env.development?
     constituency: "전남 해남군완도군진도군",
     election_count: "5선",
     latest_age: "22",
-    photo_url: "http://www.assembly.go.kr/photo/9771366.jpg"
+    photo_url: "http://www.assembly.go.kr/photo/9771366.jpg",
+    party_name: "더불어민주당",
+    birth_date: "19420605",
+    homepage_url: "https://www.assembly.go.kr/members/22nd/PARKJIEWON",
+    affiliated_committee: "법제사법위원회,정보위원회"
   ) do |member|
     member.proposer_id = assembly_proposer.id
   end
@@ -119,7 +135,11 @@ if Rails.env.development?
     constituency: "경기 안산시병",
     election_count: "초선",
     latest_age: "22",
-    photo_url: "http://www.assembly.go.kr/photo/9771369.jpg"
+    photo_url: "http://www.assembly.go.kr/photo/9771369.jpg",
+    party_name: "더불어민주당",
+    birth_date: "19650914",
+    homepage_url: "https://www.assembly.go.kr/members/22nd/PARKHAECHEOL",
+    affiliated_committee: "환경노동위원회"
   ) do |member|
     member.proposer_id = assembly_proposer.id
   end
@@ -132,7 +152,11 @@ if Rails.env.development?
     constituency: "비례대표",
     election_count: "초선",
     latest_age: "22",
-    photo_url: "http://www.assembly.go.kr/photo/9771376.jpg"
+    photo_url: "http://www.assembly.go.kr/photo/9771376.jpg",
+    party_name: "더불어민주당",
+    birth_date: "19671106",
+    homepage_url: "https://www.assembly.go.kr/members/22nd/SEOMIHWA",
+    affiliated_committee: "국회운영위원회,보건복지위원회"
   ) do |member|
     member.proposer_id = assembly_proposer.id
   end
@@ -145,7 +169,11 @@ if Rails.env.development?
     constituency: "경기 성남시중원구",
     election_count: "재선",
     latest_age: "22",
-    photo_url: "http://www.assembly.go.kr/photo/9771269.jpg"
+    photo_url: "http://www.assembly.go.kr/photo/9771269.jpg",
+    party_name: "더불어민주당",
+    birth_date: "19690514",
+    homepage_url: "https://www.assembly.go.kr/members/22nd/LEESOOJIN",
+    affiliated_committee: "12.29여객기참사진상규명과피해자및유가족의피해구제를위한특별위원회,보건복지위원회"
   ) do |member|
     member.proposer_id = assembly_proposer.id
   end
@@ -158,7 +186,11 @@ if Rails.env.development?
     constituency: "서울 양천구을",
     election_count: "재선",
     latest_age: "22",
-    photo_url: "http://www.assembly.go.kr/photo/9771115.jpg"
+    photo_url: "http://www.assembly.go.kr/photo/9771115.jpg",
+    party_name: "더불어민주당",
+    birth_date: "19580212",
+    homepage_url: "https://www.assembly.go.kr/members/22nd/LEEYONGSUN",
+    affiliated_committee: "외교통일위원회"
   ) do |member|
     member.proposer_id = assembly_proposer.id
   end
@@ -171,7 +203,11 @@ if Rails.env.development?
     constituency: "충남 천안시을",
     election_count: "초선",
     latest_age: "22",
-    photo_url: "http://www.assembly.go.kr/photo/9771412.jpg"
+    photo_url: "http://www.assembly.go.kr/photo/9771412.jpg",
+    party_name: "더불어민주당",
+    birth_date: "19650301",
+    homepage_url: "https://www.assembly.go.kr/members/22nd/LEEJAEKWAN",
+    affiliated_committee: "산업통상자원중소벤처기업위원회"
   ) do |member|
     member.proposer_id = assembly_proposer.id
   end
@@ -184,7 +220,11 @@ if Rails.env.development?
     constituency: "경기 고양시을",
     election_count: "재선",
     latest_age: "22",
-    photo_url: "http://www.assembly.go.kr/photo/9771182.jpg"
+    photo_url: "http://www.assembly.go.kr/photo/9771182.jpg",
+    party_name: "더불어민주당",
+    birth_date: "19740220",
+    homepage_url: "https://www.assembly.go.kr/members/22nd/HANJUNHO",
+    affiliated_committee: "국토교통위원회"
   ) do |member|
     member.proposer_id = assembly_proposer.id
   end
@@ -197,7 +237,11 @@ if Rails.env.development?
     constituency: "경남 창원시성산구",
     election_count: "초선",
     latest_age: "22",
-    photo_url: "http://www.assembly.go.kr/photo/9771456.jpg"
+    photo_url: "http://www.assembly.go.kr/photo/9771456.jpg",
+    party_name: "더불어민주당",
+    birth_date: "19631029",
+    homepage_url: "https://www.assembly.go.kr/members/22nd/HUHSUNGMOO",
+    affiliated_committee: "2025 아시아태평양경제협력체(APEC) 정상회의 지원 특별위원회,산업통상자원중소벤처기업위원회,예산결산특별위원회"
   ) do |member|
     member.proposer_id = assembly_proposer.id
   end
