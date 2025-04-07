@@ -1,4 +1,5 @@
 @use "../colors/color_variables";
+@use "../typography/typography";
 
 // 법안 카테고리 컴포넌트 스타일
 $law-components: (
@@ -67,4 +68,11 @@ $law-components: (
         background: color_variables.$surface-primary-color;
         width: $width;
     }
+}
+
+.law-common-text-component {
+    @extend .button-medium;
+    color: color_variables.$text-primary-color;
+    text-align: center;
+    letter-spacing: -0.72px;
 }

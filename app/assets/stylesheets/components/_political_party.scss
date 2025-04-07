@@ -1,5 +1,5 @@
 @use "../colors/color_variables";
-@use "../typography/typography.scss" as typography;
+@use "../typography/typography";
 
 %political-common-shape-component {
     width: 108px;
@@ -31,5 +31,20 @@ $political-shape-components-color: (
     .#{$name} {
         @extend %political-common-shape-component;
         border: 1px solid $color;
+    }
+}
+
+// 정당별 폰트 색상 매핑
+$political-text-components-color: (
+    democratic-party-text: #152484,
+    people-power-text: #E61E2B,
+    rebuilding-korea-text: #0073CF
+);
+
+// 정당 텍스트 컴포넌트 스타일
+@each $name, $color in $political-text-components-color {
+    .#{$name} {
+        @extend .button-small;
+        color: $color;
     }
 }
