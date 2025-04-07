@@ -1,0 +1,107 @@
+@use "../../colors/color_variables";
+@use "../../typography/typography";
+
+// 법안 상세 페이지 스타일
+
+// 메인 컨테이너
+.bill-detail-layer {
+  width: 1152px;
+  margin-top: 50px;
+}
+
+// 법안 상세 태그 컨테이너 스타일
+.bill-detail-tags {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px; // 태그 사이 간격
+  margin-bottom: 15px;
+}
+
+// 법안 카테고리 버튼 스타일 오버라이드
+[class$="-comp"] {
+  width: 187px !important;
+  height: 35px !important;
+  max-height: 35px !important;
+  min-height: 35px !important;
+  padding: 0 15px !important;
+  border-radius: 12px !important; 
+  @extend .button-small;
+}
+
+// 정당 태그 스타일 오버라이드
+[class$="-shape"] {
+  width: 108px !important;
+  height: 35px !important;
+  min-height: 35px !important;
+  max-height: 35px !important;
+  border-radius: 12px !important;
+  @extend .button-small;
+}
+  
+// 법안 제목
+.bill-detail-title {
+  @extend .title-large;
+  color: color_variables.$text-primary-color;
+  margin-bottom: 20px;
+}
+  
+// 메타데이터 컨테이너
+.bill-detail-meta {
+  width: 1152px;
+  background: color_variables.$surface-primary-color;
+  border-radius: 20px; 
+  margin-bottom: 50px;
+  padding: 27px 37px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;  
+  grid-template-rows: repeat(3, auto);  
+  gap: 16px 40px;  // 행과 열 사이의 간격
+}
+  
+// 메타데이터 아이템
+.bill-detail-meta-item {
+  display: grid;
+  grid-template-columns: 100px 1fr; 
+  gap: 20px;
+}
+  
+// 메타데이터 라벨
+.bill-detail-meta-label {
+  @extend .body-large;
+  color: color_variables.$text-tertiary-color;
+}
+  
+// 메타데이터 값
+.bill-detail-meta-value {
+  @extend .body-large;
+  font-weight: 600;
+  color: color_variables.$text-primary-color;
+}
+  
+// 컨텐츠 컨테이너 (AI 요약, 추진 현황, 주요 내용 등)
+.bill-detail-container {
+  margin-bottom: 50px;
+}
+  
+.bill-detail-label {
+  @extend .title-medium;
+  color: color_variables.$text-primary-color;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 8px; 
+    
+  .list-icon {
+    width: 32px;
+    height: 32px;
+    color: color_variables.$brand-logo-color;
+  }
+}
+  
+// 컨텐츠 내용
+.bill-detail-content {
+  @extend .body-large;
+  padding: 0 20px;
+}
+  

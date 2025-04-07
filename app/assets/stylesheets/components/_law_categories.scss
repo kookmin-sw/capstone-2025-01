@@ -1,4 +1,5 @@
 @use "../colors/color_variables";
+@use "../typography/typography";
 
 // 법안 카테고리 컴포넌트 스타일
 $law-components: (
@@ -30,6 +31,7 @@ $law-components: (
 // 공통 스타일 정의
 %law-common-shape-component {
     height: 57px;
+    min-height: 57px;
     border-radius: 20px; 
     border-width: 1px;
     padding: 4px 25px;
@@ -43,6 +45,12 @@ $law-components: (
 
     background: color_variables.$background-primary-color;
     border: 1px solid color_variables.$border-primary-color;
+
+    &:focus, &:active, &:hover {
+        outline: none !important;
+        border-color: color_variables.$border-primary-color !important;
+        box-shadow: none !important;
+    }
 }
 
 // 각 컴포넌트의 스타일 생성
@@ -60,4 +68,11 @@ $law-components: (
         background: color_variables.$surface-primary-color;
         width: $width;
     }
+}
+
+.law-common-text-component {
+    @extend .button-medium;
+    color: color_variables.$text-primary-color;
+    text-align: center;
+    letter-spacing: -0.72px;
 }
