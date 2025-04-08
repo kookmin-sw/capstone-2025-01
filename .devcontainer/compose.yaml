@@ -1,4 +1,4 @@
-name: "capstone_2025_01"
+name: "lawnow-webapp"
 
 services:
   rails-app:
