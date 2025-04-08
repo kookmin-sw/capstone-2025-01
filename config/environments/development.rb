@@ -72,7 +72,4 @@ Rails.application.configure do
 
   # For GitHub Codespaces
   config.hosts << ".app.github.dev"
-
-  # Disable serving static files from the `/public` folder in development environment.
-  config.serve_static_assets = false
 end
