@@ -6,16 +6,12 @@
 @use "components/law_categories";
 @use "components/political_party";
 @use "components/banner";
-@use "components/progress_bar";
-@use "components/law_single_tag";
-@use "components/party_single_tag";
 
 @use "layouts/_layout";
 
 @use "typography/typography";
 @use "typography/law_categories_typography";
 @use "typography/political_party_typography";
-@use "typography/law_single_tag_typography";
 
 @use "icons/first_icon";
 @use "icons/last_icon";
@@ -26,8 +22,3 @@
 @use "icons/profile_icon";
 @use "icons/search_icon";
 @use "icons/brand_logo";
-@use "icons/choice_ellipse_icon";
-@use "icons/choice_triangle_icon";
-@use "icons/choice_next_icon";
-@use "icons/unchoice_ellipse_icon";
-@use "icons/unchoice_triangle_icon";
