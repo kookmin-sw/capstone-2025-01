@@ -4,53 +4,33 @@
 <%= render "law_categories" %>
 
 <div class="bill-card-container">
-  <!-- 실제 데이터
-  <%# @bills.each do |bill| %>
-    <div class="bill-card">
+  <!-- 실제 데이터 -->
+  <% @bills.each do |bill| %>
+    <%= link_to bill_path(bill), class: "bill-card" do %>
       <div class="bill-header">
-        <div class="bill-title"><%#= link_to bill.title, bill_path(bill) %></div>
+        <div class="bill-title"><%= bill.title %></div>
         <div class="bill-header-tag">
-          <div class="bill-tag-party"><%#= bill.party_name %></div>
-          <div class="bill-tag-status"><%#= bill.current_status %></div>
+          <div class="bill-tag-party">
+            <%# TODO: national_assembly_people / government_bill_sponsors 가 공유할 수 있는 인터페이스 작업 필요 %>
+            <%# 국회의원 전체목록 API에서 정당을 제공하지 않아 현재는 이름을 표시 중이나, 추후 필드 추가 후 수정 예정 %>
+            <%= bill.proposals.first.specific_proposer.try(:name) || "" %>
+          </div>
+          <div class="bill-tag-status">
+            <%# TODO: 법안 상태 추가 필요 %>
+            <%#= bill.current_status %>
+          </div>
         </div>
       </div>
-        <div class="bill-description">
-          <%#= bill.summary || "" %>
-        </div>
-    </div>
-  <%# end %>
-  -->
-
-  <!-- 법안 카드 예시 -->
-  <div class="bill-card">
-    <!-- 법안 헤더(제목, 태그) -->
-    <div class="bill-header">
-      <!-- 법안 제목 -->
-      <div class="bill-title">근로자퇴직급여 보장법 일부개정법률안</div>
-      <!-- 법안 태그(정당, 상태) -->
-      <div class="bill-header-tag">
-        <div class="bill-tag-party">국민의 힘</div>
-        <div class="bill-tag-status">접수</div>
+      <div class="bill-description">
+        <%# TODO: AI 요약 지원 추가 필요 %>
+        <%= truncate(
+          (bill.summary || "").gsub(/\A(?:제안이유 및 주요내용|제안이유)[:\s]*/, ""),
+          length: 120
+        ) %>
       </div>
-    </div>
-    <!-- 법안 설명 -->
-    <div class="bill-description">
-      퇴직연금 기금제도의 가입 대상을 기존 30인 이하 사업장에서 50인 미만 사업장으로 확대하여 더 많은 중소기업 근로자가 혜택을 받을 수 있도록 하는 개정안이에요.
-    </div>
-  </div>
-  <div class="bill-card">
-    <div class="bill-header">
-        <div class="bill-title">산업안전보건법 일부개정법률안</div>
-      <div class="bill-header-tag">
-        <div class="bill-tag-party">더불어민주당</div>
-        <div class="bill-tag-status">심사중</div>
-      </div>
-    </div>
-    <div class="bill-description">
-      산업 현장에서의 안전 관리 기준을 강화하고, 사업주의 안전 교육 의무를 확대하는 내용의 개정안입니다. 특히 중소기업 작업장의 안전 점검 주기를 단축하고 위반 시 벌금을 상향 조정하는 내용을 담고 있어요.
-    </div>
-  </div>
+    <% end %>
+  <% end %>
 </div>
 
-<!-- Pagination -->
+<%# Pagination %>
 <%= pagy_nav(@pagy) if @pagy.pages > 1 %>
