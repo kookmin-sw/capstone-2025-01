@@ -18,8 +18,8 @@ class Bill < ApplicationRecord
     current_status == "심사"
   end
 
-  def announced?
-    current_status == "공포"
+  def passed?
+    current_status == "통과"
   end
 
   def rejected?
@@ -34,10 +34,32 @@ class Bill < ApplicationRecord
       "심사"
     when "폐기"
       "폐기"
-    when "공포"
-      "공포"
+    when "공포", "통과"
+      "통과"
     else
       "접수"
+    end
+  end
+
+  # 상태에 따라 이모지 반환
+  def status_emoji
+    case current_status
+    when "접수" then "📥 "
+    when "심사" then "📝 "
+    when "공포", "통과" then "✅ "
+    when "폐기" then "❌ "
+    else "📥 "
+    end
+  end
+
+  # 상태에 따라 CSS 클래스 반환
+  def status_css_class
+    case current_status
+    when "접수" then "status-received"
+    when "심사" then "status-reviewing"
+    when "공포", "통과" then "status-passed"
+    when "폐기" then "status-discarded"
+    else "status-received"
     end
   end
 end

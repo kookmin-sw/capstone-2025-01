@@ -1,34 +1,33 @@
 <%= turbo_frame_tag dom_id(bill, :progress) do %>
-    <div class="progress-bar-layer">
-      <% 
-        steps = ['접수', '심사']
-        final_step = bill.current_status == '폐기' ? '폐기' : '공포'
-        steps << final_step
-      %>
-  
-      <% steps.each_with_index do |step, index| %>
-        <div class="progress <%= 'active' if bill.current_status == step %> <%= 'danger' if step == '폐기' %>">
-          <% if index < steps.length - 1 %>
-            <% # 다음 단계가 폐기라면 danger, 아니라면 active 또는 default %>
-            <% next_step = steps[index + 1] %>
-            <% line_class = if bill.current_status == next_step || steps.index(bill.current_status) > index then
-                              next_step == '폐기' ? 'step-line danger' : 'step-line active'
-                            else
-                              'step-line'
-                            end %>
-            <div class="<%= line_class %>"></div>
-          <% end %>
-  
-          <div class="step-bubble-wrapper">
-            <div class="step-bubble">
-              <span class="step-label"><%= step %></span>
-              <%= inline_svg("next", class: "primary-next-icon") %>
-            </div>
-            <%= inline_svg("triangle", class: "triangle-icon") %>
+  <div class="progress-bar-layer">
+    <% 
+      steps = ['접수', '심사']
+      final_step = bill.current_status == '폐기' ? '폐기' : '공포'
+      steps << final_step
+    %>
+
+    <% steps.each_with_index do |step, index| %>
+      <div class="progress <%= 'active' if bill.current_status == step %> <%= 'danger' if step == '폐기' %>">
+        <% if index < steps.length - 1 %>
+          <% next_step = steps[index + 1] %>
+          <% line_class = if bill.current_status == next_step || steps.index(bill.current_status) > index
+                            next_step == '폐기' ? 'step-line danger' : 'step-line active'
+                          else
+                            'step-line'
+                          end %>
+          <div class="<%= line_class %>"></div>
+        <% end %>
+
+        <div class="step-bubble-wrapper">
+          <div class="step-bubble">
+            <span class="step-label"><%= step %></span>
+            <%= inline_svg("next", class: "primary-next-icon") %>
           </div>
-  
-          <%= inline_svg("ellipse", class: "ellipse-icon") %>
+          <%= inline_svg("triangle", class: "triangle-icon") %>
         </div>
-      <% end %>
-    </div>
-  <% end %>  
+
+        <%= inline_svg("ellipse", class: "ellipse-icon") %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

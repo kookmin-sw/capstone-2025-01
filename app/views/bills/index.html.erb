@@ -15,12 +15,10 @@
             <%# 국회의원 전체목록 API에서 정당을 제공하지 않아 현재는 이름을 표시 중이나, 추후 필드 추가 후 수정 예정 %>
             <%= bill.proposals.first.specific_proposer.try(:name) || "" %>
           </div>
-          <div class="bill-tag-status">
-            <%# TODO: 법안 상태 추가 필요 %>
-            <div class="bill-tag-status <%= status_css_class(bill.current_status) %>">
-              <span class="status-emoji"><%= status_emoji(bill.current_status) %></span>
-              <span class="status-label"><%= bill.current_status %></span>
-            </div>
+          <%# TODO: 법안 상태 추가 필요 %>
+          <div class="bill-tag-status <%= bill.status_css_class %>">
+            <span class="status-emoji"><%= bill.status_emoji %></span>
+            <span class="status-label"><%= bill.current_status %></span>
           </div>
         </div>
       </div>

@@ -1,13 +1,53 @@
 @use "../colors/color_variables";
 @use "../typography/typography";
-@use "../icons/primary_next_icon";
-@use "../icons/choice_ellipse_icon";
-@use "../icons/unchoice_ellipse_icon";
-@use "../icons/danger_ellipse_icon";
-@use "../icons/choice_triangle_icon";
-@use "../icons/unchoice_triangle_icon";
-@use "../icons/danger_triangle_icon";
 
+// 공통 아이콘 스타일 정의
+$ellipse-width: 35px;
+$ellipse-height: 35px;
+
+$triangle-width: 27.71px;
+$triangle-height: 20.25px;
+
+$next-width: 10.28px;
+$next-height: 18px;
+
+
+.ellipse-icon-common {
+  width: $ellipse-width;
+  height: $ellipse-height;
+  stroke-width: 4px;
+  fill: color_variables.$icon-default-background-color;
+  margin-top: 10px;
+  z-index: 1;
+}
+
+.triangle-icon-common {
+  width: $triangle-width;
+  height: $triangle-height;
+  margin-top: -8px;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.primary-next-icon {
+  width: $next-width;
+  height: $next-height;
+  color: color_variables.$icon-default-background-color;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+// 상태별 아이콘 색상 스타일
+.choice-ellipse-icon   { @extend .ellipse-icon-common; stroke: color_variables.$icon-choice-color; }
+.unchoice-ellipse-icon { @extend .ellipse-icon-common; stroke: color_variables.$icon-unchoice-color; }
+.danger-ellipse-icon   { @extend .ellipse-icon-common; stroke: color_variables.$icon-danger-color; }
+
+.choice-triangle-icon   { @extend .triangle-icon-common; color: color_variables.$icon-choice-color; }
+.unchoice-triangle-icon { @extend .triangle-icon-common; color: color_variables.$icon-unchoice-color; }
+.danger-triangle-icon   { @extend .triangle-icon-common; color: color_variables.$icon-danger-color; }
+
+// 프로그레스 바 스타일
 .progress-bar-layer {
   display: flex;
   justify-content: space-between;
@@ -31,14 +71,8 @@
       background-color: color_variables.$icon-choice-color;
       color: color_variables.$icon-default-background-color;
     }
-
-    .triangle-icon {
-      @extend .choice-triangle-icon;
-    }
-
-    .ellipse-icon {
-      @extend .choice-ellipse-icon;
-    }
+    .triangle-icon { @extend .choice-triangle-icon; }
+    .ellipse-icon { @extend .choice-ellipse-icon; }
   }
 
   &:not(.active):not(.danger) {
@@ -46,14 +80,8 @@
       background-color: color_variables.$icon-unchoice-color;
       color: color_variables.$icon-default-background-color;
     }
-
-    .triangle-icon {
-      @extend .unchoice-triangle-icon;
-    }
-
-    .ellipse-icon {
-      @extend .unchoice-ellipse-icon;
-    }
+    .triangle-icon { @extend .unchoice-triangle-icon; }
+    .ellipse-icon { @extend .unchoice-ellipse-icon; }
   }
 
   &.danger {
@@ -61,14 +89,8 @@
       background-color: color_variables.$icon-danger-color;
       color: color_variables.$icon-default-background-color;
     }
-
-    .triangle-icon {
-      @extend .danger-triangle-icon;
-    }
-
-    .ellipse-icon {
-      @extend .danger-ellipse-icon;
-    }
+    .triangle-icon { @extend .danger-triangle-icon; }
+    .ellipse-icon { @extend .danger-ellipse-icon; }
   }
 }
 
@@ -97,39 +119,21 @@
   display: inline-block;
 }
 
-.triangle-icon {
-  margin-top: -8px;
-  z-index: 1;
-  flex-shrink: 0;
-}
-
 .step-line {
   position: absolute;
-  top: 92px; 
+  top: 92px;
   left: 225px;
-  transform: translate(-46%, -50%); 
+  transform: translate(-46%, -50%);
   width: 400px;
   height: 5px;
-  background-color: color_variables.$icon-unchoice-color; 
+  background-color: color_variables.$icon-unchoice-color;
   z-index: 0;
 
   &.active {
-    background-color: color_variables.$icon-choice-color; 
+    background-color: color_variables.$icon-choice-color;
   }
 
   &.danger {
-    background-color: color_variables.$icon-danger-color; 
+    background-color: color_variables.$icon-danger-color;
   }
-}
-
-.primary-next-icon {
-  flex-shrink: 0;
-  display: inline-block;
-  vertical-align: middle;
-  @extend .primary-next-icon;
-}
-
-.ellipse-icon {
-  margin-top: 10px;
-  z-index: 1;
 }
