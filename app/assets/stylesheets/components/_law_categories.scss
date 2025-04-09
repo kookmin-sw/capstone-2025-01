@@ -3,17 +3,19 @@
 
 // 법안 카테고리 컴포넌트 스타일
 $law-components: (
-    government-administration-comp: 227px,
-    legislative-judicial-comp: 227px,
-    publicsecurity-nationaldefense-comp: 196px,
-    economy-finance-comp: 227px,
-    industry-sciencetechnology-comp: 259px,
-    land-urbandevelopment-comp: 227px,
-    health-welfare-comp: 211px,
-    education-culture-comp: 196px,
-    labor-humanrights-comp: 211px,
-    diplomacy-unification-comp: 227px,
-    disaster-climate-comp: 246px
+    all-comp: 83px,
+    labor-humanrights-comp: 187px,
+    health-welfare-comp: 154px,
+    socialsecurity-national-comp: 183px,
+    economy-finance-comp: 217px,
+    industry-sciencetechnology-comp: 183px,
+    education-culture-comp: 154px,
+    family-genderequality-comp: 168px,
+    diplomacy-unification-comp: 217px,
+    land-urbandevelopment-comp: 216px,
+    disaster-climate-comp: 236px,
+    government-administration-comp: 217px,
+    legislative-judicial-comp: 217px
 );
 
 .law-component-layer {

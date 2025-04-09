@@ -44,7 +44,11 @@ $button-system-danger-color: palette-color('red', 6);
 
 // Icon Colors
 $icon-default-color: palette-color('grayscale', 1);
+$icon-default-background-color: palette-color('grayscale', 13);
 $icon-search-color: palette-color('blue', 7);
+$icon-choice-color: palette-color('blue', 8);
+$icon-unchoice-color: palette-color('grayscale', 10);
+$icon-danger-color: palette-color('red', 8);
 
 // Logo Colors
 $brand-logo-color: palette-color('blue', 5);

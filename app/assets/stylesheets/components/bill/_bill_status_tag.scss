@@ -1,0 +1,35 @@
+@use "../../colors/color_variables";
+@use "../../typography/typography";
+
+.bill-tag-status {
+    @extend .button-small;
+    display: flex;
+    align-items: center;
+    width: 80px;
+    padding: 3px 10px;
+    border-radius: 10px;
+    gap: 10px;
+    background-color: color_variables.$background-primary-color;    
+  
+    .status-emoji {
+      font-size: 16px;
+      line-height: 1;
+    }
+  
+    &.status-received {
+      color: #162D50;
+    }
+  
+    &.status-reviewing {
+      color: #CCAA00;
+    }
+  
+    &.status-announced {
+      color: #1C7D2C;
+    }
+  
+    &.status-discarded {
+      color: #C32509;
+    }
+  }
+  

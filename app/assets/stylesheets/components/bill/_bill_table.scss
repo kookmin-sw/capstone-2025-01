@@ -53,9 +53,9 @@
 // 법안 태그 정당 스타일
 .bill-tag-party {
     @extend .button-small;
-    width: 125;
-    height: 25;
-    padding: 1px 33px;
+    width: 120;
+    height: 33;
+    padding: 3px 10px;
     background-color: color_variables.$background-primary-color;
     text-align: center;
     border-radius: 10px;
@@ -64,11 +64,11 @@
 // 법안 태그 상태 스타일
 .bill-tag-status {
     @extend .button-small;
-    padding: 1px 18px;
+    padding: 3px 10px;
     background-color: color_variables.$background-primary-color;
     text-align: center;
-    width: 65;
-    height: 25;
+    width: 80;
+    height: 33;
     border-radius: 10px;
 }
 
