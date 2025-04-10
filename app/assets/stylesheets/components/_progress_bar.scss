@@ -1,5 +1,6 @@
 @use "../colors/color_variables";
 @use "../typography/typography";
+@use "../icons/next_icon.scss";
 
 // 공통 아이콘 스타일 정의
 $ellipse-width: 35px;
@@ -7,10 +8,6 @@ $ellipse-height: 35px;
 
 $triangle-width: 27.71px;
 $triangle-height: 20.25px;
-
-$next-width: 10.28px;
-$next-height: 18px;
-
 
 .ellipse-icon-common {
   width: $ellipse-width;
@@ -30,8 +27,7 @@ $next-height: 18px;
 }
 
 .primary-next-icon {
-  width: $next-width;
-  height: $next-height;
+  @extend .next-icon;
   color: color_variables.$icon-default-background-color;
   flex-shrink: 0;
   display: inline-block;
