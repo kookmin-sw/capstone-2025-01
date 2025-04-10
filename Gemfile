@@ -45,6 +45,9 @@ gem "pagy", "~> 9.3"
 
 gem "sorbet-runtime"
 
+# YAML로 설정파일을 관리하기 위한 gem
+gem "config", "~> 5.5"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
