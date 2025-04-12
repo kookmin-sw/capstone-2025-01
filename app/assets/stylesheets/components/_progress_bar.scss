@@ -1,0 +1,135 @@
+@use "../colors/color_variables";
+@use "../typography/typography";
+@use "../icons/next_icon.scss";
+
+// 공통 아이콘 스타일 정의
+$ellipse-width: 35px;
+$ellipse-height: 35px;
+
+$triangle-width: 27.71px;
+$triangle-height: 20.25px;
+
+.ellipse-icon-common {
+  width: $ellipse-width;
+  height: $ellipse-height;
+  stroke-width: 4px;
+  fill: color_variables.$icon-default-background-color;
+  margin-top: 10px;
+  z-index: 1;
+}
+
+.triangle-icon-common {
+  width: $triangle-width;
+  height: $triangle-height;
+  margin-top: -8px;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.primary-next-icon {
+  @extend .next-icon;
+  color: color_variables.$icon-default-background-color;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+// 상태별 아이콘 색상 스타일
+.choice-ellipse-icon   { @extend .ellipse-icon-common; stroke: color_variables.$icon-choice-color; }
+.unchoice-ellipse-icon { @extend .ellipse-icon-common; stroke: color_variables.$icon-unchoice-color; }
+.danger-ellipse-icon   { @extend .ellipse-icon-common; stroke: color_variables.$icon-danger-color; }
+
+.choice-triangle-icon   { @extend .triangle-icon-common; color: color_variables.$icon-choice-color; }
+.unchoice-triangle-icon { @extend .triangle-icon-common; color: color_variables.$icon-unchoice-color; }
+.danger-triangle-icon   { @extend .triangle-icon-common; color: color_variables.$icon-danger-color; }
+
+// 프로그레스 바 스타일
+.progress-bar-layer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 914px;
+  margin: 0 auto;
+  padding: 32px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex-shrink: 0;
+
+  &.active {
+    .step-bubble {
+      background-color: color_variables.$icon-choice-color;
+      color: color_variables.$icon-default-background-color;
+    }
+    .triangle-icon { @extend .choice-triangle-icon; }
+    .ellipse-icon { @extend .choice-ellipse-icon; }
+  }
+
+  &:not(.active):not(.danger) {
+    .step-bubble {
+      background-color: color_variables.$icon-unchoice-color;
+      color: color_variables.$icon-default-background-color;
+    }
+    .triangle-icon { @extend .unchoice-triangle-icon; }
+    .ellipse-icon { @extend .unchoice-ellipse-icon; }
+  }
+
+  &.danger {
+    .step-bubble {
+      background-color: color_variables.$icon-danger-color;
+      color: color_variables.$icon-default-background-color;
+    }
+    .triangle-icon { @extend .danger-triangle-icon; }
+    .ellipse-icon { @extend .danger-ellipse-icon; }
+  }
+}
+
+.step-bubble-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.step-bubble {
+  padding: 8px 16px;
+  border-radius: 12px;
+  @extend .body-large;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  z-index: 1;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.step-label {
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.step-line {
+  position: absolute;
+  top: 92px;
+  left: 225px;
+  transform: translate(-46%, -50%);
+  width: 400px;
+  height: 5px;
+  background-color: color_variables.$icon-unchoice-color;
+  z-index: 0;
+
+  &.active {
+    background-color: color_variables.$icon-choice-color;
+  }
+
+  &.danger {
+    background-color: color_variables.$icon-danger-color;
+  }
+}

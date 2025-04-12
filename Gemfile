@@ -51,6 +51,8 @@ gem "config", "~> 5.5"
 # for sass asset pipeline
 gem "dartsass-rails", "~> 0.5.1"
 
+gem "inline_svg"
+
 # for bulk upsert
 gem "activerecord-import", "~> 2.1"
 

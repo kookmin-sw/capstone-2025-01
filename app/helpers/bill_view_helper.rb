@@ -1,17 +1,19 @@
 module BillViewHelper
     # 법안 카테고리
     LAW_CATEGORIES = {
-        "government-administration" => "🏛 정부·행정과 공공제도",
-        "legislative-judicial" => "⚖ 입법·사법과 선거제도",
-        "publicsecurity-nationaldefense" => "🚔 치안·사법과 국방",
+        "all" => "전체",
+        "labor-humanrights" => "👥 근로·노동과 인권",
+        "health-welfare" => "🏥 보건과 복지",
+        "socialsecurity-national" => "🚔 사회안전과 국방",
         "economy-finance" => "💰 경제·재정과 공정거래",
-        "industry-sciencetechnology" => "🔬 산업·과학기술과 정보통신",
-        "land-urbandevelopment" => "🏗 국토·도시개발과 환경",
-        "health-welfare" => "🏥 보건·복지와 안전망",
-        "education-culture" => "🎓 교육·문화와 관광",
-        "labor-humanrights" => "👥 노동·인권과 성평등",
+        "industry-sciencetechnology" => "🔬 정보통신과 기술",
+        "education-culture" => "🎓 교육과 문화",
+        "family-genderequality" => "🏠 가정과 성평등",
         "diplomacy-unification" => "🌍 외교·통일과 국제협력",
-        "disaster-climate" => "🆘 재난·기후와 원자력 안전"
+        "land-urbandevelopment" => "🏗 국토·도시개발과 환경",
+        "disaster-climate" => "🆘 재난·기후와 원자력 안전",
+        "government-administration" => "🏛 정부·행정과 공공제도",
+        "legislative-judicial" => "⚖ 입법·사법과 선거제도"
     }.freeze
 
     # 법안 카테고리 버튼
