@@ -1,0 +1,9 @@
+@use "../colors/color_variables";
+
+$icon-width: 24px; 
+$icon-height: 24px; 
+
+.alert-circle-icon {
+  width: $icon-width;
+  height: $icon-height;
+}

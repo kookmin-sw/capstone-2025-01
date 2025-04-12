@@ -1,6 +1,5 @@
 <!-- 상단 배너 -->
 <%= render "banner" %>
-
 <div class="bill-detail-layer">
   <!-- 법안, 정당 태그 -->
   <div class="bill-detail-tags">
@@ -66,7 +65,11 @@
       AI 요약
     </div>
     <div class="bill-detail-content">
-      AI 요약 내용
+      <%#= if @bill.ai_summary.present? %>
+        <%= render "ai_summary_accordion" %>
+        <%# else %>
+          요약 생성 중 ⏱️  곧 업데이트 될 거예요.
+        <%# end %>
     </div>
   </div>
 

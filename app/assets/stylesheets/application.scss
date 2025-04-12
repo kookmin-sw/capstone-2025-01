@@ -4,6 +4,8 @@
 @use "components/banner_search";
 @use "components/bill/bill_table";
 @use "components/bill_detail/bill_detail";
+@use "components/bill_detail/ai_summary_accordion";
+
 @use "components/law_categories";
 @use "components/political_party";
 @use "components/banner";
@@ -22,3 +24,5 @@
 @use "icons/profile_icon";
 @use "icons/search_icon";
 @use "icons/brand_logo";
+@use "icons/more_icon";
+@use "icons/alert_circle_icon";
