@@ -5,7 +5,7 @@ class BillsController < ApplicationController
                  .by_title(params[:q])
                  .by_bill_type(params[:bill_type])
 
-    @pagy, @bills = pagy(@bills.order(created_at: :desc))
+    @pagy, @bills = pagy(@bills.order(proposed_at: :desc, bill_number: :desc))
   end
 
   def show
