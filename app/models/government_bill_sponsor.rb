@@ -7,6 +7,6 @@ class GovernmentBillSponsor < ApplicationRecord
 
   sig { returns(String) }
   def display_name
-    "#{ministry_name} #{department_name} (#{manager_name})"
+    "#{ministry_name}"
   end
 end
