@@ -11,13 +11,21 @@ class BillsController < ApplicationController
   def show
     @bill = Bill.find(params[:id])
 
-    # 법안 제안자(국회/정부)
-    @proposer_type = @bill.proposals.first&.specific_proposer_type if @bill.proposals.any?
-    # 정부입법 제안자(부처)
-    @government_sponsor = @bill.proposals.find_by(specific_proposer_type: "GovernmentBillSponsor")&.specific_proposer
+    @representative_proposer = get_representative_proposer(@bill)
   end
 
   def categories
     @tab = params[:tab]
+  end
+
+
+  private
+
+  def get_representative_proposer(bill)
+    # 대표발의 존재 시 대표발의자 중 첫 번째
+    representative_proposer = bill.proposals.representative.first&.specific_proposer
+    # 대표발의가 없을 경우, 첫 번째 발의자
+    representative_proposer ||= bill.proposals.first&.specific_proposer
+    representative_proposer
   end
 end
