@@ -25,7 +25,7 @@ module IconHelper
       end
 
       # debug
-      if options[:debug]
+      if options[:debug] && Rails.env.development?
         puts "SVG Element: #{svg.to_html}"
       end
 
