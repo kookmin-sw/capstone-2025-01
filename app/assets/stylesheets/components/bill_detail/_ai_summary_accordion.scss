@@ -1,0 +1,73 @@
+@use "../../colors/color_variables";
+@use "../../typography/typography";
+@use "../../icons/more_icon";
+
+// 아코디언 컨테이너
+.accordion-container {
+  overflow: hidden;
+  position: relative; 
+}
+
+// 아코디언 헤더
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 50px; 
+
+  // 아코디언 제목
+  .accordion-header-title {
+    @extend .title-medium;
+  }
+
+  // 아코디언 부제목: 바뀌는 이유
+  .accordion-header-subtitle {
+    @extend .title-small;
+  }
+
+  // 아코디언 부제목 상세: 바뀌는 이유 상세
+  .accordion-header-description {
+    @extend .body-large;;
+  }
+}
+
+// 콘텐츠 영역
+.accordion-content {
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
+// 더보기 아이콘
+.arrow-icon {
+  @extend .more-icon;
+  transform: rotate(90deg);
+  transition: transform 0.3s ease;
+}
+
+// 더보기 버튼 - 중앙 하단에 배치
+.arrow-button {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// AI 주의 문구 박스
+.ai-info-box {
+  float: right;
+  display: flex;
+  padding: 12px;
+  
+  .ai-info-text {
+    @extend .body-small;
+    margin-left: 8px;
+    color: color_variables.$text-tertiary-color;;
+  }
+}
+
+// 열고 닫기 더보기 아이콘 회전
+.rotate-270 {
+  transform: rotate(270deg);
+}

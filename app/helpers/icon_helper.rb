@@ -11,7 +11,24 @@ module IconHelper
       # 모든 fill 속성을 제거하고 currentColor로 설정
       svg.search("[fill]").each { |node| node["fill"] = "currentColor" }
 
-      options.each { |key, value| svg[key.to_s] = value }
+      # 일반 속성 처리
+      options.each do |key, value|
+        next if key == :data
+        svg[key.to_s] = value
+      end
+
+      # data 속성 처리
+      if options[:data].present? && options[:data].is_a?(Hash)
+        options[:data].each do |data_key, data_value|
+          svg["data-#{data_key.to_s.dasherize}"] = data_value
+        end
+      end
+
+      # debug
+      if options[:debug] && Rails.env.development?
+        puts "SVG Element: #{svg.to_html}"
+      end
+
       doc.to_html.html_safe
     else
       "(SVG not found: #{filename})"

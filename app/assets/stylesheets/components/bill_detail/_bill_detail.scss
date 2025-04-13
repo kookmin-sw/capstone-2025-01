@@ -103,5 +103,9 @@
 .bill-detail-content {
   @extend .body-large;
   padding: 0 20px;
+
+  p {
+    @extend .body-large;
+    color: color_variables.$text-tertiary-color;
+  }
 }
-  
