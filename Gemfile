@@ -80,6 +80,9 @@ group :development do
 
   # Static analysis for ERB templates [https://github.com/Shopify/erb_lint]
   gem "erb_lint"
+
+  # DB schema visualization
+  gem "rails-erd", "~> 1.7"
 end
 
 group :test do
