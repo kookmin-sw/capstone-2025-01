@@ -56,6 +56,8 @@ gem "inline_svg"
 # for bulk upsert
 gem "activerecord-import", "~> 2.1"
 
+# for soft delete
+gem "acts_as_paranoid", "~> 0.10.3"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
