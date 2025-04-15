@@ -6,7 +6,6 @@ class BillSummary < ApplicationRecord
 
   validates :content, presence: true
   validates :summary_type, presence: true, inclusion: { in: %w[llm manual] }
-  validates :status, presence: true
 
   after_create :set_as_current_if_needed
   after_destroy :unset_current_if_needed
