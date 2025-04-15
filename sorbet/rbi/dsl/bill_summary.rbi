@@ -797,61 +797,6 @@ class BillSummary
     sig { void }
     def edit_reason_will_change!; end
 
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def edited_at; end
-
-    sig { params(value: T.nilable(::ActiveSupport::TimeWithZone)).returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def edited_at=(value); end
-
-    sig { returns(T::Boolean) }
-    def edited_at?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def edited_at_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def edited_at_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def edited_at_came_from_user?; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def edited_at_change; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def edited_at_change_to_be_saved; end
-
-    sig do
-      params(
-        from: T.nilable(::ActiveSupport::TimeWithZone),
-        to: T.nilable(::ActiveSupport::TimeWithZone)
-      ).returns(T::Boolean)
-    end
-    def edited_at_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def edited_at_in_database; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def edited_at_previous_change; end
-
-    sig do
-      params(
-        from: T.nilable(::ActiveSupport::TimeWithZone),
-        to: T.nilable(::ActiveSupport::TimeWithZone)
-      ).returns(T::Boolean)
-    end
-    def edited_at_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def edited_at_previously_was; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def edited_at_was; end
-
-    sig { void }
-    def edited_at_will_change!; end
-
     sig { returns(T.nilable(::Integer)) }
     def editor_id; end
 
@@ -1048,9 +993,6 @@ class BillSummary
     def restore_edit_reason!; end
 
     sig { void }
-    def restore_edited_at!; end
-
-    sig { void }
     def restore_editor_id!; end
 
     sig { void }
@@ -1097,12 +1039,6 @@ class BillSummary
 
     sig { returns(T::Boolean) }
     def saved_change_to_edit_reason?; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def saved_change_to_edited_at; end
-
-    sig { returns(T::Boolean) }
-    def saved_change_to_edited_at?; end
 
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def saved_change_to_editor_id; end
@@ -1244,9 +1180,6 @@ class BillSummary
 
     sig { returns(T::Boolean) }
     def will_save_change_to_edit_reason?; end
-
-    sig { returns(T::Boolean) }
-    def will_save_change_to_edited_at?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_editor_id?; end
