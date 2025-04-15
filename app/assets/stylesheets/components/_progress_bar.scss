@@ -1,6 +1,5 @@
 @use "../colors/color_variables";
 @use "../typography/typography";
-@use "../icons/next_icon.scss";
 
 // 공통 아이콘 스타일 정의
 $ellipse-width: 35px;
@@ -24,14 +23,6 @@ $triangle-height: 20.25px;
   margin-top: -8px;
   z-index: 1;
   flex-shrink: 0;
-}
-
-.primary-next-icon {
-  @extend .next-icon;
-  color: color_variables.$icon-default-background-color;
-  flex-shrink: 0;
-  display: inline-block;
-  vertical-align: middle;
 }
 
 // 상태별 아이콘 색상 스타일
@@ -117,10 +108,10 @@ $triangle-height: 20.25px;
 
 .step-line {
   position: absolute;
-  top: 92px;
-  left: 225px;
+  top: 95px;
+  left: 195px;
   transform: translate(-46%, -50%);
-  width: 400px;
+  width: 270px;
   height: 5px;
   background-color: color_variables.$icon-unchoice-color;
   z-index: 0;
