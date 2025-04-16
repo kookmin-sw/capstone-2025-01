@@ -37,7 +37,7 @@ module PeriodicJobs
 
           response = client.chat(
             parameters: {
-              model:       Settings.bill_summary.model,
+              model:       DEFAULT_MODEL,
               messages:    [ { role: "user", content: prompt_text } ]
             }
           )
@@ -45,7 +45,7 @@ module PeriodicJobs
           content = response.dig("choices", 0, "message", "content")
           summary = bill.bill_summaries.create!(
             content:   content,
-            llm_model: Settings.bill_summary.model,
+            llm_model: DEFAULT_MODEL,
             summary_type: "llm"
           )
           Rails.logger.info("[#{self.class.name}] Created BillSummary id=#{summary.id} for Bill id=#{bill.id}")
