@@ -26,22 +26,21 @@ module BulkUpsertable
     Rails.logger.info "Upserting #{records.count} #{T.must(model_class.name).pluralize}..."
     # Ensure updated_at is included for updates
     columns_to_update = (update_columns.map(&:to_sym) + [ :updated_at ]).uniq
+
+    import_options = {
+      on_duplicate_key_update: {
+        conflict_target: conflict_target,
+        columns: columns_to_update
+      },
+      validate: validate # Skip validations for performance by default
+    }
+
     if silence
       ActiveRecord::Base.logger.silence do
-        model_class.import records,
-                           on_duplicate_key_update: {
-                             conflict_target: conflict_target,
-                             columns: columns_to_update
-                           },
-                           validate: validate # Skip validations for performance by default
+        model_class.import records, import_options
       end
     else
-      model_class.import records,
-                         on_duplicate_key_update: {
-                           conflict_target: conflict_target,
-                           columns: columns_to_update
-                         },
-                         validate: validate # Skip validations for performance by default
+      model_class.import records, import_options
     end
 
   rescue StandardError => e

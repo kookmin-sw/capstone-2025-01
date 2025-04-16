@@ -1,0 +1,15 @@
+attributes:
+  - content
+  - foreign_keys
+  - inheritance
+disconnected: true
+filename: db/erd
+filetype: pdf
+indirect: true
+inheritance: true
+markup: true
+notation: bachman
+orientation: horizontal
+polymorphism: true
+sort: true
+exclude: ApplicationRecord, ActionMailbox::Record, ActionText::Record, ActiveStorage::Record, SolidCable::Record, SolidCache::Record, SolidQueue::Record, SolidQueue::Execution
