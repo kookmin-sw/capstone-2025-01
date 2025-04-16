@@ -4,3 +4,7 @@ bills:
 
 litellm:
   endpoint: "http://localhost:4000"
+
+# TODO: 추후 어드민에서 설정할 수 있도록 변경
+bill_summary:
+  model: gemini/gemini-2.0-flash
