@@ -1,4 +1,6 @@
 class BillsController < ApplicationController
+  allow_unauthenticated_access
+
   def index
     @bills = Bill.includes(proposals: :specific_proposer)
                  .all

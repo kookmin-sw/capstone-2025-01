@@ -16,10 +16,28 @@ module GeneratedUrlHelpersModule
   def bills_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def edit_password_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def edit_session_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_password_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def new_rails_conductor_inbound_email_source_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def new_rails_conductor_inbound_email_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_session_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def password_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def passwords_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def rails_blob_representation_proxy_url(*args); end
@@ -104,6 +122,9 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def root_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def session_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def turbo_recede_historical_location_url(*args); end

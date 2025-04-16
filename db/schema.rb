@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_15_140018) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_15_153855) do
   create_table "bill_details", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -35,19 +35,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_15_140018) do
     t.index ["bill_id"], name: "index_bill_details_on_bill_id", unique: true
   end
 
-  create_table "bill_summaries", force: :cascade do |t|
-    t.integer "bill_id", null: false
-    t.text "content", null: false
-    t.string "summary_type", default: "llm", null: false
-    t.string "llm_model"
-    t.integer "editor_id"
-    t.text "edit_reason"
-    t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["bill_id"], name: "index_bill_summaries_on_bill_id"
-  end
-
   create_table "bills", force: :cascade do |t|
     t.string "title", null: false
     t.string "bill_number"
@@ -59,12 +46,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_15_140018) do
     t.datetime "proposed_at"
     t.string "bill_stage"
     t.string "committee_name"
-    t.integer "current_bill_summary_id"
-    t.boolean "auto_update_current_summary", default: true, null: false
     t.index ["assembly_bill_id"], name: "index_bills_on_assembly_bill_id", unique: true
     t.index ["bill_stage"], name: "index_bills_on_bill_stage"
     t.index ["bill_type"], name: "index_bills_on_bill_type"
-    t.index ["current_bill_summary_id"], name: "index_bills_on_current_bill_summary_id"
     t.index ["proposed_at"], name: "index_bills_on_proposed_at"
   end
 
@@ -126,11 +110,27 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_15_140018) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "ip_address"
+    t.string "user_agent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email_address", null: false
+    t.string "password_digest", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email_address"], name: "index_users_on_email_address", unique: true
+  end
+
   add_foreign_key "bill_details", "bills"
-  add_foreign_key "bill_summaries", "bills"
-  add_foreign_key "bills", "bill_summaries", column: "current_bill_summary_id"
   add_foreign_key "government_bill_sponsors", "proposers"
   add_foreign_key "government_legislation_notices", "bills"
   add_foreign_key "national_assembly_people", "proposers"
   add_foreign_key "proposals", "bills"
+  add_foreign_key "sessions", "users"
 end
