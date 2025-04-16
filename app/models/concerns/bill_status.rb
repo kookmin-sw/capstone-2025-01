@@ -1,63 +1,66 @@
 module BillStatus
-    extend ActiveSupport::Concern
+  extend ActiveSupport::Concern
 
-    included do
-      # 현재 상태 문자열 반환
-      def current_status
-        case bill_stage
-        when "소관위접수" then "접수"
-        when "소관위심사중", "법사위심사중" then "검토"
-        when "의결", "국회통과", "법사위의결" then "결정"
-        when "공포", "시행" then "시행"
-        when "폐기" then "중단"
-        else "접수"
-        end
-      end
+  STATUS_KEYS = %i[received reviewing decided executed discarded].freeze
 
-      # 현재 상태에 해당하는 이모지
-      def status_emoji
-        self.class.emoji_for(current_status)
-      end
+  STATUS_LABELS = {
+    received: "접수",
+    reviewing: "검토",
+    decided: "결정",
+    executed: "시행",
+    discarded: "중단"
+  }.freeze
 
-      # 현재 상태에 해당하는 CSS 클래스
-      def status_css_class
-        self.class.css_class_for(current_status)
-      end
+  STATUS_EMOJIS = {
+    received: "📥",
+    reviewing: "🤔",
+    decided: "📦",
+    executed: "✅",
+    discarded: "❌"
+  }.freeze
 
-      # 상태별 Boolean 메서드
-      def received?  = current_status == "접수"
-      def reviewing? = current_status == "검토"
-      def decided?   = current_status == "결정"
-      def executed?  = current_status == "시행"
-      def rejected?  = current_status == "중단"
-    end
-
-    class_methods do
-      # 전체 진행 단계 배열
-      def steps
-        %w[접수 검토 결정 시행 중단]
-      end
-
-      # 이모지 반환
-      def emoji_for(status)
-        {
-          "접수" => "📥",
-          "검토" => "🤔",
-          "결정" => "📦",
-          "시행" => "✅",
-          "중단" => "❌"
-        }[status] || "📥"
-      end
-
-      # 상태별 CSS 클래스 반환
-      def css_class_for(status)
-        {
-          "접수" => "status-received",
-          "검토" => "status-reviewing",
-          "결정" => "status-decided",
-          "시행" => "status-executed",
-          "중단" => "status-discarded"
-        }[status] || "status-received"
+  included do
+    def current_status_key
+      case bill_stage
+      when "소관위접수"                      then :received
+      when "소관위심사중", "법사위심사중"     then :reviewing
+      when "의결", "국회통과", "법사위의결"   then :decided
+      when "공포", "시행"                    then :executed
+      when "폐기"                            then :discarded
+      else :received
       end
     end
+
+    def current_status         = STATUS_LABELS[current_status_key]
+    def status_emoji          = STATUS_EMOJIS[current_status_key]
+    def status_css_class      = "status-#{current_status_key}"
+    def status_text_class     = "text-#{current_status_key}"
+
+    def received?             = current_status_key == :received
+    def reviewing?            = current_status_key == :reviewing
+    def decided?              = current_status_key == :decided
+    def executed?             = current_status_key == :executed
+    def rejected?             = current_status_key == :discarded
+  end
+
+  class_methods do
+    def steps
+      STATUS_KEYS.map { |key| STATUS_LABELS[key] }
+    end
+
+    def emoji_for(status_label)
+      key = STATUS_LABELS.key(status_label)
+      STATUS_EMOJIS[key] if key
+    end
+
+    def css_class_for(status_label)
+      key = STATUS_LABELS.key(status_label)
+      "status-#{key}" if key
+    end
+
+    def text_color_for(status_label)
+      key = STATUS_LABELS.key(status_label)
+      "text-#{key}" if key
+    end
+  end
 end

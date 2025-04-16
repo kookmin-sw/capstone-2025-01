@@ -79,12 +79,19 @@
       font-size: 16px;
       line-height: 1;
     }
-  
-    &.status-received  { color: color_variables.$emoji-received-color; }
-    &.status-reviewing { color: color_variables.$emoji-reviewing-color; }
-    &.status-decided { color: color_variables.$emoji-decided-color; }
-    &.status-executed { color: color_variables.$emoji-executed-color; }
-    &.status-discarded { color: color_variables.$emoji-discarded-color; }
+    .bill-tag-status {
+        @each $status, $color in (
+            received: color_variables.$emoji-received-color,
+            reviewing: color_variables.$emoji-reviewing-color,
+            decided: color_variables.$emoji-decided-color,
+            executed: color_variables.$emoji-executed-color,
+            discarded: color_variables.$emoji-discarded-color
+        ) {
+            &.status-#{$status} {
+                color: $color;
+            }
+        }
+    }
   }
 
 // 법안 상세정보 스타일

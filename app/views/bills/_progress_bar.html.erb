@@ -2,14 +2,16 @@
   <% steps = bill_steps(bill) %>
 
   <% steps.each_with_index do |step, index| %>
-    <div class="progress <%= 'active' if bill.current_status == step %> <%= 'danger' if step == '중단' %>">
+    <div class="progress <%= 'active' if bill.current_status == step %> <%= 'danger' if step == Bill::STATUS_LABELS[:discarded] %>">
       <% if index < steps.length - 1 %>
         <div class="<%= step_line_class(bill, step, index, steps) %>"></div>
       <% end %>
 
       <div class="step-bubble-wrapper">
         <div class="step-bubble">
-          <span class="step-label"><%= emoji_for_status(step) %> <%= step %></span>
+          <span class="step-label <%= text_color_class_for_status(step) %>">
+            <%= emoji_for_status(step) %> <%= step %>
+          </span>
         </div>
         <%= inline_svg("triangle", class: "triangle-icon") %>
       </div>
