@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_15_153855) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_16_165834) do
+  create_table "ai_prompt_templates", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.text "template", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_ai_prompt_templates_on_name", unique: true
+  end
+
   create_table "bill_details", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
