@@ -9,8 +9,8 @@ export default class extends Controller {
     // 초기 상태는 닫혀있음
     this.isOpen = false
     const style = getComputedStyle(this.contentTarget)
-    this.previewHeight = style.getPropertyValue("--preview-height").trim()
-    this.contentTarget.style.overflow = "hidden"
+    const previewHeightValue = style.getPropertyValue("--preview-height").trim()
+    this.previewHeight = previewHeightValue || "0px" // Fallback to "0px" if --preview-height is not defined
   }
 
   toggle() {
