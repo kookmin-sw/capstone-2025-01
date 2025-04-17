@@ -54,11 +54,11 @@
     </div>
     <%# TODO: AI 요약 작업이 추가되면 수정 필요 %>
     <div class="bill-detail-content">
-      <%#= if @bill.ai_summary.present? %>
-        <%= render "ai_summary_accordion" %>
-        <%# else %>
-          요약 생성 중 ⏱️  곧 업데이트 될 거예요.
-        <%# end %>
+      <% if @bill.current_bill_summary.present? %>
+        <%= render "ai_summary_accordion", current_bill_summary: @bill.current_bill_summary %>
+      <% else %>
+        요약 생성 중 ⏱️  곧 업데이트 될 거예요.
+      <% end %>
     </div>
   </div>
 

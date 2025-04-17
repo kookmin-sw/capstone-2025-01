@@ -5,15 +5,62 @@
 // 아코디언 컨테이너
 .accordion-container {
   overflow: hidden;
-  position: relative; 
-}
+  position: relative;
 
+  &.is-open {
+    .accordion-header-content {
+      max-height: 1000px; // 또는 충분히 큰 값
+      padding-bottom: 20px;
+    }
+    .gradient-overlay {
+      opacity: 0;
+      visibility: hidden;
+      display: none;
+    }
+    .arrow-icon {
+      transform: rotate(270deg);
+    }
+  }
+}
 // 아코디언 헤더
 .accordion-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 50px; 
+  flex-direction: column; 
+  padding-bottom: 50px;
+  position: relative; // 버튼과 그라데이션의 절대 위치 지정을 위해 필요
+
+  .accordion-header-content-wrapper {
+    position: relative; // 그라데이션 오버레이 컨텍스트
+    width: 100%;
+  }
+
+  .accordion-header-content {
+    --preview-height: 250px;
+    max-height: var(--preview-height); // 미리보기 높이를 위한 CSS 변수 사용
+    @extend .body-large; // body-large 스타일 직접 적용
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, padding-bottom 0.3s ease-in-out; // 패딩 전환 효과 추가
+    margin-bottom: 0;
+  }
+
+
+  .gradient-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px; // fade 효과 높이
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0),
+      color_variables.$background-primary-color 80%
+    );
+    pointer-events: none; // 클릭이 가능하도록
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1; // 콘텐츠 위에, 버튼 아래
+    opacity: 1;
+    visibility: visible;
+  }
 
   // 아코디언 제목
   .accordion-header-title {
@@ -27,7 +74,7 @@
 
   // 아코디언 부제목 상세: 바뀌는 이유 상세
   .accordion-header-description {
-    @extend .body-large;;
+    @extend .body-large;
   }
 }
 
@@ -47,27 +94,26 @@
 // 더보기 버튼 - 중앙 하단에 배치
 .arrow-button {
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  z-index: 2;
 }
 
 // AI 주의 문구 박스
 .ai-info-box {
-  float: right;
   display: flex;
-  padding: 12px;
-  
+  align-items: center;
+  padding: 12px 0;
+  justify-content: flex-end;
+
   .ai-info-text {
     @extend .body-small;
     margin-left: 8px;
-    color: color_variables.$text-tertiary-color;;
+    color: color_variables.$text-tertiary-color;
   }
-}
-
-// 열고 닫기 더보기 아이콘 회전
-.rotate-270 {
-  transform: rotate(270deg);
 }
