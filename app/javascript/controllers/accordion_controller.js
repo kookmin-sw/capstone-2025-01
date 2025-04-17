@@ -19,10 +19,12 @@ export default class extends Controller {
     if (this.isOpen) {
       // 열기
       this.contentTarget.style.maxHeight = `${this.contentTarget.scrollHeight}px`
+      this.contentTarget.style.overflow = "visible" 
       this.iconTarget.classList.add("rotate-270")
     } else {
       // 닫기: 미리보기 높이로 설정
       this.contentTarget.style.maxHeight = this.previewHeight
+      this.contentTarget.style.overflow = "hidden" 
       this.iconTarget.classList.remove("rotate-270")
     }
   }

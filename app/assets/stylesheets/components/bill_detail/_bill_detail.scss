@@ -75,7 +75,6 @@
 // 메타데이터 값
 .bill-detail-meta-value {
   @extend .body-large;
-  font-weight: 600;
   color: color_variables.$text-primary-color;
 }
   
@@ -85,7 +84,7 @@
 }
   
 .bill-detail-label {
-  @extend .title-medium;
+  @extend .title-small;
   color: color_variables.$text-primary-color;
   display: flex;
   align-items: center;

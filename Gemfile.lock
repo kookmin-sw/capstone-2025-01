@@ -499,6 +499,7 @@ DEPENDENCIES
   rails (~> 8.0.1)
   rails-erd (~> 1.7)
   redcarpet (~> 3.6)
+  rubocop-rails (~> 2.29)
   rubocop-rails-omakase
   ruby-openai (~> 8.1)
   selenium-webdriver

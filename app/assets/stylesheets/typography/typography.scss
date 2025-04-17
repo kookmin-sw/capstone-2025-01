@@ -4,27 +4,27 @@
 
 // 기본 속성
 $font-family-base: "Pretendard GOV";    // 기본 폰트
-$line-height: 1.5;                      // 150%
-$letter-spacing: -0.04em;               // -4% 자간
 
-// 폰트 크기
-$font-sizes: (
-  "headline-large": 60px,
-  "headline-medium": 54px,
-  "title-large": 40px,
-  "title-medium": 34px,
-  "title-small": 30px,
-  "body-large": 24px,
-  "body-medium": 20px,
-  "body-small": 18px,
-  "button-medium": 18px,
-  "button-small": 16px,
-  "caption-medium": 14px,
-  "caption-small": 12px
+// 폰트 크기, 줄 사이 간격, 텍스트 사이 간격
+$font-metrics: (
+  "headline-large": (font-size: 70px, line-height: 170px, letter-spacing: -2.8px),
+  "headline-medium": (font-size: 54px, line-height: 91.8px, letter-spacing: -2.16px),
+  "title-large": (font-size: 45px, line-height: 76.5px, letter-spacing: -1.8px),
+  "title-medium": (font-size: 38px, line-height: 64.6px, letter-spacing: -1.52px),
+  "title-small": (font-size: 33px, line-height: 49.5px, letter-spacing: -1.32px),
+  "body-large": (font-size: 27px, line-height: 45.9px, letter-spacing: -1.08px),
+  "body-medium": (font-size: 23px, line-height: 39.1px, letter-spacing: -0.92px),
+  "body-small": (font-size: 21px, line-height: 31.5px, letter-spacing: -0.84px),
+  "button-large": (font-size: 22px, line-height: 37.4px), // letter-spacing 없음
+  "button-medium": (font-size: 18px, line-height: 30.6px, letter-spacing: -0.72px),
+  "button-small": (font-size: 16px, line-height: 27.2px, letter-spacing: -0.64px),
+  "caption-medium": (font-size: 14px, line-height: 21px, letter-spacing: -0.56px),
+  "caption-small": (font-size: 12px, line-height: 20.4px, letter-spacing: -0.48px)
 );
 
 // 폰트 두께
 $font-weights: (
+  "bold": 700,
   "semibold": 600,
   "medium": 500,
   "regular": 400,
@@ -33,23 +33,29 @@ $font-weights: (
 
 // 타이포그래피 타입별 폰트 두께 매핑
 $type-weights: (
-  "headline": map.get($font-weights, "semibold"),
-  "title": map.get($font-weights, "medium"),
+  "headline": map.get($font-weights, "bold"),
+  "title": map.get($font-weights, "semibold"),
   "body": map.get($font-weights, "regular"),
-  "button": map.get($font-weights, "medium"),
-  "caption": map.get($font-weights, "light")
+  "button": map.get($font-weights, "semibold"),
+  "caption": map.get($font-weights, "regular")
 );
 
 // 타이포그래피 스타일 mixin
 @mixin typography($type, $size) {
   // 기본 속성
   font-family: $font-family-base;
-  line-height: $line-height;
-  letter-spacing: $letter-spacing;
-  
-  // 폰트 크기 설정
+
   $key: "#{$type}-#{$size}";
-  font-size: map.get($font-sizes, $key);
+  $metrics: map.get($font-metrics, $key);
+  
+  // 폰트 크기, 줄 사이 간격 설정
+  font-size: map.get($metrics, font-size);
+  line-height: map.get($metrics, line-height);
+
+  // letter-spacing은 존재할 경우에만 적용
+  @if map.has-key($metrics, letter-spacing) {
+    letter-spacing: map.get($metrics, letter-spacing);
+  }
   
   // 폰트 두께 설정
   font-weight: map.get($type-weights, $type);
