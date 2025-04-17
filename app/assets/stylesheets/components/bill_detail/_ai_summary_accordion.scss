@@ -4,7 +4,7 @@
 
 // 아코디언 컨테이너
 .accordion-container {
-  overflow: hidden;
+  overflow: visible;
   position: relative;
 
   &.is-open {
@@ -104,55 +104,51 @@
   z-index: 2;
 }
 
-// AI 주의 문구 박스
-.ai-info-box {
-  display: flex;
-  align-items: center;
+.ai-tooltip-wrapper {
   position: relative;
-  padding: 12px 0;
+  overflow: visible;
+  display: flex;
   justify-content: flex-end;
 
-  .ai-info-text {
-    @extend .body-small;
-    margin-left: 8px;
-    color: color_variables.$text-tertiary-color;
-  }
+  .ai-info-box {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    padding: 12px 0;
+    // cursor: default;
 
+    .ai-info-text {
+      @extend .body-small;
+      margin-left: 8px;
+      color: color_variables.$text-tertiary-color;
+    }
+  }
   .ai-hover-box {
     display: none;
-    justify-content: center;
-    align-items: center;
-    position: absolute; 
-
-    top: 50px;           
-    left: 25px;           
-    width: 371px;
+    position: absolute;
+    top: 100%; // info-box 바로 아래에 나타나도록
+    right: 0;  // 우측 정렬
     height: 232px;
-    padding: 20px 20px;
-    gap: 10px;
-
-    border-radius: 0px 20px 20px 20px;
+    width: 371px;
+    padding: 20px;
     background: color_variables.$surface-inverse-color;
+    border-radius: 20px 0px 20px 20px;
     z-index: 10;
 
     .ai-hover-text {
       @extend .body-small;
       width: 360px;
       color: color_variables.$text-ai-explain-color;
-      display: none;
       line-height: 1.6;
     }
   }
 
-  // hover 시에만 말풍선 표시
-  &:hover,
-  &:focus,
-  &:active {
-    .ai-hover-box {
-      display: flex;
-      .ai-hover-text{
-        display: block;
-      }
-    }
+  .ai-info-box:hover + .ai-hover-box {
+    display: flex;
+  }
+
+  // ai-hover-box 자체에 호버해도 계속 표시됨 (마우스 이동 허용)
+  .ai-hover-box:hover {
+    display: flex;
   }
 }
