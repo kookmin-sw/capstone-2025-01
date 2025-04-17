@@ -19989,6 +19989,18 @@ class String
   # source://activesupport//lib/active_support/core_ext/string/inflections.rb#284
   def downcase_first; end
 
+  # The inverse of <tt>String#include?</tt>. Returns true if the string
+  # does not include the other string.
+  #
+  #   "hello".exclude? "lo" # => false
+  #   "hello".exclude? "ol" # => true
+  #   "hello".exclude? ?h   # => false
+  #
+  # @return [Boolean]
+  #
+  # source://activesupport//lib/active_support/core_ext/string/exclude.rb#10
+  def exclude?(string); end
+
   # Returns the first character. If a limit is supplied, returns a substring
   # from the beginning of the string until it reaches the limit value. If the
   # given limit is greater than or equal to the string length, returns a copy of self.
@@ -20070,6 +20082,45 @@ class String
   #
   # source://activesupport//lib/active_support/core_ext/string/zones.rb#9
   def in_time_zone(zone = T.unsafe(nil)); end
+
+  # Indents the lines in the receiver:
+  #
+  #   <<EOS.indent(2)
+  #   def some_method
+  #     some_code
+  #   end
+  #   EOS
+  #   # =>
+  #     def some_method
+  #       some_code
+  #     end
+  #
+  # The second argument, +indent_string+, specifies which indent string to
+  # use. The default is +nil+, which tells the method to make a guess by
+  # peeking at the first indented line, and fall back to a space if there is
+  # none.
+  #
+  #   "  foo".indent(2)        # => "    foo"
+  #   "foo\n\t\tbar".indent(2) # => "\t\tfoo\n\t\t\t\tbar"
+  #   "foo".indent(2, "\t")    # => "\t\tfoo"
+  #
+  # While +indent_string+ is typically one space or tab, it may be any string.
+  #
+  # The third argument, +indent_empty_lines+, is a flag that says whether
+  # empty lines should be indented. Default is false.
+  #
+  #   "foo\n\nbar".indent(2)            # => "  foo\n\n  bar"
+  #   "foo\n\nbar".indent(2, nil, true) # => "  foo\n  \n  bar"
+  #
+  # source://activesupport//lib/active_support/core_ext/string/indent.rb#42
+  def indent(amount, indent_string = T.unsafe(nil), indent_empty_lines = T.unsafe(nil)); end
+
+  # Same as +indent+, except it indents the receiver in-place.
+  #
+  # Returns the indented string, or +nil+ if there was nothing to indent.
+  #
+  # source://activesupport//lib/active_support/core_ext/string/indent.rb#7
+  def indent!(amount, indent_string = T.unsafe(nil), indent_empty_lines = T.unsafe(nil)); end
 
   # Wraps the current string in the ActiveSupport::StringInquirer class,
   # which gives you a prettier way to test for equality.
