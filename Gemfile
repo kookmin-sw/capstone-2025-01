@@ -92,3 +92,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "rubocop-rails", "~> 2.29"

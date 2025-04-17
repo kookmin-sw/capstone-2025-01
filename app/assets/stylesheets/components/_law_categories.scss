@@ -3,30 +3,32 @@
 
 // 법안 카테고리 컴포넌트 스타일
 $law-components: (
-    all-comp: 83px,
-    labor-humanrights-comp: 187px,
-    health-welfare-comp: 154px,
-    socialsecurity-national-comp: 183px,
-    economy-finance-comp: 217px,
-    industry-sciencetechnology-comp: 183px,
-    education-culture-comp: 154px,
-    family-genderequality-comp: 168px,
-    diplomacy-unification-comp: 217px,
-    land-urbandevelopment-comp: 216px,
-    disaster-climate-comp: 236px,
-    government-administration-comp: 217px,
-    legislative-judicial-comp: 217px
+    all-comp: 81px,
+    labor-humanrights-comp: 170px,
+    health-welfare-comp: 136px,
+    socialsecurity-national-comp: 200px,
+    economy-finance-comp: 103px,
+    informationcommunication-sciencetechnology-comp: 196px,
+    industry-agriculture-comp: 166px,
+    education-comp: 103px,
+    culture-sports-comp: 170px,
+    family-genderequality-comp: 151px,
+    diplomacy-unification-comp: 136px,
+    land-environment-comp: 136px,
+    disaster-climate-comp: 185px,
+    government-administration-comp: 136px,
+    legislative-judicial-comp: 200px
 );
 
 .law-component-layer {
     display: flex;
-    width: 1440px;
-    height: 170px;
-    padding: 10px 30px;
-
+    max-width: 1440px;
+    padding: 20px;
+    
+    justify-content: center;
     align-items: center;
-    align-content: center;
     flex-wrap: wrap;
+    margin: 0 auto;
     gap: 10px;
 }
 
@@ -76,5 +78,4 @@ $law-components: (
     @extend .button-medium;
     color: color_variables.$text-primary-color;
     text-align: center;
-    letter-spacing: -0.72px;
 }

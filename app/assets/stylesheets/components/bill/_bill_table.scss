@@ -4,22 +4,22 @@
 // 법안 카드 컨테이너 스타일
 .bill-card-container {
     width: 1152px;
-    margin-top: 50px;
 }   
 
 // 법안 카드 스타일
 .bill-card {
     width: 100%;
     max-width: 1152px;
-    min-height: 180px;
-    margin-bottom: 20px;
+    min-height: 200px;
+    margin: 30px;
     border-radius: 20px;
-    background: color_variables.$surface-primary-color;
-    padding: 27px 37px;
+    background: color_variables.$surface-bill-background-color;
+    box-shadow: 2px 6px 6px 2px rgba(0, 0, 0, 0.10);
+    padding: 30px 50px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 16px;
+    gap: 10px;
 
     &:focus, &:active, &:hover {
         outline: none !important;
@@ -53,7 +53,7 @@
 // 법안 태그 정당 스타일
 .bill-tag-party {
     @extend .button-small;
-    width: 120px;
+    width: 130px;
     height: 33px;
     padding: 3px 10px;
     background-color: color_variables.$background-primary-color;
@@ -79,26 +79,22 @@
       font-size: 16px;
       line-height: 1;
     }
-  
-    &.status-received {
-      color: color_variables.$emoji-received-color;
-    }
-  
-    &.status-reviewing {
-      color: color_variables.$emoji-reviewing-color;
-    }
-  
-    &.status-announced {
-      color: color_variables.$emoji-announced-color;
-    }
-  
-    &.status-discarded {
-      color: color_variables.$emoji-discarded-color;
+    .bill-tag-status {
+        @each $status, $color in (
+            received: color_variables.$emoji-received-color,
+            reviewing: color_variables.$emoji-reviewing-color,
+            decided: color_variables.$emoji-decided-color,
+            executed: color_variables.$emoji-executed-color,
+            discarded: color_variables.$emoji-discarded-color
+        ) {
+            &.status-#{$status} {
+                color: $color;
+            }
+        }
     }
   }
 
 // 법안 상세정보 스타일
 .bill-description {
-    @extend .body-large;
+    @extend .body-medium;
 }
-  
