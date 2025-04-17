@@ -8284,6 +8284,7 @@ class ActiveRecord::Base
   include ::ActiveRecord::Suppressor
   include ::ActiveRecord::Normalization
   include ::ActiveRecord::Marshalling::Methods
+  include ::ActsAsParanoid::Associations
   include ::ActiveStorage::Attached::Model
   include ::ActiveStorage::Reflection::ActiveRecordExtensions
   include ::ActionText::Attribute
@@ -8347,6 +8348,8 @@ class ActiveRecord::Base
   extend ::ActiveRecord::SignedId::ClassMethods
   extend ::ActiveRecord::Suppressor::ClassMethods
   extend ::ActiveRecord::Normalization::ClassMethods
+  extend ::ActsAsParanoid
+  extend ::ActsAsParanoid::Associations::ClassMethods
   extend ::ActiveStorage::Attached::Model::ClassMethods
   extend ::ActiveStorage::Reflection::ActiveRecordExtensions::ClassMethods
   extend ::ActionText::Attribute::ClassMethods
@@ -8917,6 +8920,9 @@ class ActiveRecord::Base
     # source://activemodel/8.0.1/lib/active_model/callbacks.rb#130
     def before_update(*args, **options, &block); end
 
+    # source://acts_as_paranoid/0.10.3/lib/acts_as_paranoid/associations.rb#15
+    def belongs_to(target, scope = T.unsafe(nil), options = T.unsafe(nil)); end
+
     # source://activerecord//lib/active_record/core.rb#89
     def belongs_to_required_by_default; end
 
@@ -8925,6 +8931,9 @@ class ActiveRecord::Base
 
     # source://activerecord//lib/active_record/core.rb#89
     def belongs_to_required_by_default?; end
+
+    # source://activerecord//lib/active_record/associations.rb#1689
+    def belongs_to_without_deleted(name, scope = T.unsafe(nil), **options); end
 
     # source://activerecord-import/2.1.0/lib/activerecord-import/import.rb#530
     def bulk_import(*args); end
@@ -32268,6 +32277,8 @@ end
 #
 # source://activerecord//lib/active_record/reflection.rb#489
 class ActiveRecord::Reflection::AssociationReflection < ::ActiveRecord::Reflection::MacroReflection
+  include ::ActsAsParanoid::AssociationReflection
+
   # @return [AssociationReflection] a new instance of AssociationReflection
   #
   # source://activerecord//lib/active_record/reflection.rb#517
@@ -32414,6 +32425,18 @@ class ActiveRecord::Reflection::AssociationReflection < ::ActiveRecord::Reflecti
   # source://activerecord//lib/active_record/reflection.rb#725
   def polymorphic_name; end
 
+  # Scopes on the potential inverse reflection prevent automatic
+  # <tt>inverse_of</tt>, since the scope could exclude the owner record
+  # we would inverse from. Scopes on the reflection itself allow for
+  # automatic <tt>inverse_of</tt> as long as
+  # <tt>config.active_record.automatic_scope_inversing<tt> is set to
+  # +true+ (the default for new applications).
+  #
+  # @return [Boolean]
+  #
+  # source://acts_as_paranoid/0.10.3/lib/acts_as_paranoid/association_reflection.rb#31
+  def scope_allows_automatic_inverse_of?(reflection, inverse_reflection); end
+
   # source://activerecord//lib/active_record/reflection.rb#650
   def source_reflection; end
 
@@ -32477,18 +32500,6 @@ class ActiveRecord::Reflection::AssociationReflection < ::ActiveRecord::Reflecti
   #
   # source://activerecord//lib/active_record/reflection.rb#749
   def inverse_name; end
-
-  # Scopes on the potential inverse reflection prevent automatic
-  # <tt>inverse_of</tt>, since the scope could exclude the owner record
-  # we would inverse from. Scopes on the reflection itself allow for
-  # automatic <tt>inverse_of</tt> as long as
-  # <tt>config.active_record.automatic_scope_inversing<tt> is set to
-  # +true+ (the default for new applications).
-  #
-  # @return [Boolean]
-  #
-  # source://activerecord//lib/active_record/reflection.rb#813
-  def scope_allows_automatic_inverse_of?(reflection, inverse_reflection); end
 
   # Checks if the inverse reflection that is returned from the
   # +automatic_inverse_of+ method is a valid reflection. We must
@@ -33091,6 +33102,7 @@ class ActiveRecord::Relation
   include ::ActiveRecord::FinderMethods
   include ::ActiveRecord::TokenFor::RelationMethods
   include ::ActiveRecord::SignedId::RelationMethods
+  include ::ActsAsParanoid::Relation
   extend ::ActiveRecord::Delegation::ClassMethods
 
   # @return [Relation] a new instance of Relation
@@ -33305,8 +33317,11 @@ class ActiveRecord::Relation
   #   Post.distinct.delete_all
   #   # => ActiveRecord::ActiveRecordError: delete_all doesn't support distinct
   #
-  # source://activerecord//lib/active_record/relation.rb#1011
-  def delete_all; end
+  # source://acts_as_paranoid/0.10.3/lib/acts_as_paranoid/relation.rb#24
+  def delete_all(conditions = T.unsafe(nil)); end
+
+  # source://acts_as_paranoid/0.10.3/lib/acts_as_paranoid/relation.rb#16
+  def delete_all!(conditions = T.unsafe(nil)); end
 
   # Finds and deletes all records matching the specified conditions.
   # This is short-hand for <tt>relation.where(condition).delete_all</tt>.
@@ -33376,6 +33391,9 @@ class ActiveRecord::Relation
   #
   # source://activerecord//lib/active_record/relation.rb#1106
   def destroy_by(*args); end
+
+  # source://acts_as_paranoid/0.10.3/lib/acts_as_paranoid/relation.rb#32
+  def destroy_fully!(id_or_array); end
 
   # Returns true if relation needs eager loading.
   #
@@ -33768,6 +33786,15 @@ class ActiveRecord::Relation
   #
   # source://activerecord//lib/active_record/relation.rb#404
   def one?(*args); end
+
+  # source://activerecord//lib/active_record/relation.rb#1011
+  def orig_delete_all; end
+
+  # source://acts_as_paranoid/0.10.3/lib/acts_as_paranoid/relation.rb#7
+  def paranoid?; end
+
+  # source://acts_as_paranoid/0.10.3/lib/acts_as_paranoid/relation.rb#11
+  def paranoid_deletion_attributes; end
 
   # Returns the value of attribute predicate_builder.
   #
