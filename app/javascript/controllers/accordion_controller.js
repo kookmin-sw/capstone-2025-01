@@ -8,20 +8,21 @@ export default class extends Controller {
   connect() {
     // 초기 상태는 닫혀있음
     this.isOpen = false
-    this.contentTarget.style.maxHeight = "0"
+    const style = getComputedStyle(this.contentTarget)
+    this.previewHeight = style.getPropertyValue("--preview-height").trim()
     this.contentTarget.style.overflow = "hidden"
   }
 
   toggle() {
     this.isOpen = !this.isOpen
-    
+    this.element.classList.toggle('is-open', this.isOpen)
     if (this.isOpen) {
       // 열기
       this.contentTarget.style.maxHeight = `${this.contentTarget.scrollHeight}px`
       this.iconTarget.classList.add("rotate-270")
     } else {
-      // 닫기
-      this.contentTarget.style.maxHeight = "0"
+      // 닫기: 미리보기 높이로 설정
+      this.contentTarget.style.maxHeight = this.previewHeight
       this.iconTarget.classList.remove("rotate-270")
     }
   }
