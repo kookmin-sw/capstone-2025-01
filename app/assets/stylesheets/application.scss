@@ -5,6 +5,7 @@
 @use "components/bill/bill_table";
 @use "components/bill_detail/bill_detail";
 @use "components/bill_detail/ai_summary_accordion";
+@use "components/login/login";
 
 @use "components/law_categories";
 @use "components/political_party";
@@ -26,3 +27,5 @@
 @use "icons/brand_logo";
 @use "icons/more_icon";
 @use "icons/alert_circle_icon";
+@use "icons/kakao_logo_icon";
+@use "icons/naver_logo_icon";

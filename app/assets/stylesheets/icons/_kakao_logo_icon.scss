@@ -1,0 +1,9 @@
+@use "../colors/color_variables";
+
+$icon-width: 36px; 
+$icon-height: 36px; 
+
+.kakao-logo-icon {
+  width: $icon-width;
+  height: $icon-height;
+}
