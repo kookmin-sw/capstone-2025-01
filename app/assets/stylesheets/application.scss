@@ -11,6 +11,11 @@
 @use "components/banner";
 @use "components/progress_bar";
 
+@use "components/main_title";
+@use "components/login_button";
+@use "components/hot_issue";
+@use "components/trend";
+
 @use "layouts/_layout";
 
 @use "typography/typography";
@@ -26,3 +31,5 @@
 @use "icons/brand_logo";
 @use "icons/more_icon";
 @use "icons/alert_circle_icon";
+@use "icons/kakao_icon";
+@use "icons/naver_icon";

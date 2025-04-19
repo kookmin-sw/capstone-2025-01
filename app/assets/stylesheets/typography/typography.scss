@@ -94,6 +94,10 @@ $type-weights: (
   @include typography("body", "small");
 }
 
+.button-large {
+  @include typography("button", "large");
+}
+
 .button-medium {
   @include typography("button", "medium");
 }

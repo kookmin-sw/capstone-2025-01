@@ -11,4 +11,12 @@ class Bill < ApplicationRecord
 
   scope :by_title, ->(query) { where("lower(title) LIKE ?", "%#{query.downcase}%") if query.present? }
   scope :by_bill_type, ->(bill_type) { where(bill_type: bill_type) if bill_type.present? }
+
+  # bill_summaries 추가/삭제 시 current_bill_summary 자동 관리
+  def update_current_bill_summary!(new_summary = nil)
+    if auto_update_current_summary?
+      summary = new_summary || bill_summaries.order(created_at: :desc).first
+      update_column(:current_bill_summary_id, summary&.id)
+    end
+  end
 end

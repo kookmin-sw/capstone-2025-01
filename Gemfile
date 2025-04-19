@@ -57,6 +57,12 @@ gem "inline_svg"
 gem "activerecord-import", "~> 2.1"
 
 
+# for LLM integration
+gem "ruby-openai", "~> 8.1"
+
+# for template rendering
+gem "liquid", "~> 5.8"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

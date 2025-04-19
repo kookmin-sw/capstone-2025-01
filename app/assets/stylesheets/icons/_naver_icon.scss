@@ -1,0 +1,10 @@
+@use "../colors/color_variables";
+
+$icon-width: 18px; 
+$icon-height: 18px; 
+
+.naver-icon {
+  width: $icon-width;
+  height: $icon-height;
+  color: color_variables.$icon-default-background-color;
+}

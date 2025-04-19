@@ -1,0 +1,18 @@
+@use "colors/color_variables";
+@use "../typography/typography";
+
+.main-message-layer {
+  text-align: center;
+  padding: 25px 410px 80px 410px;
+}
+
+.headline-text {
+  @extend .headline-large;
+  color: color_variables.$text-primary-color; // 필요에 따라 색상 지정
+}
+
+.title-text {
+  @extend .title-small;
+  color: color_variables.$text-secondary-color;
+  margin-top: 16px;
+}

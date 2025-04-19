@@ -1,0 +1,117 @@
+@use "colors/color_variables";
+@use "../typography/typography";
+@use "../icons/next_icon";
+@use "../icons/previous_icon";
+
+.hot-issue-card-container {
+    display: flex;
+    gap: 30px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin: 0 auto;              // ✅ 중앙 정렬 (불필요한 margin 제거)
+    position: relative;
+    width: fit-content;          // ✅ 카드 수에 맞게 자동 너비 설정
+    max-width: 100%;             // ✅ 너무 넓어지는 것 방지
+}
+
+.hot-issue-card{
+    height: 250px;
+    width: 500px;
+    padding: 30px;
+    gap: 11px;
+
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+  
+    border-radius: 20px; 
+    box-sizing: border-box;
+  
+    background-color: color_variables.$surface-primary-color; // 배경색 지정 (필요 시 변경)
+  
+}
+
+.hot-issue-header {
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 19px;
+}
+
+.hot-issue-bill-text {
+    @extend .title-small;
+    color: color_variables.$text-primary-color;
+}
+
+.all-issue-bill-text {
+    @extend .caption-medium;
+    color: color_variables.$text-tertiary-color;
+    margin-top: 6px;
+}
+
+.all-issue-next-icon {
+    @extend .next-icon;
+    width: 5.5px;
+    height: 10.283px;
+    color: color_variables.$text-tertiary-color;
+    margin-left: 3px;
+}
+
+.hot-issue-title {
+    @extend .button-large;
+    color: color_variables.$text-primary-color;
+    width: 100%;                
+    white-space: nowrap;        
+    overflow: hidden;           
+    text-overflow: ellipsis;    // 생략 부호(...) 표시
+    flex-shrink: 0; 
+}
+
+.hot-issue-header-tag {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0; 
+}
+
+.hot-issue-next-icon {
+    @extend .next-icon;
+    width: 35px;
+    height: 35px;
+    color: color_variables.$icon-hot-issue-color;
+    z-index: 1;
+}
+
+.hot-issue-previous-icon{
+    @extend .previous-icon;
+    width: 35px;
+    height: 35px;
+    color: color_variables.$icon-hot-issue-color;
+    z-index: 1;
+}
+
+// 요약된 법안 정보를 가져와야 하는데 없는 법안도 있어
+// 법안 상세정보 사용
+.hot-issue-bill-description {
+    @extend .body-small;
+    width: 100%;
+    overflow: hidden;
+}
+
+.hot-issue-controls-wrapper {
+    position: relative;     // 📌 컨테이너 안에서 위치 지정
+    margin-top: 23px;       // 📌 카드 하단과의 간격 확보
+    margin-bottom: 192px;
+    width: 140px;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+    left: 50%;
+    transform: translateX(-50%);
+} 
+  
+.hot-issue-controls {
+    display: flex;
+    gap: 70px;
+}
