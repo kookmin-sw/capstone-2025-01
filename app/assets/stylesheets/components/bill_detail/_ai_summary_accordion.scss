@@ -33,7 +33,7 @@
 
 // 콘텐츠 영역
 .accordion-content {
-  overflow: hidden;
+  overflow: visible;
   transition: max-height 0.3s ease-in-out;
 }
 
