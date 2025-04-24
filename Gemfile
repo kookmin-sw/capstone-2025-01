@@ -65,6 +65,11 @@ gem "ruby-openai", "~> 8.1"
 # for template rendering
 gem "liquid", "~> 5.8"
 
+# for error reporting
+gem "sentry-ruby", "~> 5.23"
+gem "sentry-rails", "~> 5.23"
+
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
