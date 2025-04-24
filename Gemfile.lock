@@ -374,6 +374,12 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sentry-rails (5.23.0)
+      railties (>= 5.0)
+      sentry-ruby (~> 5.23.0)
+    sentry-ruby (5.23.0)
+      bigdecimal
+      concurrent-ruby (~> 1.0, >= 1.0.2)
     smart_properties (1.17.0)
     solid_cable (3.0.7)
       actioncable (>= 7.2)
@@ -503,6 +509,8 @@ DEPENDENCIES
   rubocop-rails-omakase
   ruby-openai (~> 8.1)
   selenium-webdriver
+  sentry-rails (~> 5.23)
+  sentry-ruby (~> 5.23)
   solid_cable
   solid_cache
   solid_queue
