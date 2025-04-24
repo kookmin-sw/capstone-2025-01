@@ -1,10 +1,12 @@
-# production:
-#   periodic_cleanup:
-#     class: CleanSoftDeletedRecordsJob
-#     queue: background
-#     args: [ 1000, { batch_size: 500 } ]
-#     schedule: every hour
-#   periodic_command:
-#     command: "SoftDeletedRecord.due.delete_all"
-#     priority: 2
-#     schedule: at 5am every day
+production:
+  bulk_update_bill_info_periodic_job:
+    class: "PeriodicJobs::BulkUpdateBillInfoPeriodicJob"
+    schedule: "55 23 * * *" # 매일 23시 55분에 실행
+  bulk_update_bill_committee_info_periodic_job:
+    class: "PeriodicJobs::BulkUpdateBillCommitteeInfoPeriodicJob"
+    schedule: "5 0 * * *" # 매일 0시 5분에 실행
+  generate_llm_bill_summary_periodic_job:
+    class: "PeriodicJobs::GenerateLlmBillSummaryPeriodicJob"
+    # NOTE: Rate Limit 고려 필요, MAX_RECORDS_TO_PROCESS_PER_RUN 설정 참고
+    schedule: "*/15 * * * *" # 매 15분마다 실행
+    
