@@ -6,6 +6,7 @@ class Bill < ApplicationRecord
   has_one :bill_detail
   has_one :government_legislation_notice
   has_many :bill_summaries, dependent: :destroy
+
   # 각 Bill이 여러 bill_summaries 중 유저에게 노출할 것을 빠르게 참조할 수 있도록 역정규화 컬럼(current_bill_summary_id)을 사용
   belongs_to :current_bill_summary, class_name: "BillSummary", optional: true
 
