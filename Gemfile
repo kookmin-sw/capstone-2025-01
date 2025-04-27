@@ -56,6 +56,21 @@ gem "inline_svg"
 # for bulk upsert
 gem "activerecord-import", "~> 2.1"
 
+# for soft delete
+gem "acts_as_paranoid", "~> 0.10.3"
+
+# for LLM integration
+gem "ruby-openai", "~> 8.1"
+
+# for template rendering
+gem "liquid", "~> 5.8"
+
+# for markdown rendering
+gem "redcarpet", "~> 3.6"
+
+# for error reporting
+gem "sentry-ruby", "~> 5.23"
+gem "sentry-rails", "~> 5.23"
 
 # for LLM integration
 gem "ruby-openai", "~> 8.1"
