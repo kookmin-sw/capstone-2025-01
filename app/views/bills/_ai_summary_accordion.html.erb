@@ -1,19 +1,15 @@
+<%# bill_summary %>
 <!-- AI 요약 페이지 아코디언 UI -->
 
-<%# TODO: AI 요약 작업이 추가되면 수정 필요 %>
 <div data-controller="accordion" class="accordion-container">
-  <!-- 항상 표시되는 헤더 영역 -->
   <div class="accordion-header">
-    <div class="accordion-header-content">
-      <div class="accordion-header-title">
-        🚨 온라인 댓글 함부로 달면 큰일 나요! 처벌이 훨씬 세진다네요?
+    <%# Add relative positioning for the gradient overlay %>
+    <div class="accordion-header-content-wrapper" style="position: relative;">
+      <div class="accordion-header-content" data-accordion-target="content">
+        <%= markdown(current_bill_summary.content) %>
       </div>
-      <div class="accordion-header-subtitle">
-        📌 왜 바뀌나요?
-      </div>
-      <div class="accordion-header-description">
-        악플러 때문에 힘들어하는 사람들이 많아져서, 온라인 명예훼손에 대한 처벌을 강화하려는 개정안이에요.
-      </div>
+      <%# Gradient overlay for truncation effect %>
+      <div class="gradient-overlay" data-accordion-target="gradient"></div>
     </div>
 
     <!-- 더보기 화살표 버튼 -->
@@ -21,22 +17,18 @@
       <%= inline_svg("more", class: "arrow-icon", data: { accordion_target: "icon" }) %>
     </div>
   </div>
-  <!-- 토글되는 콘텐츠 -->
-  <div data-accordion-target="content" class="accordion-content">
-      AI 법안 요약 정보
-      <!-- AI 주의 정보 -->
-      <div class="ai-info-box">
-        <%= inline_svg("alert_circle", class: "alert-circle-icon") %>
-        <div class="ai-info-text">AI는 실수를 할 수 있어요</div>
-        
-        <!-- 마우스 올리면 보이는 말풍선 -->
-        <div class="ai-hover-box">
-          <div class="ai-hover-text">
-            💡 이 내용은 제안 이유와 ‘주요 내용’의 원문을 바탕으로 AI가 정리한 요약이에요. <br />
-            <strong>최대한 정확하게 전달하려 노력했지만, AI도 가끔은 실수할 수 있어요.</strong><br />
-            법안을 더 잘 이해하기 위한 도구로 활용해 주세요.
-          </div>
-        </div>
+  <!-- AI 주의 정보 + 툴팁 -->
+  <div class="ai-tooltip-wrapper" style="position: relative; overflow: visible;">
+    <div class="ai-info-box">
+      <%= inline_svg("alert_circle", class: "alert-circle-icon") %>
+      <div class="ai-info-text">AI는 실수를 할 수 있어요</div>
+    </div>
+    <div class="ai-hover-box">
+      <div class="ai-hover-text">
+        💡 이 내용은 제안 이유와 ‘주요 내용’의 원문을 바탕으로 AI가 정리한 요약이에요. <br />
+        <strong>최대한 정확하게 전달하려 노력했지만, AI도 가끔은 실수할 수 있어요.</strong><br />
+        법안을 더 잘 이해하기 위한 도구로 활용해 주세요.
       </div>
+    </div>
   </div>
 </div>

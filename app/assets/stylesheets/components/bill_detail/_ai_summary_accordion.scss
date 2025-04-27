@@ -5,15 +5,62 @@
 // 아코디언 컨테이너
 .accordion-container {
   overflow: visible;
-  position: relative; 
-}
+  position: relative;
 
+  &.is-open {
+    .accordion-header-content {
+      max-height: 1000px; // 또는 충분히 큰 값
+      padding-bottom: 20px;
+    }
+    .gradient-overlay {
+      opacity: 0;
+      visibility: hidden;
+      display: none;
+    }
+    .arrow-icon {
+      transform: rotate(270deg);
+    }
+  }
+}
 // 아코디언 헤더
 .accordion-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 50px; 
+  flex-direction: column; 
+  padding-bottom: 50px;
+  position: relative; // 버튼과 그라데이션의 절대 위치 지정을 위해 필요
+
+  .accordion-header-content-wrapper {
+    position: relative; // 그라데이션 오버레이 컨텍스트
+    width: 100%;
+  }
+
+  .accordion-header-content {
+    --preview-height: 250px;
+    max-height: var(--preview-height); // 미리보기 높이를 위한 CSS 변수 사용
+    @extend .body-large; // body-large 스타일 직접 적용
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, padding-bottom 0.3s ease-in-out; // 패딩 전환 효과 추가
+    margin-bottom: 0;
+  }
+
+
+  .gradient-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px; // fade 효과 높이
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0),
+      color_variables.$background-primary-color 80%
+    );
+    pointer-events: none; // 클릭이 가능하도록
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1; // 콘텐츠 위에, 버튼 아래
+    opacity: 1;
+    visibility: visible;
+  }
 
   // 아코디언 제목
   .accordion-header-title {
@@ -27,7 +74,7 @@
 
   // 아코디언 부제목 상세: 바뀌는 이유 상세
   .accordion-header-description {
-    @extend .body-large;;
+    @extend .body-large;
   }
 }
 
@@ -47,67 +94,61 @@
 // 더보기 버튼 - 중앙 하단에 배치
 .arrow-button {
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  z-index: 2;
 }
 
-// AI 주의 문구 박스
-.ai-info-box {
-  float: right;
-  display: flex;
-  align-items: center;
+.ai-tooltip-wrapper {
   position: relative;
-  padding: 12px;
+  overflow: visible;
+  display: flex;
+  justify-content: flex-end;
 
-  .ai-info-text {
-    @extend .body-small;
-    margin-left: 8px;
-    color: color_variables.$text-tertiary-color;
+  .ai-info-box {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    padding: 12px 0;
+    // cursor: default;
+
+    .ai-info-text {
+      @extend .body-small;
+      margin-left: 8px;
+      color: color_variables.$text-tertiary-color;
+    }
   }
-
   .ai-hover-box {
     display: none;
-    justify-content: center;
-    align-items: center;
-    position: absolute; 
-
-    top: 50px;           
-    left: 25px;           
-    width: 371px;
+    position: absolute;
+    top: 100%; // info-box 바로 아래에 나타나도록
+    right: 0;  // 우측 정렬
     height: 232px;
-    padding: 20px 20px;
-    gap: 10px;
-
-    border-radius: 0px 20px 20px 20px;
+    width: 371px;
+    padding: 20px;
     background: color_variables.$surface-inverse-color;
+    border-radius: 20px 0px 20px 20px;
     z-index: 10;
 
     .ai-hover-text {
       @extend .body-small;
       width: 360px;
       color: color_variables.$text-ai-explain-color;
-      display: none;
       line-height: 1.6;
     }
   }
 
-  // hover 시에만 말풍선 표시
-  &:hover,
-  &:focus,
-  &:active {
-    .ai-hover-box {
-      display: flex;
-      .ai-hover-text{
-        display: block;
-      }
-    }
+  .ai-info-box:hover + .ai-hover-box {
+    display: flex;
   }
-}
 
-// 열고 닫기 더보기 아이콘 회전
-.rotate-270 {
-  transform: rotate(270deg);
+  // ai-hover-box 자체에 호버해도 계속 표시됨 (마우스 이동 허용)
+  .ai-hover-box:hover {
+    display: flex;
+  }
 }
