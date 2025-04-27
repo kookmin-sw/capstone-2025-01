@@ -79,7 +79,7 @@
     @extend .next-icon;
     width: 35px;
     height: 35px;
-    color: color_variables.$icon-hot-issue-color;
+    color: color_variables.$text-secondary-color;
     z-index: 1;
 }
 
@@ -87,7 +87,7 @@
     @extend .previous-icon;
     width: 35px;
     height: 35px;
-    color: color_variables.$icon-hot-issue-color;
+    color: color_variables.$text-secondary-color;
     z-index: 1;
 }
 
