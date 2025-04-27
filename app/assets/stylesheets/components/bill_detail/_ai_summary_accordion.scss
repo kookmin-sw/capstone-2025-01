@@ -5,12 +5,7 @@
 // 아코디언 컨테이너
 .accordion-container {
   overflow: visible;
-<<<<<<< HEAD
-  position: relative; 
-}
-=======
   position: relative;
->>>>>>> upstream/master
 
   &.is-open {
     .accordion-header-content {
@@ -144,26 +139,10 @@
       @extend .body-small;
       width: 360px;
       color: color_variables.$text-ai-explain-color;
-<<<<<<< HEAD
-      display: none;
-=======
->>>>>>> upstream/master
       line-height: 1.6;
     }
   }
 
-<<<<<<< HEAD
-  // hover 시에만 말풍선 표시
-  &:hover,
-  &:focus,
-  &:active {
-    .ai-hover-box {
-      display: flex;
-      .ai-hover-text{
-        display: block;
-      }
-    }
-=======
   .ai-info-box:hover + .ai-hover-box {
     display: flex;
   }
@@ -171,6 +150,5 @@
   // ai-hover-box 자체에 호버해도 계속 표시됨 (마우스 이동 허용)
   .ai-hover-box:hover {
     display: flex;
->>>>>>> upstream/master
   }
 }
