@@ -1,0 +1,17 @@
+assembly_member:
+  proposer_type: "의원"
+
+committee_chair:
+  proposer_type: "위원장"
+
+government:
+  proposer_type: "정부"
+
+speaker:
+  proposer_type: "의장"
+
+president:
+  proposer_type: "대통령"
+
+other:
+  proposer_type: "기타"

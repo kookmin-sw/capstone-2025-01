@@ -1,0 +1,62 @@
+gov_proposal_agriculture:
+  bill: gov_bill_agriculture
+  specific_proposer: agriculture (GovernmentBillSponsor)
+
+gov_proposal_ftc:
+  bill: gov_bill_ftc
+  specific_proposer: ftc (GovernmentBillSponsor)
+
+assembly_proposal_conflict_management_rep:
+  bill: assembly_bill_conflict_management
+  specific_proposer: kim_moonsoo (NationalAssemblyPerson)
+  representative_proposal: true
+
+assembly_proposal_conflict_management_1:
+  bill: assembly_bill_conflict_management
+  specific_proposer: kim_dongah (NationalAssemblyPerson)
+  representative_proposal: false
+
+assembly_proposal_conflict_management_2:
+  bill: assembly_bill_conflict_management
+  specific_proposer: kim_wooyoung (NationalAssemblyPerson)
+  representative_proposal: false
+
+assembly_proposal_conflict_management_3:
+  bill: assembly_bill_conflict_management
+  specific_proposer: park_jiewon (NationalAssemblyPerson)
+  representative_proposal: false
+
+assembly_proposal_conflict_management_4:
+  bill: assembly_bill_conflict_management
+  specific_proposer: park_haecheol (NationalAssemblyPerson)
+  representative_proposal: false
+
+assembly_proposal_conflict_management_5:
+  bill: assembly_bill_conflict_management
+  specific_proposer: seo_mihwa (NationalAssemblyPerson)
+  representative_proposal: false
+
+assembly_proposal_conflict_management_6:
+  bill: assembly_bill_conflict_management
+  specific_proposer: lee_soojin (NationalAssemblyPerson)
+  representative_proposal: false
+
+assembly_proposal_conflict_management_7:
+  bill: assembly_bill_conflict_management
+  specific_proposer: lee_yongsun (NationalAssemblyPerson)
+  representative_proposal: false
+
+assembly_proposal_conflict_management_8:
+  bill: assembly_bill_conflict_management
+  specific_proposer: lee_jaekwan (NationalAssemblyPerson)
+  representative_proposal: false
+
+assembly_proposal_conflict_management_9:
+  bill: assembly_bill_conflict_management
+  specific_proposer: han_junho (NationalAssemblyPerson)
+  representative_proposal: false
+
+assembly_proposal_conflict_management_10:
+  bill: assembly_bill_conflict_management
+  specific_proposer: huh_sungmoo (NationalAssemblyPerson)
+  representative_proposal: false
