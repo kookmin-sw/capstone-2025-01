@@ -1,0 +1,96 @@
+<!-- 상단 카테고리 배너 -->
+<nav class="banner-component-layer">
+  <!-- 왼쪽 브랜드 로고 -->
+  <div class="brand-logo">
+    <%= link_to root_path do %>
+      <%= inline_svg("brand_logo", class: "brand_logo-icon") %>
+    <% end %>
+  </div>
+
+  <!-- 오른쪽 버튼 그룹 -->
+  <div class="login-button-layer">
+    <div class="login-button">
+      <span>로그인</span>
+    </div>
+  </div>
+</nav>
+
+<%= render "bills/law_categories" %>
+
+<!-- 중앙 메시지 -->
+<div class="main-message-layer">
+  <div class="headline-text">무슨 법이 만들어지고 있나요?</div>
+  <div class="title-text">
+    한눈에 보는 법률 개정, 우리 사회의 이슈<br>
+    <strong>LawNow</strong>와 함께 공유하세요!
+  </div>
+</div>
+
+<!-- 검색바 -->
+<div class="keyword-search-bar">
+  <%= text_field_tag :q, params[:q], placeholder: "검색어를 입력해주세요." %>
+  <button type="submit" class="keyword-search-button">
+    <%= inline_svg("search", class: "search-icon") %>
+  </button>
+</div>
+
+<!-- 실시간 검색어: 기본 숨김, 선택된 카테고리에서만 표시 -->
+<div id="trendingKeywords" class="trending-keywords">
+  <span class="trending-keyword-text">실시간 검색어 :</span>
+  <% ["유치원", "근로조건", "복지법", "건강보험", "최저임금"].each do |keyword| %>
+    <span class="keyword-bubble"><%= keyword %></span>
+  <% end %>
+</div>
+
+<!-- HOT 이슈 법안 섹션 -->
+<div class="hot-issue-section">
+  <div class="hot-issue-header">
+    <div class="hot-issue-bill-text">HOT 이슈 법안</div>
+    <%= link_to bills_path, class: "all-issue-bill-text" do %>
+      전체 법안 보기
+      <%= inline_svg("next", class: "all-issue-next-icon") %>
+    <% end %>
+  </div>
+
+  <!-- HOT 이슈 카드 -->
+  <div class="hot-issue-card-container">
+    <% @hot_bills.each do |bill| %>
+      <div class="hot-issue-card">
+        <div class="hot-issue-title"><%= bill.title %></div>
+        <div class="hot-issue-header-tag">
+          <div class="bill-tag-party">
+            <% specific_proposer = bill.proposals.first&.specific_proposer %>
+            <% if specific_proposer.is_a?(NationalAssemblyPerson) %>
+              <%= specific_proposer.party_name.presence || "무소속" %>
+            <% elsif specific_proposer.is_a?(GovernmentBillSponsor) %>
+              정부
+            <% else %>
+              기타
+            <% end %>
+          </div>
+          <div class="bill-tag-status <%= bill.status_css_class %>">
+            <span class="status-emoji"><%= bill.status_emoji %></span>
+            <span class="status-label"><%= bill.current_status %></span>
+          </div>
+        </div>
+
+        <div class="hot-issue-bill-description">
+          <%= truncate((bill.summary || "").gsub(/\A(?:제안이유 및 주요내용|제안이유)[:\s]*/, ""), length: 90) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- 아이콘 위치 -->
+    <div class="hot-issue-controls-wrapper">
+      <div class="hot-issue-controls">
+        <button class="hot-issue-previous-icon" onclick="scrollHotIssue(-1)">
+          <%= inline_svg("previous") %>
+        </button>
+        <button class="hot-issue-next-icon" onclick="scrollHotIssue(1)">
+          <%= inline_svg("next") %>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
