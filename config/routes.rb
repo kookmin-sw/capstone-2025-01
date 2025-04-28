@@ -19,7 +19,5 @@ Rails.application.routes.draw do
     # resources :departments, only: [ :index, :show ]
 
     # Root path
-    # NOTE: 스프린트 1에서는 bills#index로 설정
-    # root "bills#index"
     root "home#index"
 end
