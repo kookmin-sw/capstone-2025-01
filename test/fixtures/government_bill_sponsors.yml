@@ -1,5 +1,5 @@
 agriculture:
-  proposer: government
+  proposer_id: 3
   ministry_name: "농림축산식품부"
   department_name: "농림축산식품부"
   manager_name: "송하정"
@@ -7,7 +7,7 @@ agriculture:
   manager_email: "hjsong@korea.kr"
 
 ftc:
-  proposer: government
+  proposer_id: 3
   ministry_name: "공정거래위원회"
   department_name: "기업거래정책과"
   manager_name: "이경희"

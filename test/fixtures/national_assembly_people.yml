@@ -1,5 +1,5 @@
 kim_moonsoo:
-  proposer: assembly_member
+  proposer_id: 1
   department_code: "9771327"
   member_id: "3094"
   name: "김문수"
@@ -15,7 +15,7 @@ kim_moonsoo:
   affiliated_committee: "교육위원회,예산결산특별위원회"
 
 kim_dongah:
-  proposer: assembly_member
+  proposer_id: 1
   department_code: "9771326"
   member_id: "3000"
   name: "김동아"
@@ -31,7 +31,7 @@ kim_dongah:
   affiliated_committee: "산업통상자원중소벤처기업위원회"
 
 kim_wooyoung:
-  proposer: assembly_member
+  proposer_id: 1
   department_code: "9771336"
   member_id: "3206"
   name: "김우영"
@@ -47,7 +47,7 @@ kim_wooyoung:
   affiliated_committee: "과학기술정보방송통신위원회"
 
 park_jiewon:
-  proposer: assembly_member
+  proposer_id: 1
   department_code: "9771366"
   member_id: "2533"
   name: "박지원"
@@ -63,7 +63,7 @@ park_jiewon:
   affiliated_committee: "법제사법위원회,정보위원회"
 
 park_haecheol:
-  proposer: assembly_member
+  proposer_id: 1
   department_code: "9771369"
   member_id: "3166"
   name: "박해철"
@@ -79,7 +79,7 @@ park_haecheol:
   affiliated_committee: "환경노동위원회"
 
 seo_mihwa:
-  proposer: assembly_member
+  proposer_id: 1
   department_code: "9771376"
   member_id: "3095"
   name: "서미화"
@@ -95,7 +95,7 @@ seo_mihwa:
   affiliated_committee: "국회운영위원회,보건복지위원회"
 
 lee_soojin:
-  proposer: assembly_member
+  proposer_id: 1
   department_code: "9771269"
   member_id: "3056"
   name: "이수진"
@@ -111,7 +111,7 @@ lee_soojin:
   affiliated_committee: "12.29여객기참사진상규명과피해자및유가족의피해구제를위한특별위원회,보건복지위원회"
 
 lee_yongsun:
-  proposer: assembly_member
+  proposer_id: 1
   department_code: "9771115"
   member_id: "3075"
   name: "이용선"
@@ -127,7 +127,7 @@ lee_yongsun:
   affiliated_committee: "외교통일위원회"
 
 lee_jaekwan:
-  proposer: assembly_member
+  proposer_id: 1
   department_code: "9771412"
   member_id: "3157"
   name: "이재관"
@@ -143,7 +143,7 @@ lee_jaekwan:
   affiliated_committee: "산업통상자원중소벤처기업위원회"
 
 han_junho:
-  proposer: assembly_member
+  proposer_id: 1
   department_code: "9771182"
   member_id: "3270"
   name: "한준호"
@@ -159,7 +159,7 @@ han_junho:
   affiliated_committee: "국토교통위원회"
 
 huh_sungmoo:
-  proposer: assembly_member
+  proposer_id: 1
   department_code: "9771456"
   member_id: "3172"
   name: "허성무"
