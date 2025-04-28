@@ -1,0 +1,52 @@
+@use "colors/color_variables";
+@use "../typography/typography";
+@use "../components/banner_search";
+
+.keyword-search-bar {
+    @extend .search-bar;
+}
+
+.keyword-search-button:focus {
+    outline: none; 
+    box-shadow: 0 0 0 2px color_variables.$background-primary-color; 
+}
+
+.trending-keywords {
+    width: 660px;
+    margin: 12px auto 0;
+    display: flex; 
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    color: color_variables.$text-secondary-color;
+    @extend .caption-medium;
+    font-weight: 700;
+    margin-bottom: 102px;
+
+    .keyword-bubble {
+        @extend .caption-medium;
+        font-weight: 700;
+        background-color: color_variables.$surface-primary-color;
+        color: color_variables.$text-primary-color;
+
+        width: 76px;
+        height: 33px;
+        padding: 6px 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        border-radius: 20px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+}
+
+.trending-keyword-text {
+    @extend .caption-medium;
+    font-weight: 700; 
+}
+
+.show-keywords {
+    display: flex !important;
+}

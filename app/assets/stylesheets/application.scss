@@ -12,6 +12,11 @@
 @use "components/banner";
 @use "components/progress_bar";
 
+@use "components/main_title";
+@use "components/login_button";
+@use "components/hot_issue";
+@use "components/trend";
+
 @use "layouts/_layout";
 
 @use "typography/typography";
