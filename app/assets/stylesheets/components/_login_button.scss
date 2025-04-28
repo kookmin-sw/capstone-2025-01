@@ -10,7 +10,7 @@
   gap: 20px;
 }
 
-.kakao-login-button-layer {
+.login-button {
     @extend .button-medium;
     display: flex;
     align-items: center;
@@ -18,26 +18,10 @@
 
     height: 45px;
     width: auto;
-    padding: 0px 14px;
+    padding: 5px 25px;
     gap: 6px;
 
-    border: 6px;
-    color: color_variables.$text-kakao-color;
-    background: #FEE500;
-  }
-
-.naver-login-button-layer {
-    @extend .button-medium;
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-
-    height: 45px;
-    width: auto;
-    padding: 0px 14px;
-    gap: 6px;
-
-    border: 6px;
-    color: color_variables.$text-naver-color;
-    background: #03C75A;
+    border-radius: 4px;
+    color: color_variables.$text-inverse-color;
+    background: color_variables.$button-primary-color;
   }

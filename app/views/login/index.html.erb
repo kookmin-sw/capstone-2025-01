@@ -1,0 +1,29 @@
+<!-- 상단 배너 -->
+<%= render "banner" %>
+
+<div class="login-container">
+  <div class="login-title">
+    무슨 법이 만들어지고 있나요?
+  </div>
+
+  <div class="login-description">
+    우리는 가장 뜨거운 사회 이슈가 어떻게 법으로 바뀌는지 실시간으로 보여주고<br> 한눈에 이해할 수 있는 법안 정보 플랫폼을 만듭니다.
+  </div>
+
+  <div class="login-brand-section">
+    Law? Now!<br>
+    지금 바로 공유하고 변화를 함께하세요!
+  </div>
+
+  <div class="login-btn-container">
+    <div class="kakao-login-btn">
+      <%= inline_svg "kakao_logo", class: "kakao-btn-logo" %>
+      카카오 로그인
+    </div>
+    <div class="naver-login-btn">
+      <%= inline_svg "naver_logo", class: "naver-btn-logo" %>
+      네이버 로그인
+    </div>
+    <div class="login-indicator">3초만에 시작하기</div>
+  </div>
+</div>

@@ -20,4 +20,8 @@ Rails.application.routes.draw do
 
     # Root path
     root "home#index"
+    # NOTE: 스프린트 1에서는 bills#index로 설정
+    # root "bills#index"
+
+    get "/login", to: "login#index", as: :login
 end

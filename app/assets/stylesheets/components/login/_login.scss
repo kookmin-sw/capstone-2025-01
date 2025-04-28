@@ -1,0 +1,128 @@
+@use "../../colors/color_variables";
+@use "../../typography/typography";
+@use "../../icons/kakao_logo_icon";
+@use "../../icons/naver_logo_icon";
+
+$indicator_color: color_variables.$button-system-danger-color;
+$kakao_brand_color: #fee500;
+$naver_brand_color: #1ec800;
+
+// 로그인 페이지 스타일
+.login-container {
+  padding: 20px 0px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+// 로그인 페이지 제목
+.login-title {
+  font-size: 70px;
+  font-weight: 700;
+  line-height: 170px; 
+  letter-spacing: -2.8px;
+  color: color_variables.$text-primary-color;
+  margin-bottom: 30px;
+}
+
+// 로그인 페이지 설명
+.login-description {
+  @extend .title-small;
+  color: color_variables.$text-secondary-color;
+  margin-bottom: 50px;
+}
+
+// 로그인 페이지 설명(브랜드 로고)
+.login-brand-section {
+  @extend .title-large;
+  color: color_variables.$text-primary-color;
+  margin-bottom: 50px;
+}
+
+// 로그인 버튼 컨테이너 스타일
+.login-btn-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+// 로그인 버튼 공통 스타일
+@mixin login-btns {
+  @extend .title-small;
+  display: inline-flex;
+  width: 609px;
+  height: 90px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+// 카카오 로그인 스타일
+.kakao-login-btn {
+  @include login-btns;
+  background-color: $kakao_brand_color;
+}
+
+.kakao-btn-logo {
+  @extend .kakao-logo-icon;
+  position: absolute;
+  left: 30px;
+}
+
+// 네이버 로그인 스타일
+.naver-login-btn {
+  @include login-btns;
+  background-color: $naver_brand_color;
+  color: color_variables.$text-inverse-color;
+}
+
+.naver-btn-logo {
+  @extend .naver-logo-icon;
+  position: absolute;
+  left: 30px;
+}
+
+// 로그인 인디케이터 스타일
+.login-indicator {
+  @extend .button-large;
+  position: relative;
+  width: 213px;
+  height: 55px;
+  background-color: $indicator_color;
+  color: color_variables.$text-inverse-color;
+  border-radius: 30px;
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 25px;
+  animation: float 1.5s ease-in-out infinite;
+}
+
+// 로그인 인디케이터 화살표
+.login-indicator::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 28px solid $indicator_color;
+}
+
+// 로그인 인디케이터 애니메이션
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
