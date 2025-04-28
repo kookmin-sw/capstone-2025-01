@@ -3,6 +3,12 @@
 <!-- 법안 카테고리 -->
 <%= render "law_categories" %>
 
+<% if Rails.env.development? %>
+  <%= link_to login_path do %>
+    로그인
+  <% end %>
+<% end %>
+
 <div class="bill-card-container">
   <!-- 실제 데이터 -->
   <% @bills.each do |bill| %>
