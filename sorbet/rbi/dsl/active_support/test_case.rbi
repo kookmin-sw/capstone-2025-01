@@ -6,6 +6,16 @@
 
 
 class ActiveSupport::TestCase
+  sig { params(fixture_name: NilClass, other_fixtures: NilClass).returns(T::Array[AiPromptTemplate]) }
+  sig { params(fixture_name: T.any(String, Symbol), other_fixtures: NilClass).returns(AiPromptTemplate) }
+  sig do
+    params(
+      fixture_name: T.any(String, Symbol),
+      other_fixtures: T.any(String, Symbol)
+    ).returns(T::Array[AiPromptTemplate])
+  end
+  def ai_prompt_templates(fixture_name = nil, *other_fixtures); end
+
   sig { params(fixture_name: NilClass, other_fixtures: NilClass).returns(T::Array[T.untyped]) }
   sig { params(fixture_name: T.any(String, Symbol), other_fixtures: NilClass).returns(T.untyped) }
   sig do
@@ -45,4 +55,9 @@ class ActiveSupport::TestCase
   sig { params(fixture_name: T.any(String, Symbol), other_fixtures: NilClass).returns(Sponsor) }
   sig { params(fixture_name: T.any(String, Symbol), other_fixtures: T.any(String, Symbol)).returns(T::Array[Sponsor]) }
   def sponsors(fixture_name = nil, *other_fixtures); end
+
+  sig { params(fixture_name: NilClass, other_fixtures: NilClass).returns(T::Array[User]) }
+  sig { params(fixture_name: T.any(String, Symbol), other_fixtures: NilClass).returns(User) }
+  sig { params(fixture_name: T.any(String, Symbol), other_fixtures: T.any(String, Symbol)).returns(T::Array[User]) }
+  def users(fixture_name = nil, *other_fixtures); end
 end

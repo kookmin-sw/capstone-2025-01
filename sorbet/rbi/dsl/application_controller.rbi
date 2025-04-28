@@ -27,9 +27,15 @@ class ApplicationController
     include ::ActionController::Base::HelperMethods
     include ::Pagy::UrlHelpers
     include ::Pagy::Frontend
+    include ::MarkdownHelper
     include ::ApplicationHelper
     include ::BillViewHelper
+    include ::BillsViewHelper
+    include ::HomeHelper
     include ::IconHelper
+
+    sig { returns(T.untyped) }
+    def authenticated?; end
   end
 
   class HelperProxy < ::ActionView::Base

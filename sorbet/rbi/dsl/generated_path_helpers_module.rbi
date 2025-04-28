@@ -22,6 +22,12 @@ module GeneratedPathHelpersModule
   def edit_session_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def home_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def login_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def new_password_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
