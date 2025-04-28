@@ -17,10 +17,7 @@ $naver_brand_color: #1ec800;
 
 // 로그인 페이지 제목
 .login-title {
-  font-size: 70px;
-  font-weight: 700;
-  line-height: 170px; 
-  letter-spacing: -2.8px;
+  @extend .headline-large;
   color: color_variables.$text-primary-color;
   margin-bottom: 30px;
 }

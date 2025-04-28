@@ -1,7 +1,7 @@
 @use "colors/color_variables";
-@use "../typography/typography";
-@use "../icons/next_icon";
-@use "../icons/previous_icon";
+@use "../../typography/typography";
+@use "../../icons/next_icon";
+@use "../../icons/previous_icon";
 
 .hot-issue-card-container {
     display: flex;

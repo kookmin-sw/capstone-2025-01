@@ -1,21 +1,23 @@
 @use "colors/color_variables";
 @use "colors/color_functions";
 
-@use "components/banner_search";
 @use "components/bill/bill_table";
 @use "components/bill_detail/bill_detail";
 @use "components/bill_detail/ai_summary_accordion";
+@use "components/bill_detail/progress_bar";
+
 @use "components/login/login";
 
 @use "components/law_categories";
 @use "components/political_party";
 @use "components/banner";
-@use "components/progress_bar";
+@use "components/banner_search";
 
-@use "components/main_title";
-@use "components/login_button";
-@use "components/hot_issue";
-@use "components/trend";
+
+@use "components/home/main_title";
+@use "components/home/login_button";
+@use "components/home/hot_issue";
+@use "components/home/trend";
 
 @use "layouts/_layout";
 

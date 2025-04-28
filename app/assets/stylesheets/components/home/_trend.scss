@@ -1,6 +1,6 @@
 @use "colors/color_variables";
-@use "../typography/typography";
-@use "../components/banner_search";
+@use "../../typography/typography";
+@use "../../components/banner_search";
 
 .keyword-search-bar {
     @extend .search-bar;
