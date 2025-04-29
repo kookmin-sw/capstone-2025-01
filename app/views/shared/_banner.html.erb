@@ -1,0 +1,13 @@
+<!-- 상단 배너 -->
+
+<nav class="banner-component-layer">
+  <!-- 왼쪽 브랜드 로고 -->
+  <div class="brand-logo">
+    <%= link_to root_path do %>
+      <%= inline_svg("brand_logo", class: "brand_logo-icon") %>
+    <% end %>
+  </div>
+
+  <!-- 추가 콘텐츠 (검색 바 등) -->
+  <%= yield if block_given? %>
+</nav>
