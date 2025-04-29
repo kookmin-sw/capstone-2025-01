@@ -22,6 +22,12 @@ module GeneratedUrlHelpersModule
   def edit_session_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def home_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def login_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def new_password_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }

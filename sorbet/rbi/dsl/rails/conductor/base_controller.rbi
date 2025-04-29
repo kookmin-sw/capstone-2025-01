@@ -27,8 +27,11 @@ class Rails::Conductor::BaseController
     include ::ActionController::Base::HelperMethods
     include ::Pagy::UrlHelpers
     include ::Pagy::Frontend
+    include ::MarkdownHelper
     include ::ApplicationHelper
     include ::BillViewHelper
+    include ::BillsViewHelper
+    include ::HomeHelper
     include ::IconHelper
   end
 

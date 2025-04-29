@@ -4,6 +4,9 @@ Sentry.init do |config|
   config.breadcrumbs_logger = [ :active_support_logger, :http_logger ]
   config.dsn = Rails.application.credentials.sentry_dsn
 
+  # Only enable Sentry in production
+  config.enabled_environments = %w[production]
+
   # 초기 단계 서비스이므로 100% 샘플링
   config.traces_sample_rate = 1.0
 

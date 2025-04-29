@@ -6,43 +6,73 @@
 
 
 class ActiveSupport::TestCase
-  sig { params(fixture_name: NilClass, other_fixtures: NilClass).returns(T::Array[T.untyped]) }
-  sig { params(fixture_name: T.any(String, Symbol), other_fixtures: NilClass).returns(T.untyped) }
+  sig { params(fixture_name: NilClass, other_fixtures: NilClass).returns(T::Array[AiPromptTemplate]) }
+  sig { params(fixture_name: T.any(String, Symbol), other_fixtures: NilClass).returns(AiPromptTemplate) }
   sig do
     params(
       fixture_name: T.any(String, Symbol),
       other_fixtures: T.any(String, Symbol)
-    ).returns(T::Array[T.untyped])
+    ).returns(T::Array[AiPromptTemplate])
   end
-  def bill_events(fixture_name = nil, *other_fixtures); end
+  def ai_prompt_templates(fixture_name = nil, *other_fixtures); end
 
-  sig { params(fixture_name: NilClass, other_fixtures: NilClass).returns(T::Array[T.untyped]) }
-  sig { params(fixture_name: T.any(String, Symbol), other_fixtures: NilClass).returns(T.untyped) }
+  sig { params(fixture_name: NilClass, other_fixtures: NilClass).returns(T::Array[BillDetail]) }
+  sig { params(fixture_name: T.any(String, Symbol), other_fixtures: NilClass).returns(BillDetail) }
   sig do
     params(
       fixture_name: T.any(String, Symbol),
       other_fixtures: T.any(String, Symbol)
-    ).returns(T::Array[T.untyped])
+    ).returns(T::Array[BillDetail])
   end
-  def bill_sponsors(fixture_name = nil, *other_fixtures); end
+  def bill_details(fixture_name = nil, *other_fixtures); end
 
   sig { params(fixture_name: NilClass, other_fixtures: NilClass).returns(T::Array[Bill]) }
   sig { params(fixture_name: T.any(String, Symbol), other_fixtures: NilClass).returns(Bill) }
   sig { params(fixture_name: T.any(String, Symbol), other_fixtures: T.any(String, Symbol)).returns(T::Array[Bill]) }
   def bills(fixture_name = nil, *other_fixtures); end
 
-  sig { params(fixture_name: NilClass, other_fixtures: NilClass).returns(T::Array[T.untyped]) }
-  sig { params(fixture_name: T.any(String, Symbol), other_fixtures: NilClass).returns(T.untyped) }
+  sig { params(fixture_name: NilClass, other_fixtures: NilClass).returns(T::Array[GovernmentBillSponsor]) }
+  sig { params(fixture_name: T.any(String, Symbol), other_fixtures: NilClass).returns(GovernmentBillSponsor) }
   sig do
     params(
       fixture_name: T.any(String, Symbol),
       other_fixtures: T.any(String, Symbol)
-    ).returns(T::Array[T.untyped])
+    ).returns(T::Array[GovernmentBillSponsor])
   end
-  def departments(fixture_name = nil, *other_fixtures); end
+  def government_bill_sponsors(fixture_name = nil, *other_fixtures); end
 
-  sig { params(fixture_name: NilClass, other_fixtures: NilClass).returns(T::Array[Sponsor]) }
-  sig { params(fixture_name: T.any(String, Symbol), other_fixtures: NilClass).returns(Sponsor) }
-  sig { params(fixture_name: T.any(String, Symbol), other_fixtures: T.any(String, Symbol)).returns(T::Array[Sponsor]) }
-  def sponsors(fixture_name = nil, *other_fixtures); end
+  sig { params(fixture_name: NilClass, other_fixtures: NilClass).returns(T::Array[NationalAssemblyPerson]) }
+  sig { params(fixture_name: T.any(String, Symbol), other_fixtures: NilClass).returns(NationalAssemblyPerson) }
+  sig do
+    params(
+      fixture_name: T.any(String, Symbol),
+      other_fixtures: T.any(String, Symbol)
+    ).returns(T::Array[NationalAssemblyPerson])
+  end
+  def national_assembly_people(fixture_name = nil, *other_fixtures); end
+
+  sig { params(fixture_name: NilClass, other_fixtures: NilClass).returns(T::Array[Proposal]) }
+  sig { params(fixture_name: T.any(String, Symbol), other_fixtures: NilClass).returns(Proposal) }
+  sig do
+    params(
+      fixture_name: T.any(String, Symbol),
+      other_fixtures: T.any(String, Symbol)
+    ).returns(T::Array[Proposal])
+  end
+  def proposals(fixture_name = nil, *other_fixtures); end
+
+  sig { params(fixture_name: NilClass, other_fixtures: NilClass).returns(T::Array[Proposer]) }
+  sig { params(fixture_name: T.any(String, Symbol), other_fixtures: NilClass).returns(Proposer) }
+  sig do
+    params(
+      fixture_name: T.any(String, Symbol),
+      other_fixtures: T.any(String, Symbol)
+    ).returns(T::Array[Proposer])
+  end
+  def proposers(fixture_name = nil, *other_fixtures); end
+
+  sig { params(fixture_name: NilClass, other_fixtures: NilClass).returns(T::Array[User]) }
+  sig { params(fixture_name: T.any(String, Symbol), other_fixtures: NilClass).returns(User) }
+  sig { params(fixture_name: T.any(String, Symbol), other_fixtures: T.any(String, Symbol)).returns(T::Array[User]) }
+  def users(fixture_name = nil, *other_fixtures); end
 end

@@ -1,0 +1,16 @@
+gov_bill_agriculture_detail:
+  bill: gov_bill_agriculture
+  jurisdiction_examination_xml: "<committeeName>농림축산식품해양수산위원회</committeeName><presentDt/><procDt/><procResultCd/><submitDt>2025-03-21</submitDt>"
+  law_title: "양봉산업의 육성 및 지원에 관한 법률"
+
+gov_bill_ftc_detail:
+  bill: gov_bill_ftc
+  jurisdiction_examination_xml: "<committeeName>정무위원회</committeeName><presentDt/><procDt/><procResultCd/><submitDt>2025-01-16</submitDt>"
+  law_title: "하도급거래 공정화에 관한 법률"
+  comm_memo_xml: "<commMemo>비용추계요구서 제출됨.</commMemo>"
+
+assembly_bill_conflict_management_detail:
+  bill: assembly_bill_conflict_management
+  jurisdiction_examination_xml: "<committeeName>정무위원회</committeeName><presentDt/><procDt/><procResultCd/><submitDt>2025-04-02</submitDt>"
+  law_title: "갈등관리 및 공론화에 관한 법률"
+  comm_memo_xml: "<commMemo>비용추계요구서 제출됨.</commMemo>"
