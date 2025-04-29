@@ -1,5 +1,5 @@
 @use "../../colors/color_variables";
-@use "../../typography/typography";
+@use "../../typography/typography" as *;
 
 // 공통 아이콘 스타일 정의
 $ellipse-width: 35px;
@@ -91,7 +91,7 @@ $triangle-height: 20.25px;
 .step-bubble {
   padding: 8px 16px;
   border-radius: 12px;
-  @extend .body-large;
+  @include body-large;   
   display: flex;
   align-items: center;
   justify-content: center;

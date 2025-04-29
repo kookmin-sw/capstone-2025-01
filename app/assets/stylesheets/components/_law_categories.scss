@@ -1,5 +1,5 @@
 @use "../colors/color_variables";
-@use "../typography/typography";
+@use "../typography/typography" as *;
 
 // 법안 카테고리 컴포넌트 스타일
 $law-components: (
@@ -75,7 +75,7 @@ $law-components: (
 }
 
 .law-common-text-component {
-    @extend .button-medium;
+    @include button-medium;
     color: color_variables.$text-primary-color;
     text-align: center;
 }

@@ -1,5 +1,5 @@
 @use "../../colors/color_variables";
-@use "../../typography/typography";
+@use "../../typography/typography" as *;
 @use "../../icons/more_icon";
 
 // 아코디언 컨테이너
@@ -37,7 +37,7 @@
   .accordion-header-content {
     --preview-height: 250px;
     max-height: var(--preview-height); // 미리보기 높이를 위한 CSS 변수 사용
-    @extend .body-large; // body-large 스타일 직접 적용
+    @include body-large; 
     overflow: hidden;
     transition: max-height 0.3s ease-in-out, padding-bottom 0.3s ease-in-out; // 패딩 전환 효과 추가
     margin-bottom: 0;
@@ -64,17 +64,17 @@
 
   // 아코디언 제목
   .accordion-header-title {
-    @extend .title-medium;
+    @include title-medium;
   }
 
   // 아코디언 부제목: 바뀌는 이유
   .accordion-header-subtitle {
-    @extend .title-small;
+    @include title-small;
   }
 
   // 아코디언 부제목 상세: 바뀌는 이유 상세
   .accordion-header-description {
-    @extend .body-large;
+    @include body-large; 
   }
 }
 
@@ -118,7 +118,7 @@
     // cursor: default;
 
     .ai-info-text {
-      @extend .body-small;
+      @include body-small;
       margin-left: 8px;
       color: color_variables.$text-tertiary-color;
     }
@@ -136,7 +136,7 @@
     z-index: 10;
 
     .ai-hover-text {
-      @extend .body-small;
+      @include body-small;
       width: 360px;
       color: color_variables.$text-ai-explain-color;
       line-height: 1.6;

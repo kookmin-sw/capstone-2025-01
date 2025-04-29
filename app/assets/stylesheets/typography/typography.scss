@@ -62,54 +62,54 @@ $type-weights: (
 }
 
 // 각 타이포그래피 클래스
-.headline-large {
+@mixin headline-large {
   @include typography("headline", "large");
 }
 
-.headline-medium {
+@mixin headline-medium {
   @include typography("headline", "medium");
 }
 
-.title-large {
+@mixin title-large {
   @include typography("title", "large");
 }
 
-.title-medium {
+@mixin title-medium {
   @include typography("title", "medium");
 }
 
-.title-small {
+@mixin title-small {
   @include typography("title", "small");
 }
 
-.body-large {
+@mixin body-large {
   @include typography("body", "large");
 }
 
-.body-medium {
+@mixin body-medium {
   @include typography("body", "medium");
 }
 
-.body-small {
+@mixin body-small {
   @include typography("body", "small");
 }
 
-.button-large {
+@mixin button-large {
   @include typography("button", "large");
 }
 
-.button-medium {
+@mixin button-medium {
   @include typography("button", "medium");
 }
 
-.button-small {
+@mixin button-small {
   @include typography("button", "small");
 }
 
-.caption-medium {
+@mixin caption-medium {
   @include typography("caption", "medium");
 }
 
-.caption-small {
+@mixin caption-small {
   @include typography("caption", "small");
 }

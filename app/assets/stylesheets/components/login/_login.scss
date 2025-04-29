@@ -1,5 +1,5 @@
 @use "../../colors/color_variables";
-@use "../../typography/typography";
+@use "../../typography/typography" as *;
 @use "../../icons/kakao_logo_icon";
 @use "../../icons/naver_logo_icon";
 
@@ -17,21 +17,21 @@ $naver_brand_color: #1ec800;
 
 // 로그인 페이지 제목
 .login-title {
-  @extend .headline-large;
+  @include headline-large;
   color: color_variables.$text-primary-color;
   margin-bottom: 30px;
 }
 
 // 로그인 페이지 설명
 .login-description {
-  @extend .title-small;
+  @include title-small;
   color: color_variables.$text-secondary-color;
   margin-bottom: 50px;
 }
 
 // 로그인 페이지 설명(브랜드 로고)
 .login-brand-section {
-  @extend .title-large;
+  @include title-large;
   color: color_variables.$text-primary-color;
   margin-bottom: 50px;
 }
@@ -46,7 +46,7 @@ $naver_brand_color: #1ec800;
 
 // 로그인 버튼 공통 스타일
 @mixin login-btns {
-  @extend .title-small;
+  @include title-small;
   display: inline-flex;
   width: 609px;
   height: 90px;
@@ -84,7 +84,7 @@ $naver_brand_color: #1ec800;
 
 // 로그인 인디케이터 스타일
 .login-indicator {
-  @extend .button-large;
+  @include button-large;
   position: relative;
   width: 213px;
   height: 55px;

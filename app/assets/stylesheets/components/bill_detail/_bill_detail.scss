@@ -1,5 +1,5 @@
 @use "../../colors/color_variables";
-@use "../../typography/typography";
+@use "../../typography/typography" as *;
 
 // 법안 상세 페이지 스타일
 
@@ -26,7 +26,7 @@
   min-height: 35px !important;
   padding: 0 15px !important;
   border-radius: 12px !important; 
-  @extend .button-small;
+  @include button-small;
 }
 
 // 정당 태그 스타일 오버라이드
@@ -36,12 +36,12 @@
   min-height: 35px !important;
   max-height: 35px !important;
   border-radius: 12px !important;
-  @extend .button-small;
+  @include button-small;
 }
   
 // 법안 제목
 .bill-detail-title {
-  @extend .title-large;
+  @include title-large;
   color: color_variables.$text-primary-color;
   margin-bottom: 20px;
 }
@@ -68,13 +68,13 @@
   
 // 메타데이터 라벨
 .bill-detail-meta-label {
-  @extend .body-large;
+  @include body-large; 
   color: color_variables.$text-tertiary-color;
 }
   
 // 메타데이터 값
 .bill-detail-meta-value {
-  @extend .body-large;
+  @include body-large; 
   color: color_variables.$text-primary-color;
 }
   
@@ -84,7 +84,7 @@
 }
   
 .bill-detail-label {
-  @extend .title-small;
+  @include title-small;
   color: color_variables.$text-primary-color;
   display: flex;
   align-items: center;
@@ -100,11 +100,11 @@
   
 // 컨텐츠 내용
 .bill-detail-content {
-  @extend .body-large;
+  @include body-large; 
   padding: 0 20px;
 
   p {
-    @extend .body-large;
+    @include body-large; 
     color: color_variables.$text-tertiary-color;
   }
 }

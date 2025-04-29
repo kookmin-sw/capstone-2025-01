@@ -1,5 +1,5 @@
 @use "colors/color_variables";
-@use "../../typography/typography";
+@use "../../typography/typography" as *;
 
 .login-button-layer{
   display: flex;
@@ -19,7 +19,7 @@
 }
 
 .login-button {
-    @extend .button-medium;
+    @include button-medium;
     display: flex;
     align-items: center;
     box-sizing: border-box;
