@@ -3,15 +3,26 @@
 @use "../../icons/next_icon";
 @use "../../icons/previous_icon";
 
+.hot-issue-card-layer {
+    width: 100%;
+    max-width: 1560px; 
+}
+
 .hot-issue-card-container {
     display: flex;
     gap: 30px;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
     margin: 0 auto;              // ✅ 중앙 정렬 (불필요한 margin 제거)
     position: relative;
     width: fit-content;          // ✅ 카드 수에 맞게 자동 너비 설정
     max-width: 100%;             // ✅ 너무 넓어지는 것 방지
+    scrollbar-width: none;       // Firefox
+    -ms-overflow-style: none;    // IE, Edge
+}
+
+.hot-issue-card-container::-webkit-scrollbar {
+    display: none;  // Chrome, Safari 
 }
 
 .hot-issue-card{

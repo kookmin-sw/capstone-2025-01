@@ -1,0 +1,131 @@
+@use "colors/color_variables";
+@use "../_law_categories.scss";
+@use "../../icons/remove_icon";
+@use "../../typography/typography" as *;
+
+.selected-category-tag-container {
+  display: flex;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+
+  gap: 10px;
+  max-width: 760px;
+  margin-bottom: 16px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.selected-category-tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  gap: 5px;
+
+  padding: 6px 15px;
+  border-radius: 20px;
+  background-color: color_variables.$surface-primary-color;
+
+  span {
+    @extend .law-common-text-component;
+  }
+}
+
+.selected-category-tag .remove-button {
+  @extend .remove-icon;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.keyword-search-bar {
+  width: 660px;
+  height: 58px;
+  border-bottom: 2px solid color_variables.$border-primary-color; 
+  padding-left: 16px;
+  padding-right: 16px;
+  gap: 8px;
+
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative; 
+  
+  input[type="text"] {
+    @include body-large; 
+    border: none;
+    height: 41px;
+    flex: 1 1 auto;
+    min-width: 0;
+    margin-bottom: 17px;
+    margin-left: 9px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    transition: opacity 0.3s ease; 
+  }
+      
+  input::placeholder {
+    color: color_variables.$text-tertiary-color;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: opacity 0.3s ease;
+  }
+}
+
+.keyword-search-button:focus {
+  outline: none; 
+  box-shadow: 0 0 0 2px color_variables.$background-primary-color; 
+}
+
+.trending-keywords {
+  width: 660px;
+  margin: 15px auto 102px;
+  transform: translateX(20px);
+  display: flex; 
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  color: color_variables.$text-secondary-color;
+  @include caption-medium;
+  font-weight: 700;
+
+  .keyword-bubble {
+      @include caption-medium;
+      font-weight: 700;
+      background-color: color_variables.$surface-primary-color;
+      color: color_variables.$text-primary-color;
+
+      width: 76px;
+      height: 33px;
+      padding: 6px 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+  }
+}
+
+.trending-keyword-text {
+  @include caption-medium;
+  font-weight: 700; 
+}
+
+.show-keywords {
+  display: flex !important;
+}

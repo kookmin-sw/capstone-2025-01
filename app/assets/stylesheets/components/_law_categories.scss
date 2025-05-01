@@ -4,6 +4,7 @@
 // 법안 카테고리 컴포넌트 스타일
 $law-components: (
     all-comp: 81px,
+    starred-comp: 152px,
     labor-humanrights-comp: 170px,
     health-welfare-comp: 136px,
     socialsecurity-national-comp: 200px,
@@ -22,7 +23,7 @@ $law-components: (
 
 .law-component-layer {
     display: flex;
-    max-width: 1440px;
+    max-width: 1632px;
     padding: 20px;
     
     justify-content: center;
