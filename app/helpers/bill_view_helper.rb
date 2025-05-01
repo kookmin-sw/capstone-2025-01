@@ -22,6 +22,8 @@ module BillViewHelper
     def law_category_button(tab, options = {})
         disabled = options[:disabled] || false
 
+        # 디폴트 선택 버튼: "전체"
+        selected_buttons = params[:tab] || [ "all" ]
         category_name = LAW_CATEGORIES[tab]
 
         if disabled
@@ -29,8 +31,27 @@ module BillViewHelper
             content_tag(:div, category_name, class: "#{tab}-comp", tabindex: "-1")
         else
             # 활성화된 버튼 (법안 목록페이지 버튼)
-            link_to bills_path(tab: tab), class: "#{tab}-comp #{'active' if params[:tab] == tab}" do
+            url = tab == "all" ? bills_path : bills_path(tab: selected_law_category_buttons(tab))
+            link_to url, class: "#{tab}-comp #{'active' if selected_buttons&.include?(tab)}" do
             content_tag :div, category_name, class: "law-common-text-component"
+            end
+        end
+    end
+
+    # 법안 카테고리 버튼 다중 선택
+    def selected_law_category_buttons(tab)
+        # 선택된 버튼을 배열로 관리
+        selected_buttons = Array(params[:tab])
+
+        # "전체" 버튼 클릭 시, 모든 버튼 선택 해제
+        if tab == "all"
+            []
+        # 특정 카테고리 선택 시, "전체" 버튼 선택 해제
+        else
+            if selected_buttons.include?(tab)
+                selected_buttons - [ tab ]
+            else
+                selected_buttons + [ tab ]
             end
         end
     end
