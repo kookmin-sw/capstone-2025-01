@@ -23,6 +23,7 @@ module PeriodicJobs
 
       # 아직 요약이 생성되지 않은 Bill만 가져오기
       bills = Bill.where(current_bill_summary_id: nil)
+                  .where.not(summary: nil)
                   .order(proposed_at: :desc)
                   .limit(MAX_RECORDS_TO_PROCESS_PER_RUN)
       Rails.logger.info("[#{self.class.name}] Bills to process: #{bills.pluck(:id).join(', ')}")
