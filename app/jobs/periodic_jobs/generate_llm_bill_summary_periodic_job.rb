@@ -15,7 +15,7 @@ module PeriodicJobs
 
     sig { void }
     def perform
-      Rails.logger.info("[#{self.class.name}] Starting job: fetching up to "+
+      Rails.logger.info("Starting job: fetching up to "+
                         "#{MAX_RECORDS_TO_PROCESS_PER_RUN} bills without summary")
       # 사용할 프롬프트 템플릿 조회 (없으면 예외)
       prompt = AiPromptTemplate.find_by!(name: DEFAULT_PROMPT_TEMPLATE)
@@ -23,12 +23,13 @@ module PeriodicJobs
 
       # 아직 요약이 생성되지 않은 Bill만 가져오기
       bills = Bill.where(current_bill_summary_id: nil)
+                  .where.not(summary: [ nil, "" ])
                   .order(proposed_at: :desc)
                   .limit(MAX_RECORDS_TO_PROCESS_PER_RUN)
-      Rails.logger.info("[#{self.class.name}] Bills to process: #{bills.pluck(:id).join(', ')}")
+      Rails.logger.info("Bills to process: #{bills.pluck(:id).join(', ')}")
 
       bills.each do |bill|
-        Rails.logger.info("[#{self.class.name}] Processing Bill id=#{bill.id}, number=#{bill.bill_number}")
+        Rails.logger.info("Processing Bill id=#{bill.id}, number=#{bill.bill_number}")
         begin
           prompt_text = prompt.render_template(
             title:   bill.title,
@@ -48,16 +49,16 @@ module PeriodicJobs
             llm_model: DEFAULT_MODEL,
             summary_type: "llm"
           )
-          Rails.logger.info("[#{self.class.name}] Created BillSummary id=#{summary.id} for Bill id=#{bill.id}")
+          Rails.logger.info("Created BillSummary id=#{summary.id} for Bill id=#{bill.id}")
           # callback으로 current_bill_summary_id는 자동 갱신됨
 
           sleep DEFAULT_SLEEP_SECONDS
         rescue => e
-          Rails.logger.error("[#{self.class.name}] bill_id=#{bill.id} error=#{e.message}")
+          Rails.logger.error("Error: bill_id=#{bill.id} error=#{e.message}")
           next
         end
       end
-      Rails.logger.info("[#{self.class.name}] Finished job: processed #{bills.size} bills")
+      Rails.logger.info("Finished job: processed #{bills.size} bills")
     end
   end
 end
