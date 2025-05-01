@@ -1,5 +1,5 @@
 @use "colors/color_variables";
-@use "../../typography/typography";
+@use "../../typography/typography" as *;
 @use "../../icons/next_icon";
 @use "../../icons/previous_icon";
 
@@ -40,12 +40,12 @@
 }
 
 .hot-issue-bill-text {
-    @extend .title-small;
+    @include title-small;
     color: color_variables.$text-primary-color;
 }
 
 .all-issue-bill-text {
-    @extend .caption-medium;
+    @include caption-medium;
     color: color_variables.$text-tertiary-color;
     margin-top: 6px;
 }
@@ -59,7 +59,7 @@
 }
 
 .hot-issue-title {
-    @extend .button-large;
+    @include button-large;
     color: color_variables.$text-primary-color;
     width: 100%;                
     white-space: nowrap;        
@@ -94,7 +94,7 @@
 // 요약된 법안 정보를 가져와야 하는데 없는 법안도 있어
 // 법안 상세정보 사용
 .hot-issue-bill-description {
-    @extend .body-small;
+    @include body-small;
     width: 100%;
     overflow: hidden;
 }

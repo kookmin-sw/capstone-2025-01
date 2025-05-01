@@ -1,5 +1,5 @@
 @use "../colors/color_variables";
-@use "../typography/typography";
+@use "../typography/typography" as *;
 
 // 최상단 검색바 컨테이너
 .search-bar {
@@ -15,7 +15,7 @@
   box-sizing: border-box; 
   
   input[type="text"] {
-    @extend .body-large; 
+    @include body-large; 
     border: none;
     width: 660px;
     height: 41px;

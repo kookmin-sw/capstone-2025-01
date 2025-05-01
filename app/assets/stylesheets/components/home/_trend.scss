@@ -1,5 +1,5 @@
 @use "colors/color_variables";
-@use "../../typography/typography";
+@use "../../typography/typography" as *;
 @use "../../components/banner_search";
 
 .keyword-search-bar {
@@ -19,12 +19,12 @@
     gap: 10px;
     flex-wrap: wrap;
     color: color_variables.$text-secondary-color;
-    @extend .caption-medium;
+    @include caption-medium;
     font-weight: 700;
     margin-bottom: 102px;
 
     .keyword-bubble {
-        @extend .caption-medium;
+        @include caption-medium;
         font-weight: 700;
         background-color: color_variables.$surface-primary-color;
         color: color_variables.$text-primary-color;
@@ -43,7 +43,7 @@
 }
 
 .trending-keyword-text {
-    @extend .caption-medium;
+    @include caption-medium;
     font-weight: 700; 
 }
 

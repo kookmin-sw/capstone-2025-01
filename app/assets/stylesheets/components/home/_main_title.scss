@@ -1,5 +1,5 @@
 @use "colors/color_variables";
-@use "../../typography/typography";
+@use "../../typography/typography" as *;
 
 .main-message-layer {
   text-align: center;
@@ -7,12 +7,12 @@
 }
 
 .headline-text {
-  @extend .headline-large;
+  @include headline-large;
   color: color_variables.$text-primary-color; // 필요에 따라 색상 지정
 }
 
 .title-text {
-  @extend .title-small;
+  @include title-small;
   color: color_variables.$text-secondary-color;
   margin-top: 16px;
 }
