@@ -37,3 +37,12 @@
 @use "icons/alert_circle_icon";
 @use "icons/kakao_logo_icon";
 @use "icons/naver_logo_icon";
+
+// 전역 스타일 설정
+a {
+    &:focus, &:active, &:hover {
+      outline: none !important;
+      border-color: color_variables.$border-primary-color !important;
+      box-shadow: none !important;
+    }
+  }
