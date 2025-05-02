@@ -15,6 +15,9 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
 
+      - name: Install required gems
+        run: gem install kamal ed25519 x25519
+
       - name: Install 1Password CLI
         uses: 1password/install-cli-action@v1
 
@@ -37,9 +40,6 @@ jobs:
           organization: ${{ env.CLOUDFLARE_ZEROTRUST_ORG }}
           auth_client_id: ${{ env.CLOUDFLARE_AUTH_CLIENT_ID }}
           auth_client_secret: ${{ env.CLOUDFLARE_AUTH_CLIENT_SECRET }}
-
-      - name: Install required gems
-        run: gem install kamal ed25519 x25519
 
       - name: Add SSH host key
         run: |
