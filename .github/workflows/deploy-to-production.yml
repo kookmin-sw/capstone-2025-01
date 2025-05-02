@@ -31,6 +31,11 @@ jobs:
       - name: Install required gems
         run: gem install kamal ed25519 x25519
 
+      - name: Add SSH host key
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H 10.0.0.6 >> ~/.ssh/known_hosts
+
       - name: Debug SSH connection
         run: |
           ssh -vvv greenstar1151@10.0.0.6
