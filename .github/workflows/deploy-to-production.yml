@@ -29,7 +29,7 @@ jobs:
           auth_client_secret: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_SECRET }}
 
       - name: Install required gems
-        run: gem install kamal ed25519
+        run: gem install kamal ed25519 x25519
 
       - name: Deploy with Kamal
         run: |
