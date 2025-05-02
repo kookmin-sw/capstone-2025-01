@@ -49,12 +49,12 @@ jobs:
           auth_client_id: ${{ env.CLOUDFLARE_AUTH_CLIENT_ID }}
           auth_client_secret: ${{ env.CLOUDFLARE_AUTH_CLIENT_SECRET }}
 
-      - name: Add SSH host key
-        run: |
-          mkdir -p ~/.ssh
-          printf '%s\n' "${{ env.ACTIONS_DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          echo "Host 10.0.0.6 oracle-ssh.greenstar.dev\n\tStrictHostKeyChecking=no\n\tLogLevel=DEBUG3" >> ~/.ssh/config
+      # - name: Add SSH host key
+      #   run: |
+      #     mkdir -p ~/.ssh
+      #     printf '%s\n' "${{ env.ACTIONS_DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
+      #     chmod 600 ~/.ssh/id_ed25519
+      #     echo "Host 10.0.0.6 oracle-ssh.greenstar.dev\n\tStrictHostKeyChecking=no\n\tLogLevel=DEBUG3" >> ~/.ssh/config
 
       - name: Setup upterm session
         uses: owenthereal/action-upterm@v1
