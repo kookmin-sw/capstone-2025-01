@@ -56,13 +56,16 @@ jobs:
       #     chmod 600 ~/.ssh/id_ed25519
       #     ssh-keyscan -H ${{ env.DEPLOY_HOST_IP }} >> ~/.ssh/known_hosts
 
-      # - name: Test SSH Command Execution
-      #   run: |
-      #     ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no greenstar1151@${{ env.DEPLOY_HOST_IP }} "echo 'SSH connection and command execution successful'"
-
-      - name: Deploy with Kamal
+      - name: Test SSH Command Execution
         run: |
-          kamal deploy --verbose
+          ssh -p 22 -l greenstar1151 -o LogLevel=DEBUG -o ProxyCommand='ssh -W %h:%p greenstar1151@oracle-ssh.greenstar.dev' 10.0.0.6
         env:
           TUNNEL_SERVICE_TOKEN_ID: ${{ env.CLOUDFLARE_AUTH_CLIENT_ID }}
           TUNNEL_SERVICE_TOKEN_SECRET: ${{ env.CLOUDFLARE_AUTH_CLIENT_SECRET }}
+
+      # - name: Deploy with Kamal
+      #   run: |
+      #     kamal deploy --verbose
+      #   env:
+      #     TUNNEL_SERVICE_TOKEN_ID: ${{ env.CLOUDFLARE_AUTH_CLIENT_ID }}
+      #     TUNNEL_SERVICE_TOKEN_SECRET: ${{ env.CLOUDFLARE_AUTH_CLIENT_SECRET }}
