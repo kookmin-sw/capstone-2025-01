@@ -31,6 +31,10 @@ jobs:
       - name: Install required gems
         run: gem install kamal ed25519 x25519
 
-      - name: Deploy with Kamal
+      - name: Debug SSH connection
         run: |
-          kamal deploy --verbose
+          ssh -vvv greenstar1151@10.0.0.6
+
+      # - name: Deploy with Kamal
+      #   run: |
+      #     kamal deploy --verbose
