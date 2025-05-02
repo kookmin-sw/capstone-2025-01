@@ -1,20 +1,22 @@
 <!-- 법안 목록페이지 법안 카테고리 버튼 목록  -->
 
+<% active_tabs = parsed_active_tabs %>
+
 <div class="law-component-layer">
-  <%= law_category_button('all', no_link: local_assigns[:no_link]) %>
-  <%= law_category_button('starred', no_link: local_assigns[:no_link]) %>
-  <%= law_category_button('labor-humanrights', no_link: local_assigns[:no_link]) %>
-  <%= law_category_button('health-welfare', no_link: local_assigns[:no_link]) %>
-  <%= law_category_button('socialsecurity-national', no_link: local_assigns[:no_link]) %>
-  <%= law_category_button('economy-finance', no_link: local_assigns[:no_link]) %>
-  <%= law_category_button('informationcommunication-sciencetechnology', no_link: local_assigns[:no_link]) %>
-  <%= law_category_button('industry-agriculture', no_link: local_assigns[:no_link]) %>
-  <%= law_category_button('education', no_link: local_assigns[:no_link]) %>
-  <%= law_category_button('culture-sports', no_link: local_assigns[:no_link]) %>
-  <%= law_category_button('family-genderequality', no_link: local_assigns[:no_link]) %>
-  <%= law_category_button('diplomacy-unification', no_link: local_assigns[:no_link]) %>
-  <%= law_category_button('land-environment', no_link: local_assigns[:no_link]) %>
-  <%= law_category_button('disaster-climate', no_link: local_assigns[:no_link]) %>
-  <%= law_category_button('government-administration', no_link: local_assigns[:no_link]) %>
-  <%= law_category_button('legislative-judicial', no_link: local_assigns[:no_link]) %>
+  <%= law_category_button('all', no_link: true, active_tabs: active_tabs) %>
+  <%= law_category_button('starred', no_link: true, active_tabs: active_tabs) %>
+  <%= law_category_button('labor-humanrights', no_link: true, active_tabs: active_tabs) %>
+  <%= law_category_button('health-welfare', no_link: true, active_tabs: active_tabs) %>
+  <%= law_category_button('socialsecurity-national', no_link: true, active_tabs: active_tabs) %>
+  <%= law_category_button('economy-finance', no_link: true, active_tabs: active_tabs) %>
+  <%= law_category_button('informationcommunication-sciencetechnology', no_link: true, active_tabs: active_tabs) %>
+  <%= law_category_button('industry-agriculture', no_link: true, active_tabs: active_tabs) %>
+  <%= law_category_button('education', no_link: true, active_tabs: active_tabs) %>
+  <%= law_category_button('culture-sports', no_link: true, active_tabs: active_tabs) %>
+  <%= law_category_button('family-genderequality', no_link: true, active_tabs: active_tabs) %>
+  <%= law_category_button('diplomacy-unification', no_link: true, active_tabs: active_tabs) %>
+  <%= law_category_button('land-environment', no_link: true, active_tabs: active_tabs) %>
+  <%= law_category_button('disaster-climate', no_link: true, active_tabs: active_tabs) %>
+  <%= law_category_button('government-administration', no_link: true, active_tabs: active_tabs) %>
+  <%= law_category_button('legislative-judicial', no_link: true, active_tabs: active_tabs) %>
 </div>

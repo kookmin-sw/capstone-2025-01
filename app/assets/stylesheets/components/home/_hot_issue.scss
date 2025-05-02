@@ -13,10 +13,10 @@
     gap: 30px;
     overflow-x: auto;
     scroll-behavior: smooth;
-    margin: 0 auto;              // ✅ 중앙 정렬 (불필요한 margin 제거)
+    margin: 0 auto;              
     position: relative;
-    width: fit-content;          // ✅ 카드 수에 맞게 자동 너비 설정
-    max-width: 100%;             // ✅ 너무 넓어지는 것 방지
+    width: 100%;          
+    max-width: 100%;            
     scrollbar-width: none;       // Firefox
     -ms-overflow-style: none;    // IE, Edge
 }

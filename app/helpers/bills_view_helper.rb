@@ -28,4 +28,15 @@ module BillsViewHelper
   def text_color_class_for_status(status)
     Bill.text_color_for(status)
   end
+
+  def parsed_active_tabs
+    case params[:tab]
+    when Array
+      params[:tab]
+    when String
+      params[:tab].include?(",") ? params[:tab].split(",") : [ params[:tab] ]
+    else
+      []
+    end
+  end
 end

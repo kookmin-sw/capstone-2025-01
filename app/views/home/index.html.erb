@@ -23,31 +23,47 @@
   </div>
 </nav>
 
-<div class="law-component-layer">
-  <% BillViewHelper::LAW_CATEGORIES.each do |key, label| %>
-    <%= link_to "#", class: "#{key}-comp law-category-button law-common-text-component", data: { tab: key, label: label }, onclick: "event.preventDefault();" do %>
-      <%= label %>
+<% active_tabs = parsed_active_tabs %>
+
+<form data-controller="category-search" data-action="submit->category-search#goToSearch">
+  <!-- 카테고리 버튼 목록 -->
+  <div class="law-component-layer">
+    <% BillViewHelper::LAW_CATEGORIES.each do |key, label| %>
+      <% active = active_tabs.include?(key) ? 'active' : '' %>
+      <%= link_to label,
+            "#",
+            class: "#{key}-comp law-category-button law-common-text-component #{active}",
+            data: { tab: key, label: label },
+            onclick: "event.preventDefault();" %>
     <% end %>
-  <% end %>
-</div>
-
-<!-- 중앙 메시지 -->
-<div class="main-message-layer">
-  <div class="headline-text">무슨 법이 만들어지고 있나요?</div>
-  <div class="title-text">
-    한눈에 보는 법률 개정, 우리 사회의 이슈<br>
-    <strong>LawNow</strong>와 함께 공유하세요!
   </div>
-</div>
 
-<!-- 검색바 -->
-<div class="keyword-search-bar">
-  <div id="selected-category" class="selected-category-tag-container"></div>
-  <%= text_field_tag :q, params[:q], placeholder: "검색어를 입력해주세요." %>
-  <button type="submit" class="keyword-search-button">
-    <%= inline_svg("search", class: "search-icon") %>
-  </button>
-</div>
+  <!-- 중앙 메시지 -->
+  <div class="main-message-layer">
+    <div class="headline-text">무슨 법이 만들어지고 있나요?</div>
+    <div class="title-text">
+      한눈에 보는 법률 개정, 우리 사회의 이슈<br>
+      <strong>LawNow</strong>와 함께 공유하세요!
+    </div>
+  </div>
+
+  <!-- 검색바 -->
+  <div class="keyword-search-bar">
+    <div id="selected-category"
+          class="selected-category-tag-container"
+          data-category-search-target="selectedCategory">
+      <%= text_field_tag :q, params[:q],
+            placeholder: "검색어를 입력해주세요.",
+            data: { "category-search-target": "input" } %>
+    </div>
+
+    <button type="submit"
+            class="keyword-search-button"
+            data-action="click->category-search#goToSearch">
+      <%= inline_svg("search", class: "search-icon") %>
+    </button>
+  </div>
+</form>
 
 <!-- 실시간 검색어: 기본 숨김, 선택된 카테고리에서만 표시 -->
 <div id="trendingKeywords" class="trending-keywords">
@@ -68,159 +84,48 @@
   </div>
 
   <!-- HOT 이슈 카드 -->
-  <div class="hot-issue-card-container">
-    <% @hot_bills.each do |bill| %>
-      <%= link_to bill_path(bill), class: "hot-issue-card" do %>
-        <div class="hot-issue-title"><%= bill.title %></div>
-        <div class="hot-issue-header-tag">
-          <div class="bill-tag-party">
-            <% specific_proposer = bill.proposals.first&.specific_proposer %>
-            <% if specific_proposer.is_a?(NationalAssemblyPerson) %>
-              <%= specific_proposer.party_name.presence || "무소속" %>
-            <% elsif specific_proposer.is_a?(GovernmentBillSponsor) %>
-              정부
-            <% else %>
-              기타
-            <% end %>
+  <div data-controller="hot-issue">
+    <div data-hot-issue-target="container" class="hot-issue-card-container">
+      <% @hot_bills.each do |bill| %>
+        <%= link_to bill_path(bill), class: "hot-issue-card" do %>
+          <div class="hot-issue-title"><%= bill.title %></div>
+          <div class="hot-issue-header-tag">
+            <div class="bill-tag-party">
+              <% specific_proposer = bill.proposals.first&.specific_proposer %>
+              <% if specific_proposer.is_a?(NationalAssemblyPerson) %>
+                <%= specific_proposer.party_name.presence || "무소속" %>
+              <% elsif specific_proposer.is_a?(GovernmentBillSponsor) %>
+                정부
+              <% else %>
+                기타
+              <% end %>
+            </div>
+            <div class="bill-tag-status <%= bill.status_css_class %>">
+              <span class="status-emoji"><%= bill.status_emoji %></span>
+              <span class="status-label"><%= bill.current_status %></span>
+            </div>
           </div>
-          <div class="bill-tag-status <%= bill.status_css_class %>">
-            <span class="status-emoji"><%= bill.status_emoji %></span>
-            <span class="status-label"><%= bill.current_status %></span>
+          <div class="hot-issue-bill-description">
+            <%= truncate((bill.summary || "").gsub(/\A(?:제안이유 및 주요내용|제안이유)[:\s]*/, ""), length: 90) %>
           </div>
-        </div>
-        <div class="hot-issue-bill-description">
-          <%= truncate((bill.summary || "").gsub(/\A(?:제안이유 및 주요내용|제안이유)[:\s]*/, ""), length: 90) %>
-        </div>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
 
-  <!-- 아이콘 위치 -->
+    <!-- 아이콘 위치 -->
     <div class="hot-issue-controls-wrapper">
       <div class="hot-issue-controls">
-        <button class="hot-issue-previous-icon">
+        <button
+          class="hot-issue-previous-icon"
+          data-action="mousedown->hot-issue#startScrollLeft mouseup->hot-issue#stopScroll mouseleave->hot-issue#stopScroll">
           <%= inline_svg("previous") %>
         </button>
-        <button class="hot-issue-next-icon">
+        <button
+          class="hot-issue-next-icon"
+          data-action="mousedown->hot-issue#startScrollRight mouseup->hot-issue#stopScroll mouseleave->hot-issue#stopScroll">
           <%= inline_svg("next") %>
         </button>
       </div>
     </div>
   </div>
 </div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const container = document.querySelector(".hot-issue-card-container");
-    const leftButton = document.querySelector(".hot-issue-previous-icon");
-    const rightButton = document.querySelector(".hot-issue-next-icon");
-
-    if (!container || !leftButton || !rightButton) return;
-
-    const scrollSpeed = 8; // 한번에 이동할 거리 (조금씩 이동)
-    let scrollInterval = null;
-
-    // 누르고 있는 동안 계속 왼쪽으로 이동
-    leftButton.addEventListener("mousedown", () => {
-      scrollInterval = setInterval(() => {
-        container.scrollBy({ left: -scrollSpeed, behavior: "auto" });
-      }, 10); // 10ms마다 살짝 이동
-    });
-
-    leftButton.addEventListener("mouseup", () => {
-      clearInterval(scrollInterval);
-    });
-
-    leftButton.addEventListener("mouseleave", () => {
-      clearInterval(scrollInterval);
-    });
-
-    // 누르고 있는 동안 계속 오른쪽으로 이동
-    rightButton.addEventListener("mousedown", () => {
-      scrollInterval = setInterval(() => {
-        container.scrollBy({ left: scrollSpeed, behavior: "auto" });
-      }, 10);
-    });
-
-    rightButton.addEventListener("mouseup", () => {
-      clearInterval(scrollInterval);
-    });
-
-    rightButton.addEventListener("mouseleave", () => {
-      clearInterval(scrollInterval);
-    });
-  });
-</script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const selectedContainer = document.getElementById("selected-category");
-    const categoryButtons = document.querySelectorAll(".law-category-button");
-    const input = document.querySelector('input[name="q"]');
-    const form = document.querySelector('.keyword-search-bar');
-    const searchButton = document.querySelector('.keyword-search-button');
-
-    let selectedTab = null;
-
-    categoryButtons.forEach(button => {
-      button.addEventListener("click", (e) => {
-        e.preventDefault();
-        const tab = button.dataset.tab;
-        const label = button.dataset.label;
-
-        // 이미 선택된 버튼 → 해제
-        if (button.classList.contains("active")) {
-          button.classList.remove("active");
-          selectedTab = null;
-          selectedContainer.innerHTML = "";
-          return;
-        }
-
-        // 기존 선택 초기화
-        categoryButtons.forEach(btn => btn.classList.remove("active"));
-        selectedContainer.innerHTML = "";
-        selectedTab = tab;
-
-        button.classList.add("active");
-
-        // 선택 태그 UI 추가
-        const tag = document.createElement("div");
-        tag.className = "selected-category-tag";
-        tag.dataset.tab = tab;
-        tag.innerHTML = `
-          <span class="remove-button" data-tab="${tab}">&times;</span>
-          <span>${label}</span>
-        `;
-        selectedContainer.appendChild(tag);
-
-        tag.querySelector(".remove-button").addEventListener("click", () => {
-          button.classList.remove("active");
-          tag.remove();
-          selectedTab = null;
-        });
-      });
-    });
-
-    // 검색 실행 함수
-    const goToSearch = () => {
-      const query = input.value.trim();
-      const baseUrl = "/bills";
-      const params = new URLSearchParams();
-
-      if (query) params.set("q", query);
-      if (selectedTab) params.set("tab", selectedTab);
-
-      window.location.href = `${baseUrl}?${params.toString()}`;
-    };
-
-    searchButton.addEventListener("click", (e) => {
-      e.preventDefault();
-      goToSearch();
-    });
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      goToSearch();
-    });
-  });
-</script>
