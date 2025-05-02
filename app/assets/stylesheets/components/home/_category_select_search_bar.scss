@@ -1,30 +1,65 @@
 @use "colors/color_variables";
 @use "../_law_categories.scss";
 @use "../../icons/remove_icon";
+@use "../../icons/search_icon";
 @use "../../typography/typography" as *;
+
+.keyword-search-bar {
+  width: 660px;
+  height: 58px;
+  padding: 0 16px;
+  gap: 8px;
+
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  overflow: hidden; 
+  position: relative;
+  border-bottom: 2px solid color_variables.$border-primary-color;
+}
 
 .selected-category-tag-container {
   display: flex;
-  white-space: nowrap;
+  flex-direction: row;
   flex-wrap: nowrap;
   overflow-x: auto;
-
-  gap: 10px;
-  max-width: 760px;
-  margin-bottom: 16px;
+  gap: 8px;
+  align-items: center;
 
   &::-webkit-scrollbar {
     display: none;
   }
+
+  input[type="text"] {
+    @include body-large;
+    flex: 1 1 auto;        // 공간 부족하면 줄어듦
+    min-width: 570px;
+    border: none;
+    height: 46px;
+    padding: 16px;
+    background: transparent;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      color: color_variables.$text-tertiary-color;
+      opacity: 0.6;
+    }
+  }
 }
 
 .selected-category-tag {
-  display: flex;
-  justify-content: center;
+  display: inline-flex;
   align-items: center;
   white-space: nowrap;
   gap: 5px;
-
   padding: 6px 15px;
   border-radius: 20px;
   background-color: color_variables.$surface-primary-color;
@@ -32,62 +67,29 @@
   span {
     @extend .law-common-text-component;
   }
-}
 
-.selected-category-tag .remove-button {
-  @extend .remove-icon;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-}
-
-.keyword-search-bar {
-  width: 660px;
-  height: 58px;
-  border-bottom: 2px solid color_variables.$border-primary-color; 
-  padding-left: 16px;
-  padding-right: 16px;
-  gap: 8px;
-
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  position: relative; 
-  
-  input[type="text"] {
-    @include body-large; 
+  .remove-button {
+    @extend .remove-icon;
+    background: transparent;
     border: none;
-    height: 41px;
-    flex: 1 1 auto;
-    min-width: 0;
-    margin-bottom: 17px;
-    margin-left: 9px;
-
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    vertical-align: middle;
-    transition: opacity 0.3s ease; 
-  }
-      
-  input::placeholder {
-    color: color_variables.$text-tertiary-color;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    transition: opacity 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
-.keyword-search-button:focus {
-  outline: none; 
-  box-shadow: 0 0 0 2px color_variables.$background-primary-color; 
+.keyword-search-button {
+  @extend .search-icon;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding-bottom: 16px;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px color_variables.$background-primary-color;
+  }
 }
 
 .trending-keywords {

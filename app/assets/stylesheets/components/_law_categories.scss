@@ -70,7 +70,9 @@ $law-components: (
 @each $name, $width in $law-components {
     .#{$name}.active {
         @extend %law-common-shape-component;
-        background: color_variables.$surface-primary-color;
+        color: color_variables.$text-inverse-color;
+        border: 1px solid color_variables.$border-primary-color;
+        background: color_variables.$surface-select-background-color;
         width: $width;
     }
 }
