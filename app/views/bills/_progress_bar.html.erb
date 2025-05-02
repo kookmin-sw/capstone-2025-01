@@ -1,6 +1,6 @@
 <div class="progress-bar-layer">
   <% steps = bill_steps(bill) %>
-  <% current_index = steps.index(bill.current_status) %> 
+  <% current_index = steps.index(bill.current_status) || -1 %>
 
   <% steps.each_with_index do |step, index| %>
     <div class="progress 
