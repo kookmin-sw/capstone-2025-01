@@ -16,10 +16,13 @@ jobs:
       - name: Install 1Password CLI
         uses: 1password/install-cli-action@v1
 
-      - name: Load secrets from 1Password
+      - name: Configure 1Password
         uses: 1password/load-secrets-action/configure@v2
         with:
           service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+
+      - name: Load secrets from 1Password
+        uses: 1password/load-secrets-action@v2
         env:
           CLOUDFLARE_ZEROTRUST_ORG: "op://LawNow/777cn6fqfhh6ngojwqqd3p7lme/Zerotrust Organization ID"
           CLOUDFLARE_AUTH_CLIENT_ID: "op://LawNow/777cn6fqfhh6ngojwqqd3p7lme/CF-Access-Client-Id"
