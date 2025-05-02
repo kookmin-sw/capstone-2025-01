@@ -20,13 +20,18 @@ jobs:
         uses: 1password/load-secrets-action/configure@v2
         with:
           service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+        env:
+          CLOUDFLARE_ZEROTRUST_ORG: "op://LawNow/777cn6fqfhh6ngojwqqd3p7lme/Zerotrust Organization ID"
+          CLOUDFLARE_AUTH_CLIENT_ID: "op://LawNow/777cn6fqfhh6ngojwqqd3p7lme/CF-Access-Client-Id"
+          CLOUDFLARE_AUTH_CLIENT_SECRET: "op://LawNow/777cn6fqfhh6ngojwqqd3p7lme/CF-Access-Client-Secret"
+          ACTIONS_DEPLOY_SSH_KEY: "op://LawNow/4ph5yj7vy4ulzksvrjooqixwvy/private key"
 
       - name: Set up Cloudflare WARP
         uses: Boostport/setup-cloudflare-warp@v1
         with:
-          organization: ${{ secrets.CLOUDFLARE_ZEROTRUST_ORG }}
-          auth_client_id: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_ID }}
-          auth_client_secret: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_SECRET }}
+          organization: ${{ env.CLOUDFLARE_ZEROTRUST_ORG }}
+          auth_client_id: ${{ env.CLOUDFLARE_AUTH_CLIENT_ID }}
+          auth_client_secret: ${{ env.CLOUDFLARE_AUTH_CLIENT_SECRET }}
 
       - name: Install required gems
         run: gem install kamal ed25519 x25519
@@ -34,11 +39,13 @@ jobs:
       - name: Add SSH host key
         run: |
           mkdir -p ~/.ssh
+          echo "${{ env.ACTIONS_DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H 10.0.0.6 >> ~/.ssh/known_hosts
 
       - name: Debug SSH connection
         run: |
-          ssh -vvv greenstar1151@10.0.0.6
+          ssh -vvv -i ~/.ssh/id_ed25519 greenstar1151@10.0.0.6
 
       # - name: Deploy with Kamal
       #   run: |
