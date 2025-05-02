@@ -52,7 +52,7 @@ jobs:
       - name: Add SSH host key
         run: |
           mkdir -p ~/.ssh
-          echo "${{ env.ACTIONS_DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
+          printf '%s' "${{ env.ACTIONS_DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H ${{ env.DEPLOY_HOST_IP }} >> ~/.ssh/known_hosts
 
