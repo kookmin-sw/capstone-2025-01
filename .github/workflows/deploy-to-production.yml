@@ -58,7 +58,7 @@ jobs:
 
       - name: Test SSH Command Execution
         run: |
-          ssh -p 22 -l greenstar1151 -o LogLevel=DEBUG -o ProxyCommand='cloudflared access ssh --hostname %h' oracle-ssh.greenstar.dev
+          ssh -p 22 -l greenstar1151 -o StrictHostKeyChecking=no -o LogLevel=DEBUG -o ProxyCommand='cloudflared access ssh --hostname %h' oracle-ssh.greenstar.dev
         env:
           TUNNEL_SERVICE_TOKEN_ID: ${{ env.CLOUDFLARE_AUTH_CLIENT_ID }}
           TUNNEL_SERVICE_TOKEN_SECRET: ${{ env.CLOUDFLARE_AUTH_CLIENT_SECRET }}
