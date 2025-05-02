@@ -7,25 +7,33 @@ image: greenstarkmucs/lawnow-webapp
 # Deploy to these servers.
 servers:
   web:
-    - 192.168.0.1
+    hosts:
+      - 10.0.0.6
+    options:
+      add-host: host.docker.internal:host-gateway
+      network: deploy
   # job:
   #   hosts:
   #     - 192.168.0.1
   #   cmd: bin/jobs
+ssh:
+  user: greenstar1151
+  port: 22
+  proxy: greenstar1151@oracle-ssh.greenstar.dev
 
 # Enable SSL auto certification via Let's Encrypt and allow for multiple apps on a single web server.
 # Remove this section when using multiple web servers and ensure you terminate SSL at your load balancer.
 #
 # Note: If using Cloudflare, set encryption mode in SSL/TLS setting to "Full" to enable CF-to-app encryption.
-proxy:
-  ssl: true
-  host: app.example.com
+# proxy:
+#   ssl: true
+#   host: app.example.com
 
 # Credentials for your image host.
 registry:
   # Specify the registry server, if you're not using Docker Hub
   # server: registry.digitalocean.com / ghcr.io / ...
-  username: your-user
+  username: greenstarkmucs
 
   # Always use an access token rather than real password when possible.
   password:
@@ -75,7 +83,7 @@ asset_path: /rails/public/assets
 
 # Configure the image builder.
 builder:
-  arch: amd64
+  arch: arm64
 
   # # Build image via remote server (useful for faster amd64 builds on arm64 computers)
   # remote: ssh://docker@docker-builder-server
