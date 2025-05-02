@@ -34,12 +34,12 @@ jobs:
           CLOUDFLARE_AUTH_CLIENT_SECRET: "op://LawNow/777cn6fqfhh6ngojwqqd3p7lme/CF-Access-Client-Secret"
           ACTIONS_DEPLOY_SSH_KEY: "op://LawNow/4ph5yj7vy4ulzksvrjooqixwvy/private key"
 
-      # - name: Set up Cloudflare WARP
-      #   uses: Boostport/setup-cloudflare-warp@v1
-      #   with:
-      #     organization: ${{ env.CLOUDFLARE_ZEROTRUST_ORG }}
-      #     auth_client_id: ${{ env.CLOUDFLARE_AUTH_CLIENT_ID }}
-      #     auth_client_secret: ${{ env.CLOUDFLARE_AUTH_CLIENT_SECRET }}
+      - name: Set up Cloudflare WARP
+        uses: Boostport/setup-cloudflare-warp@v1
+        with:
+          organization: ${{ env.CLOUDFLARE_ZEROTRUST_ORG }}
+          auth_client_id: ${{ env.CLOUDFLARE_AUTH_CLIENT_ID }}
+          auth_client_secret: ${{ env.CLOUDFLARE_AUTH_CLIENT_SECRET }}
 
       - name: Setup cloudflared
         uses: AnimMouse/setup-cloudflared@v2
@@ -49,12 +49,12 @@ jobs:
           mkdir -p ~/.ssh
           echo "Host oracle-ssh.greenstar.dev\n\tProxyCommand cloudflared access ssh --hostname %h" >> ~/.ssh/config
 
-      # - name: Add SSH host key
-      #   run: |
-      #     mkdir -p ~/.ssh
-      #     echo "${{ env.ACTIONS_DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
-      #     chmod 600 ~/.ssh/id_ed25519
-      #     ssh-keyscan -H ${{ env.DEPLOY_HOST_IP }} >> ~/.ssh/known_hosts
+      - name: Add SSH host key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ env.ACTIONS_DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H ${{ env.DEPLOY_HOST_IP }} >> ~/.ssh/known_hosts
 
       - name: Test SSH Command Execution
         run: |
