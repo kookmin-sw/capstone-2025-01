@@ -19,6 +19,7 @@ servers:
 ssh:
   user: greenstar1151
   port: 22
+  log_level: debug
   # proxy: greenstar1151@oracle-ssh.greenstar.dev
 
 # Enable SSL auto certification via Let's Encrypt and allow for multiple apps on a single web server.
