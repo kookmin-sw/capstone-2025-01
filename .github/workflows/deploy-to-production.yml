@@ -31,6 +31,12 @@ jobs:
       - name: Install Kamal
         run: gem install kamal
 
+      - name: Update SSH configuration
+        run: |
+          echo "Host 10.0.0.6" >> ~/.ssh/config
+          echo "  KexAlgorithms +curve25519-sha256@libssh.org" >> ~/.ssh/config
+          echo "  StrictHostKeyChecking no" >> ~/.ssh/config
+
       - name: Deploy with Kamal
         run: |
           kamal deploy
