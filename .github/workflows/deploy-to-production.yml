@@ -56,6 +56,12 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           echo "Host 10.0.0.6 oracle-ssh.greenstar.dev\n\tStrictHostKeyChecking=no\n\tLogLevel=DEBUG3" >> ~/.ssh/config
 
-      - name: Deploy with Kamal
-        run: |
-          kamal deploy --verbose
+      - name: Setup upterm session
+        uses: owenthereal/action-upterm@v1
+        with:
+          limit-access-to-actor: true # Restrict to the user who triggered the workflow
+
+
+      # - name: Deploy with Kamal
+      #   run: |
+      #     kamal deploy --verbose
