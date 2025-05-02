@@ -8,7 +8,7 @@ image: greenstarkmucs/lawnow-webapp
 servers:
   web:
     hosts:
-      - oracle-ssh.greenstar.dev
+      - 10.0.0.6
     options:
       add-host: host.docker.internal:host-gateway
       network: deploy
