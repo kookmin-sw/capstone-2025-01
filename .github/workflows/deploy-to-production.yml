@@ -47,7 +47,7 @@ jobs:
       - name: Configure SSH config for Cloudflare Tunnel
         run: |
           mkdir -p ~/.ssh
-          echo "Host oracle-ssh.greenstar.dev\n\tProxyCommand cloudflared access ssh --hostname %h" >> ~/.ssh/config
+          echo "Host oracle-ssh.greenstar.dev\n\tProxyCommand cloudflared access ssh --hostname %h\n\tStrictHostKeyChecking=no" >> ~/.ssh/config
 
       - name: Add SSH host key
         run: |
@@ -56,19 +56,9 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H ${{ env.DEPLOY_HOST_IP }} >> ~/.ssh/known_hosts
 
-      - name: Display SSH Public Key
-        run: ssh-keygen -y -f ~/.ssh/id_ed25519
-
-      - name: Test SSH Command Execution
+      - name: Deploy with Kamal
         run: |
-          ssh -p 22 -l greenstar1151 -o StrictHostKeyChecking=no -o LogLevel=DEBUG -o ProxyCommand='cloudflared access ssh --hostname %h' oracle-ssh.greenstar.dev
+          kamal deploy --verbose
         env:
           TUNNEL_SERVICE_TOKEN_ID: ${{ env.CLOUDFLARE_AUTH_CLIENT_ID }}
           TUNNEL_SERVICE_TOKEN_SECRET: ${{ env.CLOUDFLARE_AUTH_CLIENT_SECRET }}
-
-      # - name: Deploy with Kamal
-      #   run: |
-      #     kamal deploy --verbose
-      #   env:
-      #     TUNNEL_SERVICE_TOKEN_ID: ${{ env.CLOUDFLARE_AUTH_CLIENT_ID }}
-      #     TUNNEL_SERVICE_TOKEN_SECRET: ${{ env.CLOUDFLARE_AUTH_CLIENT_SECRET }}
