@@ -40,7 +40,7 @@ jobs:
       - name: Configure SSH config for Cloudflare Tunnel
         run: |
           mkdir -p ~/.ssh
-          echo "Host 10.0.0.6\n\tProxyCommand cloudflared access ssh --hostname oracle-ssh.greenstar.dev\n\tStrictHostKeyChecking=no\n\tLogLevel=DEBUG" >> ~/.ssh/config
+          echo "Host 10.0.0.6 oracle-ssh.greenstar.dev\n\tProxyCommand cloudflared access ssh --hostname oracle-ssh.greenstar.dev\n\tStrictHostKeyChecking=no\n\tLogLevel=DEBUG3" >> ~/.ssh/config
 
       - name: Add SSH host key
         run: |
