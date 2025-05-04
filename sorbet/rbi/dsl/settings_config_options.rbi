@@ -13,6 +13,12 @@ class SettingsConfigOptions < ::Config::Options
   Elem = type_member { { fixed: T.untyped } }
 
   sig { returns(T.untyped) }
+  def bill_category; end
+
+  sig { params(value: T.untyped).returns(T.untyped) }
+  def bill_category=(value); end
+
+  sig { returns(T.untyped) }
   def bill_summary; end
 
   sig { params(value: T.untyped).returns(T.untyped) }
