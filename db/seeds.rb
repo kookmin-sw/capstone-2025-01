@@ -46,6 +46,115 @@ AiPromptTemplate.find_or_create_by!(name: "bill-summary") do |template|
 end
 
 
+# 기본 법안 카테고리 분류 프롬프트 생성
+AiPromptTemplate.find_or_create_by!(name: "bill-category") do |template|
+  template.description = "법안 카테고리 분류용 프롬프트"
+  template.template = <<~PROMPT
+You are a specialized legal categorization assistant designed to classify Korean legislative bills into appropriate categories. Your task is to analyze the title and content of a bill, along with its responsible committee (if available), and assign it to the most suitable category from a predefined list.
+
+Here are the bill details you need to classify:
+
+<bill_content>
+{{bill_content}}
+</bill_content>
+
+<bill_title>
+{{bill_title}}
+</bill_title>
+
+<committee>
+{{committee}}
+</committee>
+
+Categories:
+  "labor-humanrights" => "👥 근로·노동·인권",
+  "health-welfare" => "🏥 보건·복지",
+  "socialsecurity-national" => "🚔 교통·사회안전·국방",
+  "economy-finance" => "💰 경제",
+  "informationcommunication-sciencetechnology" => "🔬 정보통신·과학기술",
+  "industry-agriculture" => "🏭 산업·농축수산",
+  "education" => "🎓 교육",
+  "culture-sports" => "🎭 문화·체육·관광",
+  "family-genderequality" => "🏠 가정·성평등",
+  "diplomacy-unification" => "🌍 외교·통일",
+  "land-environment" => "🏗 국토·환경",
+  "disaster-climate" => "🆘 재난·기후·원자력",
+  "government-administration" => "🏛 정부·행정",
+  "legislative-judicial" => "⚖ 입법·사법·선거제도"
+
+Instructions:
+1. Carefully analyze the bill title and content. If committee information is provided, consider that as well.
+2. Consider how the bill's content aligns with each of the categories listed above. Your reply should be one of the keys of the categories. Korean values are only for reference purpose.
+3. Based on your analysis, select ONE most appropriate category from the list above.
+4. Do not include explanations, reasoning, or multiple categories.
+5. Do not include interactive responses like "Sure, I'll begin...", etc.
+
+
+Remember:
+- If the committee information is missing (null), focus entirely on the bill title and content.
+- Select only from the exact categories provided in the list (do not create new categories).
+
+Please proceed with your classification.
+  PROMPT
+end
+
+
+# 법안 카테고리 분류 프롬프트 (w/ reasoning) 생성
+AiPromptTemplate.find_or_create_by!(name: "bill-category-reasoning") do |template|
+  template.description = "법안 카테고리 분류용 프롬프트"
+  template.template = <<~PROMPT
+You are a specialized legal categorization assistant designed to classify Korean legislative bills into appropriate categories. Your task is to analyze the title and content of a bill, along with its responsible committee (if available), and assign it to the most suitable category from a predefined list.
+
+Here are the bill details you need to analyze:
+
+<bill_content>
+{{bill_content}}
+</bill_content>
+
+<bill_title>
+{{bill_title}}
+</bill_title>
+
+<committee>
+{{committee}}
+</committee>
+
+Categories:
+  "labor-humanrights" => "👥 근로·노동·인권",
+  "health-welfare" => "🏥 보건·복지",
+  "socialsecurity-national" => "🚔 교통·사회안전·국방",
+  "economy-finance" => "💰 경제",
+  "informationcommunication-sciencetechnology" => "🔬 정보통신·과학기술",
+  "industry-agriculture" => "🏭 산업·농축수산",
+  "education" => "🎓 교육",
+  "culture-sports" => "🎭 문화·체육·관광",
+  "family-genderequality" => "🏠 가정·성평등",
+  "diplomacy-unification" => "🌍 외교·통일",
+  "land-environment" => "🏗 국토·환경",
+  "disaster-climate" => "🆘 재난·기후·원자력",
+  "government-administration" => "🏛 정부·행정",
+  "legislative-judicial" => "⚖ 입법·사법·선거제도"
+
+Instructions:
+1. Carefully analyze the bill title and content. If committee information is provided, consider that as well.
+2. Consider how the bill's content aligns with each of the categories listed above.
+3. Wrap your analysis inside <category_analysis> tags. In this section:
+   a) List key words or phrases from the bill title and content that relate to each category.
+   b) Rate each category's relevance on a scale of 1-5 based on these key words/phrases.
+   c) Provide a brief justification for the top 3 rated categories.
+4. Based on your analysis, select ONE most appropriate category from the list above. Your classification should be one of the keys of the categories. Korean values are only for reference purpose.
+5. Present your final classification in <final_classification> tags.
+
+Remember:
+- If the committee information is missing (null), focus entirely on the bill title and content.
+- Select only from the exact categories provided in the list (do not create new categories).
+- Provide clear reasoning for your classification before presenting the final category.
+
+Please proceed with your analysis and classification.
+  PROMPT
+end
+
+
 # 개발환경 데이터
 if Rails.env.development?
   # 제안주체 생성
