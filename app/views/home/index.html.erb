@@ -26,19 +26,8 @@
 <% active_tabs = parsed_active_tabs %>
 
 <form data-controller="category-search" data-action="submit->category-search#goToSearch">
-  <!-- 카테고리 버튼 목록 -->
-  <div class="law-component-layer">
-    <% BillViewHelper::LAW_CATEGORIES.each do |key, label| %>
-      <% active = active_tabs.include?(key) ? 'active' : '' %>
-      <%= link_to label,
-            "#",
-            class: "#{key}-comp law-category-button law-common-text-component #{active}",
-            data: { tab: key, label: label },
-            onclick: "event.preventDefault();" %>
-    <% end %>
-  </div>
+  <%= render "shared/law_categories", active_tabs: active_tabs, context: :search %>
 
-  <!-- 중앙 메시지 -->
   <div class="main-message-layer">
     <div class="headline-text">무슨 법이 만들어지고 있나요?</div>
     <div class="title-text">
@@ -47,11 +36,14 @@
     </div>
   </div>
 
-  <!-- 검색바 -->
   <div class="keyword-search-bar">
     <div id="selected-category"
-          class="selected-category-tag-container"
-          data-category-search-target="selectedCategory">
+         class="selected-category-tag-container"
+         data-category-search-target="selectedCategory">
+      <% Array(params[:tab]).reject { |t| %w[all starred].include?(t) }.each do |tab| %>
+        <%= hidden_field_tag "tab[]", tab %>
+      <% end %>
+
       <%= text_field_tag :q, params[:q],
             placeholder: "검색어를 입력해주세요.",
             data: { "category-search-target": "input" } %>
@@ -69,26 +61,33 @@
 <div id="trendingKeywords" class="trending-keywords">
   <span class="trending-keyword-text">실시간 검색어 :</span>
   <% ["유치원", "근로조건", "복지법", "건강보험", "최저임금"].each do |keyword| %>
-    <span class="keyword-bubble"><%= keyword %></span>
+    <span class="keyword-bubble trending-keyword-text"><%= keyword %></span>
   <% end %>
 </div>
 
 <!-- HOT 이슈 법안 섹션 -->
-<div class="hot-issue-card-layer">
-  <div class="hot-issue-header">
-    <div class="hot-issue-bill-text">HOT 이슈 법안</div>
-    <%= link_to bills_path, class: "all-issue-bill-text" do %>
-      전체 법안 보기
-      <%= inline_svg("next", class: "all-issue-next-icon") %>
-    <% end %>
-  </div>
+<div class="hot-issue-header">
+  <div class="hot-issue-bill-text">HOT 이슈 법안</div>
+  <%= link_to bills_path, class: "all-issue-bill-text" do %>
+    전체 법안 보러 가기
+    <%= inline_svg("next", class: "all-issue-next-icon") %>
+  <% end %>
+</div>
 
-  <!-- HOT 이슈 카드 -->
-  <div data-controller="hot-issue">
-    <div data-hot-issue-target="container" class="hot-issue-card-container">
+<div data-controller="carousel">
+  <!-- 카드 + 화살표 -->
+  <div class="hot-issue-carousel-wrapper">
+    <button
+      class="hot-issue-previous-icon"
+      data-action="mousedown->carousel#startScrollLeft mouseup->carousel#stopScroll mouseleave->carousel#stopScroll">
+      <%= inline_svg("previous") %>
+    </button>
+
+    <div data-carousel-target="container" class="hot-issue-card-container">
       <% @hot_bills.each do |bill| %>
         <%= link_to bill_path(bill), class: "hot-issue-card" do %>
           <div class="hot-issue-title"><%= bill.title %></div>
+
           <div class="hot-issue-header-tag">
             <div class="bill-tag-party">
               <% specific_proposer = bill.proposals.first&.specific_proposer %>
@@ -100,11 +99,13 @@
                 기타
               <% end %>
             </div>
+
             <div class="bill-tag-status <%= bill.status_css_class %>">
               <span class="status-emoji"><%= bill.status_emoji %></span>
               <span class="status-label"><%= bill.current_status %></span>
             </div>
           </div>
+
           <div class="hot-issue-bill-description">
             <%= truncate((bill.summary || "").gsub(/\A(?:제안이유 및 주요내용|제안이유)[:\s]*/, ""), length: 90) %>
           </div>
@@ -112,20 +113,17 @@
       <% end %>
     </div>
 
-    <!-- 아이콘 위치 -->
-    <div class="hot-issue-controls-wrapper">
-      <div class="hot-issue-controls">
-        <button
-          class="hot-issue-previous-icon"
-          data-action="mousedown->hot-issue#startScrollLeft mouseup->hot-issue#stopScroll mouseleave->hot-issue#stopScroll">
-          <%= inline_svg("previous") %>
-        </button>
-        <button
-          class="hot-issue-next-icon"
-          data-action="mousedown->hot-issue#startScrollRight mouseup->hot-issue#stopScroll mouseleave->hot-issue#stopScroll">
-          <%= inline_svg("next") %>
-        </button>
-      </div>
-    </div>
+    <button
+      class="hot-issue-next-icon"
+      data-action="mousedown->carousel#startScrollRight mouseup->carousel#stopScroll mouseleave->carousel#stopScroll">
+      <%= inline_svg("next") %>
+    </button>
+  </div>
+
+  <!-- dot 3개 고정, Stimulus가 인식할 수 있게 controller 내부에 배치 -->
+  <div class="hot-issue-pagination">
+    <% 3.times do |index| %>
+      <div class="hot-issue-dot <%= 'active' if index == 0 %>" data-carousel-target="dot"></div>
+    <% end %>
   </div>
 </div>

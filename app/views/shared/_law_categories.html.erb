@@ -1,22 +1,42 @@
-<!-- 법안 목록페이지 법안 카테고리 버튼 목록  -->
-
-<% active_tabs = parsed_active_tabs %>
+<% selected_tabs = Array(active_tabs) %>
+<% if selected_tabs.size > 1 %>
+  <% selected_tabs -= ["all"] %>
+  <% selected_tabs -= ["starred"] %>
+<% elsif selected_tabs.size == 1 && !%w[all starred].include?(selected_tabs.first) %>
+  <% selected_tabs -= ["all"] %>
+<% end %>
 
 <div class="law-component-layer">
-  <%= law_category_button('all', no_link: true, active_tabs: active_tabs) %>
-  <%= law_category_button('starred', no_link: true, active_tabs: active_tabs) %>
-  <%= law_category_button('labor-humanrights', no_link: true, active_tabs: active_tabs) %>
-  <%= law_category_button('health-welfare', no_link: true, active_tabs: active_tabs) %>
-  <%= law_category_button('socialsecurity-national', no_link: true, active_tabs: active_tabs) %>
-  <%= law_category_button('economy-finance', no_link: true, active_tabs: active_tabs) %>
-  <%= law_category_button('informationcommunication-sciencetechnology', no_link: true, active_tabs: active_tabs) %>
-  <%= law_category_button('industry-agriculture', no_link: true, active_tabs: active_tabs) %>
-  <%= law_category_button('education', no_link: true, active_tabs: active_tabs) %>
-  <%= law_category_button('culture-sports', no_link: true, active_tabs: active_tabs) %>
-  <%= law_category_button('family-genderequality', no_link: true, active_tabs: active_tabs) %>
-  <%= law_category_button('diplomacy-unification', no_link: true, active_tabs: active_tabs) %>
-  <%= law_category_button('land-environment', no_link: true, active_tabs: active_tabs) %>
-  <%= law_category_button('disaster-climate', no_link: true, active_tabs: active_tabs) %>
-  <%= law_category_button('government-administration', no_link: true, active_tabs: active_tabs) %>
-  <%= law_category_button('legislative-judicial', no_link: true, active_tabs: active_tabs) %>
+  <% BillViewHelper::LAW_CATEGORIES.each_with_index do |(key, label), index| %>
+    <% is_head = %w[all starred].include?(key) %>
+    <% selected = (selected_tabs.include?(key) || (selected_tabs.empty? && key == "all")) && !(selected_tabs.any? && !%w[all starred].include?(key) && key == "all") %>
+
+    <% if context == :list %>
+      <%= link_to label, law_category_link(key),
+                  class: "#{key}-comp law-category-button law-common-text-component #{'active' if selected}",
+                  data: { tab: key, label: label } %>
+    <% elsif context == :search && %w[all starred].include?(key) %>
+      <%= button_tag type: "button",
+                     class: "#{key}-comp law-category-button law-common-text-component #{'active' if selected}",
+                     data: {
+                       action: "click->category-search#submitSingleTab",
+                       tab: key,
+                       label: label
+                     } do %>
+        <div class="law-category-text"><%= label %></div>
+      <% end %>
+    <% else %>
+      <%= button_tag type: "button",
+                     class: "#{key}-comp law-category-button law-common-text-component #{'active' if selected}",
+                     data: { tab: key, label: label, action: "click->category-search#toggleCategory" } do %>
+        <div class="law-category-text"><%= label %></div>
+      <% end %>
+    <% end %>
+
+    <% if key == "all" || key == "starred" %>
+      <div class="law-divider">
+        <%= inline_svg("divider", class: "law-divider-icon") %>
+      </div>
+    <% end %>
+  <% end %>
 </div>

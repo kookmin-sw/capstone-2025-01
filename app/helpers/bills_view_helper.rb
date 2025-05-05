@@ -29,14 +29,13 @@ module BillsViewHelper
     Bill.text_color_for(status)
   end
 
-  def parsed_active_tabs
-    case params[:tab]
-    when Array
-      params[:tab]
-    when String
-      params[:tab].include?(",") ? params[:tab].split(",") : [ params[:tab] ]
+
+  def law_category_link(tab)
+    if %w[all starred].include?(tab)
+      bills_path(tab: tab)
     else
-      []
+      new_tabs = selected_law_category_buttons(tab)
+      new_tabs.empty? ? bills_path : bills_path(tab: new_tabs)
     end
   end
 end
