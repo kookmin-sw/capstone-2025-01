@@ -6,7 +6,7 @@ class BillCategory < ApplicationRecord
   belongs_to :bill
   belongs_to :editor, class_name: "User", optional: true
 
-  validates :category, presence: true
+  validates :category, presence: true, inclusion: { in: BillViewHelper::LAW_CATEGORIES.keys }
   validates :classified_by, presence: true, inclusion: { in: %w[llm manual] }
 
   after_create :set_as_current_if_needed

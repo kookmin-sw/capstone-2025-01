@@ -44,9 +44,9 @@ module PeriodicJobs
             }
           )
 
-          content = response.dig("choices", 0, "message", "content")
+          content = T.let(response.dig("choices", 0, "message", "content"), String)
           category = bill.bill_categories.create!(
-            category: content,
+            category: content.strip,
             llm_model: DEFAULT_MODEL,
             classified_by: "llm"
           )
