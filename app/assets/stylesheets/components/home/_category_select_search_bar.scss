@@ -4,6 +4,7 @@
 @use "../../icons/search_icon";
 @use "../../typography/typography" as *;
 
+// 키워드 검색바 전체 영역 (입력창 + 카테고리 태그 포함)
 .keyword-search-bar {
   width: 660px;
   height: 58px;
@@ -15,11 +16,12 @@
   align-items: center;
   justify-content: flex-start;
   box-sizing: border-box;
-  overflow: hidden; 
+  overflow: hidden;     // 가로 넘침 방지
   position: relative;
   border-bottom: 2px solid color_variables.$border-primary-color;
 }
 
+// 선택된 카테고리 태그가 보여지는 영역
 .selected-category-tag-container {
   display: flex;
   flex-direction: row;
@@ -28,10 +30,12 @@
   gap: 8px;
   align-items: center;
 
+  // 웹킷 브라우저에서 자동 스크롤바 숨김
   &::-webkit-scrollbar {
     display: none;
   }
 
+  // 실제 키워드 입력창
   input[type="text"] {
     @include body-large;
     flex: 1 1 auto;        // 공간 부족하면 줄어듦
@@ -44,6 +48,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
 
+    // 포커스 시 테두리 제거
     &:focus {
       outline: none;
     }
@@ -55,6 +60,7 @@
   }
 }
 
+// 개별 선택된 카테고리 태그 UI
 .selected-category-tag {
   display: inline-flex;
   align-items: center;
@@ -79,6 +85,7 @@
   }
 }
 
+// 검색 버튼 아이콘
 .keyword-search-button {
   @extend .search-icon;
   background: transparent;
@@ -92,6 +99,7 @@
   }
 }
 
+// 실시간 검색어 영역
 .trending-keywords {
   width: 660px;
   margin: 15px auto 102px;
@@ -101,12 +109,8 @@
   gap: 10px;
   flex-wrap: wrap;
   color: color_variables.$text-secondary-color;
-  @include caption-medium;
-  font-weight: 700;
 
   .keyword-bubble {
-      @include caption-medium;
-      font-weight: 700;
       background-color: color_variables.$surface-primary-color;
       color: color_variables.$text-primary-color;
 
