@@ -1,0 +1,54 @@
+@use "../../colors/color_variables";
+@use "../../typography/typography" as *;
+
+// AI 요약 스타일
+
+// 제목
+.markdown h2 {
+    @include title-medium;
+    color: color_variables.$text-secondary-color;
+    margin-top: 10px;
+}
+
+// 왜 바뀌나요?, 마무리
+.markdown h3 {
+    @include title-small;
+    color: color_variables.$text-secondary-color;
+    margin-top: 10px;
+}
+  
+.markdown p {
+    @include body-large;
+    color: color_variables.$text-secondary-color;
+    margin-bottom: 20px;
+}
+ 
+// 개정 전/후 변화 테이블
+.markdown table {
+    width: 100%;
+    border-collapse: collapse; 
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+  
+.markdown th, .markdown td {
+    border: 1px solid #B9B9B9; 
+    padding: 0.75rem; 
+}
+
+.markdown td {
+    @include body-small;
+    color: color_variables.$text-secondary-color;
+}
+  
+.markdown th {
+    @include body-medium;
+    color: color_variables.$text-secondary-color;
+    background-color: #F0F0F0; 
+    text-align: center;
+}
+  
+// 첫 번째 열("구분")
+.markdown td:first-child {
+    font-weight: bold;
+}
