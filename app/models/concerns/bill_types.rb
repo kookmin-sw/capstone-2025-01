@@ -2,7 +2,9 @@
 # typed: true
 
 module BillTypes
-  LIST = {
+  extend T::Sig
+
+  LIST = T.let({
     "B01": "헌법개정",
     "B02": "예산안",
     "B03": "결산",
@@ -19,5 +21,5 @@ module BillTypes
     "B14": "의원자격심사",
     "B15": "기타안",
     "B16": "기타"
-  }.freeze
+  }.freeze, T::Hash[Symbol, String])
 end
