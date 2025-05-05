@@ -48,6 +48,7 @@ module MarkdownHelper
     renderer = Redcarpet::Render::HTML.new(render_options)
     markdown = Redcarpet::Markdown.new(renderer, extensions)
 
+    # 렌더링 된 마크다운에 "markdown" 스타일 적용
     content_tag :div,
             markdown.render(text).html_safe,
             class: "markdown"
