@@ -45,7 +45,7 @@ jobs:
 
       - name: Deploy with Kamal
         run: |
-          kamal deploy --destination=production
+          kamal deploy -v --destination=production
         env:
           TUNNEL_SERVICE_TOKEN_ID: ${{ env.CLOUDFLARE_AUTH_CLIENT_ID }}
           TUNNEL_SERVICE_TOKEN_SECRET: ${{ env.CLOUDFLARE_AUTH_CLIENT_SECRET }}

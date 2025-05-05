@@ -11,6 +11,7 @@ servers:
 ssh:
   user: greenstar1151
   port: 22
+  proxy: greenstar1151@oracle-ssh.greenstar.dev
 
 registry:
   username: greenstarkmucs
