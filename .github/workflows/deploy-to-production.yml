@@ -52,7 +52,7 @@ jobs:
       - name: Set SSH config for deploy
         run: |
           mkdir -p ~/.ssh
-          printf '%s' "${{ env.ACTIONS_DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
+          printf '%s\n' "${{ env.ACTIONS_DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           cp .github/workflows/templates/runner_ssh_config ~/.ssh/config
 
