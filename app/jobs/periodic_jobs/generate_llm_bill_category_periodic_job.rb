@@ -52,10 +52,11 @@ module PeriodicJobs
           )
           Rails.logger.info("Created BillCategory id=#{category.id} for Bill id=#{bill.id}")
 
-          sleep DEFAULT_SLEEP_SECONDS
         rescue => e
           Rails.logger.error("Error: bill_id=#{bill.id} error=#{e.message}")
           next
+        ensure
+          sleep DEFAULT_SLEEP_SECONDS
         end
       end
     end
