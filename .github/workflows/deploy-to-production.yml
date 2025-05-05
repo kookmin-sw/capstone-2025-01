@@ -34,28 +34,34 @@ jobs:
           CLOUDFLARE_AUTH_CLIENT_SECRET: "op://LawNow/777cn6fqfhh6ngojwqqd3p7lme/CF-Access-Client-Secret"
           ACTIONS_DEPLOY_SSH_KEY: "op://LawNow/4ph5yj7vy4ulzksvrjooqixwvy/private key?ssh-format=openssh"
 
-      # - name: Setup cloudflared
-      #   uses: AnimMouse/setup-cloudflared@v2
+      - name: Setup cloudflared
+        uses: AnimMouse/setup-cloudflared@v2
 
       # - name: Configure SSH config for Cloudflare Tunnel
       #   run: |
       #     mkdir -p ~/.ssh
       #     echo "Host 10.0.0.6 oracle-ssh.greenstar.dev\n\tProxyCommand cloudflared access ssh --hostname oracle-ssh.greenstar.dev\n\tStrictHostKeyChecking=no\n\tLogLevel=DEBUG3" >> ~/.ssh/config
 
-      - name: Set up Cloudflare WARP
-        uses: Boostport/setup-cloudflare-warp@v1
+      # - name: Set up Cloudflare WARP
+      #   uses: Boostport/setup-cloudflare-warp@v1
+      #   with:
+      #     organization: ${{ env.CLOUDFLARE_ZEROTRUST_ORG }}
+      #     auth_client_id: ${{ env.CLOUDFLARE_AUTH_CLIENT_ID }}
+      #     auth_client_secret: ${{ env.CLOUDFLARE_AUTH_CLIENT_SECRET }}
+
+      # - name: Set SSH config for deploy
+      #   run: |
+      #     mkdir -p ~/.ssh
+      #     printf '%s\n' "${{ env.ACTIONS_DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
+      #     chmod 600 ~/.ssh/id_ed25519
+      #     echo "Host *\n\tStrictHostKeyChecking=no\n\tTCPKeepALive yes\n\tServerAliveCountMax 2147000" >> ~/.ssh/config
+
+      - name: Setup upterm session
+        uses: owenthereal/action-upterm@v1
         with:
-          organization: ${{ env.CLOUDFLARE_ZEROTRUST_ORG }}
-          auth_client_id: ${{ env.CLOUDFLARE_AUTH_CLIENT_ID }}
-          auth_client_secret: ${{ env.CLOUDFLARE_AUTH_CLIENT_SECRET }}
+          limit-access-to-actor: true # Restrict to the user who triggered the workflow
 
-      - name: Set SSH config for deploy
-        run: |
-          mkdir -p ~/.ssh
-          printf '%s\n' "${{ env.ACTIONS_DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          echo "Host *\n\tStrictHostKeyChecking=no\n\tTCPKeepALive yes\n\tServerAliveCountMax 2147000" >> ~/.ssh/config
 
-      - name: Deploy with Kamal
-        run: |
-          kamal deploy --verbose
+      # - name: Deploy with Kamal
+      #   run: |
+      #     kamal deploy --verbose
