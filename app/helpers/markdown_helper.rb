@@ -7,7 +7,6 @@ require "redcarpet"
 module MarkdownHelper
   extend T::Sig
 
-
   sig { params(text: String, options: T::Hash[String, T.untyped]).returns(String) }
   def markdown(text, options = {})
     new_options = options.clone
@@ -49,6 +48,9 @@ module MarkdownHelper
     renderer = Redcarpet::Render::HTML.new(render_options)
     markdown = Redcarpet::Markdown.new(renderer, extensions)
 
-    markdown.render(text).html_safe
+    # 렌더링 된 마크다운에 "markdown" 스타일 적용
+    content_tag :div,
+            markdown.render(text).html_safe,
+            class: "markdown"
   end
 end
