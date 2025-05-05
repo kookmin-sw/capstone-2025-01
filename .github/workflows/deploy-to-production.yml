@@ -54,7 +54,7 @@ jobs:
           mkdir -p ~/.ssh
           printf '%s' "${{ env.ACTIONS_DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          echo "Host 10.0.0.6 oracle-ssh.greenstar.dev\n\tProxyCommand cloudflared access ssh --hostname oracle-ssh.greenstar.dev\nHost *\n\tStrictHostKeyChecking=no\n\tTCPKeepAlive yes\n\tServerAliveCountMax 2147000" >> ~/.ssh/config
+          cp .github/workflows/templates/runner_ssh_config ~/.ssh/config
 
       - name: Show SSH config
         run: cat ~/.ssh/config
