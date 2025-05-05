@@ -49,19 +49,16 @@ jobs:
       #     auth_client_id: ${{ env.CLOUDFLARE_AUTH_CLIENT_ID }}
       #     auth_client_secret: ${{ env.CLOUDFLARE_AUTH_CLIENT_SECRET }}
 
-      # - name: Set SSH config for deploy
-      #   run: |
-      #     mkdir -p ~/.ssh
-      #     printf '%s\n' "${{ env.ACTIONS_DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
-      #     chmod 600 ~/.ssh/id_ed25519
-      #     echo "Host *\n\tStrictHostKeyChecking=no\n\tTCPKeepALive yes\n\tServerAliveCountMax 2147000" >> ~/.ssh/config
+      - name: Set SSH config for deploy
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ env.ACTIONS_DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          echo "Host 10.0.0.6\n\tProxyCommand cloudflared access ssh --hostname oracle-ssh.greenstar.dev\nHost *\n\tStrictHostKeyChecking=no\n\tTCPKeepALive yes\n\tServerAliveCountMax 2147000" >> ~/.ssh/config
 
-      - name: Setup upterm session
-        uses: owenthereal/action-upterm@v1
-        with:
-          limit-access-to-actor: true # Restrict to the user who triggered the workflow
-
-
-      # - name: Deploy with Kamal
-      #   run: |
-      #     kamal deploy --verbose
+      - name: Deploy with Kamal
+        run: |
+          kamal deploy --verbose
+        env:
+          TUNNEL_SERVICE_TOKEN_ID: ${{ env.CLOUDFLARE_AUTH_CLIENT_ID }}
+          TUNNEL_SERVICE_TOKEN_SECRET: ${{ env.CLOUDFLARE_AUTH_CLIENT_SECRET }}
