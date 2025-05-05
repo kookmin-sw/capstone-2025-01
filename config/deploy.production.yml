@@ -11,7 +11,6 @@ servers:
 ssh:
   user: greenstar1151
   port: 22
-  log_level: debug
 
 registry:
   username: greenstarkmucs
