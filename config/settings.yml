@@ -9,4 +9,4 @@ litellm:
 bill_summary:
   model: gemini/gemini-2.0-flash
 bill_category:
-  model: gemini/gemini-2.0-flash
+  model: gemini/gemini-2.0-flash-lite
