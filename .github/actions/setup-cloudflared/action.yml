@@ -120,13 +120,13 @@ runs:
              # For simplicity, we'll just error out here.
              exit 1
           fi
-          echo "::set-output name=executable-path::$EXECUTABLE_PATH"
+          echo "executable-path=$EXECUTABLE_PATH" >> $GITHUB_OUTPUT
         else
           echo "Using downloaded cloudflared."
           # Use the path determined by the install script
           INSTALL_DIR=$(dirname "${{ steps.install.outputs.executable-path }}")
           EXECUTABLE_PATH="${{ steps.install.outputs.executable-path }}"
-          echo "::set-output name=executable-path::$EXECUTABLE_PATH"
+          echo "executable-path=$EXECUTABLE_PATH" >> $GITHUB_OUTPUT
         fi
         echo "Adding $INSTALL_DIR to GITHUB_PATH"
         echo "$INSTALL_DIR" >> $GITHUB_PATH
