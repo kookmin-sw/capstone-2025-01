@@ -111,7 +111,7 @@ module PeriodicJobs
       service_key
     end
 
-    sig { params(service_key: String, start_ord: Integer, end_ord: Integer, page_no: Integer, bill_kind_cd: String).returns(URI::HTTP) }
+    sig { params(service_key: String, start_ord: Integer, end_ord: Integer, page_no: Integer, bill_kind_cd: Symbol).returns(URI::HTTP) }
     def build_api_url(service_key, start_ord, end_ord, page_no, bill_kind_cd)
       uri = API_BASE_URL.dup
       uri.query = URI.encode_www_form({
@@ -120,7 +120,7 @@ module PeriodicJobs
         end_ord: end_ord,
         pageNo: page_no,
         numOfRows: ROWS_PER_PAGE,
-        bill_kind_cd: bill_kind_cd
+        bill_kind_cd: bill_kind_cd.to_s
       })
       uri
     end
