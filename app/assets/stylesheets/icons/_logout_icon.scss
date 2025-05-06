@@ -1,13 +1,13 @@
 @use "../colors/color_variables";
 @use "../layouts/responsive" as *;
 
-.profile-icon {
+.logout-icon {
   @include mobile {
-    width: 30px; 
-    height: 30px; 
+    width: 12px; 
+    height: 12px; 
   }
   @include desktop {
-    width: 60px; 
-    height: 60px; 
+    width: 24px; 
+    height: 24px; 
   }
 }

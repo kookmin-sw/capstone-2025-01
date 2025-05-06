@@ -1,6 +1,66 @@
 <!-- 상단 배너 -->
-<%= render "shared/banner" %>
+<%= render "shared/banner" do %>
+  <!-- 오른쪽 버튼 그룹 -->
+  <div class="banner-button-layer" data-controller="dropdown">
+    <!-- 알림 -->
+    <div class="banner-button" data-action="click->dropdown#toggleNotification">
+      <%= inline_svg("noti", class: "noti-icon") %>
+    </div>
+    <!-- 프로필 -->
+    <div class="banner-button" data-action="click->dropdown#toggleProfile">
+      <%= inline_svg("profile", class: "profile-icon") %>
+    </div>
+    
+    <!-- 알림 메뉴 -->
+    <div class="dropdown-menu notification-menu" data-dropdown-target="notificationMenu">
+      <!-- 알림 메뉴 내용 -->
+      <div class="dropdown-item">
+        [근로자퇴직급여 보장법 일부개정법률안] 업데이트
+      </div>
+      <div class="dropdown-item">
+        [근로자퇴직급여 보장법 일부개정법률안] 업데이트
+      </div>
+    </div>
+    
+    <!-- 프로필 메뉴 -->
+    <div class="dropdown-menu profile-menu" data-dropdown-target="profileMenu">
+      <!-- 프로필 헤더 -->
+      <div class="profile-menu-header">안녕하세요, USER NAME님!</div>
+      <div class="dropdown-items">
+        <!-- 내 관심 법안 -->
+        <div class="dropdown-item">
+          <%= inline_svg("noti_starred", class: "noti-starred-icon") %>
+          내 관심 법안
+        </div>
+        <!-- 설정 -->
+        <div class="dropdown-item settings-item" data-dropdown-target="settingsItem" data-action="click->dropdown#toggleSettings">
+          <%= inline_svg("settings", class: "settings_icon") %>
+          설정
+        </div>
+        <!-- 설정 하위 메뉴 -->
+        <div class="dropdown-submenu" data-dropdown-target="settingsSubmenu">
+          <div class="dropdown-item">
+            알림 설정
+            <label class="toggle-switch">
+              <input type="checkbox" checked data-action="click->dropdown#toggleNotificationSetting">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="dropdown-item member-withdrawal">
+            회원 탈퇴
+          </div>
+        </div>
+        <!-- 로그아웃 -->
+        <div class="dropdown-item">
+          <%= inline_svg("logout", class: "logout_icon") %>
+          로그아웃
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
 
+<!-- 중앙 텍스트 -->
 <div class="login-container">
   <div class="login-title">
     무슨 법이 만들어지고 있나요?
@@ -16,6 +76,7 @@
     지금 바로 공유하고 변화를 함께하세요!
   </div>
 
+  <!-- 로그인 버튼 -->
   <div class="login-btn-container">
     <div class="kakao-login-btn">
       <%= inline_svg "kakao_logo", class: "kakao-btn-logo" %>
