@@ -9,4 +9,7 @@ production:
     class: "PeriodicJobs::GenerateLlmBillSummaryPeriodicJob"
     # NOTE: Rate Limit 고려 필요, MAX_RECORDS_TO_PROCESS_PER_RUN 설정 참고
     schedule: "*/15 * * * *" # 매 15분마다 실행
-    
+  generate_llm_bill_category_periodic_job:
+    class: "PeriodicJobs::GenerateLlmBillCategoryPeriodicJob"
+    # NOTE: Rate Limit 고려 필요, MAX_RECORDS_TO_PROCESS_PER_RUN 설정 참고
+    schedule: "5/15 * * * *" # 매 15분마다 실행(5, 20, 35, 50)
