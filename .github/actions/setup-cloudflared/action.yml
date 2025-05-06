@@ -1,0 +1,147 @@
+name: "Setup cloudflared"
+description: "Downloads and installs a specific version of cloudflared, adding it to the PATH."
+inputs:
+  version:
+    description: 'The cloudflared version to install (e.g., "2024.4.1", "latest").'
+    required: false
+    default: "latest"
+  github-token:
+    description: 'GitHub token for API requests (needed for "latest").'
+    required: false
+    default: ${{ github.token }}
+outputs:
+  version:
+    description: "The installed version of cloudflared."
+    value: ${{ steps.set-outputs.outputs.version }}
+  executable-path:
+    description: "The full path to the installed cloudflared executable."
+    value: ${{ steps.set-outputs.outputs.executable-path }}
+runs:
+  using: "composite"
+  steps:
+    - name: Determine OS and Architecture
+      id: os-arch
+      shell: bash
+      run: |
+        OS=""
+        ARCH=""
+        case "$RUNNER_OS" in
+          Linux) OS="linux" ;;
+          macOS) OS="darwin" ;;
+          Windows) OS="windows" ;;
+          *) echo "::error::Unsupported OS: $RUNNER_OS"; exit 1 ;;
+        esac
+
+        case "$RUNNER_ARCH" in
+          X64) ARCH="amd64" ;;
+          ARM64) ARCH="arm64" ;;
+          *) echo "::warning::Unsupported architecture: $RUNNER_ARCH. Falling back to amd64." ; ARCH="amd64" ;; # Fallback for Windows ARM etc.
+        esac
+        echo "os=$OS" >> $GITHUB_OUTPUT
+        echo "arch=$ARCH" >> $GITHUB_OUTPUT
+        echo "runner_os=$RUNNER_OS" >> $GITHUB_OUTPUT # Pass original RUNNER_OS too
+
+    - name: Get cloudflared Version
+      id: get-version
+      shell: bash
+      run: |
+        TARGET_VERSION="${{ inputs.version }}"
+        if [[ "$TARGET_VERSION" == "latest" ]]; then
+          echo "Fetching latest cloudflared version..."
+          API_URL="https://api.github.com/repos/cloudflare/cloudflared/releases/latest"
+          VERSION=$(curl -sfL -H "Authorization: Bearer ${{ inputs.github-token }}" -H "Accept: application/vnd.github.v3+json" "$API_URL" | jq -r '.tag_name' 2>/dev/null || \
+                    curl -sfL -H "Authorization: Bearer ${{ inputs.github-token }}" -H "Accept: application/vnd.github.v3+json" "$API_URL" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+          if [[ -z "$VERSION" || "$VERSION" == "null" ]]; then
+            echo "::error::Could not fetch latest version tag from GitHub API."
+            exit 1
+          fi
+          echo "Latest version is $VERSION"
+        else
+          VERSION="$TARGET_VERSION"
+          echo "Using specified version $VERSION"
+        fi
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+      env:
+        GH_TOKEN: ${{ inputs.github-token }}
+
+    - name: Restore cloudflared from cache
+      id: cache-cloudflared
+      uses: actions/cache/restore@v4
+      with:
+        path: ${{ runner.tool_cache }}/cloudflared/${{ steps.get-version.outputs.version }}/${{ steps.os-arch.outputs.arch }}
+        key: cloudflared-${{ steps.os-arch.outputs.runner_os }}-${{ steps.os-arch.outputs.arch }}-${{ steps.get-version.outputs.version }}
+
+    - name: Download and Install cloudflared
+      id: install
+      if: steps.cache-cloudflared.outputs.cache-hit != 'true'
+      shell: bash
+      run: |
+        set -euo pipefail
+        INSTALL_DIR="${{ runner.tool_cache }}/cloudflared/${{ steps.get-version.outputs.version }}/${{ steps.os-arch.outputs.arch }}"
+        mkdir -p "$INSTALL_DIR"
+        echo "Installation directory: $INSTALL_DIR"
+        # Pass necessary info as env vars to the script
+        export CLOUDFLARED_VERSION="${{ steps.get-version.outputs.version }}"
+        export TARGET_OS="${{ steps.os-arch.outputs.os }}"
+        export TARGET_ARCH="${{ steps.os-arch.outputs.arch }}"
+        export INSTALL_DIR="$INSTALL_DIR"
+        export RUNNER_OS_ORIGINAL="${{ steps.os-arch.outputs.runner_os }}" # Pass original RUNNER_OS
+
+        # Execute the install script located within the action directory
+        "$GITHUB_ACTION_PATH/scripts/install.sh"
+
+        # Output the executable path from the script
+        # The script itself should determine the final executable name (.exe or not)
+        EXECUTABLE_PATH=$(cat $INSTALL_DIR/executable_path.txt)
+        echo "executable-path=$EXECUTABLE_PATH" >> $GITHUB_OUTPUT
+      env:
+        GITHUB_SERVER_URL: ${{ github.server_url }} # Pass server URL for GHE support
+
+    - name: Add cloudflared to PATH
+      id: add-path
+      shell: bash
+      run: |
+        INSTALL_DIR=""
+        EXECUTABLE_PATH=""
+        if [[ "${{ steps.cache-cloudflared.outputs.cache-hit }}" == "true" ]]; then
+          echo "Using cached cloudflared."
+          INSTALL_DIR="${{ runner.tool_cache }}/cloudflared/${{ steps.get-version.outputs.version }}/${{ steps.os-arch.outputs.arch }}"
+          # Determine executable name based on OS when using cache
+          if [[ "${{ steps.os-arch.outputs.runner_os }}" == "Windows" ]]; then
+            EXECUTABLE_PATH="$INSTALL_DIR/cloudflared.exe"
+          else
+            EXECUTABLE_PATH="$INSTALL_DIR/cloudflared"
+          fi
+          # Verify cached file exists
+          if [ ! -f "$EXECUTABLE_PATH" ]; then
+             echo "::error::Cached executable not found at $EXECUTABLE_PATH. Cache might be corrupted."
+             # Force redownload by clearing cache hit status (won't work directly, but signals issue)
+             # A better approach might be to fail the job or trigger download again.
+             # For simplicity, we'll just error out here.
+             exit 1
+          fi
+          echo "executable-path=$EXECUTABLE_PATH" >> $GITHUB_OUTPUT
+        else
+          echo "Using downloaded cloudflared."
+          # Use the path determined by the install script
+          INSTALL_DIR=$(dirname "${{ steps.install.outputs.executable-path }}")
+          EXECUTABLE_PATH="${{ steps.install.outputs.executable-path }}"
+          echo "executable-path=$EXECUTABLE_PATH" >> $GITHUB_OUTPUT
+        fi
+        echo "Adding $INSTALL_DIR to GITHUB_PATH"
+        echo "$INSTALL_DIR" >> $GITHUB_PATH
+
+    - name: Save cloudflared to cache
+      if: steps.cache-cloudflared.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v4
+      with:
+        path: ${{ runner.tool_cache }}/cloudflared/${{ steps.get-version.outputs.version }}/${{ steps.os-arch.outputs.arch }}
+        key: cloudflared-${{ steps.os-arch.outputs.runner_os }}-${{ steps.os-arch.outputs.arch }}-${{ steps.get-version.outputs.version }}
+
+    # Set the main action outputs
+    - name: Set Action Outputs
+      id: set-outputs
+      shell: bash
+      run: |
+        echo "version=${{ steps.get-version.outputs.version }}" >> $GITHUB_OUTPUT
+        echo "executable-path=${{ steps.add-path.outputs.executable-path }}" >> $GITHUB_OUTPUT

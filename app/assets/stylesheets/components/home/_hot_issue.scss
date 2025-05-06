@@ -3,21 +3,41 @@
 @use "../../icons/next_icon";
 @use "../../icons/previous_icon";
 
-.hot-issue-card-container {
-    display: flex;
+// 카드와 화살표를 감싸는 래퍼
+.hot-issue-carousel-wrapper { 
+    max-width: 1390px;
+    width: 100%;
     gap: 30px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    margin: 0 auto;              // ✅ 중앙 정렬 (불필요한 margin 제거)
-    position: relative;
-    width: fit-content;          // ✅ 카드 수에 맞게 자동 너비 설정
-    max-width: 100%;             // ✅ 너무 넓어지는 것 방지
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+// 카드 리스트 컨테이너 (가로 스크롤 영역)
+.hot-issue-card-container {
+    width: 100%;          
+    max-width: 100%;
+    gap: 30px;
+
+    display: flex;
+    overflow-x: auto;           // 가로 스크롤 활성화
+    scroll-behavior: smooth;    // 부드러운 스크롤            
+
+    // 브라우저 별 자동 스크롤바 숨기기          
+    scrollbar-width: none;       // Firefox
+    -ms-overflow-style: none;    // IE, Edge
+}
+
+.hot-issue-card-container::-webkit-scrollbar {
+    display: none;  // Chrome, Safari 
+}
+
+// 개별 카드 디자인
 .hot-issue-card{
-    height: 250px;
-    width: 500px;
-    padding: 30px;
+    height: 300px;
+    width: 400px;
+    padding: 15px 30px;
     gap: 11px;
 
     display: inline-flex;
@@ -32,18 +52,23 @@
   
 }
 
+// 카드 상단 헤더
 .hot-issue-header {
     margin-bottom: 28px;
     display: flex;
     align-items: center;
+    width: 100%;
+    max-width: 1632px;
     gap: 19px;
 }
 
+// 'HOT 이슈 법안' 텍스트 스타일
 .hot-issue-bill-text {
     @include title-small;
     color: color_variables.$text-primary-color;
 }
 
+// '모든 법안 보기' 텍스트
 .all-issue-bill-text {
     @include caption-medium;
     color: color_variables.$text-tertiary-color;
@@ -58,16 +83,16 @@
     margin-left: 3px;
 }
 
+// 법안 제목 (긴 경우 말줄임표 처리)
 .hot-issue-title {
     @include button-large;
     color: color_variables.$text-primary-color;
     width: 100%;                
-    white-space: nowrap;        
-    overflow: hidden;           
-    text-overflow: ellipsis;    // 생략 부호(...) 표시
+    white-space: wrap;                  
     flex-shrink: 0; 
 }
 
+// 태그 or 메타데이터를 위한 라벨 묶음
 .hot-issue-header-tag {
     display: flex;
     align-items: center;
@@ -75,23 +100,25 @@
     flex-shrink: 0; 
 }
 
-.hot-issue-next-icon {
-    @extend .next-icon;
+.hot-issue-arrow {
     width: 35px;
     height: 35px;
+    z-index: 2;
     color: color_variables.$text-secondary-color;
-    z-index: 1;
+  }
+  
+
+.hot-issue-next-icon {
+    @extend .hot-issue-arrow;
+    @extend .next-icon;
 }
 
 .hot-issue-previous-icon{
+    @extend .hot-issue-arrow;
     @extend .previous-icon;
-    width: 35px;
-    height: 35px;
-    color: color_variables.$text-secondary-color;
-    z-index: 1;
 }
 
-// 요약된 법안 정보를 가져와야 하는데 없는 법안도 있어
+// 요약된 법안 정보를 가져와야 하는데 없는 법안도 있음
 // 법안 상세정보 사용
 .hot-issue-bill-description {
     @include body-small;
@@ -99,19 +126,24 @@
     overflow: hidden;
 }
 
-.hot-issue-controls-wrapper {
-    position: relative;     // 📌 컨테이너 안에서 위치 지정
-    margin-top: 23px;       // 📌 카드 하단과의 간격 확보
-    margin-bottom: 192px;
-    width: 140px;
+.hot-issue-pagination {
     display: flex;
     justify-content: center;
-    z-index: 1;
-    left: 50%;
-    transform: translateX(-50%);
-} 
+    gap: 14px;
+    margin: 37px 0 143px;
+  }
   
-.hot-issue-controls {
-    display: flex;
-    gap: 70px;
+  .hot-issue-dot {
+    width: 20px;
+    height: 20px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background: color_variables.$button-tertiary-color;
+  
+    &.active {
+      width: 50px;
+      height: 20px;
+      border-radius: 9999px;
+      background: color_variables.$button-secondary-color;
+  }
 }
