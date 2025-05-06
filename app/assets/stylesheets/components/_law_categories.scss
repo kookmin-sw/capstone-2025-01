@@ -1,9 +1,11 @@
 @use "../colors/color_variables";
 @use "../typography/typography" as *;
+@use "../icons/divider_icon";
 
 // 법안 카테고리 컴포넌트 스타일
 $law-components: (
     all-comp: 81px,
+    starred-comp: 152px,
     labor-humanrights-comp: 170px,
     health-welfare-comp: 136px,
     socialsecurity-national-comp: 200px,
@@ -22,7 +24,7 @@ $law-components: (
 
 .law-component-layer {
     display: flex;
-    max-width: 1440px;
+    max-width: 1652px;
     padding: 20px;
     
     justify-content: center;
@@ -69,7 +71,8 @@ $law-components: (
 @each $name, $width in $law-components {
     .#{$name}.active {
         @extend %law-common-shape-component;
-        background: color_variables.$surface-primary-color;
+        border: 1px solid color_variables.$border-primary-color;
+        background: color_variables.$surface-select-background-color;
         width: $width;
     }
 }
@@ -78,4 +81,14 @@ $law-components: (
     @include button-medium;
     color: color_variables.$text-primary-color;
     text-align: center;
+
+    &.active {
+        color: color_variables.$text-inverse-color !important;
+    }
+}
+
+.law-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
