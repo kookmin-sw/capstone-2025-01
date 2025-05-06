@@ -1,8 +1,12 @@
 <div class="progress-bar-layer">
   <% steps = bill_steps(bill) %>
+  <% current_index = steps.index(bill.current_status) || -1 %>
 
   <% steps.each_with_index do |step, index| %>
-    <div class="progress <%= 'active' if bill.current_status == step %> <%= 'danger' if step == Bill::STATUS_LABELS[:discarded] %>">
+    <div class="progress 
+      <%= 'active' if index <= current_index %> 
+      <%= 'danger' if step == Bill::STATUS_LABELS[:discarded] %>">
+      
       <% if index < steps.length - 1 %>
         <div class="<%= step_line_class(bill, step, index, steps) %>"></div>
       <% end %>

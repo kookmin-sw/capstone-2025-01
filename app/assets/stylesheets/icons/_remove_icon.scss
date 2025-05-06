@@ -1,0 +1,10 @@
+@use "../colors/color_variables";
+
+$icon-width: 24px; 
+$icon-height: 24px; 
+
+.remove-icon {
+  width: $icon-width;
+  height: $icon-height;
+  color: color_variables.$text-tertiary-color;
+}
