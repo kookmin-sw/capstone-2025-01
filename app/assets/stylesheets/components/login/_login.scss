@@ -2,6 +2,7 @@
 @use "../../typography/typography" as *;
 @use "../../icons/kakao_logo_icon";
 @use "../../icons/naver_logo_icon";
+@use "../../layouts/responsive" as *;
 
 $indicator_color: color_variables.$button-system-danger-color;
 $kakao_brand_color: #fee500;
@@ -17,7 +18,7 @@ $naver_brand_color: #1ec800;
 
 // 로그인 페이지 제목
 .login-title {
-  @include headline-large;
+  @include headline-medium;
   color: color_variables.$text-primary-color;
   margin-bottom: 30px;
 }
@@ -27,6 +28,22 @@ $naver_brand_color: #1ec800;
   @include title-small;
   color: color_variables.$text-secondary-color;
   margin-bottom: 50px;
+
+  // 모바일에서는 데스크탑 전용 내용을 숨김
+  .mobile-only {
+    display: block;
+    @include desktop {
+      display: none;
+    }
+  }
+
+  // 데스크탑에서는 모바일 전용 내용을 숨김
+  .desktop-only {
+    display: none;
+    @include desktop {
+      display: block;
+    }
+  }
 }
 
 // 로그인 페이지 설명(브랜드 로고)
@@ -41,20 +58,30 @@ $naver_brand_color: #1ec800;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
 }
 
-// 로그인 버튼 공통 스타일
+// 로그인 버튼 공통 스타일 믹스인
 @mixin login-btns {
   @include title-small;
   display: inline-flex;
-  width: 609px;
-  height: 90px;
   justify-content: center;
   align-items: center;
-  border-radius: 12px;
   position: relative;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  @include mobile {
+    width: 302px;
+    height: 44px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+  }
+
+  @include desktop {
+    width: 609px;
+    height: 90px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+  }
 }
 
 // 카카오 로그인 스타일
@@ -86,8 +113,6 @@ $naver_brand_color: #1ec800;
 .login-indicator {
   @include button-large;
   position: relative;
-  width: 213px;
-  height: 55px;
   background-color: $indicator_color;
   color: color_variables.$text-inverse-color;
   border-radius: 30px;
@@ -95,31 +120,46 @@ $naver_brand_color: #1ec800;
   align-items: center;
   display: inline-flex;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-top: 25px;
   animation: float 1.5s ease-in-out infinite;
-}
 
-// 로그인 인디케이터 화살표
-.login-indicator::before {
-  content: "";
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-bottom: 28px solid $indicator_color;
+  @include mobile {
+    width: 137px;
+    height: 37px;
+    margin-top: 12px;
+  }
+
+  @include desktop {
+    width: 213px;
+    height: 55px;
+    margin-top: 25px;
+  }
+
+  // 로그인 인디케이터 화살표
+  &::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    @include mobile {
+      top: -12px;
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      border-bottom: 16px solid $indicator_color;
+    }
+
+    @include desktop {
+      top: -20px;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 28px solid $indicator_color;
+    }
+  }
 }
 
 // 로그인 인디케이터 애니메이션
 @keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
 }

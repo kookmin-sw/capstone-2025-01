@@ -1,9 +1,14 @@
 @use "../colors/color_variables";
+@use "../layouts/responsive" as *;
 
-$icon-width: 36px; 
-$icon-height: 36px; 
 
 .kakao-logo-icon {
-  width: $icon-width;
-  height: $icon-height;
+  @include mobile {
+    width: 18px;
+    height: 18px;
+  }
+  @include desktop {
+    width: 36px;
+    height: 36px;
+  }
 }

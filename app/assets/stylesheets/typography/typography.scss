@@ -1,13 +1,14 @@
 @use "sass:map";
+@use "../layouts/responsive" as *;
 
 // 텍스트 스타일 변수 설정
 
-// 기본 속성
-$font-family-base: "Pretendard GOV";    // 기본 폰트
+// 기본 폰트
+$font-family-base: "Pretendard GOV";    
 
-// 폰트 크기, 줄 사이 간격, 텍스트 사이 간격
-$font-metrics: (
-  "headline-large": (font-size: 70px, line-height: 170px, letter-spacing: -2.8px),
+// 데스크탑 (폰트 크기, 줄 사이 간격, 텍스트 사이 간격)
+$desktop-font-metrics: (
+  "headline-large": (font-size: 70px, line-height: 119px, letter-spacing: -2.8px),
   "headline-medium": (font-size: 54px, line-height: 91.8px, letter-spacing: -2.16px),
   "title-large": (font-size: 45px, line-height: 76.5px, letter-spacing: -1.8px),
   "title-medium": (font-size: 38px, line-height: 64.6px, letter-spacing: -1.52px),
@@ -15,11 +16,28 @@ $font-metrics: (
   "body-large": (font-size: 27px, line-height: 45.9px, letter-spacing: -1.08px),
   "body-medium": (font-size: 23px, line-height: 39.1px, letter-spacing: -0.92px),
   "body-small": (font-size: 21px, line-height: 31.5px, letter-spacing: -0.84px),
-  "button-large": (font-size: 22px, line-height: 37.4px), // letter-spacing 없음
+  "button-large": (font-size: 22px, line-height: 37.4px, letter-spacing: 0px),
   "button-medium": (font-size: 18px, line-height: 30.6px, letter-spacing: -0.72px),
   "button-small": (font-size: 16px, line-height: 27.2px, letter-spacing: -0.64px),
   "caption-medium": (font-size: 14px, line-height: 21px, letter-spacing: -0.56px),
   "caption-small": (font-size: 12px, line-height: 20.4px, letter-spacing: -0.48px)
+);
+
+// 모바일
+$mobile-font-metrics: (
+  "headline-large": (font-size: 35px, line-height: 59.5px, letter-spacing: -1.4px),
+  "headline-medium": (font-size: 27px, line-height: 45.9px, letter-spacing: -1.08px),
+  "title-large": (font-size: 22px, line-height: 37.4px, letter-spacing: -0.88px),
+  "title-medium": (font-size: 19px, line-height: 32.3px, letter-spacing: -0.76px),
+  "title-small": (font-size: 16px, line-height: 24px, letter-spacing: -0.64px),
+  "body-large": (font-size: 17px, line-height: 28.9px, letter-spacing: -0.68px),
+  "body-medium": (font-size: 14px, line-height: 23.8px, letter-spacing: -0.56px),
+  "body-small": (font-size: 11px, line-height: 16.5px, letter-spacing: -0.44px),
+  "button-large": (font-size: 11px, line-height: 18.7px, letter-spacing: 0px), 
+  "button-medium": (font-size: 9px, line-height: 15.3px, letter-spacing: -0.36px),
+  "button-small": (font-size: 8px, line-height: 13.6px, letter-spacing: -0.32px),
+  "caption-medium": (font-size: 7px, line-height: 10.5px, letter-spacing: -0.28px),
+  "caption-small": (font-size: 6px, line-height: 10.2px, letter-spacing: -0.24px)
 );
 
 // 폰트 두께
@@ -42,74 +60,42 @@ $type-weights: (
 
 // 타이포그래피 스타일 mixin
 @mixin typography($type, $size) {
-  // 기본 속성
   font-family: $font-family-base;
+  font-weight: map.get($type-weights, $type);
 
   $key: "#{$type}-#{$size}";
-  $metrics: map.get($font-metrics, $key);
-  
-  // 폰트 크기, 줄 사이 간격 설정
-  font-size: map.get($metrics, font-size);
-  line-height: map.get($metrics, line-height);
 
-  // letter-spacing은 존재할 경우에만 적용
-  @if map.has-key($metrics, letter-spacing) {
+  // 데스크탑과 모바일에서 각각의 폰트 메트릭스를 가져옴
+  @include desktop {
+    $metrics: map.get($desktop-font-metrics, $key);
+    font-size: map.get($metrics, font-size);
+    line-height: map.get($metrics, line-height);
     letter-spacing: map.get($metrics, letter-spacing);
   }
-  
-  // 폰트 두께 설정
-  font-weight: map.get($type-weights, $type);
+
+  @include mobile {
+    $metrics: map.get($mobile-font-metrics, $key);
+    font-size: map.get($metrics, font-size);
+    line-height: map.get($metrics, line-height);
+    letter-spacing: map.get($metrics, letter-spacing);
+  }
 }
 
 // 각 타이포그래피 클래스
-@mixin headline-large {
-  @include typography("headline", "large");
-}
+@mixin headline-large {@include typography("headline", "large");}
+@mixin headline-medium {@include typography("headline", "medium");} 
 
-@mixin headline-medium {
-  @include typography("headline", "medium");
-}
+@mixin title-large {@include typography("title", "large");} 
+@mixin title-medium {@include typography("title", "medium");} 
+@mixin title-small {@include typography("title", "small");} 
 
-@mixin title-large {
-  @include typography("title", "large");
-}
+@mixin body-large {@include typography("body", "large");} 
+@mixin body-medium {@include typography("body", "medium");} 
+@mixin body-small {@include typography("body", "small");} 
 
-@mixin title-medium {
-  @include typography("title", "medium");
-}
+@mixin button-large {@include typography("button", "large");} 
+@mixin button-medium {@include typography("button", "medium");} 
+@mixin button-small {@include typography("button", "small");} 
 
-@mixin title-small {
-  @include typography("title", "small");
-}
-
-@mixin body-large {
-  @include typography("body", "large");
-}
-
-@mixin body-medium {
-  @include typography("body", "medium");
-}
-
-@mixin body-small {
-  @include typography("body", "small");
-}
-
-@mixin button-large {
-  @include typography("button", "large");
-}
-
-@mixin button-medium {
-  @include typography("button", "medium");
-}
-
-@mixin button-small {
-  @include typography("button", "small");
-}
-
-@mixin caption-medium {
-  @include typography("caption", "medium");
-}
-
-@mixin caption-small {
-  @include typography("caption", "small");
-}
+@mixin caption-medium {@include typography("caption", "medium");} 
+@mixin caption-small {@include typography("caption", "small");}

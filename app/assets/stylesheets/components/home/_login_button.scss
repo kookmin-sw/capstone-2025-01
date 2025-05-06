@@ -8,14 +8,6 @@
   margin-left: auto;
   margin-right: 30px;
   gap: 20px;
-
-  a {
-    &:focus, &:active, &:hover {
-      outline: none !important;
-      border-color: color_variables.$border-primary-color !important;
-      box-shadow: none !important;
-    }
-  }
 }
 
 .login-button {
