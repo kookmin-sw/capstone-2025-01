@@ -1,15 +1,19 @@
 <!-- 상단 배너 검색바 -->
 <%= render "banner_search" %>
 <!-- 법안 카테고리 -->
-<% active_tabs = parsed_active_tabs.presence || ["all"] %>
-<%= render "shared/law_categories", active_tabs: active_tabs, context: :list %>
+<%= render "shared/law_categories",
+            active_tabs: (params[:starred] == 'true' ? ["starred"] : parsed_active_tabs.presence || ["all"]),
+            context: :list %>
 
 <div class="bill-card-container">
   <!-- 실제 데이터 -->
   <% @bills.each do |bill| %>
     <%= link_to bill_path(bill), class: "bill-card" do %>
       <div class="bill-header">
-        <div class="bill-title"><%= bill.title %></div>
+        <div class="bill-title">
+          <%= inline_svg("star", class: "star-icon", data: { controller: "star", action: "click->star#toggle", bill_id: bill.id, star_target: "icon" }) %>
+          <%= bill.title %>
+        </div>
         <div class="bill-header-tag">
           <div class="bill-tag-party">
             <%# 국회의원 전체목록 API에서 정당을 제공하지 않아 현재는 이름을 표시 중이나, 추후 필드 추가 후 수정 예정 %>
@@ -34,4 +38,33 @@
 </div>
 
 <%# Pagination %>
-<%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+<% if @pagy.pages >= 1 %>
+  <nav class="pagination">
+    <ul class="pagination-list">
+
+      <!-- 항상 표시 + 항상 클릭 가능 -->
+        <%= link_to bills_path(page: 1) do %>
+          <%= inline_svg("first", class: "laquo-icon") %>
+        <% end %>
+
+        <%= link_to bills_path(page: @current_page - 1) do %>
+          <%= inline_svg("previous", class: "lsaquo-icon") %>
+        <% end %>
+
+      <% (@start_page..@end_page).each do |page| %>
+        <li class="page-num <%= 'active' if page == @current_page %>">
+          <%= link_to page, bills_path(page: page) %>
+        </li>
+      <% end %>
+
+        <%= link_to bills_path(page: @current_page + 1) do %>
+          <%= inline_svg("next", class: "rsaquo-icon") %>
+        <% end %>
+
+        <%= link_to bills_path(page: @total_pages) do %>
+          <%= inline_svg("last", class: "raquo-icon") %>
+        <% end %>
+
+    </ul>
+  </nav>
+<% end %>

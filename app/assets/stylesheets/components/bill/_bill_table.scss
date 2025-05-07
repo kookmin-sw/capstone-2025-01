@@ -1,5 +1,10 @@
 @use "../../colors/color_variables";
 @use "../../typography/typography" as *;
+@use "../../icons/star_icon";
+@use "../../icons/first_icon";
+@use "../../icons/last_icon";
+@use "../../icons/next_icon";
+@use "../../icons/previous_icon";
 
 // 법안 카드 컨테이너 스타일
 .bill-card-container {
@@ -41,6 +46,9 @@
     @include title-small; 
     color: color_variables.$text-primary-color;
     flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 // 법안 헤더 태그 스타일
@@ -97,4 +105,65 @@
 // 법안 상세정보 스타일
 .bill-description {
     @include body-medium;
+}
+
+.star-icon {
+    @extend .star-icon;
+    color: color_variables.$surface-bill-background-color;
+    stroke-width: 2;
+    stroke: color_variables.$surface-tertiary-color;
+  
+    &.active {
+        color: color_variables.$button-system-warn-color;
+        stroke: color_variables.$button-system-warn-color;
+    }
+}
+
+// pagination 스타일 
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 17px 0;
+  
+    .pagination-list {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      list-style: none;
+      gap: 10px;
+      padding: 10px;
+  
+      .page-num {
+        @include button-large;
+        display: flex;              // 숫자 중앙 정렬을 위해 추가
+        align-items: center;        // 수직 중앙 정렬
+        justify-content: center;    // 수평 중앙 정렬
+        padding: 0px 11px;
+        height: 37px;               // 아이콘 높이와 맞추기
+        border-radius: 10px;
+        color: color_variables.$text-secondary-color;
+  
+        &.active {
+          color: color_variables.$text-inverse-color;
+          background: color_variables.$button-primary-color;
+        }
+      }
+    }
+  }
+  
+.laquo-icon, .lsaquo-icon, .rsaquo-icon, .raquo-icon {
+    width: 37px;
+    height: 37px;
+    display: flex;               // 아이콘도 flex로 정렬 대상에 맞춤
+    align-items: center;
+    justify-content: center;
+    color: color_variables.$text-secondary-color;
+}  
+
+a:focus,
+a:focus-visible,
+a:active {
+  outline: none ;
+  box-shadow: none ;
+  border: none ;
 }
