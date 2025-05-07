@@ -13,7 +13,7 @@
     <tr align="center">
         <td style="min-width: 150px;">
             <a href="https://github.com/greenstar1151">
-              <img src="https://github.com/user-attachments/assets/338f9f85-02bd-458f-9a9d-69b22842aa0a" width="80" height="100">
+              <img src="https://github.com/user-attachments/assets/338f9f85-02bd-458f-9a9d-69b22842aa0a" width="80" height="80">
               <br />
               <b>추헌준</b>
             </a> 
