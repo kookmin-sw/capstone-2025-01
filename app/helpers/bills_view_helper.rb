@@ -31,11 +31,21 @@ module BillsViewHelper
 
 
   def law_category_link(tab)
-    if %w[all starred].include?(tab)
-      bills_path(tab: tab)
+    case tab
+    when "all"
+      bills_path
+    when "starred"
+      bills_path(request.query_parameters.merge(starred: true))  # 관심법안은 독립 파라미터로 처리
     else
-      new_tabs = selected_law_category_buttons(tab)
-      new_tabs.empty? ? bills_path : bills_path(tab: new_tabs)
+      current_tabs = Array(params[:tab]) - [ "all", "starred" ]
+
+      if current_tabs.include?(tab)
+        current_tabs -= [ tab ]
+      else
+        current_tabs << tab
+      end
+
+      current_tabs.empty? ? bills_path : bills_path(tab: current_tabs)
     end
   end
 end
