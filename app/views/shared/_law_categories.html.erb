@@ -1,20 +1,29 @@
 <% selected_tabs = Array(active_tabs) %>
 <% if selected_tabs.size > 1 %>
   <% selected_tabs -= ["all"] %>
-  <% selected_tabs -= ["starred"] %>
-<% elsif selected_tabs.size == 1 && !%w[all starred].include?(selected_tabs.first) %>
+<% elsif selected_tabs.size == 1 && selected_tabs.first != "all" %>
   <% selected_tabs -= ["all"] %>
 <% end %>
 
 <div class="law-component-layer">
   <% BillViewHelper::LAW_CATEGORIES.each_with_index do |(key, label), index| %>
     <% is_head = %w[all starred].include?(key) %>
-    <% selected = (selected_tabs.include?(key) || (selected_tabs.empty? && key == "all")) && !(selected_tabs.any? && !%w[all starred].include?(key) && key == "all") %>
+
+    <% selected =
+      if key == "starred"
+        params[:starred] == 'true'
+      elsif key == "all"
+        selected_tabs.empty? || selected_tabs == ["all"]
+      else
+        selected_tabs.include?(key)
+      end %>
 
     <% if context == :list %>
-      <%= link_to label, law_category_link(key),
+      <%= link_to label,
+                  (key == "starred" ? bills_path(starred: true) : law_category_link(key)),
                   class: "#{key}-comp law-category-button law-common-text-component #{'active' if selected}",
                   data: { tab: key, label: label } %>
+
     <% elsif context == :search && %w[all starred].include?(key) %>
       <%= button_tag type: "button",
                      class: "#{key}-comp law-category-button law-common-text-component #{'active' if selected}",
@@ -25,10 +34,15 @@
                      } do %>
         <div class="law-category-text"><%= label %></div>
       <% end %>
+
     <% else %>
       <%= button_tag type: "button",
                      class: "#{key}-comp law-category-button law-common-text-component #{'active' if selected}",
-                     data: { tab: key, label: label, action: "click->category-search#toggleCategory" } do %>
+                     data: {
+                       tab: key,
+                       label: label,
+                       action: "click->category-search#toggleCategory"
+                     } do %>
         <div class="law-category-text"><%= label %></div>
       <% end %>
     <% end %>
