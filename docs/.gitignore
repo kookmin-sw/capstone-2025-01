@@ -1,0 +1,39 @@
+# Jekyll 빌드 결과물
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+vendor/
+.bundle/
+vendor/bundle/
+
+# 로컬 설정 파일
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# 편집기/IDE 파일
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*~
+
+# 로그 파일
+*.log
+
+# 캐시 파일
+.cache/
+
+# 환경 설정 파일
+.env
+.env.*
+!.env.example
+
+# 임시 파일
+tmp/
+.tmp/
