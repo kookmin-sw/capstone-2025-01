@@ -1,6 +1,9 @@
 title: "LawNow"
 description: "LawNow 프로젝트 문서화"
-theme: just-the-docs
+# theme: just-the-docs
+plugins:
+  - jekyll-remote-theme    
+remote_theme: just-the-docs/just-the-docs
 # GitHub Pages URL 설정
 url: "https://kookmin-sw.github.io"
 baseurl: "/capstone-2025-01"
