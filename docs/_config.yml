@@ -1,8 +1,9 @@
 title: "LawNow"
 description: "LawNow 프로젝트 문서화"
 theme: just-the-docs
-# baseurl: ""  # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+# GitHub Pages URL 설정
+url: "https://kookmin-sw.github.io"
+baseurl: "/capstone-2025-01"
 
 search_enabled: false
 aux_links:
