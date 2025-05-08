@@ -1,0 +1,16 @@
+title: "LawNow"
+description: "LawNow 프로젝트 문서화"
+theme: just-the-docs
+# baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+
+search_enabled: false
+aux_links:
+  Github: https://github.com/kookmin-sw/capstone-2025-01
+
+# 사이드바 설정
+aux_links_new_tab: true
+heading_anchors: true
+
+# 로고 설정
+logo: "/assets/images/brand_logo.svg"
