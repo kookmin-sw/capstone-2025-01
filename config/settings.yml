@@ -3,7 +3,7 @@ bills:
   end_ord: 22
 
 litellm:
-  endpoint: "http://localhost:4000"
+  endpoint: "http://litellm:4000"
 
 # TODO: 추후 어드민에서 설정할 수 있도록 변경
 bill_summary:
