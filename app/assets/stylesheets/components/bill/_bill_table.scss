@@ -1,10 +1,5 @@
 @use "../../colors/color_variables";
 @use "../../typography/typography" as *;
-@use "../../icons/star_icon";
-@use "../../icons/first_icon";
-@use "../../icons/last_icon";
-@use "../../icons/next_icon";
-@use "../../icons/previous_icon";
 
 // 법안 카드 컨테이너 스타일
 .bill-card-container {
@@ -108,14 +103,10 @@
 }
 
 .star-icon {
-    @extend .star-icon;
-    color: color_variables.$surface-bill-background-color;
-    stroke-width: 2;
-    stroke: color_variables.$surface-tertiary-color;
+    color: color_variables.$surface-tertiary-color;
   
     &.active {
         color: color_variables.$button-system-warn-color;
-        stroke: color_variables.$button-system-warn-color;
     }
 }
 
