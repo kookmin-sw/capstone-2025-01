@@ -16,7 +16,7 @@ module PeriodicJobs
     sig { void }
     def perform
       Rails.logger.info("Starting job: fetching up to "+
-                        "#{MAX_RECORDS_TO_PROCESS_PER_RUN} bills without summary")
+                        "#{MAX_RECORDS_TO_PROCESS_PER_RUN} bills without category")
       # 사용할 프롬프트 템플릿 조회 (없으면 예외)
       prompt = AiPromptTemplate.find_by!(name: DEFAULT_PROMPT_TEMPLATE)
       client = OpenAI::Client.new
