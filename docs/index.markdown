@@ -7,7 +7,13 @@ permalink: /
 
 # LawNow
 > 한눈에 보는 법률 개정, 우리 사회의 이슈, LawNow와 함께 공유하세요!
-
+<div align="center"> 
+    <p align = "center">
+        <a href="https://lawnow.kr/">
+            <img src="https://github.com/user-attachments/assets/17d5c90c-6e36-4461-af2e-e7685231a8ba" width="100%"/>
+        </a>
+    </p>
+</div>
 ---
 
 ## 프로젝트 소개
