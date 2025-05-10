@@ -97,7 +97,8 @@ SNS 공유 기능과 카드 뉴스 제공합니다.<br>
 <br><br>
 
 ## 🌐 시스템 아키텍처
-<img width="50%" alt="dafe7daf8c1a478148afdc21c04c0410f129be87" src="https://github.com/user-attachments/assets/1bebbefb-96af-4c8a-a8d4-a147b77be4ec" />
+<img width="55%" alt="Service Architecture" src="https://github.com/user-attachments/assets/016ff565-7cf0-4c01-b843-1fde67d76aa1" />
+<img width="44%" alt="AI Pipeline" src="https://github.com/user-attachments/assets/1bebbefb-96af-4c8a-a8d4-a147b77be4ec" />
 <br><br>
 
 ## 🛠️ 기술 스택
