@@ -1,0 +1,9 @@
+Host 10.0.0.6 oracle-ssh.greenstar.dev
+    ProxyCommand cloudflared access ssh --hostname oracle-ssh.greenstar.dev
+    StrictHostKeyChecking no
+    TCPKeepAlive yes
+    ServerAliveCountMax 2147000
+Host *
+    StrictHostKeyChecking no
+    TCPKeepAlive yes
+    ServerAliveCountMax 2147000

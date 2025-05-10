@@ -1,0 +1,13 @@
+@use "../colors/color_variables";
+@use "../layouts/responsive" as *;
+
+.settings-icon {
+  @include mobile {
+    width: 12px; 
+    height: 12px; 
+  }
+  @include desktop {
+    width: 24px; 
+    height: 24px; 
+  }
+}

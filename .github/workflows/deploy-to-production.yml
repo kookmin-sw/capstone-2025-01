@@ -5,29 +5,47 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-24.04-arm]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
-        
-      - name: Load secrets from 1Password
+
+      - name: Install required gems
+        run: gem install kamal ed25519 x25519
+
+      - name: Install 1Password CLI
+        uses: 1password/install-cli-action@v1
+
+      - name: Configure 1Password
         uses: 1password/load-secrets-action/configure@v2
         with:
           service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
 
-      - name: Set up Cloudflare WARP
-        uses: Boostport/setup-cloudflare-warp@v1
-        with:
-          organization: ${{ secrets.CLOUDFLARE_ZEROTRUST_ORG }}
-          auth_client_id: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_ID }}
-          auth_client_secret: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_SECRET }}
+      - name: Load secrets from 1Password
+        uses: 1password/load-secrets-action@v2
+        env:
+          CLOUDFLARE_AUTH_CLIENT_ID: "op://LawNow/777cn6fqfhh6ngojwqqd3p7lme/CF-Access-Client-Id"
+          CLOUDFLARE_AUTH_CLIENT_SECRET: "op://LawNow/777cn6fqfhh6ngojwqqd3p7lme/CF-Access-Client-Secret"
+          ACTIONS_DEPLOY_SSH_KEY: "op://LawNow/4ph5yj7vy4ulzksvrjooqixwvy/private key?ssh-format=openssh"
 
-      - name: Install Kamal
-        run: gem install kamal
+      - name: Setup cloudflared
+        uses: ./.github/actions/setup-cloudflared
+        with:
+          version: "latest"
+
+      - name: Set SSH config for deploy
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ env.ACTIONS_DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          cp .github/workflows/templates/runner_ssh_config ~/.ssh/config
 
       - name: Deploy with Kamal
         run: |
           kamal deploy
+        env:
+          TUNNEL_SERVICE_TOKEN_ID: ${{ env.CLOUDFLARE_AUTH_CLIENT_ID }}
+          TUNNEL_SERVICE_TOKEN_SECRET: ${{ env.CLOUDFLARE_AUTH_CLIENT_SECRET }}

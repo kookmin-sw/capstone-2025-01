@@ -1,0 +1,12 @@
+@use "../colors/color_variables";
+
+$icon-width: 36px; 
+$icon-height: 0px; 
+
+.divider-icon {
+    width: $icon-width;
+    height: $icon-height;
+    opacity: 0.35;
+    flex-shrink: 0;
+    stroke: color_variables.$border-primary-color;
+}

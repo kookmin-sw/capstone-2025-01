@@ -1,0 +1,175 @@
+@use "colors/color_variables";
+@use "../typography/typography" as *;
+
+// 배너 버튼 레이어 스타일
+.banner-button-layer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 50px;
+  gap: 40px;
+}
+
+// 배너 버튼 스타일
+.banner-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+// 알림 메뉴 위치 조정
+.notification-menu {
+    right: 110px; 
+}
+
+// 프로필 메뉴 위치 조정
+.profile-menu {
+    right: 10px; 
+}
+
+// 프로필 메뉴 헤더 스타일
+.profile-menu-header {
+    @include button-large;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+// 드롭다운 메뉴 스타일
+.dropdown-menu {
+    min-width: 400px;
+    padding: 20px;
+    flex-direction: column;
+    gap: 12px;
+    border-radius: 20px 0px 20px 20px;
+    background: color_variables.$surface-primary-color;
+    box-shadow: 2px 6px 6px 2px rgba(0, 0, 0, 0.10);
+    
+    // 위치 설정
+    position: absolute;
+    top: calc(90%); // 버튼과 메뉴 사이 간격
+    display: none;
+    
+    // 개별 메뉴 항목
+    .dropdown-item {
+        @include button-medium;
+        display: flex; 
+        align-items: center; 
+        color: color_variables.$text-secondary-color;
+        padding: 10px 10px;
+        gap: 10px;
+        border-bottom: 1px solid color_variables.$border-inverse-color; //구분선
+        cursor: pointer;
+
+        &:last-child {
+            border-bottom: none; 
+        }
+    
+        &:hover {
+            background: rgba(0, 0, 0, 0.03);
+        }
+    }
+}
+
+// 메뉴 항목 컨테이너
+.dropdown-items {
+    flex-direction: column;
+    background: color_variables.$background-primary-color;
+    border-radius: 15px;
+}
+
+// 설정 서브 드롭다운
+.dropdown-submenu {
+    display: none; 
+    width: 100%;
+    flex-direction: column; 
+
+    &.show {
+        display: flex; 
+    }
+
+    .dropdown-item {
+        width: 100%;
+        padding-left: 44px; // 들여쓰기 효과(아이콘 width + padding + gap)
+        cursor: pointer;
+        border-bottom: none; // 하위 항목들 사이에는 구분선 제거
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.03);
+        }
+    }
+}
+
+// 설정 메뉴의 구분선 처리
+.dropdown-item.settings-item {
+    border-bottom: none; // 설정 항목 자체는 구분선 없음
+}
+
+// 설정 하위 메뉴 이후 항목(로그아웃)에는 상단 구분선 추가
+.dropdown-submenu + .dropdown-item {
+    border-top: 1px solid color_variables.$border-inverse-color;
+}
+
+// 토글 스위치 스타일
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 20.25px;
+    margin-left: auto; 
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: color_variables.$button-tertiary-color;
+    transition: .4s;
+    border-radius: 20px;
+    
+    &:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 2px;
+        bottom: 2px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
+}
+
+input:checked + .toggle-slider {
+    background-color: color_variables.$brand-logo-color; 
+}
+
+input:checked + .toggle-slider:before {
+    transform: translateX(16px);
+}
+
+// 서브메뉴 드롭다운 항목 정렬
+.dropdown-submenu .dropdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+// 회원 탈퇴 텍스트 색상 변경
+.dropdown-submenu .dropdown-item.member-withdrawal {
+    color: color_variables.$border-tertiary-color;
+}
+
+// 드롭다운 메뉴 표시 클래스
+.show {
+    display: flex !important;
+}

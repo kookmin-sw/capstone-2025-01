@@ -2,6 +2,9 @@ production:
   bulk_update_bill_info_periodic_job:
     class: "PeriodicJobs::BulkUpdateBillInfoPeriodicJob"
     schedule: "55 23 * * *" # 매일 23시 55분에 실행
+  bulk_update_bill_type_periodic_job:
+    class: "PeriodicJobs::BulkUpdateBillTypePeriodicJob"
+    schedule: "0 0 * * *" # 매일 0시에 실행
   bulk_update_bill_committee_info_periodic_job:
     class: "PeriodicJobs::BulkUpdateBillCommitteeInfoPeriodicJob"
     schedule: "5 0 * * *" # 매일 0시 5분에 실행

@@ -13,12 +13,12 @@
 @use "components/political_party";
 @use "components/banner";
 @use "components/banner_search";
-
+@use "components/banner_buttons";
 
 @use "components/home/main_title";
 @use "components/home/login_button";
 @use "components/home/hot_issue";
-@use "components/home/trend";
+@use 'components/home/category_select_search_bar';
 
 @use "layouts/_layout";
 @use "layouts/responsive";
@@ -38,3 +38,14 @@
 @use "icons/alert_circle_icon";
 @use "icons/kakao_logo_icon";
 @use "icons/naver_logo_icon";
+@use "icons/remove_icon";
+@use "icons/divider_icon";
+
+// 전역 스타일 설정
+a {
+    &:focus, &:active, &:hover {
+      outline: none !important;
+      border-color: color_variables.$border-primary-color !important;
+      box-shadow: none !important;
+    }
+  }

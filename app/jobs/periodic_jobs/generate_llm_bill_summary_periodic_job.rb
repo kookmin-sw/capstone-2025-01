@@ -55,6 +55,7 @@ module PeriodicJobs
           sleep DEFAULT_SLEEP_SECONDS
         rescue => e
           Rails.logger.error("Error: bill_id=#{bill.id} error=#{e.message}")
+          Sentry.capture_exception(e, extra: { bill_id: bill.id })
           next
         end
       end
