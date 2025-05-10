@@ -53,14 +53,29 @@ export default class extends Controller {
   }
 
   submitSingleTab(e) {
-    // "전체" 또는 "내 관심법안" 버튼 클릭 시 바로 해당 상세 페이지로 이동
     e.preventDefault()
     const tab = e.currentTarget.dataset.tab
+  
+    this.selectedTabs.clear()
+  
     const baseUrl = "/bills"
+  
+    // 전체 탭일 경우 쿼리스트링 없이 이동
+    if (tab === "all") {
+      window.location.href = baseUrl
+      return
+    }
+  
+    // 관심법안은 별도 처리
+    if (tab === "starred") {
+      window.location.href = `${baseUrl}?starred=true`
+      return
+    }
+  
     const params = new URLSearchParams()
     params.set("tab", tab)
     window.location.href = `${baseUrl}?${params.toString()}`
-  }
+  }  
 
   addTag(tab, label) {
     if (!this.hasSelectedCategoryTarget) return
