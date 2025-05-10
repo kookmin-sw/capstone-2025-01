@@ -1,12 +1,20 @@
 @use "../../colors/color_variables";
 @use "../../typography/typography" as *;
+@use "../../layouts/responsive" as *;
 
 // 법안 상세 페이지 스타일
 
 // 메인 컨테이너
 .bill-detail-layer {
-  width: 1152px;
   margin-top: 50px;
+
+  @include mobile {
+    width: 375px;
+  }
+
+  @include desktop {
+    width: 1152px;
+  }
 }
 
 // 법안 상세 태그 컨테이너 스타일
@@ -18,25 +26,49 @@
   margin-bottom: 15px;
 }
 
+// 법안, 정당 공통 태그 스타일
+@mixin common-tag-style {
+  @include button-small;
+  
+  @include mobile {
+    height: 22px !important;
+    max-height: 22px !important;
+    min-height: 22px !important;
+    border-radius: 5px !important;
+  }
+  
+  @include desktop {
+    height: 35px !important;
+    max-height: 35px !important;
+    min-height: 35px !important;
+    border-radius: 12px !important;
+  }
+}
+
 // 법안 카테고리 버튼 스타일 오버라이드
 [class$="-comp"] {
-  width: 187px !important;
-  height: 35px !important;
-  max-height: 35px !important;
-  min-height: 35px !important;
-  padding: 0 15px !important;
-  border-radius: 12px !important; 
-  @include button-small;
+  @include common-tag-style;
+  
+  @include mobile {
+    width: 94px !important;
+  }
+  
+  @include desktop {
+    width: 187px !important;
+  }
 }
 
 // 정당 태그 스타일 오버라이드
 [class$="-shape"] {
-  width: 108px !important;
-  height: 35px !important;
-  min-height: 35px !important;
-  max-height: 35px !important;
-  border-radius: 12px !important;
-  @include button-small;
+@include common-tag-style;
+  
+  @include mobile {
+    width: 74px !important;
+  }
+  
+  @include desktop {
+    width: 108px !important;
+  }
 }
   
 // 법안 제목
@@ -48,22 +80,36 @@
   
 // 메타데이터 컨테이너
 .bill-detail-meta {
-  width: 1152px;
   background: color_variables.$surface-primary-color;
-  border-radius: 20px; 
-  margin-bottom: 50px;
   padding: 27px 37px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;  
-  grid-template-rows: repeat(3, auto);  
-  gap: 16px 40px;  // 행과 열 사이의 간격
+  border-radius: 20px; 
+  margin-left: auto;
+  margin-right: auto;
+
+  @include mobile {
+    width: 343px;
+    margin-bottom: 30px;
+  }
+
+  @include desktop {
+    width: 1152px;
+    margin-bottom: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;  
+    grid-template-rows: repeat(3, auto);  
+    gap: 16px 40px;  // 행과 열 사이의 간격
+    
+  }
 }
   
 // 메타데이터 아이템
 .bill-detail-meta-item {
   display: grid;
   grid-template-columns: 100px 1fr; 
-  gap: 20px;
+  
+  @include desktop {
+    gap: 20px;
+  }
 }
   
 // 메타데이터 라벨
@@ -80,7 +126,13 @@
   
 // 컨텐츠 컨테이너 (AI 요약, 추진 현황, 주요 내용 등)
 .bill-detail-container {
-  margin-bottom: 50px;
+  @include mobile {
+    margin-bottom: 20px;
+  }
+  
+  @include desktop {
+    margin-bottom: 50px;
+  }
 }
   
 .bill-detail-label {
@@ -88,13 +140,18 @@
   color: color_variables.$text-primary-color;
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
-  gap: 8px; 
     
   .list-icon {
-    width: 32px;
-    height: 32px;
     color: color_variables.$brand-logo-color;
+  }
+
+  @include mobile {
+    gap: 5px; 
+  }
+
+  @include desktop {
+    margin-bottom: 10px;
+    gap: 8px; 
   }
 }
   
@@ -102,9 +159,5 @@
 .bill-detail-content {
   @include body-large; 
   padding: 0 20px;
-
-  p {
-    @include body-large; 
-    color: color_variables.$text-tertiary-color;
-  }
+  color: color_variables.$text-secondary-color;
 }
