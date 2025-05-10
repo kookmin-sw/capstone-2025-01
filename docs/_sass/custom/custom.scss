@@ -46,7 +46,8 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     align-items: center;
 }
-  // GitHub 아이콘 스타일링
+
+// GitHub 아이콘 스타일링
 .aux-nav .aux-nav-list-item a[href*="github.com"]::before {
     font-family: "Font Awesome 6 Brands" !important;
     content: "\f09b" !important;
@@ -55,4 +56,10 @@ h1, h2, h3, h4, h5, h6 {
     position: relative !important;
     top: -1.5px !important; /* 필요하면 미세 조정: -1px, 1px 등 */
     font-size: 1em !important; /* 아이콘 크기를 텍스트와 동일하게 */
+}
+
+// 헤더 스타일링(로고 크기 조정)
+.site-header {
+  height: auto !important; 
+  min-height: 120px !important; 
 }
