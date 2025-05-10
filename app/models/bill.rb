@@ -30,8 +30,7 @@ class Bill < ApplicationRecord
   def update_current_bill_category!(new_category = nil)
     if auto_update_current_category?
       category = new_category || bill_categories.order(created_at: :desc).first
-      update_column(:current_bill_category_id, category&.id)
-      update_column(:category, category&.category)
+      update_columns(current_bill_category_id: category&.id, category: category&.category)
     end
   end
 end
