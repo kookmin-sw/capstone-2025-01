@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+bc_gov_bill_agriculture:
+  id: 1
+  bill: gov_bill_agriculture
+  category: "industry-agriculture"
+  classified_by: "llm"
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+bc_gov_bill_ftc:
+  id: 2
+  bill: gov_bill_ftc
+  category: "economy-finance"
+  classified_by: "llm"
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+bc_assembly_bill_conflict_management:
+  id: 3
+  bill: assembly_bill_conflict_management
+  category: "government-administration"
+  classified_by: "llm"
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
