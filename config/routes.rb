@@ -17,7 +17,6 @@ Rails.application.routes.draw do
   ## OAuth
   namespace :oauth do
     get "/:provider/callback" => "omni_auths#create", as: :callback
-    get "/failure" => "omni_auths#failure", as: :failure
   end
   get "/login", to: "login#index", as: :login
 

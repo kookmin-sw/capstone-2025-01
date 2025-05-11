@@ -31,9 +31,6 @@ module GeneratedPathHelpersModule
   def oauth_callback_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def oauth_failure_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def rails_blob_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }

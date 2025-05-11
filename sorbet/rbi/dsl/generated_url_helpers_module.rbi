@@ -31,9 +31,6 @@ module GeneratedUrlHelpersModule
   def oauth_callback_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def oauth_failure_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def rails_blob_representation_proxy_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
