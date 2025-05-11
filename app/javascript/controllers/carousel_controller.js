@@ -4,66 +4,98 @@ export default class extends Controller {
   static targets = ["container", "dot"]
 
   connect() {
-    // 스크롤 이동 속도 설정
-    this.scrollSpeed = 8
-
-    // 현재 선택된 인디케이터 인덱스 (0~2)
+    this.cardWidth = 430
+    this.totalSlides = this.containerTarget.children.length
+    this.dotCount = Math.min(this.totalSlides, 5)
     this.currentIndex = 0
+    this.scrolling = false
 
-    // Stimulus가 초기화된 직후 dot 표시 업데이트
-    setTimeout(() => this.updateDots(), 50)
-
-    // 스크롤 이벤트 리스너 등록
-    this.containerTarget.addEventListener("scroll", this.onScroll.bind(this))
+    this.updateDots()
+    this.bindEvents()
   }
 
-  // 스크롤 시 인디케이터 위치 업데이트
+  // 이벤트 핸들러를 변수에 저장해서 remove 가능하도록
+  bindEvents() {
+    this.boundOnScroll = this.onScroll.bind(this)
+    this.boundOnKeydown = this.onKeydown.bind(this)
+    this.boundWindowKeydown = (e) => {
+      if (
+        ["ArrowLeft", "ArrowRight"].includes(e.key) &&
+        document.activeElement !== this.containerTarget
+      ) {
+        this.containerTarget.focus({ preventScroll: true })
+      }
+    }
+
+    this.containerTarget.addEventListener("scroll", this.boundOnScroll)
+    this.containerTarget.addEventListener("keydown", this.boundOnKeydown)
+    window.addEventListener("keydown", this.boundWindowKeydown)
+  }
+
+  // Stimulus가 DOM에서 제거될 때 clean-up
+  disconnect() {
+    this.containerTarget.removeEventListener("scroll", this.boundOnScroll)
+    this.containerTarget.removeEventListener("keydown", this.boundOnKeydown)
+    window.removeEventListener("keydown", this.boundWindowKeydown)
+  }
+
   onScroll() {
-    const container = this.containerTarget
-    const scrollLeft = container.scrollLeft
-    const maxScroll = container.scrollWidth - container.clientWidth
-
-    // 스크롤 가능한 영역이 없으면 종료
-    if (maxScroll <= 0) return
-
-    // 전체 너비에서 현재 스크롤 비율 계산 (0~1)
+    const scrollLeft = this.containerTarget.scrollLeft
+    const maxScroll = this.containerTarget.scrollWidth - this.containerTarget.clientWidth
     const ratio = scrollLeft / maxScroll
-
-    // 비율을 기준으로 현재 인디케이터 인덱스 계산 (최대 2)
-    this.currentIndex = Math.min(2, Math.floor(ratio * 3))
-
-    // 인디케이터 상태 갱신
+    this.currentIndex = Math.min(this.dotCount - 1, Math.round(ratio * (this.dotCount - 1)))
     this.updateDots()
   }
 
-  // 왼쪽 방향으로 자동 스크롤 시작
-  startScrollLeft() {
-    this.stopScroll()
-    this.scrollInterval = setInterval(() => {
-      this.containerTarget.scrollBy({ left: -this.scrollSpeed, behavior: "auto" })
-      this.onScroll()
-    }, 10)
-  }
-
-  // 오른쪽 방향으로 자동 스크롤 시작
-  startScrollRight() {
-    this.stopScroll()
-    this.scrollInterval = setInterval(() => {
-      this.containerTarget.scrollBy({ left: this.scrollSpeed, behavior: "auto" })
-      this.onScroll()
-    }, 10)
-  }
-
-  // 자동 스크롤 중단
-  stopScroll() {
-    clearInterval(this.scrollInterval)
-    this.onScroll()
-  }
-
-  // 인디케이터 상태를 현재 인덱스에 따라 갱신
   updateDots() {
     this.dotTargets.forEach((dot, index) => {
-      dot.classList.toggle("active", index === this.currentIndex)
+      const active = index === this.currentIndex
+      dot.classList.toggle("active", active)
+      dot.setAttribute("aria-current", active ? "true" : "false")
     })
+  }
+
+  onKeydown(event) {
+    if (this.scrolling) return
+    const direction = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0
+    if (direction !== 0) this.scrollToCard(direction)
+  }
+
+  startScrollLeft() {
+    if (!this.scrolling) this.scrollToCard(-1)
+  }
+
+  startScrollRight() {
+    if (!this.scrolling) this.scrollToCard(1)
+  }
+
+  scrollToCard(direction, duration = 700) {
+    const start = this.containerTarget.scrollLeft
+    const target = Math.max(
+      0,
+      Math.min(start + direction * this.cardWidth, this.containerTarget.scrollWidth)
+    )
+    this.animateScroll(start, target, duration)
+  }
+
+  animateScroll(start, end, duration) {
+    this.scrolling = true
+    const startTime = performance.now()
+
+    const animate = (time) => {
+      const elapsed = time - startTime
+      const progress = Math.min(elapsed / duration, 1)
+      const ease = 0.5 - Math.cos(progress * Math.PI) / 2
+      this.containerTarget.scrollLeft = start + (end - start) * ease
+
+      if (progress < 1) {
+        requestAnimationFrame(animate)
+      } else {
+        this.scrolling = false
+        this.onScroll()
+      }
+    }
+
+    requestAnimationFrame(animate)
   }
 }
