@@ -329,6 +329,20 @@ class Bill
   end
 
   module GeneratedAssociationMethods
+    # This method is created by ActiveRecord on the `Bill` class because it declared `has_many :bill_categories`.
+    # 🔗 [Rails guide for `has_many` association](https://guides.rubyonrails.org/association_basics.html#the-has-many-association)
+    sig { returns(::BillCategory::PrivateCollectionProxy) }
+    def bill_categories; end
+
+    sig { params(value: T::Enumerable[::BillCategory]).void }
+    def bill_categories=(value); end
+
+    sig { returns(T::Array[T.untyped]) }
+    def bill_category_ids; end
+
+    sig { params(ids: T::Array[T.untyped]).returns(T::Array[T.untyped]) }
+    def bill_category_ids=(ids); end
+
     sig { returns(T.nilable(::BillDetail)) }
     def bill_detail; end
 
@@ -352,6 +366,9 @@ class Bill
     sig { params(args: T.untyped, blk: T.untyped).returns(::BillDetail) }
     def build_bill_detail(*args, &blk); end
 
+    sig { params(args: T.untyped, blk: T.untyped).returns(::BillCategory) }
+    def build_current_bill_category(*args, &blk); end
+
     sig { params(args: T.untyped, blk: T.untyped).returns(::BillSummary) }
     def build_current_bill_summary(*args, &blk); end
 
@@ -364,6 +381,12 @@ class Bill
     sig { params(args: T.untyped, blk: T.untyped).returns(::BillDetail) }
     def create_bill_detail!(*args, &blk); end
 
+    sig { params(args: T.untyped, blk: T.untyped).returns(::BillCategory) }
+    def create_current_bill_category(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(::BillCategory) }
+    def create_current_bill_category!(*args, &blk); end
+
     sig { params(args: T.untyped, blk: T.untyped).returns(::BillSummary) }
     def create_current_bill_summary(*args, &blk); end
 
@@ -375,6 +398,18 @@ class Bill
 
     sig { params(args: T.untyped, blk: T.untyped).returns(::GovernmentLegislationNotice) }
     def create_government_legislation_notice!(*args, &blk); end
+
+    sig { returns(T.nilable(::BillCategory)) }
+    def current_bill_category; end
+
+    sig { params(value: T.nilable(::BillCategory)).void }
+    def current_bill_category=(value); end
+
+    sig { returns(T::Boolean) }
+    def current_bill_category_changed?; end
+
+    sig { returns(T::Boolean) }
+    def current_bill_category_previously_changed?; end
 
     sig { returns(T.nilable(::BillSummary)) }
     def current_bill_summary; end
@@ -411,6 +446,9 @@ class Bill
     sig { returns(T.nilable(::BillDetail)) }
     def reload_bill_detail; end
 
+    sig { returns(T.nilable(::BillCategory)) }
+    def reload_current_bill_category; end
+
     sig { returns(T.nilable(::BillSummary)) }
     def reload_current_bill_summary; end
 
@@ -419,6 +457,9 @@ class Bill
 
     sig { void }
     def reset_bill_detail; end
+
+    sig { void }
+    def reset_current_bill_category; end
 
     sig { void }
     def reset_current_bill_summary; end
@@ -625,6 +666,51 @@ class Bill
     def assembly_bill_id_will_change!; end
 
     sig { returns(T::Boolean) }
+    def auto_update_current_category; end
+
+    sig { params(value: T::Boolean).returns(T::Boolean) }
+    def auto_update_current_category=(value); end
+
+    sig { returns(T::Boolean) }
+    def auto_update_current_category?; end
+
+    sig { returns(T.nilable(T::Boolean)) }
+    def auto_update_current_category_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def auto_update_current_category_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def auto_update_current_category_came_from_user?; end
+
+    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
+    def auto_update_current_category_change; end
+
+    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
+    def auto_update_current_category_change_to_be_saved; end
+
+    sig { params(from: T::Boolean, to: T::Boolean).returns(T::Boolean) }
+    def auto_update_current_category_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(T::Boolean)) }
+    def auto_update_current_category_in_database; end
+
+    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
+    def auto_update_current_category_previous_change; end
+
+    sig { params(from: T::Boolean, to: T::Boolean).returns(T::Boolean) }
+    def auto_update_current_category_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(T::Boolean)) }
+    def auto_update_current_category_previously_was; end
+
+    sig { returns(T.nilable(T::Boolean)) }
+    def auto_update_current_category_was; end
+
+    sig { void }
+    def auto_update_current_category_will_change!; end
+
+    sig { returns(T::Boolean) }
     def auto_update_current_summary; end
 
     sig { params(value: T::Boolean).returns(T::Boolean) }
@@ -805,6 +891,51 @@ class Bill
     def bill_type_will_change!; end
 
     sig { returns(T.nilable(::String)) }
+    def category; end
+
+    sig { params(value: T.nilable(::String)).returns(T.nilable(::String)) }
+    def category=(value); end
+
+    sig { returns(T::Boolean) }
+    def category?; end
+
+    sig { returns(T.nilable(::String)) }
+    def category_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def category_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def category_came_from_user?; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def category_change; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def category_change_to_be_saved; end
+
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def category_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def category_in_database; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def category_previous_change; end
+
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def category_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def category_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def category_was; end
+
+    sig { void }
+    def category_will_change!; end
+
+    sig { returns(T.nilable(::String)) }
     def committee_name; end
 
     sig { params(value: T.nilable(::String)).returns(T.nilable(::String)) }
@@ -893,6 +1024,51 @@ class Bill
 
     sig { void }
     def created_at_will_change!; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def current_bill_category_id; end
+
+    sig { params(value: T.nilable(::Integer)).returns(T.nilable(::Integer)) }
+    def current_bill_category_id=(value); end
+
+    sig { returns(T::Boolean) }
+    def current_bill_category_id?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def current_bill_category_id_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def current_bill_category_id_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def current_bill_category_id_came_from_user?; end
+
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def current_bill_category_id_change; end
+
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def current_bill_category_id_change_to_be_saved; end
+
+    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
+    def current_bill_category_id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::Integer)) }
+    def current_bill_category_id_in_database; end
+
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def current_bill_category_id_previous_change; end
+
+    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
+    def current_bill_category_id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::Integer)) }
+    def current_bill_category_id_previously_was; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def current_bill_category_id_was; end
+
+    sig { void }
+    def current_bill_category_id_will_change!; end
 
     sig { returns(T.nilable(::Integer)) }
     def current_bill_summary_id; end
@@ -1088,6 +1264,9 @@ class Bill
     def restore_assembly_bill_id!; end
 
     sig { void }
+    def restore_auto_update_current_category!; end
+
+    sig { void }
     def restore_auto_update_current_summary!; end
 
     sig { void }
@@ -1100,10 +1279,16 @@ class Bill
     def restore_bill_type!; end
 
     sig { void }
+    def restore_category!; end
+
+    sig { void }
     def restore_committee_name!; end
 
     sig { void }
     def restore_created_at!; end
+
+    sig { void }
+    def restore_current_bill_category_id!; end
 
     sig { void }
     def restore_current_bill_summary_id!; end
@@ -1133,6 +1318,12 @@ class Bill
     def saved_change_to_assembly_bill_id?; end
 
     sig { returns(T.nilable([T::Boolean, T::Boolean])) }
+    def saved_change_to_auto_update_current_category; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_auto_update_current_category?; end
+
+    sig { returns(T.nilable([T::Boolean, T::Boolean])) }
     def saved_change_to_auto_update_current_summary; end
 
     sig { returns(T::Boolean) }
@@ -1157,6 +1348,12 @@ class Bill
     def saved_change_to_bill_type?; end
 
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def saved_change_to_category; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_category?; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def saved_change_to_committee_name; end
 
     sig { returns(T::Boolean) }
@@ -1167,6 +1364,12 @@ class Bill
 
     sig { returns(T::Boolean) }
     def saved_change_to_created_at?; end
+
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def saved_change_to_current_bill_category_id; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_current_bill_category_id?; end
 
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def saved_change_to_current_bill_summary_id; end
@@ -1349,6 +1552,9 @@ class Bill
     def will_save_change_to_assembly_bill_id?; end
 
     sig { returns(T::Boolean) }
+    def will_save_change_to_auto_update_current_category?; end
+
+    sig { returns(T::Boolean) }
     def will_save_change_to_auto_update_current_summary?; end
 
     sig { returns(T::Boolean) }
@@ -1361,10 +1567,16 @@ class Bill
     def will_save_change_to_bill_type?; end
 
     sig { returns(T::Boolean) }
+    def will_save_change_to_category?; end
+
+    sig { returns(T::Boolean) }
     def will_save_change_to_committee_name?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_created_at?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_current_bill_category_id?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_current_bill_summary_id?; end
