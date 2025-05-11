@@ -696,6 +696,9 @@ class Session
     def restore_ip_address!; end
 
     sig { void }
+    def restore_source!; end
+
+    sig { void }
     def restore_updated_at!; end
 
     sig { void }
@@ -728,6 +731,12 @@ class Session
     sig { returns(T::Boolean) }
     def saved_change_to_ip_address?; end
 
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def saved_change_to_source; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_source?; end
+
     sig { returns(T.nilable([::ActiveSupport::TimeWithZone, ::ActiveSupport::TimeWithZone])) }
     def saved_change_to_updated_at; end
 
@@ -745,6 +754,51 @@ class Session
 
     sig { returns(T::Boolean) }
     def saved_change_to_user_id?; end
+
+    sig { returns(T.nilable(::String)) }
+    def source; end
+
+    sig { params(value: T.nilable(::String)).returns(T.nilable(::String)) }
+    def source=(value); end
+
+    sig { returns(T::Boolean) }
+    def source?; end
+
+    sig { returns(T.nilable(::String)) }
+    def source_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def source_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def source_came_from_user?; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def source_change; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def source_change_to_be_saved; end
+
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def source_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def source_in_database; end
+
+    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
+    def source_previous_change; end
+
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def source_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def source_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def source_was; end
+
+    sig { void }
+    def source_will_change!; end
 
     sig { returns(::ActiveSupport::TimeWithZone) }
     def updated_at; end
@@ -892,6 +946,9 @@ class Session
 
     sig { returns(T::Boolean) }
     def will_save_change_to_ip_address?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_source?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_updated_at?; end
