@@ -16,6 +16,6 @@ class SessionsController < ApplicationController
 
   def destroy
     terminate_session
-    redirect_to new_session_path
+    redirect_to root_path, notice: "로그아웃되었습니다."
   end
 end
