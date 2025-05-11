@@ -366,6 +366,9 @@ class Bill
     sig { params(args: T.untyped, blk: T.untyped).returns(::BillDetail) }
     def build_bill_detail(*args, &blk); end
 
+    sig { params(args: T.untyped, blk: T.untyped).returns(::BillCategory) }
+    def build_current_bill_category(*args, &blk); end
+
     sig { params(args: T.untyped, blk: T.untyped).returns(::BillSummary) }
     def build_current_bill_summary(*args, &blk); end
 
@@ -378,6 +381,12 @@ class Bill
     sig { params(args: T.untyped, blk: T.untyped).returns(::BillDetail) }
     def create_bill_detail!(*args, &blk); end
 
+    sig { params(args: T.untyped, blk: T.untyped).returns(::BillCategory) }
+    def create_current_bill_category(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(::BillCategory) }
+    def create_current_bill_category!(*args, &blk); end
+
     sig { params(args: T.untyped, blk: T.untyped).returns(::BillSummary) }
     def create_current_bill_summary(*args, &blk); end
 
@@ -389,6 +398,18 @@ class Bill
 
     sig { params(args: T.untyped, blk: T.untyped).returns(::GovernmentLegislationNotice) }
     def create_government_legislation_notice!(*args, &blk); end
+
+    sig { returns(T.nilable(::BillCategory)) }
+    def current_bill_category; end
+
+    sig { params(value: T.nilable(::BillCategory)).void }
+    def current_bill_category=(value); end
+
+    sig { returns(T::Boolean) }
+    def current_bill_category_changed?; end
+
+    sig { returns(T::Boolean) }
+    def current_bill_category_previously_changed?; end
 
     sig { returns(T.nilable(::BillSummary)) }
     def current_bill_summary; end
@@ -425,6 +446,9 @@ class Bill
     sig { returns(T.nilable(::BillDetail)) }
     def reload_bill_detail; end
 
+    sig { returns(T.nilable(::BillCategory)) }
+    def reload_current_bill_category; end
+
     sig { returns(T.nilable(::BillSummary)) }
     def reload_current_bill_summary; end
 
@@ -433,6 +457,9 @@ class Bill
 
     sig { void }
     def reset_bill_detail; end
+
+    sig { void }
+    def reset_current_bill_category; end
 
     sig { void }
     def reset_current_bill_summary; end
