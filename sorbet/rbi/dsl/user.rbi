@@ -707,6 +707,51 @@ class User
     def id_will_change!; end
 
     sig { returns(::String) }
+    def name; end
+
+    sig { params(value: ::String).returns(::String) }
+    def name=(value); end
+
+    sig { returns(T::Boolean) }
+    def name?; end
+
+    sig { returns(T.nilable(::String)) }
+    def name_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def name_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def name_came_from_user?; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def name_change; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def name_change_to_be_saved; end
+
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def name_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def name_in_database; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def name_previous_change; end
+
+    sig { params(from: ::String, to: ::String).returns(T::Boolean) }
+    def name_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::String)) }
+    def name_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def name_was; end
+
+    sig { void }
+    def name_will_change!; end
+
+    sig { returns(::String) }
     def password_digest; end
 
     sig { params(value: ::String).returns(::String) }
@@ -764,6 +809,9 @@ class User
     def restore_id_value!; end
 
     sig { void }
+    def restore_name!; end
+
+    sig { void }
     def restore_password_digest!; end
 
     sig { void }
@@ -792,6 +840,12 @@ class User
 
     sig { returns(T::Boolean) }
     def saved_change_to_id_value?; end
+
+    sig { returns(T.nilable([::String, ::String])) }
+    def saved_change_to_name; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_name?; end
 
     sig { returns(T.nilable([::String, ::String])) }
     def saved_change_to_password_digest; end
@@ -861,6 +915,9 @@ class User
 
     sig { returns(T::Boolean) }
     def will_save_change_to_id_value?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_name?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_password_digest?; end
