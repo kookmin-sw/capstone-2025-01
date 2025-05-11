@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_11_132750) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_05_042939) do
   create_table "ai_prompt_templates", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
@@ -18,6 +18,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_11_132750) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_ai_prompt_templates_on_name", unique: true
+  end
+
+  create_table "bill_categories", force: :cascade do |t|
+    t.integer "bill_id", null: false
+    t.string "category", null: false
+    t.string "classified_by", default: "llm", null: false
+    t.string "llm_model"
+    t.integer "editor_id"
+    t.datetime "edited_at"
+    t.text "edit_reason"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bill_id"], name: "index_bill_categories_on_bill_id"
   end
 
   create_table "bill_details", force: :cascade do |t|
@@ -70,9 +84,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_11_132750) do
     t.string "committee_name"
     t.integer "current_bill_summary_id"
     t.boolean "auto_update_current_summary", default: true, null: false
+    t.integer "current_bill_category_id"
+    t.string "category"
+    t.boolean "auto_update_current_category", default: true, null: false
     t.index ["assembly_bill_id"], name: "index_bills_on_assembly_bill_id", unique: true
     t.index ["bill_stage"], name: "index_bills_on_bill_stage"
     t.index ["bill_type"], name: "index_bills_on_bill_type"
+    t.index ["current_bill_category_id"], name: "index_bills_on_current_bill_category_id"
     t.index ["current_bill_summary_id"], name: "index_bills_on_current_bill_summary_id"
     t.index ["proposed_at"], name: "index_bills_on_proposed_at"
   end
@@ -163,8 +181,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_11_132750) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "bill_categories", "bills"
   add_foreign_key "bill_details", "bills"
   add_foreign_key "bill_summaries", "bills"
+  add_foreign_key "bills", "bill_categories", column: "current_bill_category_id"
   add_foreign_key "bills", "bill_summaries", column: "current_bill_summary_id"
   add_foreign_key "government_bill_sponsors", "proposers"
   add_foreign_key "government_legislation_notices", "bills"

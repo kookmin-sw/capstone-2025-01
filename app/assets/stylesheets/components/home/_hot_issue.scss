@@ -22,11 +22,19 @@
 
     display: flex;
     overflow-x: auto;           // 가로 스크롤 활성화
-    scroll-behavior: smooth;    // 부드러운 스크롤            
+    scroll-behavior: smooth;    // 부드러운 스크롤 
+    scroll-snap-type: x mandatory; 
+    outline: none !important;           
 
     // 브라우저 별 자동 스크롤바 숨기기          
     scrollbar-width: none;       // Firefox
     -ms-overflow-style: none;    // IE, Edge
+
+    &:focus,
+    &:focus-visible {
+    outline: none ;
+    box-shadow: none ;
+  }
 }
 
 .hot-issue-card-container::-webkit-scrollbar {
@@ -44,6 +52,7 @@
     flex-direction: column;
     align-items: flex-start;
     flex-shrink: 0;
+    scroll-snap-align: start;
   
     border-radius: 20px; 
     box-sizing: border-box;
@@ -116,6 +125,16 @@
 .hot-issue-previous-icon{
     @extend .hot-issue-arrow;
     @extend .previous-icon;
+}
+
+// 포커스 스타일 추가
+.hot-issue-previous-icon,
+.hot-issue-next-icon {
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    box-shadow: none;
+  }
 }
 
 // 요약된 법안 정보를 가져와야 하는데 없는 법안도 있음
