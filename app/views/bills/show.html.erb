@@ -8,6 +8,23 @@
     <%= law_category_button('government-administration', disabled: true) %>
     <!-- 정당 태그 -->
     <%= political_party_tab('people-power') %>
+    <!-- 내 관심 법안 버튼 -->
+    <div class="star-icon-wrapper" data-controller="star" data-bill-id="<%= @bill.id %>" data-action="click->star#toggle">
+      <%= inline_svg("star", class: "star-icon default") %>
+      <%= inline_svg("select_star", class: "star-icon select") %>
+    </div>
+    <!-- 공유 아이콘 (클릭 시 공유 메뉴 열림) -->
+    <div data-controller="share" class="share-wrapper">
+      <%= inline_svg("share", class: "share-icon", data: { action: "click->share#toggleMenu" }) %>
+      <div class="share-menu" data-share-target="menu" hidden>
+        <button data-action="click->share#copy">🔗 복사</button>
+        <button data-action="click->share#nativeShare">📱 공유</button>
+        <button data-action="click->share#shareToX">❌ X (트위터)</button>
+        <button data-action="click->share#shareToFacebook">📘 페이스북</button>
+        <button data-action="click->share#shareToInstagram">📷 인스타그램</button>
+        <button data-action="click->share#shareToKakao">💬 카카오톡</button>
+      </div>
+    </div>
   </div>
   <!-- 법안 제목 -->
   <div class="bill-detail-title"><%= @bill.title %></div>

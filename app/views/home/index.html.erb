@@ -79,13 +79,15 @@
   <div class="hot-issue-carousel-wrapper">
     <button
       class="hot-issue-previous-icon"
-      data-action="mousedown->carousel#startScrollLeft mouseup->carousel#stopScroll mouseleave->carousel#stopScroll">
+      data-action="mousedown->carousel#startScrollLeft mouseup->carousel#stopScroll mouseleave->carousel#stopScroll"
+      aria-label="이전 슬라이드">
       <%= inline_svg("previous") %>
     </button>
 
-    <div data-carousel-target="container" class="hot-issue-card-container">
+    <!-- tabindex 추가로 키보드 조작 가능하게 -->
+    <div data-carousel-target="container" class="hot-issue-card-container" tabindex="0">
       <% @hot_bills.each do |bill| %>
-        <%= link_to bill_path(bill), class: "hot-issue-card" do %>
+        <%= link_to bill_path(bill), class: "hot-issue-card", aria: { label: "#{bill.title} 요약: #{truncate((bill.summary || '').gsub(/\A(?:제안이유 및 주요내용|제안이유)[:\s]*/, ''), length: 90)}" } do %>
           <div class="hot-issue-title"><%= bill.title %></div>
 
           <div class="hot-issue-header-tag">
@@ -115,15 +117,24 @@
 
     <button
       class="hot-issue-next-icon"
-      data-action="mousedown->carousel#startScrollRight mouseup->carousel#stopScroll mouseleave->carousel#stopScroll">
+      data-action="mousedown->carousel#startScrollRight mouseup->carousel#stopScroll mouseleave->carousel#stopScroll"
+      aria-label="다음 슬라이드">
       <%= inline_svg("next") %>
     </button>
   </div>
 
-  <!-- dot 3개 고정, Stimulus가 인식할 수 있게 controller 내부에 배치 -->
+  <!-- 동적 dot 생성 + aria-current -->
+  <% dot_count = [@hot_bills.size, 5].min %>
   <div class="hot-issue-pagination">
-    <% 3.times do |index| %>
-      <div class="hot-issue-dot <%= 'active' if index == 0 %>" data-carousel-target="dot"></div>
+    <% dot_count.times do |index| %>
+      <div
+        class="hot-issue-dot <%= 'active' if index == 0 %>"
+        data-carousel-target="dot"
+        role="button"
+        tabindex="-1"
+        aria-current="<%= index == 0 ? 'true' : 'false' %>"
+        aria-label="슬라이드 <%= index + 1 %>">
+      </div>
     <% end %>
   </div>
 </div>

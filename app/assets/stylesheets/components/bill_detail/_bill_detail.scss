@@ -22,7 +22,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 15px; // 태그 사이 간격
+  gap: 16px; // 태그 사이 간격
   margin-bottom: 15px;
 }
 
@@ -160,4 +160,9 @@
   @include body-large; 
   padding: 0 20px;
   color: color_variables.$text-secondary-color;
+}
+
+.share-icon {
+  vertical-align: bottom;
+  color: color_variables.$surface-tertiary-color;
 }
