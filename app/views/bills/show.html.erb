@@ -9,7 +9,10 @@
     <!-- 정당 태그 -->
     <%= political_party_tab('people-power') %>
     <!-- 내 관심 법안 버튼 -->
-    <%= inline_svg("star", class: "star-icon", data: { controller: "star", action: "click->star#toggle", bill_id: @bill.id, star_target: "icon" }) %>
+    <div class="star-icon-wrapper" data-controller="star" data-bill-id="<%= @bill.id %>" data-action="click->star#toggle">
+      <%= inline_svg("star", class: "star-icon default") %>
+      <%= inline_svg("select_star", class: "star-icon select") %>
+    </div>
     <!-- 공유 아이콘 (클릭 시 공유 메뉴 열림) -->
     <div data-controller="share" class="share-wrapper">
       <%= inline_svg("share", class: "share-icon", data: { action: "click->share#toggleMenu" }) %>

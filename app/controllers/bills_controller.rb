@@ -24,11 +24,14 @@ class BillsController < ApplicationController
     @total_pages = @pagy.last
     @start_page = [ @current_page - 2, 1 ].max
     @end_page = [ @start_page + 4, @total_pages ].min
+
+    @starred_ids = starred_bill_ids
   end
 
   def show
     @bill = Bill.find(params[:id])
     @representative_proposer = get_representative_proposer(@bill)
+    @starred_ids = starred_bill_ids
   end
 
   def categories

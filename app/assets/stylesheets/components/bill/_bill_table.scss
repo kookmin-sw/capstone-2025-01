@@ -102,12 +102,34 @@
     @include body-medium;
 }
 
-.star-icon {
-    color: color_variables.$surface-tertiary-color;
-  
-    &.active {
-        color: color_variables.$button-system-warn-color;
+.star-icon-wrapper {
+  display: inline-block;
+
+  .star-icon {
+    vertical-align: middle;
+
+    &.default path {
+      fill: color_variables.$surface-tertiary-color;
     }
+
+    &.select path {
+      fill: color_variables.$button-system-warn-color;
+    }
+
+    &.select {
+      display: none;
+    }
+  }
+
+  &.active {
+    .star-icon.select {
+      display: inline;
+    }
+
+    .star-icon.default {
+      display: none;
+    }
+  }
 }
 
 // pagination 스타일 
