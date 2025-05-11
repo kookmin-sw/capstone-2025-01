@@ -115,6 +115,9 @@ module GeneratedPathHelpersModule
   def root_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def session_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def turbo_recede_historical_location_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
