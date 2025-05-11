@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_16_165834) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_11_112024) do
   create_table "ai_prompt_templates", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
@@ -119,6 +119,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_16_165834) do
     t.index ["proposer_id"], name: "index_national_assembly_people_on_proposer_id"
   end
 
+  create_table "omni_auth_identities", force: :cascade do |t|
+    t.string "uid"
+    t.string "provider"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_omni_auth_identities_on_user_id"
+  end
+
   create_table "proposals", force: :cascade do |t|
     t.integer "bill_id", null: false
     t.datetime "created_at", null: false
@@ -158,6 +167,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_16_165834) do
   add_foreign_key "government_bill_sponsors", "proposers"
   add_foreign_key "government_legislation_notices", "bills"
   add_foreign_key "national_assembly_people", "proposers"
+  add_foreign_key "omni_auth_identities", "users"
   add_foreign_key "proposals", "bills"
   add_foreign_key "sessions", "users"
 end
