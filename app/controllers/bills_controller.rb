@@ -45,7 +45,7 @@ class BillsController < ApplicationController
   end
 
   def bill_filter_params
-    params.permit(:q, :bill_type, :starred, tab: [])
+    params.permit(:q, :bill_type)
   end
 
   # 로컬스토리지 → 쿠키에서 ID 가져오기
