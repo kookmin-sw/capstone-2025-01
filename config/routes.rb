@@ -1,27 +1,30 @@
 Rails.application.routes.draw do
-  resource :session
-  resources :passwords, param: :token
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # Application routes
+  ## root
+  root "home#index"
+
+  ## 메인 페이지
+  get "/home", to: "home#index"
+
+  ## 의안 관련
+  resources :bills, only: [ :index, :show ]
+
+
+  # 인증 관련
+  # resource :session
+  # resources :passwords, param: :token
+
+  ## OAuth
+  namespace :oauth do
+    get "/:provider/callback" => "omni_auths#create", as: :callback
+    get "/failure" => "omni_auths#failure", as: :failure
+  end
+  get "/login", to: "login#index", as: :login
+
+
+  # Rails system related
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
-  get "/home", to: "home#index"
-    # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-    # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-    # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-
-    resources :bills, only: [ :index, :show ] do
-      # resources :bill_events, only: [ :index, :show ]
-    end
-
-    # resources :sponsors, only: [ :index, :show ]
-    # resources :departments, only: [ :index, :show ]
-
-    # Root path
-    root "home#index"
-    # NOTE: 스프린트 1에서는 bills#index로 설정
-    # root "bills#index"
-
-    get "/login", to: "login#index", as: :login
 end
