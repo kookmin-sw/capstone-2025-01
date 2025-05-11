@@ -25,21 +25,24 @@
 
 @use "typography/typography";
 
+@use "icons/alert_circle_icon";
+@use "icons/brand_logo";
+@use "icons/divider_icon";
 @use "icons/first_icon";
+@use "icons/kakao_logo_icon";
 @use "icons/last_icon";
 @use "icons/list_icon";
+@use "icons/logout_icon";
+@use "icons/more_icon";
+@use "icons/naver_logo_icon";
 @use "icons/next_icon";
 @use "icons/noti_icon";
+@use "icons/noti_starred_icon";
 @use "icons/previous_icon";
 @use "icons/profile_icon";
-@use "icons/search_icon";
-@use "icons/brand_logo";
-@use "icons/more_icon";
-@use "icons/alert_circle_icon";
-@use "icons/kakao_logo_icon";
-@use "icons/naver_logo_icon";
 @use "icons/remove_icon";
-@use "icons/divider_icon";
+@use "icons/search_icon";
+@use "icons/settings_icon";
 
 // 전역 스타일 설정
 a {

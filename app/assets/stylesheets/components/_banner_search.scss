@@ -1,25 +1,41 @@
 @use "../colors/color_variables";
 @use "../typography/typography" as *;
+@use "../layouts/responsive" as *;
 
 // 최상단 검색바 컨테이너
 .search-bar {
-  width: 660px;
-  height: 58px;
-  border-bottom: 2px solid color_variables.$border-primary-color; 
-  padding-left: 16px;
-  padding-right: 16px;
   margin: auto;
   display: flex;
   align-items: center;
-  justify-content: center;
-  box-sizing: border-box; 
+  justify-self: center;
+
+  @include mobile {
+    width: 315px;
+    height: 36px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-bottom: 1px solid color_variables.$border-primary-color; 
+  }
+
+  @include desktop {
+    width: 660px;
+    height: 58px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-bottom: 2px solid color_variables.$border-primary-color; 
+  }
   
   input[type="text"] {
     @include body-large; 
     border: none;
-    width: 660px;
-    height: 41px;
-    vertical-align: middle; 
+
+    @include mobile {
+      width: 315px;
+    }
+
+    @include desktop {
+      width: 660px;
+    }
   }
       
   input[type="text"]::placeholder {

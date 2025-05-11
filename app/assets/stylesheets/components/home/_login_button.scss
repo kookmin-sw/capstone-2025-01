@@ -1,27 +1,32 @@
 @use "colors/color_variables";
 @use "../../typography/typography" as *;
+@use "../../layouts/responsive" as *;
 
 .login-button-layer{
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-left: auto;
-  margin-right: 30px;
-  gap: 20px;
 }
 
 .login-button {
     @include button-medium;
+    width: auto;
     display: flex;
     align-items: center;
     box-sizing: border-box;
-
-    height: 45px;
-    width: auto;
-    padding: 5px 25px;
-    gap: 6px;
-
-    border-radius: 4px;
+    justify-content: center;
     color: color_variables.$text-inverse-color;
     background: color_variables.$button-primary-color;
+
+    @include mobile {
+        height: 22px;
+        padding: 5px 10px;
+        border-radius: 3px;
+    }
+
+    @include desktop {
+        height: 45px;
+        padding: 5px 25px;
+        border-radius: 4px;
+    }
   }
