@@ -1,17 +1,26 @@
 @use "colors/color_variables";
 @use "../typography/typography.scss" as *;;
 @use "../icons/next_icon";
+@use "../layouts/responsive" as *;
 
 // 배너 컴포넌트 스타일
 .banner-component-layer {
     width: 100vw; 
-    height: 120px;
-    min-height: 120px;
     display: flex;
-    padding-left: 50px;
-    padding-right: 50px;
-    background-color: color_variables.$background-primary-color;
-    box-shadow: 0px 6px 12px -3px rgba(0, 0, 0, 0.2); // 아래쪽 그림자만 
+
+    @include mobile {
+      height: 85px;
+      min-height: 85px;
+      padding: 0px 20px;
+      box-shadow: 0px 4px 8px -2px rgba(0, 0, 0, 0.2);
+    }
+
+    @include desktop {
+      height: 120px;
+      min-height: 120px;
+      padding: 0px 50px;
+      box-shadow: 0px 6px 12px -3px rgba(0, 0, 0, 0.2);
+    }
 }
 
 // 배너-브랜드 로고
@@ -24,24 +33,22 @@
 .all-bills-link {
     display: flex;
     align-items: center;
-    margin-left: 50px;
-  
+
     .all-bills-text {
-      @include button-large;
-      display: flex;
-      align-items: center;
-      color: color_variables.$text-secondary-color;
-      text-decoration: none;
-      gap: 6px;
-  
-      &:hover {
-        text-decoration: underline;
-      }
-  
-      .next-icon {
-        width: 24px;
-        height: 24px;
+        @include button-large;
+        display: flex;
+        align-items: center;
         color: color_variables.$text-secondary-color;
+        text-decoration: none;
+
+      @include mobile {
+          margin-left: 25px;
+          gap: 3px;
+      }
+
+      @include desktop {
+          margin-left: 50px;
+          gap: 6px;
       }
     }
   }

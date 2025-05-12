@@ -1,7 +1,15 @@
-$icon-width: 22.5px; 
-$icon-height: 27.5px; 
+@use "../colors/color_variables";
+@use "../layouts/responsive" as *;
 
-.star-icon {
-  width: $icon-width;
-  height: $icon-height;
+.share-icon {
+  color: color_variables.$surface-tertiary-color;
+
+  @include mobile {
+    width: 15px; 
+    height: 18px; 
+  }
+  @include desktop {
+    width: 23px; 
+    height: 28px; 
+  }
 }

@@ -1,10 +1,13 @@
 @use "../colors/color_variables";
-
-$icon-width: 35px; 
-$icon-height: 35px; 
+@use "../layouts/responsive" as *;
 
 .more-icon {
-  width: $icon-width;
-  height: $icon-height;
-  color: color_variables.$text-tertiary-color;
+  @include mobile {
+    width: 17px;
+    height: 17px;
+  }
+  @include desktop {
+    width: 35px;
+    height: 35px;
+  }
 }

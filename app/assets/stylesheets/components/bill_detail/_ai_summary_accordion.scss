@@ -1,6 +1,7 @@
 @use "../../colors/color_variables";
 @use "../../typography/typography" as *;
 @use "../../icons/more_icon";
+@use "../../layouts/responsive" as *;
 
 // 아코디언 컨테이너
 .accordion-container {
@@ -22,12 +23,20 @@
     }
   }
 }
+
 // 아코디언 헤더
 .accordion-header {
   display: flex;
   flex-direction: column; 
-  padding-bottom: 50px;
   position: relative; // 버튼과 그라데이션의 절대 위치 지정을 위해 필요
+
+  @include mobile {
+    padding-bottom: 10px;
+  }
+
+  @include desktop {
+    padding-bottom: 50px;
+  }
 
   .accordion-header-content-wrapper {
     position: relative; // 그라데이션 오버레이 컨텍스트
@@ -40,9 +49,7 @@
     @include body-large; 
     overflow: hidden;
     transition: max-height 0.3s ease-in-out, padding-bottom 0.3s ease-in-out; // 패딩 전환 효과 추가
-    margin-bottom: 0;
   }
-
 
   .gradient-overlay {
     position: absolute;
@@ -87,6 +94,7 @@
 // 더보기 아이콘
 .arrow-icon {
   @extend .more-icon;
+  color: color_variables.$text-tertiary-color;
   transform: rotate(90deg);
   transition: transform 0.3s ease;
 }
@@ -115,7 +123,6 @@
     align-items: center;
     position: relative;
     padding: 12px 0;
-    // cursor: default;
 
     .ai-info-text {
       @include body-small;
@@ -123,21 +130,28 @@
       color: color_variables.$text-tertiary-color;
     }
   }
+
   .ai-hover-box {
+    width: 60%;
     display: none;
     position: absolute;
     top: 100%; // info-box 바로 아래에 나타나도록
     right: 0;  // 우측 정렬
-    height: 232px;
-    width: 371px;
-    padding: 20px;
     background: color_variables.$surface-inverse-color;
-    border-radius: 20px 0px 20px 20px;
     z-index: 10;
+
+    @include mobile {
+      padding: 10px;
+      border-radius: 15px 0px 15px 15px;
+    }
+
+    @include desktop {
+      padding: 20px;
+      border-radius: 20px 0px 20px 20px;
+    }
 
     .ai-hover-text {
       @include body-small;
-      width: 360px;
       color: color_variables.$text-ai-explain-color;
     }
   }

@@ -1,10 +1,16 @@
 @use "../colors/color_variables";
-
-$icon-width: 172.93px; 
-$icon-height: 28px; 
+@use "../layouts/responsive" as *;
 
 .brand_logo-icon {
-  width: $icon-width;
-  height: $icon-height;
   color: color_variables.$brand-logo-color;
+
+  @include mobile {
+    width: 86px;
+    height: 14px;
+  }
+
+  @include desktop {
+    width: 172.93px; 
+    height: 28px; 
+  }
 }
