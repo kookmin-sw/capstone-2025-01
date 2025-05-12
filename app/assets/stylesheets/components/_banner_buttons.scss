@@ -1,5 +1,6 @@
 @use "colors/color_variables";
 @use "../typography/typography" as *;
+@use "../layouts/responsive" as *;
 
 // 배너 버튼 레이어 스타일
 .banner-button-layer {
@@ -7,8 +8,14 @@
   display: flex;
   align-items: center;
   margin-left: auto;
-  margin-right: 50px;
-  gap: 40px;
+  
+  @include mobile {
+    gap: 15px;
+  }
+
+  @include desktop {
+    gap: 40px;
+  }
 }
 
 // 배너 버튼 스타일
@@ -20,12 +27,24 @@
 
 // 알림 메뉴 위치 조정
 .notification-menu {
-    right: 110px; 
+    @include mobile {
+        right: 50px; 
+    }
+
+    @include desktop {
+        right: 110px; 
+    }
 }
 
 // 프로필 메뉴 위치 조정
 .profile-menu {
-    right: 10px; 
+    @include mobile {
+        right: 5px; 
+    }
+
+    @include desktop {
+        right: 10px; 
+    }
 }
 
 // 프로필 메뉴 헤더 스타일
@@ -37,18 +56,29 @@
 
 // 드롭다운 메뉴 스타일
 .dropdown-menu {
-    min-width: 400px;
-    padding: 20px;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     border-radius: 20px 0px 20px 20px;
     background: color_variables.$surface-primary-color;
-    box-shadow: 2px 6px 6px 2px rgba(0, 0, 0, 0.10);
-    
+
     // 위치 설정
     position: absolute;
     top: calc(90%); // 버튼과 메뉴 사이 간격
     display: none;
+    
+    @include mobile {
+        width: 200px; 
+        min-width: 200px;
+        padding: 15px 10px;
+        box-shadow: 1px 3px 3px 1px rgba(0, 0, 0, 0.10);
+    }
+
+    @include desktop {
+        width: 400px; 
+        min-width: 400px;
+        padding: 15px 20px;
+        box-shadow: 2px 6px 6px 2px rgba(0, 0, 0, 0.10);
+    }
     
     // 개별 메뉴 항목
     .dropdown-item {
@@ -57,9 +87,16 @@
         align-items: center; 
         color: color_variables.$text-secondary-color;
         padding: 10px 10px;
-        gap: 10px;
         border-bottom: 1px solid color_variables.$border-inverse-color; //구분선
         cursor: pointer;
+
+        @include mobile {
+            gap: 5px;
+        }
+        
+        @include desktop {
+            gap: 10px;
+        }
 
         &:last-child {
             border-bottom: none; 
@@ -90,9 +127,16 @@
 
     .dropdown-item {
         width: 100%;
-        padding-left: 44px; // 들여쓰기 효과(아이콘 width + padding + gap)
         cursor: pointer;
         border-bottom: none; // 하위 항목들 사이에는 구분선 제거
+
+        @include mobile {
+           padding-left: 27px; // 들여쓰기 효과(아이콘 width + padding + gap)
+        }
+
+        @include desktop {
+            padding-left: 44px; // 들여쓰기 효과(아이콘 width + padding + gap)
+        }
 
         &:hover {
             background: rgba(0, 0, 0, 0.03);
@@ -114,9 +158,18 @@
 .toggle-switch {
     position: relative;
     display: inline-block;
-    width: 36px;
-    height: 20.25px;
+    
     margin-left: auto; 
+
+    @include mobile {
+        width: 24px;
+        height: 13.5px;
+    }
+
+    @include desktop {
+        width: 36px;
+        height: 20.25px;
+    }
 }
 
 .toggle-switch input {
@@ -139,13 +192,23 @@
     &:before {
         position: absolute;
         content: "";
-        height: 16px;
-        width: 16px;
-        left: 2px;
-        bottom: 2px;
         background-color: white;
         transition: .4s;
         border-radius: 50%;
+
+        @include mobile {
+            height: 10px;
+            width: 10px;
+            left: 2px;
+            bottom: 1.7px;
+        }
+
+        @include desktop {
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+        }
     }
 }
 
@@ -154,7 +217,13 @@ input:checked + .toggle-slider {
 }
 
 input:checked + .toggle-slider:before {
-    transform: translateX(16px);
+    @include mobile {
+        transform: translateX(10px);
+    }
+
+    @include desktop {
+        transform: translateX(16px);
+    }
 }
 
 // 서브메뉴 드롭다운 항목 정렬

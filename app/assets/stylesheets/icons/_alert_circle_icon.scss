@@ -1,9 +1,13 @@
 @use "../colors/color_variables";
-
-$icon-width: 24px; 
-$icon-height: 24px; 
+@use "../layouts/responsive" as *;
 
 .alert-circle-icon {
-  width: $icon-width;
-  height: $icon-height;
+  @include mobile {
+    width: 14px;  
+    height: 14px;
+  }
+  @include desktop {
+    width: 24px;
+    height: 24px;
+  }
 }

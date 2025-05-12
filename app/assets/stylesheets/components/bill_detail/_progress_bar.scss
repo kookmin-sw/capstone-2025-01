@@ -1,28 +1,40 @@
 @use "../../colors/color_variables";
 @use "../../typography/typography" as *;
-
-// 공통 아이콘 스타일 정의
-$ellipse-width: 35px;
-$ellipse-height: 35px;
-
-$triangle-width: 27.71px;
-$triangle-height: 20.25px;
+@use "../../layouts/responsive" as *;
 
 .ellipse-icon-common {
-  width: $ellipse-width;
-  height: $ellipse-height;
   stroke-width: 4px;
   fill: color_variables.$icon-default-background-color;
-  margin-top: 10px;
   z-index: 1;
+
+  @include mobile {
+    width: 17.26px;
+    height: 17.26px;
+    margin-top: 5px;
+  }
+
+  @include desktop {
+    width: 35px;
+    height: 35px;
+    margin-top: 10px;
+  }
 }
 
 .triangle-icon-common {
-  width: $triangle-width;
-  height: $triangle-height;
-  margin-top: -8px;
   z-index: 1;
   flex-shrink: 0;
+
+  @include mobile {
+    margin-top: -3px;
+    width: 17.26px;
+    height: 17.26px;
+  }
+
+  @include desktop {
+    margin-top: -8px;
+    width: 32px;
+    height: 27px;
+  }
 }
 
 // 상태별 아이콘 색상 스타일
@@ -39,11 +51,19 @@ $triangle-height: 20.25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 914px;
   margin: 0 auto;
-  padding: 32px 0;
   position: relative;
   overflow: hidden;
+
+  @include mobile {
+    width: 340px;
+    padding: 15px 0;
+  }
+
+  @include desktop {
+    width: 914px;
+    padding: 32px 0;
+  }
 }
 
 .progress {
@@ -89,16 +109,24 @@ $triangle-height: 20.25px;
 }
 
 .step-bubble {
-  padding: 8px 16px;
+  @include body-medium;   
   border-radius: 12px;
-  @include body-large;   
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
   z-index: 1;
   flex-shrink: 0;
   white-space: nowrap;
+
+  @include mobile {
+    width: 67px;
+    height: 32px;
+  }
+
+  @include desktop {
+    width: 129px;
+    height: 71px;
+  }
 }
 
 .step-label {
@@ -108,13 +136,23 @@ $triangle-height: 20.25px;
 
 .step-line {
   position: absolute;
-  top: 95px;
-  left: 195px;
   transform: translate(-46%, -50%);
-  width: 270px;
-  height: 5px;
   background-color: color_variables.$icon-unchoice-color;
   z-index: 0;
+
+  @include mobile {
+    top: 60px;
+    left: 80px;
+    width: 90px;
+    height: 3px;
+  }
+
+  @include desktop {
+    top: 120px;
+    left: 190px;
+    width: 270px;
+    height: 5px;
+  }
 
   &.active {
     background-color: color_variables.$icon-choice-color;

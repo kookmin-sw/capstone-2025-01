@@ -1,10 +1,16 @@
 @use "../colors/color_variables";
-
-$icon-width: 10.28px; 
-$icon-height: 18px; 
+@use "../layouts/responsive" as *;
 
 .next-icon {
-  width: $icon-width;
-  height: $icon-height;
-  color: color_variables.$icon-default-color;
+  color: color_variables.$text-secondary-color;
+
+  @include mobile {
+    width: 12px;
+    height: 12px;
+  }
+
+  @include desktop {
+    width: 24px;
+    height: 24px;
+  }
 }

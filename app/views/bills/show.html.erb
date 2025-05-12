@@ -14,9 +14,9 @@
       <%= inline_svg("select_star", class: "star-icon select") %>
     </div>
     <!-- 공유 아이콘 (클릭 시 공유 메뉴 열림) -->
-    <div data-controller="share" class="share-wrapper">
-      <%= inline_svg("share", class: "share-icon", data: { action: "click->share#toggleMenu" }) %>
-      <div class="share-menu" data-share-target="menu" hidden>
+    <div data-controller="share">
+      <%= inline_svg("share", class: "share-icon-style", data: { action: "click->share#toggleMenu" }) %>
+      <div data-share-target="menu" hidden>
         <button data-action="click->share#copy">🔗 복사</button>
         <button data-action="click->share#nativeShare">📱 공유</button>
         <button data-action="click->share#shareToX">❌ X (트위터)</button>
@@ -87,9 +87,6 @@
     <div class="bill-detail-label">
       <%= inline_svg("list", class: "list-icon") %>
       추진 현황
-    </div>
-    <div class="bill-detail-content">
-      추진 현황 내용
     </div>
     <div class="bill-detail-content">
       <%= render "progress_bar", bill: @bill %>

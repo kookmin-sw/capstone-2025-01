@@ -1,8 +1,12 @@
-$icon-width: 44px; 
-$icon-height: 44px; 
+@use "../layouts/responsive" as *;
 
 .star-icon {
-  width: $icon-width;
-  height: $icon-height;
-  aspect-ratio: 1/1;
+  @include mobile {
+    width: 24px; 
+    height: 24px; 
+  }
+  @include desktop {
+    width: 40px; 
+    height: 40px; 
+  }
 }
