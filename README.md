@@ -11,7 +11,13 @@
 <br><br>
 
 ## 💡 프로젝트 소개
-[포스터]
+<div align="center"> 
+    <p align = "center">
+        <a href="https://lawnow.kr/">
+            <img src="https://github.com/user-attachments/assets/c4dd0da7-2d55-40de-8383-315b1e75f644" width="70%"/>
+        </a>
+    </p>
+</div>
 
 1️⃣ LawNow는 **사회 이슈에 관심이 많은 청년**들이 어렵고 복잡한 공식 정보 대신 익숙한 SNS를 통해 **검증되지 않은 정보만을 소비**하여, 우리 사회의 **갈등과 양극화가 심화되는 문제를 해결**하기 위해 탄생했습니다.
 
