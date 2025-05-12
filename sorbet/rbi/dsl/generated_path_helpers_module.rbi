@@ -16,19 +16,10 @@ module GeneratedPathHelpersModule
   def bills_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def edit_password_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def edit_session_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def home_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def login_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def new_password_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def new_rails_conductor_inbound_email_path(*args); end
@@ -37,13 +28,7 @@ module GeneratedPathHelpersModule
   def new_rails_conductor_inbound_email_source_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def new_session_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def password_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def passwords_path(*args); end
+  def oauth_callback_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def rails_blob_path(*args); end

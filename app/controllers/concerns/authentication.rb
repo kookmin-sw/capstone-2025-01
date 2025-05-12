@@ -31,17 +31,17 @@ module Authentication
 
     def request_authentication
       session[:return_to_after_authenticating] = request.url
-      redirect_to new_session_path
+      redirect_to login_path
     end
 
     def after_authentication_url
       session.delete(:return_to_after_authenticating) || root_url
     end
 
-    def start_new_session_for(user)
-      user.sessions.create!(user_agent: request.user_agent, ip_address: request.remote_ip).tap do |session|
+    def start_new_session_for(user, source: nil)
+      user.sessions.create!(user_agent: request.user_agent, ip_address: request.remote_ip, source:).tap do |session|
         Current.session = session
-        cookies.signed.permanent[:session_id] = { value: session.id, httponly: true, same_site: :lax }
+        cookies.signed.permanent[:session_id] = { value: session.id, httponly: true, same_site: :lax, secure: Rails.env.production? }
       end
     end
 

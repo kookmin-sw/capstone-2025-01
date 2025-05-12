@@ -51,6 +51,16 @@ class ActiveSupport::TestCase
   end
   def national_assembly_people(fixture_name = nil, *other_fixtures); end
 
+  sig { params(fixture_name: NilClass, other_fixtures: NilClass).returns(T::Array[OmniAuthIdentity]) }
+  sig { params(fixture_name: T.any(String, Symbol), other_fixtures: NilClass).returns(OmniAuthIdentity) }
+  sig do
+    params(
+      fixture_name: T.any(String, Symbol),
+      other_fixtures: T.any(String, Symbol)
+    ).returns(T::Array[OmniAuthIdentity])
+  end
+  def omni_auth_identities(fixture_name = nil, *other_fixtures); end
+
   sig { params(fixture_name: NilClass, other_fixtures: NilClass).returns(T::Array[Proposal]) }
   sig { params(fixture_name: T.any(String, Symbol), other_fixtures: NilClass).returns(Proposal) }
   sig do

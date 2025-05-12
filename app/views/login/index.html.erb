@@ -82,10 +82,12 @@
       <%= inline_svg "kakao_logo", class: "kakao-btn-logo" %>
       카카오 로그인
     </div>
-    <div class="naver-login-btn">
-      <%= inline_svg "naver_logo", class: "naver-btn-logo" %>
-      네이버 로그인
-    </div>
+    <%= form_tag "/oauth/naver", method: :post, data: { turbo: false } do %>
+      <button class="naver-login-btn">
+        <%= inline_svg "naver_logo", class: "naver-btn-logo" %>
+        네이버 로그인
+      </button>
+    <% end %>
     <div class="login-indicator">3초만에 시작하기</div>
   </div>
 </div>
