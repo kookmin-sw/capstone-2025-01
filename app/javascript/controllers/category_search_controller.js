@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["selectedCategory", "input"]
-
+  
   connect() {
     // 선택된 탭을 Set으로 관리
     this.selectedTabs = new Set()
@@ -51,6 +51,33 @@ export default class extends Controller {
     
     // 태그 표시 업데이트
     this.updateTagsDisplay()
+    // placeholder 업데이트
+    this.updatePlaceholder()
+  }
+
+  submitSingleTab(e) {
+    e.preventDefault()
+    const tab = e.currentTarget.dataset.tab
+  
+    this.selectedTabs.clear()
+  
+    const baseUrl = "/bills"
+  
+    // 전체 탭일 경우 쿼리스트링 없이 이동
+    if (tab === "all") {
+      window.location.href = baseUrl
+      return
+    }
+  
+    // 관심법안은 별도 처리
+    if (tab === "starred") {
+      window.location.href = `${baseUrl}?starred=true`
+      return
+    }
+  
+    const params = new URLSearchParams()
+    params.set("tab", tab)
+    window.location.href = `${baseUrl}?${params.toString()}`
   }
 
   // 모든 태그 표시 업데이트
@@ -61,10 +88,7 @@ export default class extends Controller {
     this.clearAllTags()
     
     // 선택된 탭이 없으면 종료 및 placeholder 업데이트
-    if (this.selectedTabs.size === 0) {
-      this.updatePlaceholder()
-      return
-    }
+    if (this.selectedTabs.size === 0) return
     
     const tabsArray = Array.from(this.selectedTabs)
     
@@ -80,7 +104,7 @@ export default class extends Controller {
     if (remainingCount > 0) {
       this.addMoreTag(remainingCount)
     }
-    
+
     // placeholder 업데이트
     this.updatePlaceholder()
   }
