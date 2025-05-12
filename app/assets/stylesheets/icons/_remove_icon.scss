@@ -1,10 +1,15 @@
 @use "../colors/color_variables";
-
-$icon-width: 24px; 
-$icon-height: 24px; 
+@use "../layouts/responsive" as *;
 
 .remove-icon {
-  width: $icon-width;
-  height: $icon-height;
   color: color_variables.$text-tertiary-color;
+
+  @include mobile {
+    width: 12px; 
+    height: 12px; 
+  }
+  @include desktop {
+    width: 24px; 
+    height: 24px; 
+  }
 }

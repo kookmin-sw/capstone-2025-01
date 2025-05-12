@@ -1,14 +1,22 @@
 @use "colors/color_variables";
 @use "../../typography/typography" as *;
+@use "../../layouts/responsive" as *;
 
 .main-message-layer {
   text-align: center;
-  padding: 25px 410px 80px 410px;
+
+  @include mobile {
+    padding: 20px;
+  }
+
+  @include desktop {
+    padding: 25px 20px 80px 20px;
+  }
 }
 
 .headline-text {
-  @include headline-large;
-  color: color_variables.$text-primary-color; // 필요에 따라 색상 지정
+  @include headline-medium;
+  color: color_variables.$text-primary-color;
 }
 
 .title-text {

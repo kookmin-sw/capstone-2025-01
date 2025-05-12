@@ -1,25 +1,8 @@
 @use "colors/color_variables";
 @use "../_law_categories.scss";
 @use "../../icons/remove_icon";
-@use "../../icons/search_icon";
 @use "../../typography/typography" as *;
-
-// 키워드 검색바 전체 영역 (입력창 + 카테고리 태그 포함)
-.keyword-search-bar {
-  width: 660px;
-  height: 58px;
-  padding: 0 16px;
-  gap: 8px;
-
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  box-sizing: border-box;
-  overflow: hidden;     // 가로 넘침 방지
-  position: relative;
-  border-bottom: 2px solid color_variables.$border-primary-color;
-}
+@use "../../layouts/responsive" as *;
 
 // 선택된 카테고리 태그가 보여지는 영역
 .selected-category-tag-container {
@@ -37,25 +20,15 @@
 
   // 실제 키워드 입력창
   input[type="text"] {
-    @include body-large;
-    flex: 1 1 auto;        // 공간 부족하면 줄어듦
-    min-width: 570px;
-    border: none;
-    height: 46px;
-    padding: 16px;
-    background: transparent;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-
-    // 포커스 시 테두리 제거
-    &:focus {
-      outline: none;
+    @include mobile {
+      height: 24px;
+      width: 100vw;
+      padding: 5px;
     }
 
-    &::placeholder {
-      color: color_variables.$text-tertiary-color;
-      opacity: 0.6;
+    @include desktop {
+      height: 46px;
+      padding: 16px;
     }
   }
 }
@@ -65,10 +38,19 @@
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
-  gap: 5px;
-  padding: 6px 15px;
-  border-radius: 20px;
   background-color: color_variables.$surface-primary-color;
+
+  @include mobile {
+    padding: 0px 10px;
+    border-radius: 15px;
+    height: 24px;
+  }
+
+  @include desktop {
+    gap: 5px;
+    padding: 6px 15px;
+    border-radius: 20px;
+  }
 
   span {
     @extend .law-common-text-component;
@@ -76,7 +58,6 @@
 
   .remove-button {
     @extend .remove-icon;
-    background: transparent;
     border: none;
     cursor: pointer;
     display: flex;
@@ -85,53 +66,45 @@
   }
 }
 
-// 검색 버튼 아이콘
-.keyword-search-button {
-  @extend .search-icon;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding-bottom: 16px;
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px color_variables.$background-primary-color;
-  }
-}
-
 // 실시간 검색어 영역
 .trending-keywords {
-  width: 660px;
-  margin: 15px auto 102px;
-  transform: translateX(20px);
   display: flex; 
   align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  color: color_variables.$text-secondary-color;
+
+  @include mobile {
+    width: 315px;
+    margin: 15px auto 50px;
+    gap: 5px;
+  }
+
+  @include desktop {
+    width: 660px;
+    margin: 15px auto 100px;
+    gap: 10px;
+  }
 
   .keyword-bubble {
-      background-color: color_variables.$surface-primary-color;
-      color: color_variables.$text-primary-color;
+    background-color: color_variables.$surface-primary-color;
+    color: color_variables.$text-primary-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-      width: 76px;
+    @include mobile {
+      height: 20px;
+      padding: 3px 13px;
+      border-radius: 15px;
+    }
+
+    @include desktop {
       height: 33px;
       padding: 6px 15px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 5px;
       border-radius: 20px;
-      white-space: nowrap;
-      flex-shrink: 0;
+    }
   }
 }
 
 .trending-keyword-text {
   @include caption-medium;
   font-weight: 700; 
-}
-
-.show-keywords {
-  display: flex !important;
 }
