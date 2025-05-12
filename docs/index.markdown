@@ -108,6 +108,44 @@ permalink: /
     </tr>
 </table>
 
+<div class="chat-container">
+  <div class="chat-message receiver">
+    <div class="message-bubble">
+      <p>왜 법을 주제로 한 플랫폼을 만들게 되었나요?</p>
+    </div>
+  </div>
+
+  <div class="chat-message sender">
+    <div class="message-bubble">
+      <p>법이 오픈소스 프로젝트와 비슷하다는 생각이 들었어요 🧐 <br>PR을 제출하고 대리인들의 의결로 Merge/Close가 결정되는 구조요!</p>
+    </div>
+  </div>
+
+  <div class="chat-message sender with-profile">
+    <div class="message-bubble">
+      <p>'법'이라는 오픈소스 프로젝트에도 무관심과 기여 부족이 문제가 되는 것 같아서, 접근성 개선해보고 싶었습니다.</p>
+    </div>
+  </div>
+
+  <div class="chat-message receiver">
+    <div class="message-bubble">
+      <p>팀원들은 왜 이 프로젝트에 함께하게 되었나요?</p>
+    </div>
+  </div>
+  
+  <div class="chat-message sender">
+    <div class="message-bubble">
+      <p> 저희 모두는 법은 머리 아프고 멀게 느껴지지만, 사실은 우리 삶을 지탱하는 가장 가까운 울타리라고 생각했어요.</p>
+    </div>
+  </div>
+
+  <div class="chat-message sender">
+    <div class="message-bubble">
+      <p>청년 세대로서 정치와 법의 중요성을 절실히 느끼며, 일상 속에서 법을 쉽게 이해하고 이야기할 수 있는 플랫폼을 함께 만들어보고자 했습니다. 💬</p>
+    </div>
+  </div>
+</div>
+
 ---
 
 ## 시스템 아키텍처
