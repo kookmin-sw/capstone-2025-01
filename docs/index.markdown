@@ -1,7 +1,7 @@
 ---
 layout: default
 title: 
-nav_order: 1
+nav_order: 0
 permalink: /
 ---
 
@@ -17,6 +17,11 @@ permalink: /
 ---
 
 ## 프로젝트 소개
+<div align="center"> 
+    <p align = "center">
+        <img src="./assets/images/poster.png" width="80%"/>
+    </p>
+</div>
 <br>
 1️⃣ LawNow는 **사회 이슈에 관심이 많은 청년**들이 어렵고 복잡한 공식 정보 대신 익숙한 SNS를 통해 **검증되지 않은 정보만을 소비**하여, 우리 사회의 **갈등과 양극화가 심화되는 문제를 해결**하기 위해 탄생했습니다.
 
