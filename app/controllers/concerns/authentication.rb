@@ -17,7 +17,7 @@ module Authentication
   end
 
   def current_admin_user
-    Current.session&.user if Current.session&.user&.admin?
+    current_user if current_user.admin?
   end
 
   private
