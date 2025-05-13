@@ -10,6 +10,18 @@ module GeneratedPathHelpersModule
   include ::ActionDispatch::Routing::PolymorphicRoutes
 
   sig { params(args: T.untyped).returns(String) }
+  def admin_comment_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def admin_comments_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def admin_dashboard_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def admin_root_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def bill_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }

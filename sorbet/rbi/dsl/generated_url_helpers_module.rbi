@@ -10,6 +10,18 @@ module GeneratedUrlHelpersModule
   include ::ActionDispatch::Routing::PolymorphicRoutes
 
   sig { params(args: T.untyped).returns(String) }
+  def admin_comment_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def admin_comments_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def admin_dashboard_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def admin_root_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def bill_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }

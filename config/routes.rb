@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  ActiveAdmin.routes(self)
   # Application routes
   ## root
   root "home#index"
