@@ -28,10 +28,10 @@
       <div class="profile-menu-header">안녕하세요, USER NAME님!</div>
       <div class="dropdown-items">
         <!-- 내 관심 법안 -->
-        <div class="dropdown-item">
+        <%= link_to bills_path(starred: true), class: "dropdown-item" do %>
           <%= inline_svg("noti_starred", class: "noti-starred-icon") %>
           내 관심 법안
-        </div>
+        <% end %>
         <!-- 설정 -->
         <div class="dropdown-item settings-item" data-dropdown-target="settingsItem" data-action="click->dropdown#toggleSettings">
           <%= inline_svg("settings", class: "settings-icon") %>
