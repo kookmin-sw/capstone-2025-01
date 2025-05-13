@@ -48,6 +48,11 @@ ActiveAdmin.register BillSummary do
     selectable_column
     id_column
     column :bill
+    column "Current?" do |bs|
+      if bs.bill.current_bill_summary_id == bs.id
+        status_tag true
+      end
+    end
     column :content do |bill_summary|
       truncate(bill_summary.content, length: 50)
     end
