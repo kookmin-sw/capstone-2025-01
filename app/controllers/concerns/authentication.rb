@@ -12,6 +12,14 @@ module Authentication
     end
   end
 
+  def authenticate_admin_user!
+    redirect_to root_path unless current_admin_user
+  end
+
+  def current_admin_user
+    Current.session&.user if Current.session&.user&.admin?
+  end
+
   private
     def authenticated?
       resume_session
