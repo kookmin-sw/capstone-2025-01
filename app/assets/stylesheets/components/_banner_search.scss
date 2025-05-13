@@ -27,14 +27,15 @@
   }
   
   input[type="text"] {
-    @include body-large; 
     border: none;
 
     @include mobile {
+      @include body-medium;
       width: 315px;
     }
 
     @include desktop {
+      @include body-large; 
       width: 660px;
     }
   }
@@ -47,7 +48,14 @@
 // 검색 버튼 스타일
 .search-button {
   @extend .search-icon;
-  padding-bottom: 16px;
+
+  @include mobile {
+    margin-left: 5px;
+  }
+
+  @include desktop {
+    margin-left: 10px;
+  }
 
   &:focus {
     outline: none;
