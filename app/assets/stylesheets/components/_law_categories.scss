@@ -1,79 +1,93 @@
 @use "../colors/color_variables";
 @use "../typography/typography" as *;
 @use "../icons/divider_icon";
+@use "../layouts/responsive" as *;
 
 // 법안 카테고리 컴포넌트 스타일
-$law-components: (
-    all-comp: 81px,
-    starred-comp: 152px,
-    labor-humanrights-comp: 170px,
-    health-welfare-comp: 136px,
-    socialsecurity-national-comp: 200px,
-    economy-finance-comp: 103px,
-    informationcommunication-sciencetechnology-comp: 196px,
-    industry-agriculture-comp: 166px,
-    education-comp: 103px,
-    culture-sports-comp: 170px,
-    family-genderequality-comp: 151px,
-    diplomacy-unification-comp: 136px,
-    land-environment-comp: 136px,
-    disaster-climate-comp: 185px,
-    government-administration-comp: 136px,
-    legislative-judicial-comp: 200px
+$LAW_CATEGORIES: (
+    "all",
+    "starred",
+    "labor-humanrights",
+    "health-welfare",
+    "socialsecurity-national",
+    "economy-finance",
+    "informationcommunication-sciencetechnology",
+    "industry-agriculture",
+    "education",
+    "culture-sports",
+    "family-genderequality",
+    "diplomacy-unification",
+    "land-environment",
+    "disaster-climate",
+    "government-administration",
+    "legislative-judicial"
 );
 
 .law-component-layer {
     display: flex;
     max-width: 1652px;
-    padding: 20px;
-    
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     margin: 0 auto;
-    gap: 10px;
+    
+    @include mobile {
+        gap: 5px;
+        padding: 15px;
+    }
+
+    @include desktop {
+        gap: 10px;
+        padding: 20px;
+    }
 }
 
 // 공통 스타일 정의
 %law-common-shape-component {
-    height: 57px;
-    min-height: 57px;
-    border-radius: 20px; 
-    border-width: 1px;
-    padding: 4px 25px;
-    gap: 10px;
-
+    width: auto;
     justify-content: center;
     display: flex;
     align-items: center;
-    box-sizing: border-box;
-    white-space: nowrap; // 자동 줄 바꿈이 안되게 설정 
-
     background: color_variables.$background-primary-color;
     border: 1px solid color_variables.$border-primary-color;
 
+    @include mobile {
+        // height: 35px;
+        // min-height: 35px;
+        height: 30px;
+        min-height: 30px;
+        border-radius: 12px; 
+        // padding: 8px 15px;
+        padding: 0px 10px;
+    }
+
+    @include desktop {
+        height: 57px;
+        min-height: 57px;
+        border-radius: 20px; 
+        padding: 4px 25px;
+    }
+
     &:focus, &:active, &:hover {
         outline: none !important;
-        border-color: color_variables.$border-primary-color !important;
+        border: 1px solid color_variables.$border-primary-color !important;
         box-shadow: none !important;
     }
 }
 
 // 각 컴포넌트의 스타일 생성
-@each $name, $width in $law-components {
-    .#{$name} {
+@each $name in $LAW_CATEGORIES {
+    .#{$name}-comp {
         @extend %law-common-shape-component;
-        width: $width;
     }
 }
 
 // 동적으로 선택된 탭에 대한 스타일 생성
-@each $name, $width in $law-components {
-    .#{$name}.active {
+@each $name in $LAW_CATEGORIES {
+    .#{$name}-comp.active {
         @extend %law-common-shape-component;
         border: 1px solid color_variables.$border-primary-color;
         background: color_variables.$surface-select-background-color;
-        width: $width;
     }
 }
 

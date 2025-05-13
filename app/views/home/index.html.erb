@@ -28,8 +28,10 @@
   </div>
 </nav>
 
+<!-- 법안 카테고리 -->
 <% active_tabs = parsed_active_tabs %>
 
+<!-- 메인페이지 법안 검색바 -->
 <form data-controller="category-search" data-action="submit->category-search#goToSearch">
   <%= render "shared/law_categories", active_tabs: active_tabs, context: :search %>
 
@@ -41,21 +43,17 @@
     </div>
   </div>
 
-  <div class="keyword-search-bar">
+  <div class="search-bar">
     <div id="selected-category"
          class="selected-category-tag-container"
          data-category-search-target="selectedCategory">
-      <% Array(params[:tab]).reject { |t| %w[all starred].include?(t) }.each do |tab| %>
-        <%= hidden_field_tag "tab[]", tab %>
-      <% end %>
-
       <%= text_field_tag :q, params[:q],
-            placeholder: "검색어를 입력해주세요.",
+            placeholder: "검색어를 입력해주세요",
             data: { "category-search-target": "input" } %>
     </div>
 
     <button type="submit"
-            class="keyword-search-button"
+            class="search-button"
             data-action="click->category-search#goToSearch">
       <%= inline_svg("search", class: "search-icon") %>
     </button>
