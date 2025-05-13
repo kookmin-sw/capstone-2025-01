@@ -4,18 +4,25 @@ export default class extends Controller {
   static targets = ["container", "dot"]
 
   connect() {
-    this.cardWidth = 430
+    const card = this.containerTarget.querySelector(".hot-issue-card")
+    const gap = 30
+    this.cardWidth = card ? card.offsetWidth + gap : 460
+
     this.totalSlides = this.containerTarget.children.length
     this.dotCount = Math.min(this.totalSlides, 5)
     this.currentIndex = 0
     this.scrolling = false
+    this.scrollAnimationId = null
 
     this.updateDots()
-    this.bindEvents()
+    this.addEventListeners()
   }
 
-  // 이벤트 핸들러를 변수에 저장해서 remove 가능하도록
-  bindEvents() {
+  disconnect() {
+    this.removeEventListeners()
+  }
+
+  addEventListeners() {
     this.boundOnScroll = this.onScroll.bind(this)
     this.boundOnKeydown = this.onKeydown.bind(this)
     this.boundWindowKeydown = (e) => {
@@ -32,8 +39,7 @@ export default class extends Controller {
     window.addEventListener("keydown", this.boundWindowKeydown)
   }
 
-  // Stimulus가 DOM에서 제거될 때 clean-up
-  disconnect() {
+  removeEventListeners() {
     this.containerTarget.removeEventListener("scroll", this.boundOnScroll)
     this.containerTarget.removeEventListener("keydown", this.boundOnKeydown)
     window.removeEventListener("keydown", this.boundWindowKeydown)
@@ -62,23 +68,31 @@ export default class extends Controller {
   }
 
   startScrollLeft() {
-    if (!this.scrolling) this.scrollToCard(-1)
+    this.scrollToCard(-1)
   }
 
   startScrollRight() {
-    if (!this.scrolling) this.scrollToCard(1)
+    this.scrollToCard(1)
   }
 
   scrollToCard(direction, duration = 700) {
-    const start = this.containerTarget.scrollLeft
-    const target = Math.max(
-      0,
-      Math.min(start + direction * this.cardWidth, this.containerTarget.scrollWidth)
-    )
-    this.animateScroll(start, target, duration)
+    if (this.scrolling) return
+
+    const currentIndex = Math.round(this.containerTarget.scrollLeft / this.cardWidth)
+    const targetIndex = Math.max(0, Math.min(currentIndex + direction, this.totalSlides - 1))
+    const targetScroll = targetIndex * this.cardWidth
+    const currentScroll = this.containerTarget.scrollLeft
+
+    if (Math.abs(currentScroll - targetScroll) < 2) return // 이동할 필요 없음
+
+    this.animateScroll(currentScroll, targetScroll, duration)
   }
 
   animateScroll(start, end, duration) {
+    if (this.scrollAnimationId) {
+      cancelAnimationFrame(this.scrollAnimationId)
+    }
+
     this.scrolling = true
     const startTime = performance.now()
 
@@ -89,13 +103,14 @@ export default class extends Controller {
       this.containerTarget.scrollLeft = start + (end - start) * ease
 
       if (progress < 1) {
-        requestAnimationFrame(animate)
+        this.scrollAnimationId = requestAnimationFrame(animate)
       } else {
         this.scrolling = false
+        this.scrollAnimationId = null
         this.onScroll()
       }
     }
 
-    requestAnimationFrame(animate)
+    this.scrollAnimationId = requestAnimationFrame(animate)
   }
 }
