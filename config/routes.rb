@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
 
   # 인증 관련
-  resource :session, only: [ :destroy ]
+  resource :session, only: [ :new, :destroy ]
   # resources :passwords, param: :token
 
   ## OAuth
