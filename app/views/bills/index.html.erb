@@ -1,20 +1,65 @@
-<!-- 상단 배너 검색바 -->
-<%= render "banner_search" %>
-<!-- 법안 카테고리 -->
-<%= render "shared/law_categories",
+<!-- 데스크탑 베너, 검색바 -->
+<div class="desktop-only">
+  <!-- 상단 배너 검색바 -->
+  <%= render "banner_search" %>
+</div>
+
+
+<!-- 모바일 베너, 검색바 -->
+<div class="mobile-only">
+  <!-- 상단 배너 -->
+  <nav class="banner-component-layer">
+    <!-- 왼쪽 브랜드 로고 -->
+    <div class="brand-logo">
+      <%= link_to root_path do %>
+        <%= inline_svg("brand_logo", class: "brand_logo-icon") %>
+      <% end %>
+    </div>
+    <div class="all-bills-link">
+      <%= link_to bills_path, class: "all-bills-text" do %>
+        모든 법안 보러가기 <%= inline_svg("next", class: "next-icon") %>
+      <% end %>
+    </div>
+  </nav>
+
+  <!-- 법안 카테고리 -->
+  <!-- 메인페이지 법안 검색바 -->
+  <form data-controller="category-search" data-action="submit->category-search#goToSearch">
+    <%= render "shared/law_categories", 
             active_tabs: (params[:starred] == 'true' ? ["starred"] : parsed_active_tabs.presence || ["all"]),
-            context: :list %>
+            context: :search %>
+
+    <div class="search-bar">
+      <div id="selected-category"
+          class="selected-category-tag-container"
+          data-category-search-target="selectedCategory">
+        <%= text_field_tag :q, params[:q],
+              placeholder: "검색어를 입력해주세요",
+              data: { "category-search-target": "input" } %>
+      </div>
+
+      <button type="submit"
+              class="search-button"
+              data-action="click->category-search#goToSearch">
+        <%= inline_svg("search", class: "search-icon") %>
+      </button>
+    </div>
+  </form>
+</div>
+
+
+
 
 <div class="bill-card-container">
   <!-- 실제 데이터 -->
   <% @bills.each do |bill| %>
     <%= link_to bill_path(bill), class: "bill-card" do %>
       <div class="bill-header">
+        <div class="star-icon-wrapper" data-controller="star" data-bill-id="<%= bill.id %>" data-action="click->star#toggle">
+          <%= inline_svg("star", class: "star-icon default") %>
+          <%= inline_svg("select_star", class: "star-icon select") %>
+        </div>
         <div class="bill-title">
-          <div class="star-icon-wrapper" data-controller="star" data-bill-id="<%= bill.id %>" data-action="click->star#toggle">
-            <%= inline_svg("star", class: "star-icon default") %>
-            <%= inline_svg("select_star", class: "star-icon select") %>
-          </div>
           <%= bill.title %>
         </div>
         <div class="bill-header-tag">
@@ -24,17 +69,25 @@
           </div>
           <%# TODO: 법안 상태 추가 필요 %>
           <div class="bill-tag-status <%= bill.status_css_class %>">
-            <span class="status-emoji"><%= bill.status_emoji %></span>
-            <span class="status-label"><%= bill.current_status %></span>
+            <%= bill.status_emoji %>
+            <%= bill.current_status %>
           </div>
         </div>
       </div>
       <div class="bill-description">
         <%# TODO: AI 요약 지원 추가 필요 %>
-        <%= truncate(
-          (bill.summary || "").gsub(/\A(?:제안이유 및 주요내용|제안이유)[:\s]*/, ""),
-          length: 120
-        ) %>
+        <span class="mobile-only">
+          <%= truncate(
+            (bill.summary || "").gsub(/\A(?:제안이유 및 주요내용|제안이유)[:\s]*/, ""),
+            length: 80
+          ) %>
+        </span>
+        <span class="desktop-only">
+          <%= truncate(
+            (bill.summary || "").gsub(/\A(?:제안이유 및 주요내용|제안이유)[:\s]*/, ""),
+            length: 120
+          ) %>
+        </span>
       </div>
     <% end %>
   <% end %>
@@ -42,32 +95,28 @@
 
 <%# Pagination %>
 <% if @pagy.pages >= 1 %>
-  <nav class="pagination">
-    <ul class="pagination-list">
+  <ul class="pagination-list">
+    <!-- 항상 표시 + 항상 클릭 가능 -->
+    <%= link_to bills_path(page: 1) do %>
+      <%= inline_svg("first", class: "laquo-icon") %>
+    <% end %>
 
-      <!-- 항상 표시 + 항상 클릭 가능 -->
-        <%= link_to bills_path(page: 1) do %>
-          <%= inline_svg("first", class: "laquo-icon") %>
-        <% end %>
+    <%= link_to bills_path(page: @current_page > 1 ? @current_page - 1 : 1) do %>
+      <%= inline_svg("previous", class: "lsaquo-icon") %>
+    <% end %>
 
-        <%= link_to bills_path(page: @current_page > 1 ? @current_page - 1 : 1) do %>
-          <%= inline_svg("previous", class: "lsaquo-icon") %>
-        <% end %>
+    <% (@start_page..@end_page).each do |page| %>
+      <li class="page-num <%= 'active' if page == @current_page %>">
+        <%= link_to page, bills_path(page: page) %>
+      </li>
+    <% end %>
 
-      <% (@start_page..@end_page).each do |page| %>
-        <li class="page-num <%= 'active' if page == @current_page %>">
-          <%= link_to page, bills_path(page: page) %>
-        </li>
-      <% end %>
+    <%= link_to bills_path(page: @current_page < @total_pages ? @current_page + 1 : @total_pages) do %>
+      <%= inline_svg("next", class: "rsaquo-icon") %>
+    <% end %>
 
-        <%= link_to bills_path(page: @current_page < @total_pages ? @current_page + 1 : @total_pages) do %>
-          <%= inline_svg("next", class: "rsaquo-icon") %>
-        <% end %>
-
-        <%= link_to bills_path(page: @total_pages) do %>
-          <%= inline_svg("last", class: "raquo-icon") %>
-        <% end %>
-
-    </ul>
-  </nav>
+    <%= link_to bills_path(page: @total_pages) do %>
+      <%= inline_svg("last", class: "raquo-icon") %>
+    <% end %>
+  </ul>
 <% end %>
