@@ -9,7 +9,7 @@ export default class extends Controller {
 
     // URL에서 탭 파라미터를 가져옴
     const urlParams = new URLSearchParams(window.location.search)
-    const tabsFromUrl = urlParams.getAll("tab") || []
+    const tabsFromUrl = urlParams.getAll("tab[]") || []
 
     // 검색바가 없는 경우 종료
     if (!this.hasSelectedCategoryTarget) return
@@ -22,6 +22,8 @@ export default class extends Controller {
     
     // 태그 표시 업데이트
     this.updateTagsDisplay()
+    // placeholder 업데이트
+    this.updatePlaceholder()
   }
 
   toggleCategory(e) {
@@ -53,6 +55,8 @@ export default class extends Controller {
     this.updateTagsDisplay()
     // placeholder 업데이트
     this.updatePlaceholder()
+    // URL 업데이트
+    this.updateURL()
   }
 
   submitSingleTab(e) {
@@ -157,15 +161,44 @@ export default class extends Controller {
     existingTags.forEach(tag => tag.remove())
   }
 
+  // 태그 X 버튼을 눌렀을 때 해당 항목 제거
   removeCategory(e) {
-    // 태그에 있는 X 버튼을 눌렀을 때 해당 항목 제거
     const tab = e.target.dataset.tab
-    const button = document.querySelector(`.law-category-button[data-tab="${tab}"]`)
+    
+    // 현재 컨트롤러 요소의 스코프 내에서만 버튼 찾기
+    const container = this.element.closest('.mobile-only, .desktop-only')
+    const button = container.querySelector(`.law-category-button[data-tab="${tab}"]`)
+    
     if (button) button.classList.remove("active")
     this.selectedTabs.delete(tab)
     
-    // 태그 표시 업데이트
+    // 태그, URL 업데이트
     this.updateTagsDisplay()
+    this.updateURL()
+  }
+
+  // URL 업데이트 메서드
+  updateURL() {
+    const baseUrl = "/bills"
+    const params = new URLSearchParams(window.location.search)
+    
+    // 기존 tab[] 파라미터 모두 제거
+    params.delete("tab[]")
+    params.delete("tab")
+    
+    // 선택된 탭이 1개면 단일 값으로 전송
+    if (this.selectedTabs.size === 1) {
+      const only = Array.from(this.selectedTabs)[0]
+      params.set("tab", only)
+    } 
+    // 2개 이상이면 배열로 전송
+    else if (this.selectedTabs.size > 1) {
+      this.selectedTabs.forEach(tab => params.append("tab[]", tab))
+    }
+    
+    // 현재 페이지 유지하면서 URL만 업데이트
+    const newUrl = `${baseUrl}?${params.toString()}`
+    window.history.pushState({ path: newUrl }, '', newUrl)
   }
 
   goToSearch(e) {
