@@ -15,6 +15,7 @@ class BillsController < ApplicationController
 
     @bills = @bills.by_title(params[:q])
                    .by_bill_type(bill_type_param)
+                   .where(category: @tabs) if @tabs.any?
 
     @pagy, @bills = pagy(@bills.order(proposed_at: :desc, bill_number: :desc))
 
