@@ -10,7 +10,7 @@ module TabParamsParser
       else
         []
       end
-    list.reject { |t| t == "starred" }
+    list.select { |t| LawCategory::PERSISTABLE_CATEGORY_KEYS.include?(t) }
   end
 
   def selected_law_category_buttons(tab)
