@@ -16,6 +16,16 @@ class ActiveSupport::TestCase
   end
   def ai_prompt_templates(fixture_name = nil, *other_fixtures); end
 
+  sig { params(fixture_name: NilClass, other_fixtures: NilClass).returns(T::Array[BillCategory]) }
+  sig { params(fixture_name: T.any(String, Symbol), other_fixtures: NilClass).returns(BillCategory) }
+  sig do
+    params(
+      fixture_name: T.any(String, Symbol),
+      other_fixtures: T.any(String, Symbol)
+    ).returns(T::Array[BillCategory])
+  end
+  def bill_categories(fixture_name = nil, *other_fixtures); end
+
   sig { params(fixture_name: NilClass, other_fixtures: NilClass).returns(T::Array[BillDetail]) }
   sig { params(fixture_name: T.any(String, Symbol), other_fixtures: NilClass).returns(BillDetail) }
   sig do

@@ -13,8 +13,8 @@
   @include mobile {
     width: 315px;
     height: 36px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 0px 10px;
+    margin: 10px 0px;
     border-bottom: 1px solid color_variables.$border-primary-color; 
   }
 

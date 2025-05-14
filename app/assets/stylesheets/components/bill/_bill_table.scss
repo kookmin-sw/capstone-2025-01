@@ -1,25 +1,51 @@
 @use "../../colors/color_variables";
 @use "../../typography/typography" as *;
+@use "../../layouts/responsive" as *;
+
+// 모바일과 데스크탑에서 다른 스타일을 적용하기 위한 mixin
+.mobile-only {
+  @include desktop {
+    display: none;
+  }
+}
+
+.desktop-only {
+  @include mobile {
+    display: none;
+  }
+}
 
 // 법안 카드 컨테이너 스타일
 .bill-card-container {
-    width: 1152px;
+    @include mobile {
+      width: 375px;
+    }
+
+    @include desktop {
+        width: 1152px;
+    }
 }   
 
 // 법안 카드 스타일
 .bill-card {
-    width: 100%;
-    max-width: 1152px;
     min-height: 200px;
-    margin: 30px;
     border-radius: 20px;
     background: color_variables.$surface-bill-background-color;
     box-shadow: 2px 6px 6px 2px rgba(0, 0, 0, 0.10);
-    padding: 30px 50px;
     display: flex;
     align-items: center;
     flex-direction: column;
     gap: 10px;
+
+    @include mobile {
+      margin: 25px;
+      padding: 10px 25px;
+    }
+
+    @include desktop {
+      margin: 30px;
+      padding: 30px 50px;
+    }
 
     &:focus, &:active, &:hover {
         outline: none !important;
@@ -32,81 +58,29 @@
 .bill-header {
     width: 100%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-}
- 
-// 법안 헤더 제목 스타일
-.bill-title {
-    @include title-small; 
-    color: color_variables.$text-primary-color;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
 
-// 법안 헤더 태그 스타일
-.bill-header-tag {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
- 
-// 법안 태그 정당 스타일
-.bill-tag-party {
-    @include button-small;
-    width: 130px;
-    height: 33px;
-    padding: 3px 10px;
-    background-color: color_variables.$background-primary-color;
-    text-align: center;
-    border-radius: 10px;
-}
- 
-// 법안 태그 상태 스타일
-.bill-tag-status {
-    @include button-small;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 3px 10px;
-    width: 80px;
-    height: 33px;
-    border-radius: 10px;
-    gap: 10px;
-    text-align: center;
-    background-color: color_variables.$background-primary-color;
-  
-    .status-emoji {
-      font-size: 16px;
-      line-height: 1;
+    // 모바일에서는 세로 배치(column)로 변경
+    @include mobile {
+      flex-direction: column;
+      align-items: flex-start; 
+      gap: 5px; 
     }
-    .bill-tag-status {
-        @each $status, $color in (
-            received: color_variables.$emoji-received-color,
-            reviewing: color_variables.$emoji-reviewing-color,
-            decided: color_variables.$emoji-decided-color,
-            executed: color_variables.$emoji-executed-color,
-            discarded: color_variables.$emoji-discarded-color
-        ) {
-            &.status-#{$status} {
-                color: $color;
-            }
-        }
+    
+    // 데스크탑에서는 가로 배치(row) 유지
+    @include desktop {
+      flex-direction: row;
     }
-  }
-
-// 법안 상세정보 스타일
-.bill-description {
-    @include body-medium;
 }
-
+ 
+// 법안 헤더 즐겨찾기 스타일
 .star-icon-wrapper {
-  display: inline-block;
 
   .star-icon {
     vertical-align: middle;
+    @include desktop {
+      margin-right: 10px;
+    }
 
     &.default path {
       fill: color_variables.$surface-tertiary-color;
@@ -132,51 +106,129 @@
   }
 }
 
-// pagination 스타일 
-.pagination {
+// 법안 헤더 제목 스타일
+.bill-title {
+    @include title-small; 
+    color: color_variables.$text-primary-color;
+    flex: 1;
     display: flex;
-    justify-content: center;
-    margin: 0 0 17px 0;
-  
-    .pagination-list {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      list-style: none;
-      gap: 10px;
-      padding: 10px;
-  
-      .page-num {
-        @include button-large;
-        display: flex;              // 숫자 중앙 정렬을 위해 추가
-        align-items: center;        // 수직 중앙 정렬
-        justify-content: center;    // 수평 중앙 정렬
-        padding: 0px 11px;
-        height: 37px;               // 아이콘 높이와 맞추기
-        border-radius: 10px;
-        color: color_variables.$text-secondary-color;
-  
-        &.active {
-          color: color_variables.$text-inverse-color;
-          background: color_variables.$button-primary-color;
+    align-items: center;
+}
+
+// 법안 헤더 태그 스타일
+.bill-header-tag {
+    display: flex;
+    align-items: center;
+
+    @include mobile{
+      gap: 8px;
+    }
+
+    @include desktop{
+      gap: 12px;
+    }
+}
+
+// 법안 태그(정당, 상태) 공통 스타일
+@mixin bill-tags {
+  @include button-small;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  background-color: color_variables.$background-primary-color;
+
+  @include mobile{
+    height: 20px;
+    border-radius: 5px;
+    padding: 3px 10px;
+  }
+
+  @include desktop {
+    height: 33px;
+    border-radius: 10px;
+    padding: 3px 20px;
+  }
+}
+ 
+// 법안 태그 정당 스타일
+.bill-tag-party {
+    @include bill-tags;
+}
+ 
+// 법안 태그 상태 스타일
+.bill-tag-status {
+    @include bill-tags;
+    gap: 5px;
+
+    @each $status, $color in (
+        received: color_variables.$emoji-received-color,
+        reviewing: color_variables.$emoji-reviewing-color,
+        decided: color_variables.$emoji-decided-color,
+        executed: color_variables.$emoji-executed-color,
+        discarded: color_variables.$emoji-discarded-color
+    ) {
+        &.status-#{$status} {
+            color: $color;
         }
       }
+}
+
+// 법안 상세정보 스타일
+.bill-description {
+    @include body-medium;
+}
+
+// pagination 스타일 
+.pagination-list {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 30px 0px;
+
+  .page-num {
+    @include button-large;
+    display: flex;              
+    align-items: center;        
+    justify-content: center;    
+    width: auto;
+    padding: 0px 11px;
+    color: color_variables.$text-secondary-color;
+
+    @include mobile {
+      height: 19px; 
+      border-radius: 15px;
+      gap: 5px;
+    }
+
+    @include desktop {
+      height: 37px; 
+      border-radius: 10px;
+      gap: 10px;
+    }
+
+    &.active {
+      color: color_variables.$text-inverse-color;
+      background: color_variables.$button-primary-color;
     }
   }
-  
+}
+ 
+// 페이지네이션 아이콘 스타일
 .laquo-icon, .lsaquo-icon, .rsaquo-icon, .raquo-icon {
-    width: 37px;
-    height: 37px;
-    display: flex;               // 아이콘도 flex로 정렬 대상에 맞춤
+    display: flex;              
     align-items: center;
     justify-content: center;
     color: color_variables.$text-secondary-color;
-}  
 
-a:focus,
-a:focus-visible,
-a:active {
-  outline: none ;
-  box-shadow: none ;
-  border: none ;
-}
+    @include mobile {
+      width: 9.5px;
+      height: 9.5px;
+    }
+
+    @include desktop {
+      width: 18.5px;
+      height: 18.5px;
+    }
+}  

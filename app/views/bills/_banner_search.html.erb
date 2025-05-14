@@ -1,15 +1,31 @@
 <!-- 상단 배너 검색바 -->
 
-<%= form_with url: bills_path, method: :get, local: true do %>
-  <%= render "shared/banner" do %>
-      <!-- 법안 검색 -->
-      <div class="search-bar">
-        <label for="q"></label>
-          <%= text_field_tag :q, params[:q], placeholder: "무슨 법이 만들어지고 있나요?" %>
-          <!-- 검색 버튼 -->
-          <button type="submit" class="search-button">
-            <%= inline_svg("search", class: "search-icon") %>
-          </button>
+<form data-controller="category-search" data-action="submit->category-search#goToSearch">
+  <%= render "shared/banner", 
+           active_tabs: (params[:starred] == 'true' ? ["starred"] : parsed_active_tabs.presence || ["all"]),
+           context: :search do %>
+
+    <div class="search-bar">
+      <div id="selected-category"
+          class="selected-category-tag-container"
+          data-category-search-target="selectedCategory">
+        <%= text_field_tag :q, params[:q],
+              placeholder: "검색어를 입력해주세요",
+              data: { "category-search-target": "input" } %>
       </div>
+
+      <button type="submit"
+              class="search-button"
+              data-action="click->category-search#goToSearch">
+        <%= inline_svg("search", class: "search-icon") %>
+      </button>
+    </div>
   <% end %>
-<% end %>
+
+  <!-- 법안 카테고리 -->
+  <%= render "shared/law_categories", 
+            active_tabs: (params[:starred] == 'true' ? ["starred"] : parsed_active_tabs.presence || ["all"]),
+            context: :search %>
+</form>
+
+
