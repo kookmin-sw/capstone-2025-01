@@ -1,35 +1,46 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["container", "dot"]
+  static targets = ["container", "dot", "pageCounter", "playPauseIcon"]
 
   connect() {
+    this.detectDevice()
+    this.cloneEdgeCards()
+
     const card = this.containerTarget.querySelector(".hot-issue-card")
     const gap = 30
     this.cardWidth = card ? card.offsetWidth + gap : 460
 
-    this.totalSlides = this.containerTarget.children.length
-    this.dotCount = Math.min(this.totalSlides, 5)
+    this.totalSlides = this.containerTarget.children.length - 2 // 복제 카드 제외
     this.currentIndex = 0
     this.scrolling = false
     this.scrollAnimationId = null
+    this.isAutoPlaying = false
+    this.autoPlayInterval = null
 
-    this.updateDots()
+    // 초기 위치: 첫 번째 진짜 카드
+    this.containerTarget.scrollLeft = this.cardWidth
+
+    this.updatePagination()
     this.addEventListeners()
   }
 
   disconnect() {
     this.removeEventListeners()
+    this.stopAutoPlay()
+  }
+
+  detectDevice() {
+    this.isMobile = window.innerWidth <= 768
   }
 
   addEventListeners() {
     this.boundOnScroll = this.onScroll.bind(this)
+    this.boundOnResize = this.onResize.bind(this)
     this.boundOnKeydown = this.onKeydown.bind(this)
     this.boundWindowKeydown = (e) => {
-      if (
-        ["ArrowLeft", "ArrowRight"].includes(e.key) &&
-        document.activeElement !== this.containerTarget
-      ) {
+      if (["ArrowLeft", "ArrowRight"].includes(e.key) &&
+        document.activeElement !== this.containerTarget) {
         this.containerTarget.focus({ preventScroll: true })
       }
     }
@@ -37,28 +48,52 @@ export default class extends Controller {
     this.containerTarget.addEventListener("scroll", this.boundOnScroll)
     this.containerTarget.addEventListener("keydown", this.boundOnKeydown)
     window.addEventListener("keydown", this.boundWindowKeydown)
+    window.addEventListener("resize", this.boundOnResize)
   }
 
   removeEventListeners() {
     this.containerTarget.removeEventListener("scroll", this.boundOnScroll)
     this.containerTarget.removeEventListener("keydown", this.boundOnKeydown)
     window.removeEventListener("keydown", this.boundWindowKeydown)
+    window.removeEventListener("resize", this.boundOnResize)
+  }
+
+  onResize() {
+    this.detectDevice()
+    const card = this.containerTarget.querySelector(".hot-issue-card")
+    this.cardWidth = card ? card.offsetWidth + (this.isMobile ? 0 : 30) : 460
+    this.containerTarget.scrollLeft = (this.currentIndex + 1) * this.cardWidth
+    this.updatePagination()
   }
 
   onScroll() {
-    const scrollLeft = this.containerTarget.scrollLeft
-    const maxScroll = this.containerTarget.scrollWidth - this.containerTarget.clientWidth
-    const ratio = scrollLeft / maxScroll
-    this.currentIndex = Math.min(this.dotCount - 1, Math.round(ratio * (this.dotCount - 1)))
-    this.updateDots()
+    const index = Math.round(this.containerTarget.scrollLeft / this.cardWidth)
+
+    if (index === 0) {
+      this.containerTarget.scrollLeft = this.totalSlides * this.cardWidth
+      this.currentIndex = this.totalSlides - 1
+    } else if (index === this.totalSlides + 1) {
+      this.containerTarget.scrollLeft = this.cardWidth
+      this.currentIndex = 0
+    } else {
+      this.currentIndex = index - 1
+    }
+
+    this.updatePagination()
   }
 
-  updateDots() {
-    this.dotTargets.forEach((dot, index) => {
-      const active = index === this.currentIndex
-      dot.classList.toggle("active", active)
-      dot.setAttribute("aria-current", active ? "true" : "false")
-    })
+  updatePagination() {
+    if (this.hasDotTarget) {
+      this.dotTargets.forEach((dot, index) => {
+        const active = index === this.currentIndex
+        dot.classList.toggle("active", active)
+        dot.setAttribute("aria-current", active ? "true" : "false")
+      })
+    }
+
+    if (this.hasPageCounterTarget) {
+      this.pageCounterTarget.textContent = `${this.currentIndex + 1} / ${this.totalSlides}`
+    }
   }
 
   onKeydown(event) {
@@ -68,24 +103,20 @@ export default class extends Controller {
   }
 
   startScrollLeft() {
-    this.scrollToCard(-1)
+    requestAnimationFrame(() => this.scrollToCard(-1))
   }
 
   startScrollRight() {
-    this.scrollToCard(1)
+    requestAnimationFrame(() => this.scrollToCard(1))
   }
 
-  scrollToCard(direction, duration = 700) {
+  scrollToCard(direction, duration = 500) {
     if (this.scrolling) return
 
-    const currentIndex = Math.round(this.containerTarget.scrollLeft / this.cardWidth)
-    const targetIndex = Math.max(0, Math.min(currentIndex + direction, this.totalSlides - 1))
+    const targetIndex = Math.round(this.containerTarget.scrollLeft / this.cardWidth) + direction
     const targetScroll = targetIndex * this.cardWidth
-    const currentScroll = this.containerTarget.scrollLeft
 
-    if (Math.abs(currentScroll - targetScroll) < 2) return // 이동할 필요 없음
-
-    this.animateScroll(currentScroll, targetScroll, duration)
+    this.animateScroll(this.containerTarget.scrollLeft, targetScroll, duration)
   }
 
   animateScroll(start, end, duration) {
@@ -99,7 +130,10 @@ export default class extends Controller {
     const animate = (time) => {
       const elapsed = time - startTime
       const progress = Math.min(elapsed / duration, 1)
-      const ease = 0.5 - Math.cos(progress * Math.PI) / 2
+      const ease = progress < 0.5
+        ? 2 * progress * progress
+        : -1 + (4 - 2 * progress) * progress
+
       this.containerTarget.scrollLeft = start + (end - start) * ease
 
       if (progress < 1) {
@@ -112,5 +146,51 @@ export default class extends Controller {
     }
 
     this.scrollAnimationId = requestAnimationFrame(animate)
+  }
+
+  cloneEdgeCards() {
+    const children = this.containerTarget.children
+    if (children.length < 1) return
+
+    const firstCard = children[0].cloneNode(true)
+    const lastCard = children[children.length - 1].cloneNode(true)
+
+    firstCard.classList.add("hot-issue-card-clone")
+    lastCard.classList.add("hot-issue-card-clone")
+
+    this.containerTarget.insertBefore(lastCard, children[0])
+    this.containerTarget.appendChild(firstCard)
+  }
+
+  toggleAutoPlay() {
+    if (this.isAutoPlaying) {
+      this.stopAutoPlay()
+    } else {
+      this.startAutoPlay()
+    }
+  }
+
+  startAutoPlay() {
+    this.isAutoPlaying = true
+    this.autoPlayInterval = setInterval(() => {
+      this.scrollToCard(1)
+    }, 3500)
+
+    if (this.hasPlayPauseIconTarget) {
+      this.playPauseIconTarget.classList.add("playing")
+    }
+  }
+
+  stopAutoPlay() {
+    this.isAutoPlaying = false
+    clearInterval(this.autoPlayInterval)
+
+    if (this.hasPlayPauseIconTarget) {
+      this.playPauseIconTarget.classList.remove("playing")
+    }
+  }
+
+  stopScroll() {
+    this.scrolling = false
   }
 }
