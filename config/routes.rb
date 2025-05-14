@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  ActiveAdmin.routes(self)
   # Application routes
   ## root
   root "home#index"
@@ -11,7 +12,7 @@ Rails.application.routes.draw do
 
 
   # 인증 관련
-  resource :session, only: [ :destroy ]
+  resource :session, only: [ :new, :destroy ]
   # resources :passwords, param: :token
 
   ## OAuth

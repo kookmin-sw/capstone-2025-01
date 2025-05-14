@@ -12,6 +12,14 @@ module Authentication
     end
   end
 
+  def authenticate_admin_user!
+    redirect_to root_path unless current_admin_user
+  end
+
+  def current_admin_user
+    current_user if current_user.admin?
+  end
+
   private
     def authenticated?
       resume_session
@@ -31,7 +39,7 @@ module Authentication
 
     def request_authentication
       session[:return_to_after_authenticating] = request.url
-      redirect_to login_path
+      redirect_to new_session_path
     end
 
     def after_authentication_url

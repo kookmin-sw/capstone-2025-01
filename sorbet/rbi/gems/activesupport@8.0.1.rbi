@@ -17870,6 +17870,43 @@ class Integer < ::Numeric
   # source://activesupport//lib/active_support/core_ext/integer/time.rb#10
   def months; end
 
+  # Check whether the integer is evenly divisible by the argument.
+  #
+  #   0.multiple_of?(0)  # => true
+  #   6.multiple_of?(5)  # => false
+  #   10.multiple_of?(2) # => true
+  #
+  # @return [Boolean]
+  #
+  # source://activesupport//lib/active_support/core_ext/integer/multiple.rb#9
+  def multiple_of?(number); end
+
+  # Ordinal returns the suffix used to denote the position
+  # in an ordered sequence such as 1st, 2nd, 3rd, 4th.
+  #
+  #   1.ordinal     # => "st"
+  #   2.ordinal     # => "nd"
+  #   1002.ordinal  # => "nd"
+  #   1003.ordinal  # => "rd"
+  #   -11.ordinal   # => "th"
+  #   -1001.ordinal # => "st"
+  #
+  # source://activesupport//lib/active_support/core_ext/integer/inflections.rb#28
+  def ordinal; end
+
+  # Ordinalize turns a number into an ordinal string used to denote the
+  # position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
+  #
+  #   1.ordinalize     # => "1st"
+  #   2.ordinalize     # => "2nd"
+  #   1002.ordinalize  # => "1002nd"
+  #   1003.ordinalize  # => "1003rd"
+  #   -11.ordinalize   # => "-11th"
+  #   -1001.ordinalize # => "-1001st"
+  #
+  # source://activesupport//lib/active_support/core_ext/integer/inflections.rb#15
+  def ordinalize; end
+
   # Returns a Duration instance matching the number of years provided.
   #
   #   2.years # => 2 years
@@ -17889,7 +17926,19 @@ Integer::GMP_VERSION = T.let(T.unsafe(nil), String)
 
 # source://activesupport//lib/active_support/core_ext/kernel/reporting.rb#3
 module Kernel
+  # class_eval on an object acts like +singleton_class.class_eval+.
+  #
+  # source://activesupport//lib/active_support/core_ext/kernel/singleton_class.rb#5
+  def class_eval(*args, &block); end
+
   private
+
+  # A shortcut to define a toplevel concern, not within a module.
+  #
+  # See Module::Concerning for more.
+  #
+  # source://activesupport//lib/active_support/core_ext/kernel/concern.rb#11
+  def concern(topic, &module_definition); end
 
   # Sets $VERBOSE to +true+ for the duration of the block and back to its
   # original value afterwards.
@@ -17928,6 +17977,13 @@ module Kernel
   def with_warnings(flag); end
 
   class << self
+    # A shortcut to define a toplevel concern, not within a module.
+    #
+    # See Module::Concerning for more.
+    #
+    # source://activesupport//lib/active_support/core_ext/kernel/concern.rb#11
+    def concern(topic, &module_definition); end
+
     # Sets $VERBOSE to +true+ for the duration of the block and back to its
     # original value afterwards.
     #
@@ -17964,6 +18020,19 @@ module Kernel
     # source://activesupport//lib/active_support/core_ext/kernel/reporting.rb#26
     def with_warnings(flag); end
   end
+end
+
+# source://activesupport//lib/active_support/core_ext/load_error.rb#3
+class LoadError < ::ScriptError
+  include ::DidYouMean::Correctable
+
+  # Returns true if the given path name (except perhaps for the ".rb"
+  # extension) is the missing file which caused the exception to be raised.
+  #
+  # @return [Boolean]
+  #
+  # source://activesupport//lib/active_support/core_ext/load_error.rb#6
+  def is_missing?(location); end
 end
 
 # == Attribute Accessors per Thread
@@ -19724,6 +19793,40 @@ end
 class Pathname
   # source://activesupport//lib/active_support/core_ext/object/json.rb#237
   def as_json(options = T.unsafe(nil)); end
+
+  # An Pathname is blank if it's empty:
+  #
+  #   Pathname.new("").blank?      # => true
+  #   Pathname.new(" ").blank?     # => false
+  #   Pathname.new("test").blank?  # => false
+  #
+  # @return [true, false]
+  #
+  # source://activesupport//lib/active_support/core_ext/pathname/blank.rb#13
+  def blank?; end
+
+  # Returns the receiver if the named file exists otherwise returns +nil+.
+  # <tt>pathname.existence</tt> is equivalent to
+  #
+  #    pathname.exist? ? pathname : nil
+  #
+  # For example, something like
+  #
+  #   content = pathname.read if pathname.exist?
+  #
+  # becomes
+  #
+  #   content = pathname.existence&.read
+  #
+  # @return [Pathname]
+  #
+  # source://activesupport//lib/active_support/core_ext/pathname/existence.rb#20
+  def existence; end
+
+  # @return [Boolean]
+  #
+  # source://activesupport//lib/active_support/core_ext/pathname/blank.rb#17
+  def present?; end
 end
 
 module Process

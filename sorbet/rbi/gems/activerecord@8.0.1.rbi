@@ -5185,6 +5185,7 @@ end
 # source://activerecord//lib/active_record/associations/join_dependency.rb#5
 class ActiveRecord::Associations::JoinDependency
   extend ::ActiveSupport::Autoload
+  extend ::Polyamorous::JoinDependencyExtensions::ClassMethods
 
   # @return [JoinDependency] a new instance of JoinDependency
   #
@@ -5197,13 +5198,16 @@ class ActiveRecord::Associations::JoinDependency
   # source://activerecord//lib/active_record/associations/join_dependency.rb#77
   def base_klass; end
 
+  # source://ransack/4.3.0/lib/polyamorous/activerecord/join_dependency.rb#4
+  def build(associations, base_klass); end
+
   # source://activerecord//lib/active_record/associations/join_dependency.rb#158
   def each(&block); end
 
   # source://activerecord//lib/active_record/associations/join_dependency.rb#105
   def instantiate(result_set, strict_loading_value, &block); end
 
-  # source://activerecord//lib/active_record/associations/join_dependency.rb#85
+  # source://ransack/4.3.0/lib/polyamorous/activerecord/join_dependency.rb#30
   def join_constraints(joins_to_add, alias_tracker, references); end
 
   # source://activerecord//lib/active_record/associations/join_dependency.rb#81
@@ -5230,9 +5234,6 @@ class ActiveRecord::Associations::JoinDependency
 
   # source://activerecord//lib/active_record/associations/join_dependency.rb#168
   def aliases; end
-
-  # source://activerecord//lib/active_record/associations/join_dependency.rb#228
-  def build(associations, base_klass); end
 
   # source://activerecord//lib/active_record/associations/join_dependency.rb#242
   def construct(ar_parent, parent, row, seen, model_cache, strict_loading_value); end
@@ -5261,7 +5262,7 @@ class ActiveRecord::Associations::JoinDependency
     # source://activerecord//lib/active_record/associations/join_dependency.rb#47
     def make_tree(associations); end
 
-    # source://activerecord//lib/active_record/associations/join_dependency.rb#53
+    # source://ransack/4.3.0/lib/polyamorous/activerecord/join_dependency.rb#81
     def walk_tree(associations, hash); end
   end
 end
@@ -5354,13 +5355,18 @@ end
 
 # source://activerecord//lib/active_record/associations/join_dependency/join_association.rb#9
 class ActiveRecord::Associations::JoinDependency::JoinAssociation < ::ActiveRecord::Associations::JoinDependency::JoinPart
+  include ::Polyamorous::SwappingReflectionClass
+
   # @return [JoinAssociation] a new instance of JoinAssociation
   #
-  # source://activerecord//lib/active_record/associations/join_dependency/join_association.rb#13
-  def initialize(reflection, children); end
+  # source://ransack/4.3.0/lib/polyamorous/activerecord/join_association.rb#8
+  def initialize(reflection, children, polymorphic_class = T.unsafe(nil), join_type = T.unsafe(nil)); end
 
   # source://activerecord//lib/active_record/associations/join_dependency/join_association.rb#24
   def join_constraints(foreign_table, foreign_klass, join_type, alias_tracker); end
+
+  # source://ransack/4.3.0/lib/polyamorous/activerecord/join_association.rb#5
+  def join_type; end
 
   # @return [Boolean]
   #
@@ -8285,6 +8291,7 @@ class ActiveRecord::Base
   include ::ActiveRecord::Normalization
   include ::ActiveRecord::Marshalling::Methods
   include ::ActsAsParanoid::Associations
+  include ::Kaminari::ActiveRecordExtension
   include ::ActiveStorage::Attached::Model
   include ::ActiveStorage::Reflection::ActiveRecordExtensions
   include ::ActionText::Attribute
@@ -8350,6 +8357,8 @@ class ActiveRecord::Base
   extend ::ActiveRecord::Normalization::ClassMethods
   extend ::ActsAsParanoid
   extend ::ActsAsParanoid::Associations::ClassMethods
+  extend ::Ransack::Adapters::ActiveRecord::Base
+  extend ::Kaminari::ActiveRecordExtension::ClassMethods
   extend ::ActiveStorage::Attached::Model::ClassMethods
   extend ::ActiveStorage::Reflection::ActiveRecordExtensions::ClassMethods
   extend ::ActionText::Attribute::ClassMethods
@@ -8376,6 +8385,24 @@ class ActiveRecord::Base
 
   # source://activesupport/8.0.1/lib/active_support/callbacks.rb#923
   def _initialize_callbacks; end
+
+  # source://ransack/4.3.0/lib/ransack/adapters/active_record/base.rb#9
+  def _ransack_aliases; end
+
+  # source://ransack/4.3.0/lib/ransack/adapters/active_record/base.rb#9
+  def _ransack_aliases=(_arg0); end
+
+  # source://ransack/4.3.0/lib/ransack/adapters/active_record/base.rb#9
+  def _ransack_aliases?; end
+
+  # source://ransack/4.3.0/lib/ransack/adapters/active_record/base.rb#8
+  def _ransackers; end
+
+  # source://ransack/4.3.0/lib/ransack/adapters/active_record/base.rb#8
+  def _ransackers=(_arg0); end
+
+  # source://ransack/4.3.0/lib/ransack/adapters/active_record/base.rb#8
+  def _ransackers?; end
 
   # source://activerecord//lib/active_record/reflection.rb#11
   def _reflections; end
@@ -8748,6 +8775,24 @@ class ActiveRecord::Base
 
     # source://activesupport/8.0.1/lib/active_support/callbacks.rb#919
     def _initialize_callbacks=(value); end
+
+    # source://ransack/4.3.0/lib/ransack/adapters/active_record/base.rb#9
+    def _ransack_aliases; end
+
+    # source://ransack/4.3.0/lib/ransack/adapters/active_record/base.rb#9
+    def _ransack_aliases=(value); end
+
+    # source://ransack/4.3.0/lib/ransack/adapters/active_record/base.rb#9
+    def _ransack_aliases?; end
+
+    # source://ransack/4.3.0/lib/ransack/adapters/active_record/base.rb#8
+    def _ransackers; end
+
+    # source://ransack/4.3.0/lib/ransack/adapters/active_record/base.rb#8
+    def _ransackers=(value); end
+
+    # source://ransack/4.3.0/lib/ransack/adapters/active_record/base.rb#8
+    def _ransackers?; end
 
     # source://activerecord//lib/active_record/reflection.rb#11
     def _reflections; end
@@ -9440,6 +9485,18 @@ class ActiveRecord::Base
 
     # source://activesupport/8.0.1/lib/active_support/class_attribute.rb#17
     def __class_attr__destroy_association_async_job=(new_value); end
+
+    # source://activesupport/8.0.1/lib/active_support/class_attribute.rb#15
+    def __class_attr__ransack_aliases; end
+
+    # source://activesupport/8.0.1/lib/active_support/class_attribute.rb#17
+    def __class_attr__ransack_aliases=(new_value); end
+
+    # source://activesupport/8.0.1/lib/active_support/class_attribute.rb#15
+    def __class_attr__ransackers; end
+
+    # source://activesupport/8.0.1/lib/active_support/class_attribute.rb#17
+    def __class_attr__ransackers=(new_value); end
 
     # source://activesupport/8.0.1/lib/active_support/class_attribute.rb#15
     def __class_attr__reflections; end
@@ -32216,7 +32273,7 @@ class ActiveRecord::Reflection::AbstractReflection
   # source://activerecord//lib/active_record/reflection.rb#285
   def inverse_which_updates_counter_cache; end
 
-  # source://activerecord//lib/active_record/reflection.rb#200
+  # source://ransack/4.3.0/lib/polyamorous/activerecord/reflection.rb#3
   def join_scope(table, foreign_table, foreign_klass); end
 
   # source://activerecord//lib/active_record/reflection.rb#227

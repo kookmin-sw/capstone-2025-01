@@ -5,4 +5,9 @@ class ApplicationController < ActionController::Base
 
   # Pagination
   include Pagy::Backend
+
+  # Current User
+  def current_user
+    Current.session&.user
+  end
 end
