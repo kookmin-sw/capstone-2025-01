@@ -28,37 +28,38 @@
   </div>
 </nav>
 
-<!-- 법안 카테고리 -->
-<% active_tabs = parsed_active_tabs %>
-
 <!-- 메인페이지 법안 검색바 -->
-<form data-controller="category-search" data-action="submit->category-search#goToSearch">
-  <%= render "shared/law_categories", active_tabs: active_tabs, context: :search %>
+<div class="home-category-search">
+  <% active_tabs = parsed_active_tabs %>
 
-  <div class="main-message-layer">
-    <div class="headline-text">무슨 법이 만들어지고 있나요?</div>
-    <div class="title-text">
-      한눈에 보는 법률 개정, 우리 사회의 이슈<br>
-      <strong>LawNow</strong>와 함께 공유하세요!
-    </div>
-  </div>
+  <form data-controller="category-search" data-action="submit->category-search#goToSearch">
+    <%= render "shared/law_categories", active_tabs: active_tabs, context: :search %>
 
-  <div class="search-bar">
-    <div id="selected-category"
-         class="selected-category-tag-container"
-         data-category-search-target="selectedCategory">
-      <%= text_field_tag :q, params[:q],
-            placeholder: "검색어를 입력해주세요",
-            data: { "category-search-target": "input" } %>
+    <div class="main-message-layer">
+      <div class="headline-text">무슨 법이 만들어지고 있나요?</div>
+      <div class="title-text">
+        한눈에 보는 법률 개정, 우리 사회의 이슈<br>
+        <strong>LawNow</strong>와 함께 공유하세요!
+      </div>
     </div>
 
-    <button type="submit"
-            class="search-button"
-            data-action="click->category-search#goToSearch">
-      <%= inline_svg("search", class: "search-icon") %>
-    </button>
-  </div>
-</form>
+    <div class="search-bar">
+      <div id="selected-category"
+          class="selected-category-tag-container"
+          data-category-search-target="selectedCategory">
+        <%= text_field_tag :q, params[:q],
+              placeholder: "검색어를 입력해주세요",
+              data: { "category-search-target": "input" } %>
+      </div>
+
+      <button type="submit"
+              class="search-button"
+              data-action="click->category-search#goToSearch">
+        <%= inline_svg("search", class: "search-icon") %>
+      </button>
+    </div>
+  </form>
+</div>
 
 <!-- 실시간 검색어: 기본 숨김, 선택된 카테고리에서만 표시 -->
 <div id="trendingKeywords" class="trending-keywords">

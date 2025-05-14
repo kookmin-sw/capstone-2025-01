@@ -166,9 +166,9 @@ export default class extends Controller {
     const tab = e.target.dataset.tab
     
     // 현재 컨트롤러 요소의 스코프 내에서만 버튼 찾기
-    const container = this.element.closest('.mobile-only, .desktop-only')
+    const container = this.element.closest('.mobile-only, .desktop-only, .home-category-search')
     const button = container.querySelector(`.law-category-button[data-tab="${tab}"]`)
-    
+
     if (button) button.classList.remove("active")
     this.selectedTabs.delete(tab)
     
@@ -184,15 +184,9 @@ export default class extends Controller {
     
     // 기존 tab[] 파라미터 모두 제거
     params.delete("tab[]")
-    params.delete("tab")
     
-    // 선택된 탭이 1개면 단일 값으로 전송
-    if (this.selectedTabs.size === 1) {
-      const only = Array.from(this.selectedTabs)[0]
-      params.set("tab", only)
-    } 
-    // 2개 이상이면 배열로 전송
-    else if (this.selectedTabs.size > 1) {
+    // 배열로 전송
+    if (this.selectedTabs.size >= 1) {
       this.selectedTabs.forEach(tab => params.append("tab[]", tab))
     }
     
@@ -208,13 +202,8 @@ export default class extends Controller {
     const baseUrl = "/bills"
     const params = new URLSearchParams()
 
-    // 선택된 탭이 1개면 단일 값으로 전송
-    if (this.selectedTabs.size === 1) {
-      const only = Array.from(this.selectedTabs)[0]
-      params.set("tab", only)
-    } 
-    // 2개 이상이면 배열로 전송
-    else if (this.selectedTabs.size > 1) {
+    // 배열로 전송
+    if (this.selectedTabs.size >= 1) {
       this.selectedTabs.forEach(tab => params.append("tab[]", tab))
     }
 
