@@ -77,6 +77,11 @@ gem "omniauth", "~> 2.1"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
 gem "omniauth-naver", "~> 0.2.0"
 
+# for admin panel
+gem "activeadmin", "~> 4.0.0.beta15"
+# cssbundling-rails 설치 없이 ActiveAdmin을 사용하기 위해 임시 조치
+## ref. https://github.com/jaynetics/activeadmin_assets
+gem "activeadmin_assets"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

@@ -24,11 +24,13 @@ class Rails::Conductor::BaseController
     include ::ActionText::ContentHelper
     include ::ActionText::TagHelper
     include ::Importmap::ImportmapTagsHelper
+    include ::Ransack::Helpers::FormHelper
     include ::ActionController::Base::HelperMethods
     include ::Pagy::UrlHelpers
     include ::Pagy::Frontend
     include ::MarkdownHelper
     include ::ApplicationHelper
+    include ::TabParamsParser
     include ::BillViewHelper
     include ::BillsViewHelper
     include ::HomeHelper

@@ -1260,6 +1260,7 @@ class ActionController::API < ::ActionController::Metal
   include ::ActionController::Rescue
   include ::ActionController::Instrumentation
   include ::ActionController::ParamsWrapper
+  include ::ActionController::RespondWith
   include ::Turbo::RequestIdTracking
   extend ::ActionView::ViewPaths::ClassMethods
   extend ::AbstractController::UrlFor::ClassMethods
@@ -1277,6 +1278,7 @@ class ActionController::API < ::ActionController::Metal
   extend ::ActiveSupport::Rescuable::ClassMethods
   extend ::ActionController::Instrumentation::ClassMethods
   extend ::ActionController::ParamsWrapper::ClassMethods
+  extend ::ActionController::RespondWith::ClassMethods
 
   # source://activesupport/8.0.1/lib/active_support/callbacks.rb#69
   def __callbacks; end
@@ -1359,6 +1361,15 @@ class ActionController::API < ::ActionController::Metal
   # source://activesupport/8.0.1/lib/active_support/configurable.rb#116
   def logger=(value); end
 
+  # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+  def mimes_for_respond_to; end
+
+  # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+  def mimes_for_respond_to=(_arg0); end
+
+  # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+  def mimes_for_respond_to?; end
+
   # source://activesupport/8.0.1/lib/active_support/configurable.rb#115
   def perform_caching; end
 
@@ -1385,6 +1396,15 @@ class ActionController::API < ::ActionController::Metal
 
   # source://activesupport/8.0.1/lib/active_support/rescuable.rb#15
   def rescue_handlers?; end
+
+  # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+  def responder; end
+
+  # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+  def responder=(_arg0); end
+
+  # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+  def responder?; end
 
   class << self
     # source://activesupport/8.0.1/lib/active_support/callbacks.rb#69
@@ -1471,6 +1491,15 @@ class ActionController::API < ::ActionController::Metal
     # source://activesupport/8.0.1/lib/active_support/configurable.rb#116
     def logger=(value); end
 
+    # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+    def mimes_for_respond_to; end
+
+    # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+    def mimes_for_respond_to=(value); end
+
+    # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+    def mimes_for_respond_to?; end
+
     # source://activesupport/8.0.1/lib/active_support/configurable.rb#115
     def perform_caching; end
 
@@ -1497,6 +1526,15 @@ class ActionController::API < ::ActionController::Metal
 
     # source://activesupport/8.0.1/lib/active_support/rescuable.rb#15
     def rescue_handlers?; end
+
+    # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+    def responder; end
+
+    # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+    def responder=(value); end
+
+    # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+    def responder?; end
 
     # Shortcut helper that returns all the ActionController::API modules except the
     # ones passed as arguments:
@@ -1565,10 +1603,22 @@ class ActionController::API < ::ActionController::Metal
     def __class_attr_middleware_stack=(new_value); end
 
     # source://activesupport/8.0.1/lib/active_support/class_attribute.rb#15
+    def __class_attr_mimes_for_respond_to; end
+
+    # source://activesupport/8.0.1/lib/active_support/class_attribute.rb#17
+    def __class_attr_mimes_for_respond_to=(new_value); end
+
+    # source://activesupport/8.0.1/lib/active_support/class_attribute.rb#15
     def __class_attr_rescue_handlers; end
 
     # source://activesupport/8.0.1/lib/active_support/class_attribute.rb#17
     def __class_attr_rescue_handlers=(new_value); end
+
+    # source://activesupport/8.0.1/lib/active_support/class_attribute.rb#15
+    def __class_attr_responder; end
+
+    # source://activesupport/8.0.1/lib/active_support/class_attribute.rb#17
+    def __class_attr_responder=(new_value); end
   end
 end
 
@@ -1984,6 +2034,7 @@ class ActionController::Base < ::ActionController::Metal
   include ::Turbo::Native::Navigation
   include ::Turbo::Frames::FrameRequest
   include ::Turbo::Streams::TurboStreamsTagBuilder
+  include ::ActionController::RespondWith
   include ::Turbo::RequestIdTracking
   extend ::ActionView::ViewPaths::ClassMethods
   extend ::AbstractController::Helpers::Resolution
@@ -2014,7 +2065,9 @@ class ActionController::Base < ::ActionController::Metal
   extend ::ActiveSupport::Rescuable::ClassMethods
   extend ::ActionController::Instrumentation::ClassMethods
   extend ::ActionController::ParamsWrapper::ClassMethods
+  extend ::Responders::ControllerMethod
   extend ::Importmap::Freshness
+  extend ::ActionController::RespondWith::ClassMethods
 
   # source://activesupport/8.0.1/lib/active_support/callbacks.rb#69
   def __callbacks; end
@@ -2199,6 +2252,15 @@ class ActionController::Base < ::ActionController::Metal
   # source://activesupport/8.0.1/lib/active_support/configurable.rb#116
   def logger=(value); end
 
+  # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+  def mimes_for_respond_to; end
+
+  # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+  def mimes_for_respond_to=(_arg0); end
+
+  # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+  def mimes_for_respond_to?; end
+
   # source://actionpack//lib/action_controller/metal/flash.rb#38
   def notice; end
 
@@ -2246,6 +2308,15 @@ class ActionController::Base < ::ActionController::Metal
 
   # source://activesupport/8.0.1/lib/active_support/rescuable.rb#15
   def rescue_handlers?; end
+
+  # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+  def responder; end
+
+  # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+  def responder=(_arg0); end
+
+  # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+  def responder?; end
 
   # source://activesupport/8.0.1/lib/active_support/configurable.rb#115
   def stylesheets_dir; end
@@ -2459,6 +2530,9 @@ class ActionController::Base < ::ActionController::Metal
     # source://actionpack//lib/action_controller/metal/helpers.rb#71
     def include_all_helpers?; end
 
+    # source://inherited_resources/2.1.0/lib/inherited_resources.rb#39
+    def inherit_resources; end
+
     # source://activesupport/8.0.1/lib/active_support/configurable.rb#115
     def javascripts_dir; end
 
@@ -2476,6 +2550,15 @@ class ActionController::Base < ::ActionController::Metal
 
     # source://activesupport/8.0.1/lib/active_support/configurable.rb#116
     def logger=(value); end
+
+    # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+    def mimes_for_respond_to; end
+
+    # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+    def mimes_for_respond_to=(value); end
+
+    # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+    def mimes_for_respond_to?; end
 
     # source://activesupport/8.0.1/lib/active_support/configurable.rb#115
     def per_form_csrf_tokens; end
@@ -2521,6 +2604,15 @@ class ActionController::Base < ::ActionController::Metal
 
     # source://activesupport/8.0.1/lib/active_support/rescuable.rb#15
     def rescue_handlers?; end
+
+    # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+    def responder; end
+
+    # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+    def responder=(value); end
+
+    # source://responders/3.1.1/lib/action_controller/respond_with.rb#11
+    def responder?; end
 
     # source://activesupport/8.0.1/lib/active_support/configurable.rb#115
     def stylesheets_dir; end
@@ -2643,10 +2735,22 @@ class ActionController::Base < ::ActionController::Metal
     def __class_attr_middleware_stack=(new_value); end
 
     # source://activesupport/8.0.1/lib/active_support/class_attribute.rb#15
+    def __class_attr_mimes_for_respond_to; end
+
+    # source://activesupport/8.0.1/lib/active_support/class_attribute.rb#17
+    def __class_attr_mimes_for_respond_to=(new_value); end
+
+    # source://activesupport/8.0.1/lib/active_support/class_attribute.rb#15
     def __class_attr_rescue_handlers; end
 
     # source://activesupport/8.0.1/lib/active_support/class_attribute.rb#17
     def __class_attr_rescue_handlers=(new_value); end
+
+    # source://activesupport/8.0.1/lib/active_support/class_attribute.rb#15
+    def __class_attr_responder; end
+
+    # source://activesupport/8.0.1/lib/active_support/class_attribute.rb#17
+    def __class_attr_responder=(new_value); end
   end
 end
 
@@ -2663,6 +2767,7 @@ module ActionController::Base::HelperMethods
   include ::ActionView::Helpers::OutputSafetyHelper
   include ::ActionView::Helpers::TagHelper
   include ::Turbo::Streams::ActionHelper
+  include ::Ransack::Helpers::FormHelper
 
   # source://actionpack//lib/action_controller/metal/flash.rb#41
   def alert(*_arg0, **_arg1, &_arg2); end
