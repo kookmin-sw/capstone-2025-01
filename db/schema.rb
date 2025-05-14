@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_14_112655) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_14_115338) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -102,6 +102,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_14_112655) do
     t.string "category"
     t.boolean "auto_update_current_category", default: true, null: false
     t.index ["assembly_bill_id"], name: "index_bills_on_assembly_bill_id", unique: true
+    t.index ["bill_number"], name: "index_bills_on_bill_number"
     t.index ["bill_stage"], name: "index_bills_on_bill_stage"
     t.index ["bill_type"], name: "index_bills_on_bill_type"
     t.index ["category"], name: "index_bills_on_category"
