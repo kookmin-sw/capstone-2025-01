@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_13_151706) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_14_112655) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -104,6 +104,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_13_151706) do
     t.index ["assembly_bill_id"], name: "index_bills_on_assembly_bill_id", unique: true
     t.index ["bill_stage"], name: "index_bills_on_bill_stage"
     t.index ["bill_type"], name: "index_bills_on_bill_type"
+    t.index ["category"], name: "index_bills_on_category"
     t.index ["current_bill_category_id"], name: "index_bills_on_current_bill_category_id"
     t.index ["current_bill_summary_id"], name: "index_bills_on_current_bill_summary_id"
     t.index ["proposed_at"], name: "index_bills_on_proposed_at"
