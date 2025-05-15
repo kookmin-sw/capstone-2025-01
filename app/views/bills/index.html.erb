@@ -7,21 +7,9 @@
 <!-- 모바일 베너, 검색바 -->
 <div class="mobile-only">
   <!-- 상단 배너 -->
-  <nav class="banner-component-layer">
-    <!-- 왼쪽 브랜드 로고 -->
-    <div class="brand-logo">
-      <%= link_to root_path do %>
-        <%= inline_svg("brand_logo", class: "brand_logo-icon") %>
-      <% end %>
-    </div>
-    <div class="all-bills-link">
-      <%= link_to bills_path, class: "all-bills-text" do %>
-        모든 법안 보러가기 <%= inline_svg("next", class: "next-icon") %>
-      <% end %>
-    </div>
-  </nav>
+  <%= render 'shared/banner' %>
   <!-- 목록페이지 법안 검색바 -->
-  <%= render "shared/search_form", 
+  <%= render "shared/search_form",
         active_tabs: (params[:starred] == 'true' ? ["starred"] : parsed_active_tabs.presence || ["all"]) %>
 </div>
 

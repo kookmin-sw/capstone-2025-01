@@ -1,37 +1,11 @@
 <!-- 상단 배너 -->
-<nav class="banner-component-layer">
-  <!-- 왼쪽 브랜드 로고 -->
-  <div class="brand-logo">
-    <%= link_to root_path do %>
-      <%= inline_svg("brand_logo", class: "brand_logo-icon") %>
-    <% end %>
-  </div>
-
-  <div class="all-bills-link">
-    <%= link_to bills_path, class: "all-bills-text" do %>
-      모든 법안 보러가기 <%= inline_svg("next", class: "next-icon") %>
-    <% end %>
-  </div>
-
-  <!-- 오른쪽 버튼 그룹 -->
-  <div class="login-button-layer">
-    <% if authenticated? %>
-      <%= button_to "로그아웃", session_path, method: :delete %>
-    <% else %>
-      <%= link_to login_path do %>
-        <div class="login-button">
-          로그인
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-</nav>
+<%= render 'shared/banner' %>
 
 <!-- 메인페이지 법안 검색바 -->
 <div class="home-category-search">
   <% active_tabs = parsed_active_tabs %>
-  <%= render "shared/search_form", 
-        active_tabs: active_tabs, 
+  <%= render "shared/search_form",
+        active_tabs: active_tabs,
         show_main_message: true %>
 </div>
 
@@ -52,6 +26,7 @@
   <% end %>
 </div>
 
+<!-- HOT 이슈 캐러셀 -->
 <div data-controller="carousel">
   <!-- 카드 + 화살표 -->
   <div class="hot-issue-carousel-wrapper">
