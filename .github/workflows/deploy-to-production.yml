@@ -14,7 +14,7 @@ jobs:
         uses: ruby/setup-ruby@v1
 
       - name: Install required gems
-        run: gem install kamal ed25519 x25519
+        run: gem install kamal:2.6.0 ed25519 x25519
 
       - name: Install 1Password CLI
         uses: 1password/install-cli-action@v1
