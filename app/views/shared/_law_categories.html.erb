@@ -6,7 +6,7 @@
 <% end %>
 
 <div class="law-component-layer">
-  <% BillViewHelper::LAW_CATEGORIES.each_with_index do |(key, label), index| %>
+  <% LawCategory::DISPLAY_CATEGORIES.each_with_index do |(key, label), index| %>
     <% is_head = %w[all starred].include?(key) %>
 
     <% selected =
