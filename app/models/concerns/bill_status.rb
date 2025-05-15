@@ -22,12 +22,18 @@ module BillStatus
   included do
     def current_status_key
       case bill_stage
-      when "소관위접수"                      then :received
-      when "소관위심사중", "법사위심사중"     then :reviewing
-      when "의결", "국회통과", "법사위의결"   then :decided
-      when "공포", "시행"                    then :executed
-      when "폐기"                            then :discarded
-      else :received
+      when "접수", "소관위접수"
+        :received
+      when "소관위심사보고", "소관위심사", "체계자구심사", "본회의부의안건", "재의요구"
+        :reviewing
+      when "본회의의결", "정부이송", "재의(부결)", "재의(가결)"
+        :decided
+      when "공포"
+        :executed
+      when "대안반영폐기", "수정안반영폐기", "철회"
+        :discarded
+      else
+        :received
       end
     end
 
