@@ -1,0 +1,33 @@
+<%# 법안 카테고리 검색바 %>
+<form data-controller="category-search" data-action="submit->category-search#goToSearch">
+    <%= render "shared/law_categories", 
+        active_tabs: local_assigns[:active_tabs] || (params[:starred] == 'true' ? ["starred"] : parsed_active_tabs.presence || ["all"]),
+        context: :search %>
+
+    <%# 메인페이지 메세지 %>
+    <% if local_assigns[:show_main_message] %>
+        <div class="main-message-layer">
+        <div class="headline-text">무슨 법이 만들어지고 있나요?</div>
+        <div class="title-text">
+            한눈에 보는 법률 개정, 우리 사회의 이슈<br>
+            <strong>LawNow</strong>와 함께 공유하세요!
+        </div>
+        </div>
+    <% end %>
+
+    <%# 검색바 %>
+    <div class="search-bar">
+        <div id="selected-category"
+            class="selected-category-tag-container"
+            data-category-search-target="selectedCategory">
+        <%= text_field_tag :q, params[:q],
+                placeholder: "검색어를 입력해주세요",
+                data: { "category-search-target": "input" } %>
+        </div>
+    <button type="submit"
+            class="search-button"
+            data-action="click->category-search#goToSearch">
+      <%= inline_svg("search", class: "search-icon") %>
+    </button>
+  </div>
+</form>

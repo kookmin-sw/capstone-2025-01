@@ -4,7 +4,6 @@
   <%= render "banner_search" %>
 </div>
 
-
 <!-- 모바일 베너, 검색바 -->
 <div class="mobile-only">
   <!-- 상단 배너 -->
@@ -21,35 +20,12 @@
       <% end %>
     </div>
   </nav>
-
-  <!-- 법안 카테고리 -->
-  <!-- 메인페이지 법안 검색바 -->
-  <form data-controller="category-search" data-action="submit->category-search#goToSearch">
-    <%= render "shared/law_categories", 
-            active_tabs: (params[:starred] == 'true' ? ["starred"] : parsed_active_tabs.presence || ["all"]),
-            context: :search %>
-
-    <div class="search-bar">
-      <div id="selected-category"
-          class="selected-category-tag-container"
-          data-category-search-target="selectedCategory">
-        <%= text_field_tag :q, params[:q],
-              placeholder: "검색어를 입력해주세요",
-              data: { "category-search-target": "input" } %>
-      </div>
-
-      <button type="submit"
-              class="search-button"
-              data-action="click->category-search#goToSearch">
-        <%= inline_svg("search", class: "search-icon") %>
-      </button>
-    </div>
-  </form>
+  <!-- 목록페이지 법안 검색바 -->
+  <%= render "shared/search_form", 
+        active_tabs: (params[:starred] == 'true' ? ["starred"] : parsed_active_tabs.presence || ["all"]) %>
 </div>
 
-
-
-
+<!-- 법안 목록 -->
 <div class="bill-card-container">
   <!-- 실제 데이터 -->
   <% @bills.each do |bill| %>
