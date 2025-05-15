@@ -3,8 +3,7 @@ class BillsController < ApplicationController
   allow_unauthenticated_access
 
   def index
-    filter_params = bill_filter_params
-    bill_type_param = filter_params[:bill_type].presence || "법률안"
+    bill_type_param = params[:bill_type].presence || "법률안"
     @tabs = parsed_tabs
 
     @bills = Bill.includes(proposals: :specific_proposer)
@@ -14,8 +13,12 @@ class BillsController < ApplicationController
       @bills = ids.any? ? @bills.where(id: ids) : @bills.none
     end
 
-    @bills = @bills.by_title(filter_params[:q])
+    @bills = @bills.by_title(params[:q])
                    .by_bill_type(bill_type_param)
+
+    if @tabs.any?
+      @bills = @bills.where(category: @tabs)
+    end
 
     @pagy, @bills = pagy(@bills.order(proposed_at: :desc, bill_number: :desc))
 
@@ -44,9 +47,6 @@ class BillsController < ApplicationController
     bill.proposals.representative.first&.specific_proposer || bill.proposals.first&.specific_proposer
   end
 
-  def bill_filter_params
-    params.permit(:q, :bill_type)
-  end
 
   # 로컬스토리지 → 쿠키에서 ID 가져오기
   def starred_bill_ids

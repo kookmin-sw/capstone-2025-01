@@ -8,6 +8,20 @@
     <% end %>
   </div>
 
+  <!-- 모든 법안 보러가기 -->
+  <div class="all-bills-link">
+    <%= link_to bills_path, class: "all-bills-text" do %>
+      모든 법안 보러가기 <%= inline_svg("next", class: "next-icon") %>
+    <% end %>
+  </div>
+
   <!-- 추가 콘텐츠 (검색 바 등) -->
   <%= yield if block_given? %>
+
+  <!-- 로그인 조건에 따른 nav 렌더링 -->
+  <% if authenticated? %>
+    <%= render "shared/authenticated_nav" %>
+  <% else %>
+    <%= render "shared/unauthenticated_nav" %>
+  <% end %>
 </nav>
