@@ -4,18 +4,18 @@ module BillStatus
   STATUS_KEYS = %i[received reviewing decided executed discarded].freeze
 
   STATUS_LABELS = {
-    received: "접수",
+    received:  "접수",
     reviewing: "검토",
-    decided: "결정",
-    executed: "시행",
+    decided:   "결정",
+    executed:  "시행",
     discarded: "중단"
   }.freeze
 
   STATUS_EMOJIS = {
-    received: "📥",
+    received:  "📥",
     reviewing: "🤔",
-    decided: "📦",
-    executed: "✅",
+    decided:   "📦",
+    executed:  "✅",
     discarded: "❌"
   }.freeze
 
@@ -37,16 +37,16 @@ module BillStatus
       end
     end
 
-    def current_status         = STATUS_LABELS[current_status_key]
-    def status_emoji          = STATUS_EMOJIS[current_status_key]
-    def status_css_class      = "status-#{current_status_key}"
-    def status_text_class     = "text-#{current_status_key}"
+    def current_status    = STATUS_LABELS[current_status_key]
+    def status_emoji      = STATUS_EMOJIS[current_status_key]
+    def status_css_class  = "status-#{current_status_key}"
+    def status_text_class = "text-#{current_status_key}"
 
-    def received?             = current_status_key == :received
-    def reviewing?            = current_status_key == :reviewing
-    def decided?              = current_status_key == :decided
-    def executed?             = current_status_key == :executed
-    def rejected?             = current_status_key == :discarded
+    def received?   = current_status_key == :received
+    def reviewing?  = current_status_key == :reviewing
+    def decided?    = current_status_key == :decided
+    def executed?   = current_status_key == :executed
+    def rejected?   = current_status_key == :discarded
   end
 
   class_methods do
