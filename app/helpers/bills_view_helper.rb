@@ -2,7 +2,7 @@ module BillsViewHelper
   def bill_steps(bill)
     base_steps = Bill.steps[0..2]
     final_step = bill.current_status_key == :discarded ?
-                   Bill::STATUS_LABELS[:discarded] : Bill::STATUS_LABELS[:executed]
+                   BillStatus::STATUS_LABELS[:discarded] : BillStatus::STATUS_LABELS[:executed]
     base_steps + [ final_step ]
   end
 
@@ -19,7 +19,7 @@ module BillsViewHelper
     next_step = steps[index + 1]
 
     if bill.current_status == next_step || current_index > index
-      next_step == Bill::STATUS_LABELS[:discarded] ? "step-line danger" : "step-line active"
+      next_step == BillStatus::STATUS_LABELS[:discarded] ? "step-line danger" : "step-line active"
     else
       "step-line"
     end
