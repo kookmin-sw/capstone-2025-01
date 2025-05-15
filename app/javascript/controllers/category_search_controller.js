@@ -221,10 +221,7 @@ export default class extends Controller {
     if (button) button.classList.remove("active")
     this.selectedTabs.delete(tab)
     
-    // 태그, URL 업데이트
-    this.updateTagsDisplay()
-    this.updateURL()
-    this.debouncedGoToSearch(e)
+    this.categoryStrategy.onCategoryToggle(this, e);
   }
 
   // URL 업데이트 메서드
