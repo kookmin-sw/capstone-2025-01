@@ -1,20 +1,27 @@
 import { Controller } from "@hotwired/stimulus"
 
 export class NoRedirectStrategy {
+  constructor(baseUrl) {
+    this.baseUrl = baseUrl;
+  }
   onCategoryToggle(controller, event) {
     // 필터 UI만 갱신, URL 이동 없음
     controller.updateTagsDisplay();
     controller.updatePlaceholder();
-    controller.updateURL();
+    controller.updateURL(this.baseUrl);
+    // URL 이동 없음
   }
 }
 
 export class RedirectStrategy {
+  constructor(baseUrl) {
+    this.baseUrl = baseUrl;
+  }
   onCategoryToggle(controller, event) {
     // 필터 변경 시 URL 이동
     controller.updateTagsDisplay();
     controller.updatePlaceholder();
-    controller.updateURL();
+    controller.updateURL(this.baseUrl);
     controller.debouncedGoToSearch(event);
   }
 }
@@ -29,12 +36,14 @@ export default class extends Controller {
     this.debouncedGoToSearch = this.debounce(this.goToSearch.bind(this), 500)
 
     // 전략 결정: 루트(/)면 NoRedirect, /bills면 Redirect
+    let baseUrl = "/bills";
     if (window.location.pathname === "/") {
-      this.categoryStrategy = new NoRedirectStrategy();
+      baseUrl = "/";
+      this.categoryStrategy = new NoRedirectStrategy(baseUrl);
     } else if (window.location.pathname.startsWith("/bills")) {
-      this.categoryStrategy = new RedirectStrategy();
+      this.categoryStrategy = new RedirectStrategy(baseUrl);
     } else {
-      this.categoryStrategy = new NoRedirectStrategy(); // 기본값
+      this.categoryStrategy = new NoRedirectStrategy(baseUrl); // 기본값
     }
 
     // 선택된 탭을 Set으로 관리
@@ -225,8 +234,7 @@ export default class extends Controller {
   }
 
   // URL 업데이트 메서드
-  updateURL() {
-    const baseUrl = "/bills"
+  updateURL(baseUrl) {
     const params = new URLSearchParams(window.location.search)
     
     // 기존 tab[] 파라미터 모두 제거
