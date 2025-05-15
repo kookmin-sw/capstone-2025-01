@@ -1,9 +1,51 @@
 import { Controller } from "@hotwired/stimulus"
 
+export class NoRedirectStrategy {
+  constructor(baseUrl) {
+    this.baseUrl = baseUrl;
+  }
+  onCategoryToggle(controller, event) {
+    // 필터 UI만 갱신, URL 이동 없음
+    controller.updateTagsDisplay();
+    controller.updatePlaceholder();
+    controller.updateURL(this.baseUrl);
+    // URL 이동 없음
+  }
+}
+
+export class RedirectStrategy {
+  constructor(baseUrl) {
+    this.baseUrl = baseUrl;
+  }
+  onCategoryToggle(controller, event) {
+    // 필터 변경 시 URL 이동
+    controller.updateTagsDisplay();
+    controller.updatePlaceholder();
+    controller.updateURL(this.baseUrl);
+    controller.debouncedGoToSearch(event);
+  }
+}
+
 export default class extends Controller {
   static targets = ["selectedCategory", "input"]
-  
+
   connect() {
+    // 카테고리 필터를 위한 디바운싱 타임아웃 오브젝트 설정
+    this.debounceTimeout = null;
+    // 디바운싱된 검색 메서드
+    this.debouncedGoToSearch = this.debounce(this.goToSearch.bind(this), 500)
+
+    // 전략 결정: 루트(/)면 NoRedirect, /bills면 Redirect
+    let baseUrl = "/bills";
+    if (window.location.pathname === "/") {
+      baseUrl = "/";
+      this.categoryStrategy = new NoRedirectStrategy(baseUrl);
+    } else if (window.location.pathname.startsWith("/bills")) {
+      this.categoryStrategy = new RedirectStrategy(baseUrl);
+    } else {
+      this.categoryStrategy = new NoRedirectStrategy(baseUrl); // 기본값
+    }
+
     // 선택된 탭을 Set으로 관리
     this.selectedTabs = new Set()
 
@@ -26,11 +68,31 @@ export default class extends Controller {
     this.updatePlaceholder()
   }
 
+  // Debounce utility
+  debounce(func, wait) {
+    // This method will now use `this.debounceTimeout` to store the timeout ID.
+    // This makes the timeout ID accessible to other methods like disconnect().
+    // Note: This assumes this specific `debounceTimeout` property is dedicated
+    // to the single debounced function created in this controller.
+    return (...args) => {
+      clearTimeout(this.debounceTimeout)
+      this.debounceTimeout = setTimeout(() => {
+        func.apply(this, args)
+      }, wait)
+    }
+  }
+
+  disconnect() {
+    if (this.debounceTimeout) {
+      clearTimeout(this.debounceTimeout);
+      this.debounceTimeout = null;
+    }
+  }
+
   toggleCategory(e) {
     e.preventDefault()
     const button = e.currentTarget
     const tab = button.dataset.tab
-    const label = button.dataset.label?.trim() || button.textContent.trim()
 
     if (button.classList.contains("active")) {
       // 이미 선택된 상태면 해제
@@ -51,12 +113,8 @@ export default class extends Controller {
       this.selectedTabs.add(tab)
     }
     
-    // 태그 표시 업데이트
-    this.updateTagsDisplay()
-    // placeholder 업데이트
-    this.updatePlaceholder()
-    // URL 업데이트
-    this.updateURL()
+    // 전략에 따라 동작 위임
+    this.categoryStrategy.onCategoryToggle(this, e);
   }
 
   submitSingleTab(e) {
@@ -172,14 +230,11 @@ export default class extends Controller {
     if (button) button.classList.remove("active")
     this.selectedTabs.delete(tab)
     
-    // 태그, URL 업데이트
-    this.updateTagsDisplay()
-    this.updateURL()
+    this.categoryStrategy.onCategoryToggle(this, e);
   }
 
   // URL 업데이트 메서드
-  updateURL() {
-    const baseUrl = "/bills"
+  updateURL(baseUrl) {
     const params = new URLSearchParams(window.location.search)
     
     // 기존 tab[] 파라미터 모두 제거
