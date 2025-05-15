@@ -3,19 +3,11 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["selectedCategory", "input"]
 
-  // Debounce utility
-  debounce(func, wait) {
-    let timeout
-    return (...args) => {
-      clearTimeout(timeout)
-      timeout = setTimeout(() => func.apply(this, args), wait)
-    }
-  }
-
-
   connect() {
+    // 카테고리 필터를 위한 디바운싱 타임아웃 오브젝트 설정
+    this.debounceTimeout = null;
     // 디바운싱된 검색 메서드
-    this.debouncedGoToSearch = this.debounce(this.goToSearch.bind(this), 500)
+    this.debouncedGoToSearch = this.debounce(this.goToSearch.bind(this), 1000)
 
     // 선택된 탭을 Set으로 관리
     this.selectedTabs = new Set()
@@ -37,6 +29,27 @@ export default class extends Controller {
     this.updateTagsDisplay()
     // placeholder 업데이트
     this.updatePlaceholder()
+  }
+
+  // Debounce utility
+  debounce(func, wait) {
+    // This method will now use `this.debounceTimeout` to store the timeout ID.
+    // This makes the timeout ID accessible to other methods like disconnect().
+    // Note: This assumes this specific `debounceTimeout` property is dedicated
+    // to the single debounced function created in this controller.
+    return (...args) => {
+      clearTimeout(this.debounceTimeout)
+      this.debounceTimeout = setTimeout(() => {
+        func.apply(this, args)
+      }, wait)
+    }
+  }
+
+  disconnect() {
+    if (this.debounceTimeout) {
+      clearTimeout(this.debounceTimeout);
+      this.debounceTimeout = null;
+    }
   }
 
   toggleCategory(e) {
