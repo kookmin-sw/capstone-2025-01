@@ -1,30 +1,11 @@
 module BillViewHelper
   include TabParamsParser
 
-  LAW_CATEGORIES = {
-    "all" => "전체",
-    "starred" => "⭐ 내 관심법안",
-    "labor-humanrights" => "👥 근로·노동·인권",
-    "health-welfare" => "🏥 보건·복지",
-    "socialsecurity-national" => "🚔 교통·사회안전·국방",
-    "economy-finance" => "💰 경제",
-    "informationcommunication-sciencetechnology" => "🔬 정보통신·과학기술",
-    "industry-agriculture" => "🏭 산업·농축수산",
-    "education" => "🎓 교육",
-    "culture-sports" => "🎭 문화·체육·관광",
-    "family-genderequality" => "🏠 가정·성평등",
-    "diplomacy-unification" => "🌍 외교·통일",
-    "land-environment" => "🏗 국토·환경",
-    "disaster-climate" => "🆘 재난·기후·원자력",
-    "government-administration" => "🏛 정부·행정",
-    "legislative-judicial" => "⚖ 입법·사법·선거제도"
-  }.freeze
-
   def law_category_button(tab, options = {})
     disabled      = options[:disabled] || false
     context       = options[:context] || :search
     active_tabs   = Array(options[:active_tabs]) || []
-    category_name = LAW_CATEGORIES[tab]
+    category_name = LawCategory::DISPLAY_CATEGORIES[tab]
     return "" unless category_name
 
     if disabled
