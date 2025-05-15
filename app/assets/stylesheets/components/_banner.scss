@@ -42,12 +42,12 @@
         text-decoration: none;
 
       @include mobile {
-          margin-left: 25px;
+          margin-left: 24px;
           gap: 3px;
       }
 
       @include desktop {
-          margin-left: 50px;
+          margin-left: 35px;
           gap: 6px;
       }
     }
