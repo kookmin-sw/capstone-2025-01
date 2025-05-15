@@ -1,5 +1,24 @@
 import { Controller } from "@hotwired/stimulus"
 
+export class NoRedirectStrategy {
+  onCategoryToggle(controller, event) {
+    // 필터 UI만 갱신, URL 이동 없음
+    controller.updateTagsDisplay();
+    controller.updatePlaceholder();
+    controller.updateURL();
+  }
+}
+
+export class RedirectStrategy {
+  onCategoryToggle(controller, event) {
+    // 필터 변경 시 URL 이동
+    controller.updateTagsDisplay();
+    controller.updatePlaceholder();
+    controller.updateURL();
+    controller.debouncedGoToSearch(event);
+  }
+}
+
 export default class extends Controller {
   static targets = ["selectedCategory", "input"]
 
@@ -8,6 +27,15 @@ export default class extends Controller {
     this.debounceTimeout = null;
     // 디바운싱된 검색 메서드
     this.debouncedGoToSearch = this.debounce(this.goToSearch.bind(this), 500)
+
+    // 전략 결정: 루트(/)면 NoRedirect, /bills면 Redirect
+    if (window.location.pathname === "/") {
+      this.categoryStrategy = new NoRedirectStrategy();
+    } else if (window.location.pathname.startsWith("/bills")) {
+      this.categoryStrategy = new RedirectStrategy();
+    } else {
+      this.categoryStrategy = new NoRedirectStrategy(); // 기본값
+    }
 
     // 선택된 탭을 Set으로 관리
     this.selectedTabs = new Set()
@@ -56,7 +84,6 @@ export default class extends Controller {
     e.preventDefault()
     const button = e.currentTarget
     const tab = button.dataset.tab
-    const label = button.dataset.label?.trim() || button.textContent.trim()
 
     if (button.classList.contains("active")) {
       // 이미 선택된 상태면 해제
@@ -77,13 +104,8 @@ export default class extends Controller {
       this.selectedTabs.add(tab)
     }
     
-    // 태그 표시 업데이트
-    this.updateTagsDisplay()
-    // placeholder 업데이트
-    this.updatePlaceholder()
-    // URL 업데이트
-    this.updateURL()
-    this.debouncedGoToSearch(e)
+    // 전략에 따라 동작 위임
+    this.categoryStrategy.onCategoryToggle(this, e);
   }
 
   submitSingleTab(e) {
