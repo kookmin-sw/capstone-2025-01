@@ -7,7 +7,7 @@ export default class extends Controller {
     // 카테고리 필터를 위한 디바운싱 타임아웃 오브젝트 설정
     this.debounceTimeout = null;
     // 디바운싱된 검색 메서드
-    this.debouncedGoToSearch = this.debounce(this.goToSearch.bind(this), 1000)
+    this.debouncedGoToSearch = this.debounce(this.goToSearch.bind(this), 500)
 
     // 선택된 탭을 Set으로 관리
     this.selectedTabs = new Set()
