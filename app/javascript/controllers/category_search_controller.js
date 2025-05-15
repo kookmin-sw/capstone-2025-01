@@ -2,8 +2,21 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   static targets = ["selectedCategory", "input"]
-  
+
+  // Debounce utility
+  debounce(func, wait) {
+    let timeout
+    return (...args) => {
+      clearTimeout(timeout)
+      timeout = setTimeout(() => func.apply(this, args), wait)
+    }
+  }
+
+
   connect() {
+    // 디바운싱된 검색 메서드
+    this.debouncedGoToSearch = this.debounce(this.goToSearch.bind(this), 500)
+
     // 선택된 탭을 Set으로 관리
     this.selectedTabs = new Set()
 
@@ -57,6 +70,7 @@ export default class extends Controller {
     this.updatePlaceholder()
     // URL 업데이트
     this.updateURL()
+    this.debouncedGoToSearch(e)
   }
 
   submitSingleTab(e) {
@@ -175,6 +189,7 @@ export default class extends Controller {
     // 태그, URL 업데이트
     this.updateTagsDisplay()
     this.updateURL()
+    this.debouncedGoToSearch(e)
   }
 
   // URL 업데이트 메서드
