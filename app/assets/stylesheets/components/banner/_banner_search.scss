@@ -1,7 +1,7 @@
-@use "../colors/color_variables";
-@use "../icons/search_icon";
-@use "../typography/typography" as *;
-@use "../layouts/responsive" as *;
+@use "../../colors/color_variables";
+@use "../../icons/search_icon";
+@use "../../typography/typography" as *;
+@use "../../layouts/responsive" as *;
 
 // 최상단 검색바 컨테이너
 .search-bar {

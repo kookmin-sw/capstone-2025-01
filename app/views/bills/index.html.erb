@@ -56,30 +56,5 @@
   <% end %>
 </div>
 
-<%# Pagination %>
-<% if @pagy.pages >= 1 %>
-  <ul class="pagination-list">
-    <!-- 항상 표시 + 항상 클릭 가능 -->
-    <%= link_to bills_path(page: 1) do %>
-      <%= inline_svg("first", class: "laquo-icon") %>
-    <% end %>
-
-    <%= link_to bills_path(page: @current_page > 1 ? @current_page - 1 : 1) do %>
-      <%= inline_svg("previous", class: "lsaquo-icon") %>
-    <% end %>
-
-    <% (@start_page..@end_page).each do |page| %>
-      <li class="page-num <%= 'active' if page == @current_page %>">
-        <%= link_to page, bills_path(page: page) %>
-      </li>
-    <% end %>
-
-    <%= link_to bills_path(page: @current_page < @total_pages ? @current_page + 1 : @total_pages) do %>
-      <%= inline_svg("next", class: "rsaquo-icon") %>
-    <% end %>
-
-    <%= link_to bills_path(page: @total_pages) do %>
-      <%= inline_svg("last", class: "raquo-icon") %>
-    <% end %>
-  </ul>
-<% end %>
+<!-- 페이지네이션 -->
+  <%= render 'pagination' if @pagy.pages >= 1 %>

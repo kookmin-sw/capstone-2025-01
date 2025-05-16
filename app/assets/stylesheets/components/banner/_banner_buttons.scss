@@ -1,6 +1,6 @@
-@use "colors/color_variables";
-@use "../typography/typography" as *;
-@use "../layouts/responsive" as *;
+@use "../../colors/color_variables";
+@use "../../typography/typography" as *;
+@use "../../layouts/responsive" as *;
 
 // 배너 버튼 레이어 스타일
 .banner-button-layer {
