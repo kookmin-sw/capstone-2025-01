@@ -2,12 +2,10 @@
 <%= render 'shared/banner' %>
 
 <!-- 메인페이지 법안 검색바 -->
-<div class="home-category-search">
-  <% active_tabs = parsed_active_tabs %>
-  <%= render "shared/search_form",
-        active_tabs: active_tabs,
-        show_main_message: true %>
-</div>
+<% active_tabs = parsed_active_tabs %>
+<%= render "shared/search_form",
+      active_tabs: active_tabs,
+      show_main_message: true %>
 
 <!-- 실시간 검색어: 기본 숨김, 선택된 카테고리에서만 표시 -->
 <div id="trendingKeywords" class="trending-keywords">

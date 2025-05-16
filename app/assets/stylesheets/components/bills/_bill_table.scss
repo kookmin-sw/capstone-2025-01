@@ -26,6 +26,16 @@
     }
 }
 
+// 법안 데이터 주의 텍스트 스타일
+.bill-data-alert {
+  @include body-small;
+  color: color_variables.$text-tertiary-color;
+  align-items: center;
+  display: flex;
+  gap: 5px;
+  margin: 30px 30px 0px 30px; 
+}
+
 // 관심법안이 없는 경우 스타일
 .empty-starred-bills {
   margin-top: 80px;
