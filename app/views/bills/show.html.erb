@@ -74,7 +74,7 @@
       </div>
       <div class="bill-detail-content">
         <% if @bill.current_bill_summary.present? %>
-          <%= render "ai_summary_accordion", current_bill_summary: @bill.current_bill_summary %>
+          <%= render "bill_detail/ai_summary_accordion", current_bill_summary: @bill.current_bill_summary %>
         <% else %>
           요약 생성 중 ⏱️  곧 업데이트 될 거예요.
         <% end %>
@@ -89,7 +89,7 @@
       추진 현황
     </div>
     <div class="bill-detail-content">
-      <%= render "progress_bar", bill: @bill %>
+      <%= render "bill_detail/progress_bar", bill: @bill %>
     </div>
   </div>
 

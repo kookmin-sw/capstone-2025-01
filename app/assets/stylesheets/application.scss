@@ -1,7 +1,7 @@
 @use "colors/color_variables";
 @use "colors/color_functions";
 
-@use "components/bill/bill_table";
+@use "components/bills/bill_table";
 @use "components/bill_detail/bill_detail";
 @use "components/bill_detail/ai_summary_accordion";
 @use "components/bill_detail/ai_summary";
@@ -11,9 +11,9 @@
 
 @use "components/law_categories";
 @use "components/political_party";
-@use "components/banner";
-@use "components/banner_search";
-@use "components/banner_buttons";
+@use "components/banner/banner";
+@use "components/banner/banner_search";
+@use "components/banner/banner_buttons";
 
 @use "components/home/main_title";
 @use "components/home/login_button";

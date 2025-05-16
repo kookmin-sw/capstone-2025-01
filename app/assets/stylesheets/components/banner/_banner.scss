@@ -1,7 +1,7 @@
-@use "colors/color_variables";
-@use "../typography/typography.scss" as *;;
-@use "../icons/next_icon";
-@use "../layouts/responsive" as *;
+@use "../../colors/color_variables";
+@use "../../typography/typography.scss" as *;;
+@use "../../icons/next_icon";
+@use "../../layouts/responsive" as *;
 
 // 배너 컴포넌트 스타일
 .banner-component-layer {

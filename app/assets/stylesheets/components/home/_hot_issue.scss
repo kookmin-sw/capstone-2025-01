@@ -1,6 +1,21 @@
 @use "colors/color_variables";
 @use "../../typography/typography" as *;
 @use "../../layouts/responsive" as *;
+<<<<<<< Updated upstream
+=======
+
+.mobile-only {
+  @include desktop {
+    display: none;
+  }
+}
+
+.desktop-only {
+  @include mobile {
+    display: none;
+  }
+}
+>>>>>>> Stashed changes
 
 // 카드와 화살표를 감싸는 래퍼
 .hot-issue-carousel-wrapper { 
@@ -211,6 +226,7 @@
     height: 20px;
     border-radius: 9999px;
     background: color_variables.$button-secondary-color;
+<<<<<<< Updated upstream
   }
 }
 
@@ -228,5 +244,7 @@
 
   @include mobile {
     display: none;
+=======
+>>>>>>> Stashed changes
   }
 }
