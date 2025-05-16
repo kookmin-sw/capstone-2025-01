@@ -31,7 +31,6 @@
             <%# 국회의원 전체목록 API에서 정당을 제공하지 않아 현재는 이름을 표시 중이나, 추후 필드 추가 후 수정 예정 %>
             <%= bill.proposals.first&.specific_proposer&.display_name || "" %>
           </div>
-          <%# TODO: 법안 상태 추가 필요 %>
           <div class="bill-tag-status <%= bill.status_css_class %>">
             <%= bill.status_emoji %>
             <%= bill.current_status %>
