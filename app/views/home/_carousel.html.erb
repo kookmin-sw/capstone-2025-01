@@ -43,8 +43,9 @@
     </button>
   </div>
 
+<div class="desktop-only">
   <% if @hot_bills.present? %>
-    <div class="hot-issue-pagination desktop-only">
+    <div class="desktop-only hot-issue-pagination">
       <% [@hot_bills.size, 4].min.times do |index| %>
         <div class="hot-issue-dot <%= 'active' if index == 0 %>"
              data-carousel-target="dot"
@@ -56,7 +57,9 @@
       <% end %>
     </div>
   <% end %>
+</div>
 
+<div class="mobile-only">
   <div class="mobile-only hot-issue-pagination">
     <span class="hot-issue-page-counter" data-carousel-target="pageCounter">
       1 / <%= @hot_bills.size %>
