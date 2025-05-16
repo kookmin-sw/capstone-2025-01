@@ -12,11 +12,9 @@ export default class extends Controller {
     this.scrollAnimationId = null
     this.isAutoPlaying = false
     this.autoPlayInterval = null
-    this.forceScroll = false
 
-    this.cloneEdgeCards()
     this.updateCardMetrics()
-    this.containerTarget.scrollLeft = this.cardWidth
+    this.containerTarget.scrollLeft = 0  // 첫 카드로 고정
     this.updatePagination()
     this.addEventListeners()
 
@@ -27,35 +25,27 @@ export default class extends Controller {
       this.updatePlayPauseIcon(false)
       this.containerTarget.setAttribute("tabindex", "0")
       setTimeout(() => {
-        this.containerTarget.focus({ preventScroll: true })  // ✅ 키보드 ← → 조작용
+        this.containerTarget.focus({ preventScroll: true })
       }, 100)
     }
   }
 
-  cloneEdgeCards() {
-    const cards = [...this.containerTarget.children]
-    if (cards.length === 0) return
-
-    const first = cards[0].cloneNode(true)
-    const last = cards[cards.length - 1].cloneNode(true)
-    first.classList.add("hot-issue-card-clone")
-    last.classList.add("hot-issue-card-clone")
-    this.containerTarget.insertBefore(last, cards[0])
-    this.containerTarget.appendChild(first)
-  }
-
   updateCardMetrics() {
-    const card = this.containerTarget.querySelector(".hot-issue-card:not(.hot-issue-card-clone)")
-    const gap = this.isMobile ? 0 : 30
-    this.cardWidth = card ? card.offsetWidth + gap : 460
-    this.totalSlides = [...this.containerTarget.children].filter(el => !el.classList.contains("hot-issue-card-clone")).length
+    const card = this.containerTarget.querySelector(".hot-issue-card")
+    if (!card) return;
+
+    const style = window.getComputedStyle(card)
+    const marginRight = parseInt(style.marginRight || 0, 10)
+    const marginLeft = parseInt(style.marginLeft || 0, 10)
+    const gap = marginRight + marginLeft
+
+    this.cardWidth = card.offsetWidth + gap
+    this.totalSlides = this.containerTarget.querySelectorAll(".hot-issue-card").length
   }
 
   addEventListeners() {
     this.containerTarget.addEventListener("scroll", this.onScroll.bind(this))
     this.containerTarget.addEventListener("keydown", this.onKeydown.bind(this))
-
-    // 마우스로 조작 시 포커스 다시 잡기
     this.containerTarget.addEventListener("mousedown", () => {
       this.containerTarget.focus({ preventScroll: true })
     })
@@ -65,24 +55,15 @@ export default class extends Controller {
     if (this.scrolling) return
 
     const index = Math.round(this.containerTarget.scrollLeft / this.cardWidth)
-
-    if (index === 0) {
-      this.containerTarget.scrollLeft = this.totalSlides * this.cardWidth
-      this.currentIndex = this.totalSlides - 1
-    } else if (index === this.totalSlides + 1) {
-      this.containerTarget.scrollLeft = this.cardWidth
-      this.currentIndex = 0
-    } else {
-      this.currentIndex = index - 1
-    }
-
+    this.currentIndex = Math.min(index, this.totalSlides - 1)
     this.updatePagination()
   }
 
   scrollToIndex(index, duration = 500) {
-    if (this.scrolling) return 
+    if (this.scrolling) return
+    index = Math.max(0, Math.min(index, this.totalSlides - 1))  // 범위 제한
 
-    const targetScroll = (index + 1) * this.cardWidth
+    const targetScroll = index * this.cardWidth
     this.animateScroll(this.containerTarget.scrollLeft, targetScroll, duration)
   }
 
@@ -109,11 +90,11 @@ export default class extends Controller {
   }
 
   startScrollLeft() {
-    this.scrollToIndex((this.currentIndex - 1 + this.totalSlides) % this.totalSlides)
+    this.scrollToIndex(this.currentIndex - 1)
   }
 
   startScrollRight() {
-    this.scrollToIndex((this.currentIndex + 1) % this.totalSlides)
+    this.scrollToIndex(this.currentIndex + 1)
   }
 
   onKeydown(e) {
@@ -143,7 +124,7 @@ export default class extends Controller {
   startAutoPlay() {
     this.isAutoPlaying = true
     this.autoPlayInterval = setInterval(() => {
-      this.scrollToIndex((this.currentIndex + 1) % this.totalSlides)
+      this.scrollToIndex(this.currentIndex + 1)
     }, 3000)
     this.updatePlayPauseIcon(true)
   }
@@ -178,7 +159,7 @@ export default class extends Controller {
       }
     })
   }
-  
+
   focusContainer() {
     this.containerTarget.focus({ preventScroll: true })
   }

@@ -74,7 +74,7 @@
 
   <% if @hot_bills.present? %>
     <div class="hot-issue-pagination desktop-only">
-      <% [@hot_bills.size, 5].min.times do |index| %>
+      <% [@hot_bills.size, 4].min.times do |index| %>
         <div class="hot-issue-dot <%= 'active' if index == 0 %>"
              data-carousel-target="dot"
              role="button"
