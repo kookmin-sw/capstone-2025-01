@@ -1,133 +1,162 @@
 @use "colors/color_variables";
 @use "../../typography/typography" as *;
-@use "../../icons/next_icon";
-@use "../../icons/previous_icon";
+@use "../../layouts/responsive" as *;
 
 // 카드와 화살표를 감싸는 래퍼
 .hot-issue-carousel-wrapper { 
-    max-width: 1390px;
-    width: 100%;
-    gap: 30px;
+  max-width: 1390px;
+  width: 100%;
+  gap: 30px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 // 카드 리스트 컨테이너 (가로 스크롤 영역)
 .hot-issue-card-container {
-    width: 100%;          
-    max-width: 100%;
-    gap: 30px;
+  width: 100%;          
+  max-width: 1260px;
+  gap: 30px;
 
-    display: flex;
-    overflow-x: auto;           // 가로 스크롤 활성화
-    scroll-behavior: smooth;    // 부드러운 스크롤 
-    scroll-snap-type: x mandatory; 
-    outline: none !important;           
+  display: flex;
+  overflow-x: auto;           // 가로 스크롤 활성화
+  scroll-behavior: smooth;    // 부드러운 스크롤 
+  scroll-snap-type: x mandatory; 
+  outline: none !important;           
 
-    // 브라우저 별 자동 스크롤바 숨기기          
-    scrollbar-width: none;       // Firefox
-    -ms-overflow-style: none;    // IE, Edge
+  // 브라우저 별 자동 스크롤바 숨기기          
+  scrollbar-width: none;       // Firefox
+  -ms-overflow-style: none;    // IE, Edge
 
-    &:focus,
-    &:focus-visible {
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari
+  }
+
+  &:focus,
+  &:focus-visible {
     outline: none ;
     box-shadow: none ;
   }
-}
 
-.hot-issue-card-container::-webkit-scrollbar {
-    display: none;  // Chrome, Safari 
+  @include mobile {
+    max-width: 100vw;
+    padding: 0 37px 0 38px;
+    scroll-padding-left: 38px;
+    gap: 75px;
+
+    // 가로 중앙 정렬을 보장하기 위해 필요
+    justify-content: flex-start;
+  }
 }
 
 // 개별 카드 디자인
 .hot-issue-card{
-    height: 300px;
-    width: 400px;
-    padding: 15px 30px;
-    gap: 11px;
+  height: 300px;
+  width: 400px;
+  padding: 15px 30px;
+  gap: 11px;
 
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
-    flex-shrink: 0;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  
+  border-radius: 20px; 
+  box-sizing: border-box;
+  
+  background-color: color_variables.$surface-primary-color; // 배경색 지정 (필요 시 변경)
+
+  @include mobile {
+    width: 100%;
+    max-width: 330px;
+    height: 159px;
+    padding: 15px;
+    gap: 10px;
     scroll-snap-align: start;
-  
-    border-radius: 20px; 
-    box-sizing: border-box;
-  
-    background-color: color_variables.$surface-primary-color; // 배경색 지정 (필요 시 변경)
-  
+  }
 }
 
 // 카드 상단 헤더
 .hot-issue-header {
-    margin-bottom: 28px;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: 1632px;
-    gap: 19px;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1632px;
+  gap: 19px;
+
+  @include mobile {
+    margin-bottom: 10px;
+    max-width: 338px;
+    gap: 10px;
+  }
 }
 
 // 'HOT 이슈 법안' 텍스트 스타일
 .hot-issue-bill-text {
-    @include title-small;
-    color: color_variables.$text-primary-color;
+  @include title-small;
+  color: color_variables.$text-primary-color;
 }
 
 // '모든 법안 보기' 텍스트
 .all-issue-bill-text {
-    @include caption-medium;
-    color: color_variables.$text-tertiary-color;
-    margin-top: 6px;
+  @include caption-medium;
+  color: color_variables.$text-tertiary-color;
+  margin-top: 6px;
+
+  @include mobile {
+    margin-top: 3px;
+  }
 }
 
 .all-issue-next-icon {
-    @extend .next-icon;
-    width: 5.5px;
-    height: 10.283px;
-    color: color_variables.$text-tertiary-color;
-    margin-left: 3px;
+  width: 5.5px;
+  height: 10.283px;
+  color: color_variables.$text-tertiary-color;
+  margin-left: 3px;
+
+  @include mobile {
+    width: 3px;
+    height: 5px;
+  }
 }
 
 // 법안 제목 (긴 경우 말줄임표 처리)
 .hot-issue-title {
-    @include button-large;
-    color: color_variables.$text-primary-color;
-    width: 100%;                
-    white-space: wrap;                  
-    flex-shrink: 0; 
+  @include button-large;
+  color: color_variables.$text-primary-color;
+  width: 100%;                
+  white-space: wrap;                  
+  flex-shrink: 0; 
 }
 
 // 태그 or 메타데이터를 위한 라벨 묶음
 .hot-issue-header-tag {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0; 
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0; 
 }
 
-.hot-issue-arrow {
+// 원래 icon의 크기와 상이하므로 따로 정의
+.hot-issue-icon {
+  z-index: 2;
+  color: color_variables.$text-secondary-color;
+
+  @include mobile {
+    width: 18px;
+    height: 18px;
+  }
+
+  @include desktop {
     width: 35px;
     height: 35px;
-    z-index: 2;
-    color: color_variables.$text-secondary-color;
   }
-  
-
-.hot-issue-next-icon {
-    @extend .hot-issue-arrow;
-    @extend .next-icon;
 }
 
-.hot-issue-previous-icon{
-    @extend .hot-issue-arrow;
-    @extend .previous-icon;
-}
-
-// 포커스 스타일 추가
+// 포커스 스타일 제거
 .hot-issue-previous-icon,
 .hot-issue-next-icon {
   &:focus,
@@ -140,29 +169,64 @@
 // 요약된 법안 정보를 가져와야 하는데 없는 법안도 있음
 // 법안 상세정보 사용
 .hot-issue-bill-description {
-    @include body-small;
-    width: 100%;
-    overflow: hidden;
+  @include body-small;
+  width: 100%;
+  overflow: hidden;
 }
 
 .hot-issue-pagination {
-    display: flex;
-    justify-content: center;
-    gap: 14px;
-    margin: 37px 0 143px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin: 37px 0 143px;
+
+  @include mobile {
+    justify-content: flex-end;
+    padding-right: 45px;
+    margin: 7px 0 9px;
+    gap: 6px;
   }
+
+  @include desktop {
+    flex-direction: row !important; // 명시적으로 가로 정렬
+  }
+}
+
+// 페이지 번호 표시
+.hot-issue-page-counter {
+  @include button-large;
+  align-items: center;
+  color: color_variables.$icon-default-color;
+}
+
+.hot-issue-dot {
+  width: 20px;
+  height: 20px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background: color_variables.$button-tertiary-color;
   
-  .hot-issue-dot {
-    width: 20px;
+  &.active {
+    width: 50px;
     height: 20px;
-    aspect-ratio: 1/1;
-    border-radius: 50%;
-    background: color_variables.$button-tertiary-color;
-  
-    &.active {
-      width: 50px;
-      height: 20px;
-      border-radius: 9999px;
-      background: color_variables.$button-secondary-color;
+    border-radius: 9999px;
+    background: color_variables.$button-secondary-color;
+  }
+}
+
+.mobile-only {
+  display: none;
+
+  @include mobile {
+    display: flex;
+  }
+}
+
+.desktop-only {
+  display: flex;
+  flex-direction: row;
+
+  @include mobile {
+    display: none;
   }
 }

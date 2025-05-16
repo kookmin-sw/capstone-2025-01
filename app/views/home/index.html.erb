@@ -17,7 +17,7 @@
   <% end %>
 </div>
 
-<!-- HOT 이슈 법안 섹션 -->
+<!-- HOT 이슈 법안 헤더 -->
 <div class="hot-issue-header">
   <div class="hot-issue-bill-text">HOT 이슈 법안</div>
   <%= link_to bills_path, class: "all-issue-bill-text" do %>
@@ -28,39 +28,35 @@
 
 <!-- HOT 이슈 캐러셀 -->
 <div data-controller="carousel">
-  <!-- 카드 + 화살표 -->
-  <div class="hot-issue-carousel-wrapper">
-    <button
-      class="hot-issue-previous-icon"
-      data-action="mousedown->carousel#startScrollLeft mouseup->carousel#stopScroll mouseleave->carousel#stopScroll"
-      aria-label="이전 슬라이드">
-      <%= inline_svg("previous") %>
+  <div class="hot-issue-carousel-wrapper" role="region" aria-label="HOT 이슈 법안 슬라이드">
+
+    <button class="hot-issue-previous-icon desktop-only"
+            type="button"
+            data-action="click->carousel#focusContainer click->carousel#startScrollLeft"
+            aria-label="이전 슬라이드">
+      <%= inline_svg("previous", class: "hot-issue-icon") %>
     </button>
 
-    <!-- tabindex 추가로 키보드 조작 가능하게 -->
-    <div data-carousel-target="container" class="hot-issue-card-container" tabindex="0">
-      <% @hot_bills.each do |bill| %>
-        <%= link_to bill_path(bill), class: "hot-issue-card", aria: { label: "#{bill.title} 요약: #{truncate((bill.summary || '').gsub(/\A(?:제안이유 및 주요내용|제안이유)[:\s]*/, ''), length: 90)}" } do %>
-          <div class="hot-issue-title"><%= bill.title %></div>
+    <div data-carousel-target="container"
+         class="hot-issue-card-container"
+         tabindex="0"
+         aria-label="슬라이드 목록. 좌우 방향키로 이동 가능">
 
+      <% @hot_bills.each do |bill| %>
+        <%= link_to bill_path(bill),
+                    class: "hot-issue-card",
+                    aria: { label: "HOT 이슈 법안: #{truncate(bill.title, length: 30)}" } do %>
+          <div class="hot-issue-title"><%= bill.title %></div>
           <div class="hot-issue-header-tag">
             <div class="bill-tag-party">
-              <% specific_proposer = bill.proposals.first&.specific_proposer %>
-              <% if specific_proposer.is_a?(NationalAssemblyPerson) %>
-                <%= specific_proposer.party_name.presence || "무소속" %>
-              <% elsif specific_proposer.is_a?(GovernmentBillSponsor) %>
-                정부
-              <% else %>
-                기타
-              <% end %>
+              <% proposer = bill.proposals.first&.specific_proposer %>
+              <%= proposer.is_a?(NationalAssemblyPerson) ? (proposer.party_name.presence || "무소속") : proposer.is_a?(GovernmentBillSponsor) ? "정부" : "기타" %>
             </div>
-
             <div class="bill-tag-status <%= bill.status_css_class %>">
-              <%= bill.status_emoji %>
-              <%= bill.current_status %>
+              <span class="status-emoji"><%= bill.status_emoji %></span>
+              <span class="status-label"><%= bill.current_status %></span>
             </div>
           </div>
-
           <div class="hot-issue-bill-description">
             <%= truncate((bill.summary || "").gsub(/\A(?:제안이유 및 주요내용|제안이유)[:\s]*/, ""), length: 90) %>
           </div>
@@ -68,26 +64,54 @@
       <% end %>
     </div>
 
-    <button
-      class="hot-issue-next-icon"
-      data-action="mousedown->carousel#startScrollRight mouseup->carousel#stopScroll mouseleave->carousel#stopScroll"
-      aria-label="다음 슬라이드">
-      <%= inline_svg("next") %>
+    <button class="hot-issue-next-icon desktop-only"
+            type="button"
+            data-action="click->carousel#focusContainer click->carousel#startScrollRight"
+            aria-label="다음 슬라이드">
+      <%= inline_svg("next", class: "hot-issue-icon") %>
     </button>
   </div>
 
-  <!-- 동적 dot 생성 + aria-current -->
-  <% dot_count = [@hot_bills.size, 5].min %>
-  <div class="hot-issue-pagination">
-    <% dot_count.times do |index| %>
-      <div
-        class="hot-issue-dot <%= 'active' if index == 0 %>"
-        data-carousel-target="dot"
-        role="button"
-        tabindex="-1"
-        aria-current="<%= index == 0 ? 'true' : 'false' %>"
-        aria-label="슬라이드 <%= index + 1 %>">
-      </div>
-    <% end %>
+  <% if @hot_bills.present? %>
+    <div class="hot-issue-pagination desktop-only">
+      <% [@hot_bills.size, 4].min.times do |index| %>
+        <div class="hot-issue-dot <%= 'active' if index == 0 %>"
+             data-carousel-target="dot"
+             role="button"
+             tabindex="0"
+             aria-current="<%= index == 0 ? 'true' : 'false' %>"
+             aria-label="슬라이드 <%= index + 1 %>">
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="mobile-only hot-issue-pagination">
+    <span class="hot-issue-page-counter" data-carousel-target="pageCounter">
+      1 / <%= @hot_bills.size %>
+    </span>
+
+    <button class="hot-issue-previous-icon"
+            type="button"
+            data-action="click->carousel#startScrollLeft"
+            aria-label="이전 슬라이드">
+      <%= inline_svg("previous", class: "hot-issue-icon") %>
+    </button>
+
+    <button class="pause-line-icon"
+            type="button"
+            data-carousel-target="playPauseIcon"
+            data-action="click->carousel#toggleAutoPlay"
+            aria-label="자동 재생 토글">
+      <%= inline_svg("list", class: "hot-issue-icon play-icon") %>
+      <%= inline_svg("pause_line", class: "hot-issue-icon pause-icon") %>
+    </button>
+
+    <button class="hot-issue-next-icon"
+            type="button"
+            data-action="click->carousel#startScrollRight"
+            aria-label="다음 슬라이드">
+      <%= inline_svg("next", class: "hot-issue-icon") %>
+    </button>
   </div>
 </div>
