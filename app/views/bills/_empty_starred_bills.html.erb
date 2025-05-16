@@ -1,0 +1,12 @@
+<%# 관심법안이 없는 경우 %>
+
+<div class="empty-starred-bills">
+    <div class="empty-starred-bills-text">
+        아직 관심 법안이 없어요.
+    </div>
+    <div class="add-starred-bill-button">
+        <%= link_to bills_path do %>
+            관심 법안 추가하러 가기 →
+        <% end %>
+    </div>
+</div>

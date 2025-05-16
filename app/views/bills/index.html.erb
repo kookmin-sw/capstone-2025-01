@@ -13,6 +13,10 @@
         active_tabs: (params[:starred] == 'true' ? ["starred"] : parsed_active_tabs.presence || ["all"]) %>
 </div>
 
+<!-- 관심법안 상태 및 빈 결과 처리 -->
+<% if params[:starred] == "true" && @bills.empty? %>
+  <%= render 'empty_starred_bills' %>
+<% else %>
 <!-- 법안 목록 -->
 <div class="bill-card-container">
   <!-- 실제 데이터 -->
@@ -58,3 +62,4 @@
 
 <!-- 페이지네이션 -->
   <%= render 'pagination' if @pagy.pages >= 1 %>
+<% end %>

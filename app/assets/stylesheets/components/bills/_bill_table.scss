@@ -26,6 +26,36 @@
     }
 }
 
+// 관심법안이 없는 경우 스타일
+.empty-starred-bills {
+  margin-top: 80px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.empty-starred-bills-text {
+  @include headline-medium;
+  color: color_variables.$text-primary-color;
+}
+
+.add-starred-bill-button {
+  @include title-small;
+  color: color_variables.$text-inverse-color;
+  background: color_variables.$button-primary-color;
+  border-radius: 20px;
+
+
+  @include mobile {
+    padding: 8px 15px;
+  }
+
+  @include desktop {
+    padding: 15px 30px;
+  }
+}
+
 // 법안 카드 스타일
 .bill-card {
     min-height: 200px;
