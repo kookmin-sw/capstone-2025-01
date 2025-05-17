@@ -3,12 +3,12 @@
 
 .pause-line-icon {
     color: color_variables.$text-secondary-color;
-    
+
     @include mobile {
         width: 18px; 
         height: 18px; 
     }
-    
+
     @include desktop {
     display: none;
   }

@@ -2,6 +2,18 @@
 @use "../../typography/typography" as *;
 @use "../../layouts/responsive" as *;
 
+.mobile-only {
+  @include desktop {
+    display: none;
+  }
+}
+
+.desktop-only {
+  @include mobile {
+    display: none;
+  }
+}
+
 // 카드와 화살표를 감싸는 래퍼
 .hot-issue-carousel-wrapper { 
   max-width: 1390px;
@@ -80,17 +92,19 @@
 
 // 카드 상단 헤더
 .hot-issue-header {
-  margin-bottom: 28px;
   display: flex;
   align-items: center;
-  width: 100%;
-  max-width: 1632px;
-  gap: 19px;
 
   @include mobile {
     margin-bottom: 10px;
-    max-width: 338px;
+    width: 79%;
     gap: 10px;
+  }
+
+  @include desktop {
+    margin-bottom: 28px;
+    width: 85%;
+    gap: 19px;
   }
 }
 
@@ -214,19 +228,3 @@
   }
 }
 
-.mobile-only {
-  display: none;
-
-  @include mobile {
-    display: flex;
-  }
-}
-
-.desktop-only {
-  display: flex;
-  flex-direction: row;
-
-  @include mobile {
-    display: none;
-  }
-}
