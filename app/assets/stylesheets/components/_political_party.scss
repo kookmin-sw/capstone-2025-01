@@ -1,22 +1,26 @@
 @use "../colors/color_variables";
 @use "../typography/typography" as *;
+@use "../layouts/responsive" as *;
 
 %political-common-shape-component {
-    width: 108px;
-    height: 35px;
-    border-radius: 10px; 
-    border-width: 1px;
-    padding: 4px 33px;
-    gap: 20px;
-
+    width: auto;
     justify-content: center;
     display: flex;
     align-items: center;
-    box-sizing: border-box;
-    flex-shrink: 0;
-    white-space: nowrap; // 자동 줄 바꿈이 안되게 설정 
 
-    background: color_variables.$background-primary-color;
+    @include mobile {
+        height: 30px;
+        min-height: 30px;
+        border-radius: 12px; 
+        padding: 0px 10px;
+    }
+
+    @include desktop {
+        height: 57px;
+        min-height: 57px;
+        border-radius: 20px; 
+        padding: 4px 25px;
+    }
 }
 
 // 정당 관련 컴포넌트의 이름과 색상 맵

@@ -6,7 +6,6 @@
 .banner-button-layer {
   position: relative;
   display: flex;
-  align-items: center;
   margin-left: auto;
   
   @include mobile {
@@ -119,7 +118,6 @@
 // 설정 서브 드롭다운
 .dropdown-submenu {
     display: none; 
-    width: 100%;
     flex-direction: column; 
 
     &.show {
@@ -127,7 +125,6 @@
     }
 
     .dropdown-item {
-        width: 100%;
         cursor: pointer;
         border-bottom: none; // 하위 항목들 사이에는 구분선 제거
 
@@ -159,7 +156,6 @@
 .toggle-switch {
     position: relative;
     display: inline-block;
-    
     margin-left: auto; 
 
     @include mobile {
@@ -171,12 +167,6 @@
         width: 36px;
         height: 20.25px;
     }
-}
-
-.toggle-switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
 }
 
 .toggle-slider {
@@ -227,19 +217,7 @@ input:checked + .toggle-slider:before {
     }
 }
 
-// 서브메뉴 드롭다운 항목 정렬
-.dropdown-submenu .dropdown-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 // 회원 탈퇴 텍스트 색상 변경
 .dropdown-submenu .dropdown-item.member-withdrawal {
     color: color_variables.$border-tertiary-color;
-}
-
-// 드롭다운 메뉴 표시 클래스
-.show {
-    display: flex !important;
 }

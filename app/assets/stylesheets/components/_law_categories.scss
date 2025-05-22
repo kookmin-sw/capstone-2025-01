@@ -27,9 +27,7 @@ $LAW_CATEGORIES: (
     display: flex;
     max-width: 1652px;
     justify-content: center;
-    align-items: center;
     flex-wrap: wrap;
-    margin: 0 auto;
     
     @include mobile {
         gap: 5px;
@@ -52,12 +50,9 @@ $LAW_CATEGORIES: (
     border: 1px solid color_variables.$border-primary-color;
 
     @include mobile {
-        // height: 35px;
-        // min-height: 35px;
         height: 30px;
         min-height: 30px;
         border-radius: 12px; 
-        // padding: 8px 15px;
         padding: 0px 10px;
     }
 

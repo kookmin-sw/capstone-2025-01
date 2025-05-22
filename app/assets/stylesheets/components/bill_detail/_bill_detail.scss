@@ -28,7 +28,7 @@
 }
 
 // 법안, 정당 공통 태그 스타일
-@mixin common-tag-style {
+[class$="-comp"], [class$="-shape"] {
   @include button-small;
   
   @include mobile {
@@ -36,6 +36,7 @@
     max-height: 22px !important;
     min-height: 22px !important;
     border-radius: 5px !important;
+    padding: 4px 15px !important;
   }
   
   @include desktop {
@@ -43,35 +44,10 @@
     max-height: 35px !important;
     min-height: 35px !important;
     border-radius: 10px !important;
+    padding: 4px 33px !important;
   }
 }
 
-// 법안 카테고리 버튼 스타일 오버라이드
-[class$="-comp"] {
-  @include common-tag-style;
-  
-  @include mobile {
-    width: 94px !important;
-  }
-  
-  @include desktop {
-    width: 187px !important;
-  }
-}
-
-// 정당 태그 스타일 오버라이드
-[class$="-shape"] {
-@include common-tag-style;
-  
-  @include mobile {
-    width: 74px !important;
-  }
-  
-  @include desktop {
-    width: 108px !important;
-  }
-}
-  
 // 법안 제목
 .bill-detail-title {
   @include title-large;
@@ -142,10 +118,6 @@
   display: flex;
   align-items: center;
     
-  .list-icon {
-    color: color_variables.$brand-logo-color;
-  }
-
   @include mobile {
     gap: 5px; 
   }
