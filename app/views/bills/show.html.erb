@@ -5,9 +5,11 @@
   <!-- 법안, 정당 태그 -->
   <div class="bill-detail-tags">
     <!-- 법안 카테고리 태그 -->
-    <%= law_category_button('government-administration', disabled: true) %>
+    <% if @bill.category.present? %>
+      <%= law_category_button(@bill.category, disabled: true) %>
+    <% end %>
     <!-- 정당 태그 -->
-    <%= political_party_tab('people-power') %>
+    <%# <%= political_party_tab('people-power') %>
     <!-- 내 관심 법안 버튼 -->
     <div class="star-icon-wrapper" data-controller="star" data-bill-id="<%= @bill.id %>" data-action="click->star#toggle">
       <%= inline_svg("star", class: "star-icon default") %>
