@@ -106,7 +106,7 @@
 // 메타데이터 아이템
 .bill-detail-meta-item {
   display: grid;
-  grid-template-columns: 100px 1fr; 
+  grid-template-columns: 120px 1fr; 
   
   @include desktop {
     gap: 20px;

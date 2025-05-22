@@ -42,10 +42,10 @@
       <span class="bill-detail-meta-label">제안일자</span>
       <span class="bill-detail-meta-value"><%= @bill.proposed_at.strftime('%Y-%m-%d') || "" %></span>
     </div>
-    <!-- 소관부처 -->
+    <!-- 소관위원회 -->
     <div class="bill-detail-meta-item">
-      <span class="bill-detail-meta-label">소관부처</span>
-      <span class="bill-detail-meta-value"><%#= @bill.department_name || "" %></span>
+      <span class="bill-detail-meta-label">소관위원회</span>
+      <span class="bill-detail-meta-value"><%= @bill.committee_name || "" %></span>
     </div>
     <!-- 제안회기 -->
     <div class="bill-detail-meta-item">
