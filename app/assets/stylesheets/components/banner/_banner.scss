@@ -39,7 +39,6 @@
         display: flex;
         align-items: center;
         color: color_variables.$text-secondary-color;
-        text-decoration: none;
 
       @include mobile {
           margin-left: 24px;

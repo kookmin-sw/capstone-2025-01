@@ -5,7 +5,7 @@
             type="button"
             data-action="click->carousel#focusContainer click->carousel#startScrollLeft"
             aria-label="이전 슬라이드">
-      <%= inline_svg("previous", class: "hot-issue-icon") %>
+      <%= inline_svg("previous", class: "hot-issue-slide-icon") %>
     </button>
 
     <div data-carousel-target="container"
@@ -39,10 +39,11 @@
             type="button"
             data-action="click->carousel#focusContainer click->carousel#startScrollRight"
             aria-label="다음 슬라이드">
-      <%= inline_svg("next", class: "hot-issue-icon") %>
+      <%= inline_svg("next", class: "hot-issue-slide-icon") %>
     </button>
   </div>
 
+<%# 데스크탑 캐러셀 %>
 <div class="desktop-only">
   <% if @hot_bills.present? %>
     <div class="desktop-only hot-issue-pagination">
@@ -59,6 +60,7 @@
   <% end %>
 </div>
 
+<%# 모바일 캐러셀 %>
 <div class="mobile-only">
   <div class="mobile-only hot-issue-pagination">
     <span class="hot-issue-page-counter" data-carousel-target="pageCounter">
@@ -69,7 +71,7 @@
             type="button"
             data-action="click->carousel#startScrollLeft"
             aria-label="이전 슬라이드">
-      <%= inline_svg("previous", class: "hot-issue-icon") %>
+      <%= inline_svg("previous", class: "hot-issue-slide-icon") %>
     </button>
 
     <button class="pause-line-icon"
@@ -77,15 +79,15 @@
             data-carousel-target="playPauseIcon"
             data-action="click->carousel#toggleAutoPlay"
             aria-label="자동 재생 토글">
-      <%= inline_svg("list", class: "hot-issue-icon play-icon") %>
-      <%= inline_svg("pause_line", class: "hot-issue-icon pause-icon") %>
+      <%= inline_svg("list", class: "hot-issue-slide-icon play-icon") %>
+      <%= inline_svg("pause_line", class: "hot-issue-slide-icon pause-icon") %>
     </button>
 
     <button class="hot-issue-next-icon"
             type="button"
             data-action="click->carousel#startScrollRight"
             aria-label="다음 슬라이드">
-      <%= inline_svg("next", class: "hot-issue-icon") %>
+      <%= inline_svg("next", class: "hot-issue-slide-icon") %>
     </button>
   </div>
 </div>
