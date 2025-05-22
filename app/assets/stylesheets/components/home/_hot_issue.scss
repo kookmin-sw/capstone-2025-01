@@ -1,4 +1,5 @@
 @use "colors/color_variables";
+@use "../../icons/previous_icon";
 @use "../../typography/typography" as *;
 @use "../../layouts/responsive" as *;
 
@@ -16,21 +17,12 @@
 
 // 카드와 화살표를 감싸는 래퍼
 .hot-issue-carousel-wrapper { 
-  max-width: 1390px;
-  width: 100%;
   gap: 30px;
-
   display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 // 카드 리스트 컨테이너 (가로 스크롤 영역)
 .hot-issue-card-container {
-  width: 100%;          
-  max-width: 1260px;
-  gap: 30px;
-
   display: flex;
   overflow-x: auto;           // 가로 스크롤 활성화
   scroll-behavior: smooth;    // 부드러운 스크롤 
@@ -42,11 +34,10 @@
   -ms-overflow-style: none;    // IE, Edge
 
   &::-webkit-scrollbar {
-    display: none; // Chrome, Safari
+    display: none;            // Chrome, Safari
   }
 
-  &:focus,
-  &:focus-visible {
+  &:focus, &:focus-visible {
     outline: none ;
     box-shadow: none ;
   }
@@ -56,29 +47,25 @@
     padding: 0 37px 0 38px;
     scroll-padding-left: 38px;
     gap: 75px;
-
-    // 가로 중앙 정렬을 보장하기 위해 필요
     justify-content: flex-start;
+  }
+
+  @include desktop {
+    max-width: 1260px;
+    gap: 30px;
   }
 }
 
 // 개별 카드 디자인
 .hot-issue-card{
-  height: 300px;
-  width: 400px;
-  padding: 15px 30px;
-  gap: 11px;
-
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
   flex-shrink: 0;
   scroll-snap-align: start;
-  
   border-radius: 20px; 
   box-sizing: border-box;
-  
-  background-color: color_variables.$surface-primary-color; // 배경색 지정 (필요 시 변경)
+  background-color: color_variables.$surface-primary-color;
 
   @include mobile {
     width: 100%;
@@ -88,12 +75,19 @@
     gap: 10px;
     scroll-snap-align: start;
   }
+
+  @include desktop {
+    width: 400px;
+    height: 300px;
+    padding: 15px 30px;
+    gap: 11px;
+  }
 }
 
 // 카드 상단 헤더
 .hot-issue-header {
   display: flex;
-  align-items: center;
+  align-items: end;
 
   @include mobile {
     margin-bottom: 10px;
@@ -118,16 +112,17 @@
 .all-issue-bill-text {
   @include caption-medium;
   color: color_variables.$text-tertiary-color;
-  margin-top: 6px;
 
   @include mobile {
-    margin-top: 3px;
+    margin-bottom: 3px;
+  }
+
+  @include desktop {
+    margin-bottom: 7px;
   }
 }
 
 .all-issue-next-icon {
-  width: 5.5px;
-  height: 10.283px;
   color: color_variables.$text-tertiary-color;
   margin-left: 3px;
 
@@ -135,14 +130,17 @@
     width: 3px;
     height: 5px;
   }
+
+  @include desktop {
+    width: 5.5px;
+    height: 10.2px;
+  }
 }
 
 // 법안 제목 (긴 경우 말줄임표 처리)
 .hot-issue-title {
   @include button-large;
   color: color_variables.$text-primary-color;
-  width: 100%;                
-  white-space: wrap;                  
   flex-shrink: 0; 
 }
 
@@ -154,14 +152,10 @@
   flex-shrink: 0; 
 }
 
-// 원래 icon의 크기와 상이하므로 따로 정의
-.hot-issue-icon {
-  z-index: 2;
-  color: color_variables.$text-secondary-color;
-
+.hot-issue-slide-icon {
   @include mobile {
-    width: 18px;
-    height: 18px;
+    width: 13px;
+    height: 13px;
   }
 
   @include desktop {
@@ -171,10 +165,8 @@
 }
 
 // 포커스 스타일 제거
-.hot-issue-previous-icon,
-.hot-issue-next-icon {
-  &:focus,
-  &:focus-visible {
+.hot-issue-previous-icon, .hot-issue-next-icon, .pause-line-icon {
+  &:focus, &:focus-visible {
     outline: none;
     box-shadow: none;
   }
@@ -190,10 +182,7 @@
 
 .hot-issue-pagination {
   display: flex;
-  justify-content: center;
-  gap: 14px;
-  margin: 37px 0 143px;
-
+  
   @include mobile {
     justify-content: flex-end;
     padding-right: 45px;
@@ -203,28 +192,34 @@
 
   @include desktop {
     flex-direction: row !important; // 명시적으로 가로 정렬
+    justify-content: center;
+    gap: 14px;
+    margin: 37px 0px;
   }
 }
 
 // 페이지 번호 표시
 .hot-issue-page-counter {
   @include button-large;
+  display: flex;
   align-items: center;
-  color: color_variables.$icon-default-color;
 }
 
 .hot-issue-dot {
   width: 20px;
   height: 20px;
   aspect-ratio: 1/1;
-  border-radius: 50%;
+  border-radius: 9999px;
   background: color_variables.$button-tertiary-color;
   
   &.active {
     width: 50px;
-    height: 20px;
-    border-radius: 9999px;
     background: color_variables.$button-secondary-color;
   }
-}
 
+  &:focus, &:hover {
+      outline: none !important;
+      border-color: color_variables.$border-primary-color !important;
+      box-shadow: none !important;
+    }
+}

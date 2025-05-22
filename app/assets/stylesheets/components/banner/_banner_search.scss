@@ -5,24 +5,22 @@
 
 // 최상단 검색바 컨테이너
 .search-bar {
-  margin: auto;
   display: flex;
   align-items: center;
-  justify-self: center;
 
   @include mobile {
     width: 315px;
     height: 36px;
     padding: 0px 10px;
-    margin: 10px 0px;
+    margin: 10px auto;
     border-bottom: 1px solid color_variables.$border-primary-color; 
   }
 
   @include desktop {
     width: 660px;
     height: 58px;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding: 0px 16px;
+    margin: auto;
     border-bottom: 2px solid color_variables.$border-primary-color; 
   }
   

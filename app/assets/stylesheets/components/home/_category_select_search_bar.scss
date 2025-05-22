@@ -7,8 +7,6 @@
 // 선택된 카테고리 태그가 보여지는 영역
 .selected-category-tag-container {
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
   overflow-x: auto;
   gap: 8px;
   align-items: center;
@@ -16,20 +14,6 @@
   // 웹킷 브라우저에서 자동 스크롤바 숨김
   &::-webkit-scrollbar {
     display: none;
-  }
-
-  // 실제 키워드 입력창
-  input[type="text"] {
-    @include mobile {
-      height: 24px;
-      width: 100vw;
-      padding: 5px;
-    }
-
-    @include desktop {
-      height: 46px;
-      padding: 16px;
-    }
   }
 }
 
@@ -41,15 +25,15 @@
   background-color: color_variables.$surface-primary-color;
 
   @include mobile {
-    padding: 0px 10px;
+    padding: 4px 10px;
     border-radius: 15px;
-    height: 24px;
+    gap: 3px;
   }
 
   @include desktop {
-    gap: 5px;
     padding: 6px 15px;
     border-radius: 20px;
+    gap: 5px;
   }
 
   span {
@@ -58,7 +42,6 @@
 
   .remove-button {
     @extend .remove-icon;
-    border: none;
     cursor: pointer;
     display: flex;
     align-items: center;

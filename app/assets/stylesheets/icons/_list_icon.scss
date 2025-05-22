@@ -2,6 +2,8 @@
 @use "../layouts/responsive" as *;
 
 .list-icon {
+  color: color_variables.$brand-logo-color;
+  
   @include mobile {
     width: 24px;
     height: 24px;
