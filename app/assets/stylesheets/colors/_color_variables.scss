@@ -26,8 +26,6 @@ $text-system-safe-color: palette-color('green', 4);
 $text-system-warn-color: palette-color('yellow', 5);
 $text-system-danger-color: palette-color('red', 5);
 $text-ai-explain-color: palette-color('grayscale', 1);
-$text-kakao-color: palette-color('grayscale', 1);
-$text-naver-color: palette-color('grayscale', 13);
 
 // Border Colors
 $border-primary-color: palette-color('blue', 7);
@@ -63,3 +61,13 @@ $emoji-reviewing-color: palette-color('yellow', 5);
 $emoji-decided-color: palette-color('grayscale', 4);
 $emoji-executed-color: palette-color('green', 4);
 $emoji-discarded-color: palette-color('red', 8);
+
+// SNS Colors
+$kakao-brand-color: #fee500;
+$kakao-logo-color: #000000;
+$naver-brand-color: #1ec800;
+$naver-logo-color: #ffffff;
+$facebook-brand-color: #1877f2;
+$facebook-logo-color: #ffffff;
+$x-brand-color: #000000;
+$x-logo-color: #ffffff;

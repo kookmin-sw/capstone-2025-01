@@ -1,0 +1,7 @@
+@use "../colors/color_variables";
+
+.x-logo-icon {
+    color: color_variables.$x-logo-color;
+    width: 25px;
+    height: 25px;
+}

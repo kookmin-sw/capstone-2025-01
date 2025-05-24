@@ -1,8 +1,8 @@
 @use "../colors/color_variables";
 @use "../layouts/responsive" as *;
 
-
 .kakao-logo-icon {
+  color: color_variables.$kakao-logo-color;
   @include mobile {
     width: 18px;
     height: 18px;
