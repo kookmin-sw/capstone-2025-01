@@ -46,9 +46,8 @@
 
 // 전역 스타일 설정
 a {
-    &:focus, &:active, &:hover {
-      outline: none !important;
-      border-color: color_variables.$border-primary-color !important;
-      box-shadow: none !important;
+    &:focus {
+      outline: none;
+      box-shadow: none;
     }
   }

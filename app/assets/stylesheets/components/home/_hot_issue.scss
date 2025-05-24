@@ -37,9 +37,8 @@
     display: none;            // Chrome, Safari
   }
 
-  &:focus, &:focus-visible {
-    outline: none ;
-    box-shadow: none ;
+  &:focus {
+    box-shadow: none;
   }
 
   @include mobile {
@@ -166,18 +165,16 @@
 
 // 포커스 스타일 제거
 .hot-issue-previous-icon, .hot-issue-next-icon, .pause-line-icon {
-  &:focus, &:focus-visible {
-    outline: none;
+  &:focus {
     box-shadow: none;
   }
 }
 
-// 요약된 법안 정보를 가져와야 하는데 없는 법안도 있음
 // 법안 상세정보 사용
 .hot-issue-bill-description {
   @include body-small;
-  width: 100%;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .hot-issue-pagination {
@@ -217,9 +214,7 @@
     background: color_variables.$button-secondary-color;
   }
 
-  &:focus, &:hover {
-      outline: none !important;
-      border-color: color_variables.$border-primary-color !important;
-      box-shadow: none !important;
+  &:focus {
+      box-shadow: none;
     }
 }
