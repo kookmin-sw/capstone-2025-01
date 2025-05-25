@@ -171,3 +171,33 @@ permalink: /
 ---
 
 ## 사용법
+LawNow는 3월 4일에 배포되어 현재 서비스 운영중입니다. 지금 바로 LawNow를 사용해보세요! 🔍
+<div class="md-carousel">
+  <!-- 라디오 버튼들 (숨김) -->
+  <input type="radio" name="mdcarousel" id="slide1" checked>
+  <input type="radio" name="mdcarousel" id="slide2">
+  <input type="radio" name="mdcarousel" id="slide3">
+  
+  <!-- 이미지 -->
+  <div class="md-carousel-images">
+    <img src="./assets/images/user_guide_main.png" alt="메인 가이드">
+    <img src="./assets/images/user_guide_bills.png" alt="법안 가이드">
+    <img src="./assets/images/user_guide_bills_detail.png" alt="상세 가이드">
+  </div>
+  
+  <!-- 첫 번째 슬라이드용 화살표 -->
+  <div class="carousel-arrows slide1">
+    <label for="slide2" class="carousel-arrow next">›</label>
+  </div>
+  
+  <!-- 두 번째 슬라이드용 화살표 -->
+  <div class="carousel-arrows slide2">
+    <label for="slide1" class="carousel-arrow prev">‹</label>
+    <label for="slide3" class="carousel-arrow next">›</label>
+  </div>
+  
+  <!-- 세 번째 슬라이드용 화살표 -->
+  <div class="carousel-arrows slide3">
+    <label for="slide2" class="carousel-arrow prev">‹</label>
+  </div>
+</div>

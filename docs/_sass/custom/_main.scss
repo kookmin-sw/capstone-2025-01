@@ -1,0 +1,64 @@
+$docs-background-color: #EBF1F9;
+$docs-font-color: #162D50;
+
+// 모든 최상위 요소 선택
+html, body, .page-wrap, .side-bar  {
+    background-color: $docs-background-color
+}
+  
+// 콘텐츠 영역만 다른 색상으로 설정
+.main-content-wrap, .main-content {
+    background-color: white;
+}
+
+// 직접 폰트 적용 (필요한 경우)
+body {
+    font-family: "Pretendard GOV";
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Pretendard GOV";
+    font-weight: 600 !important;
+}
+
+// 사이드바 링크
+.nav-list .nav-list-item .nav-list-link {
+    color: $docs-font-color; 
+    font-weight: 600 !important;
+}
+  
+// aux_links를 nav바 오른쪽에 배치
+.aux-nav {
+    margin-left: auto;
+}
+
+// aux_links 폰트 스타일
+.aux-nav .aux-nav-list-item a {
+    color: $docs-font-color; 
+    font-size: 1rem; 
+    font-weight: 500; 
+    text-decoration: none; 
+  }
+  
+// GitHub 링크 스타일링
+.aux-nav .aux-nav-list-item a[href*="github.com"] {
+    display: flex;
+    align-items: center;
+}
+
+// GitHub 아이콘 스타일링
+.aux-nav .aux-nav-list-item a[href*="github.com"]::before {
+    font-family: "Font Awesome 6 Brands" !important;
+    content: "\f09b" !important;
+    margin-right: 0.4rem !important;
+    line-height: 1 !important;
+    position: relative !important;
+    top: -1.5px !important; 
+    font-size: 1em !important; 
+}
+
+// 헤더 스타일링(로고 크기 조정)
+.site-header {
+  height: auto !important; 
+  min-height: 120px !important; 
+}
