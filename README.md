@@ -165,3 +165,10 @@ LawNow는 3월 4일에 배포되어 현재 서비스 운영중입니다. 지금 
 4단계의 추진 현황 그래프의 항목을 클릭하면 상세 정보를 볼 수 있으며 다시 클릭하여 접을 수 있습니다.<br> 법안 기본 정보가 필요할 경우 제목 옆의 "더보기"를 클릭하여 상세 정보를 볼 수 있습니다.
 
 <br><br>
+
+## 📚 소개 자료
+### - [프로젝트 페이지](https://lawnow.kr/)<br>
+### - [사업 계획서](https://drive.google.com/file/d/1Ed9N4Td7XA0rQxf8Lewg0aFkMcHjZZQ8/view?usp=drive_link)<br>
+### - [결과 보고서](https://drive.google.com/file/d/1fqzS1QQMKOCk5w2TgKFvm9wfaLGGVKi-/view?usp=drive_link)<br>
+### - [최종 발표 자료](https://drive.google.com/file/d/1msj22dZi4qHvOD1bQ_akEQTdc1QPVh0-/view?usp=drive_link)<br>
+### - [프로젝트 노션](https://greenstar.notion.site/2025-01-capstone-lawnow)
