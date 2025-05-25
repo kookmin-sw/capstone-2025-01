@@ -122,4 +122,53 @@ SNS 공유 기능과 카드 뉴스 제공합니다.<br>
 <br><br>
 
 ## 💻 사용법
+LawNow는 3월 4일에 배포되어 현재 서비스 운영중입니다. 지금 바로 [LawNow](https://lawnow.kr/)를 사용해보세요! 🔍<br>
+
+### 1️⃣ 메인 페이지
+<div align="center">
+    <img width="70%" src="https://github.com/user-attachments/assets/6dcd423b-ebdd-449c-a27c-baef1868dbdb">
+</div>
+
+- **로그인**<br>
+우측 상단 로그인 버튼을 클릭하여 로그인 페이지로 이동합니다. 소셜 로그인(네이버 로그인)을 사용해 로그인 가능합니다.
+
+- **카테고리별 탐색**<br>
+탐색을 원하는 주제가 있는 경우 AI 분류 카테고리를 참고하여 주제별 탐색이 가능합니다.<br>
+카테고리는 다중 선택 가능하며, 카테고리 선택 후 검색어 입력 없이 검색 버튼을 클릭하여 해당 카테고리의 모든 법안 검색이 가능합니다.
+
+- **HOT 이슈 법안**<br>
+현재 우리 사회의 가장 떠오르는 이슈와 관련된 법안을 탐색할 수 있습니다. 법안 카드를 클릭하면 법안 상세 페이지로 이동합니다.
+<br>
+
+### 2️⃣ 법안 목록 페이지
+<div align="center">
+    <img width="70%" src="https://github.com/user-attachments/assets/982384c8-b672-4ed6-bbe1-375ad799ffa2">
+</div>
+
+- **법안 카드**<br>
+선택한 카테고리에 해당하는 법안을 볼 수 있고 목록 페이지에서 바로 검색 가능합니다.<br> 법안은 1일 1회 업데이트되며, 최신순으로 정렬됩니다.
+
+- **관심 법안**<br>
+스크랩 표시한 법안은 "관심 법안"카테고리에서 모아 볼 수 있습니다.
+
+<br>
+
+### 3️⃣ 법안 상세보기 페이지
+<div align="center">
+    <img width="70%" src="https://github.com/user-attachments/assets/a266b993-292d-45df-8355-98ba9e8e5b3d">
+</div>
+    
+- **AI 요약**<br>
+발의된 법안의 "제안 이유 및 주요 내용" 원문을 일상적인 표현과 알기 쉬운 구조로 AI가 요약한 내용을 통 해 개별 법안을 더 쉽게 이해할 수 있습니다.
+
+- **추진 현황 및 법안 기본 정보**<br>
+4단계의 추진 현황 그래프의 항목을 클릭하면 상세 정보를 볼 수 있으며 다시 클릭하여 접을 수 있습니다.<br> 법안 기본 정보가 필요할 경우 제목 옆의 "더보기"를 클릭하여 상세 정보를 볼 수 있습니다.
+
 <br><br>
+
+## 📚 소개 자료
+### - [프로젝트 페이지](https://lawnow.kr/)<br>
+### - [사업 계획서](https://drive.google.com/file/d/1Ed9N4Td7XA0rQxf8Lewg0aFkMcHjZZQ8/view?usp=drive_link)<br>
+### - [결과 보고서](https://drive.google.com/file/d/1fqzS1QQMKOCk5w2TgKFvm9wfaLGGVKi-/view?usp=drive_link)<br>
+### - [최종 발표 자료](https://drive.google.com/file/d/1msj22dZi4qHvOD1bQ_akEQTdc1QPVh0-/view?usp=drive_link)<br>
+### - [프로젝트 노션](https://greenstar.notion.site/2025-01-capstone-lawnow)
