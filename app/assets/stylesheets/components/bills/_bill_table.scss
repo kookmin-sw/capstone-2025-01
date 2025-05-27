@@ -86,12 +86,6 @@
       margin: 30px;
       padding: 30px 50px;
     }
-
-    &:focus, &:active, &:hover {
-        outline: none !important;
-        border-color: color_variables.$border-primary-color !important;
-        box-shadow: none !important;
-    }
 }
  
 // 법안 카드 헤더 스타일
@@ -114,6 +108,7 @@
  
 // 법안 헤더 즐겨찾기 스타일
 .star-icon-wrapper {
+  cursor: pointer;
 
   .star-icon {
     vertical-align: middle;

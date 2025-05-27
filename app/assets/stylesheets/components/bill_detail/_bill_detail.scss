@@ -1,5 +1,6 @@
 @use "../../colors/color_variables";
 @use "../../icons/share_icon";
+@use "../../icons/kakao_logo_icon";
 @use "../../typography/typography" as *;
 @use "../../layouts/responsive" as *;
 
@@ -111,7 +112,8 @@
     margin-bottom: 50px;
   }
 }
-  
+
+// 컨텐츠 제목
 .bill-detail-label {
   @include title-small;
   color: color_variables.$text-primary-color;
@@ -135,7 +137,129 @@
   color: color_variables.$text-secondary-color;
 }
 
+// 공유 아이콘 스타일
 .share-icon-style {
   @extend .share-icon;
   vertical-align: middle;
+  cursor: pointer;
+}
+
+// 공유 메뉴 스타일
+.share-menu {
+    flex-direction: column;
+    border-radius: 0px 20px 20px 20px;
+    background-color: color_variables.$surface-primary-color;
+    position: absolute;
+    top: calc(23%); 
+    display: none;
+    width: 450px; 
+    padding: 10px 25px 25px 25px;
+    box-shadow: 2px 6px 6px 2px rgba(0, 0, 0, 0.10);
+
+    .share-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .share-close-btn {
+      @include body-large;
+
+      &:focus {
+        box-shadow: none;
+        outline: none;
+      }
+    }
+
+    .share-options {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-bottom: 30px;
+      gap: 30px;
+
+      .share-option {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .share-sns-icon {
+          width: 55px;
+          height: 55px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 10px;
+
+          &.x {
+            background-color: color_variables.$x-brand-color;
+          }
+          
+          &.facebook {
+            background-color: color_variables.$facebook-logo-color;
+          }
+
+          &.kakao {
+            background-color: color_variables.$kakao-brand-color;
+          }
+
+          .kakao-share-logo-icon {
+            @extend .kakao-logo-icon;
+            width: 30px;
+            height: 30px;
+          }
+
+          &:focus {
+            outline: none;
+            box-shadow: none;
+          }
+        }
+
+        .share-sns-label {
+          font-size: 18px;
+          color: color_variables.$text-secondary-color;
+        }
+      }
+    }
+
+    .share-header-title {
+        @include button-large;
+        margin-bottom: 12px;
+      }
+
+    .link-container {
+        display: flex;
+        align-items: center;
+        border: 1px solid color_variables.$border-inverse-color;
+        border-radius: 10px;
+        background-color: color_variables.$background-primary-color;
+        padding: 15px 10px;
+
+        .link-text {
+          @include body-small;
+          color: color_variables.$text-tertiary-color;
+          flex: 1;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .link-copy-button {
+          @include button-small;
+          color: color_variables.$text-inverse-color;
+          padding: 5px 15px;
+          background-color: color_variables.$icon-search-color;
+          border-radius: 20px;
+          cursor: pointer;
+
+          &:focus {
+            box-shadow: none;
+          }
+        }
+      }
+}
+
+.share-menu.show {
+  display: block;
 }

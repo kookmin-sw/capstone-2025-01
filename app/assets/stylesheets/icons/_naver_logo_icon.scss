@@ -2,6 +2,7 @@
 @use "../layouts/responsive" as *;
 
 .naver-logo-icon {
+  color: color_variables.$naver-logo-color;
   @include mobile {
     width: 18px;
     height: 18px;

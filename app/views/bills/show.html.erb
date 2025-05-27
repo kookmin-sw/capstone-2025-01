@@ -15,16 +15,59 @@
       <%= inline_svg("star", class: "star-icon default") %>
       <%= inline_svg("select_star", class: "star-icon select") %>
     </div>
-    <!-- 공유 아이콘 (클릭 시 공유 메뉴 열림) -->
+    
+    <!-- 공유 버튼 -->
     <div data-controller="share">
-      <%= inline_svg("share", class: "share-icon-style", data: { action: "click->share#toggleMenu" }) %>
-      <div data-share-target="menu" hidden>
-        <button data-action="click->share#copy">🔗 복사</button>
-        <button data-action="click->share#nativeShare">📱 공유</button>
-        <button data-action="click->share#shareToX">❌ X (트위터)</button>
-        <button data-action="click->share#shareToFacebook">📘 페이스북</button>
-        <button data-action="click->share#shareToInstagram">📷 인스타그램</button>
-        <button data-action="click->share#shareToKakao">💬 카카오톡</button>
+      <div class="mobile-only">
+        <div data-action="click->share#nativeShare">
+          <%= inline_svg("share", class: "share-icon-style") %>
+        </div>
+      </div>
+      <div class="desktop-only">
+        <div data-action="click->share#toggleMenu">
+          <%= inline_svg("share", class: "share-icon-style") %>
+        </div>
+        <div class="share-menu" data-share-target="menu">
+          <!-- 공유 메뉴 내용 -->
+            <div class="share-header">
+              <div class="share-header-title">공유</div>
+              <button class="share-close-btn" data-action="click->share#closeMenu">
+                ×
+              </button>
+            </div>
+            
+            <!-- SNS 공유 -->
+            <div class="share-options">
+              <!-- X(트위터) -->
+              <div class="share-option">
+                <button class="share-sns-icon x" data-action="click->share#shareToX">
+                   <%= inline_svg("x_logo", class: "x-logo-icon") %>
+                </button>
+                <span class="share-sns-label">X</span>
+              </div>
+              <!-- 페이스북 -->
+              <div class="share-option">
+                <button class="share-sns-icon facebook" data-action="click->share#shareToFacebook">
+                  <%= inline_svg("facebook_logo", class: "facebook-logo-icon") %>
+                </button>
+                <span class="share-sns-label">페이스북</span>
+              </div>
+              <!-- 카카오톡 -->
+              <div class="share-option">
+                <button class="share-sns-icon kakao" data-action="click->share#shareToKakao">
+                  <%= inline_svg("kakao_logo", class: "kakao-share-logo-icon") %>
+                </button>
+                <span class="share-sns-label">카카오톡</span>
+              </div>
+            </div>
+            <!-- URL 복사 -->
+            <div class="link-container">
+              <span class="link-text" data-share-target="linkText"></span>
+              <button class="link-copy-button" data-action="click->share#copy">
+                복사
+              </button>
+            </div>
+        </div>
       </div>
     </div>
   </div>

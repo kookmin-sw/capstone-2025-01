@@ -1,0 +1,110 @@
+.md-carousel {
+  position: relative;
+  max-width: 1200px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.md-carousel input[type="radio"] {
+  display: none;
+}
+
+.md-carousel-images {
+  position: relative;
+  width: 100%;
+  height: 630px; 
+  overflow: hidden;
+}
+
+.md-carousel-images img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  image-rendering: -webkit-optimize-contrast; 
+  backface-visibility: hidden;
+}
+
+/* 활성화된 이미지 표시 */
+.md-carousel input:nth-child(1):checked ~ .md-carousel-images img:nth-child(1),
+.md-carousel input:nth-child(2):checked ~ .md-carousel-images img:nth-child(2),
+.md-carousel input:nth-child(3):checked ~ .md-carousel-images img:nth-child(3) {
+  opacity: 1;
+}
+
+/* 화살표 버튼 기본 스타일 */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 30px;
+  font-weight: bold;
+  z-index: 10;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-arrow:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* 모든 화살표 버튼들 숨기기 */
+.carousel-arrows {
+  display: none;
+}
+
+/* 첫 번째 슬라이드일 때 다음 버튼만 표시 */
+.md-carousel input:nth-child(1):checked ~ .carousel-arrows.slide1 {
+  display: block;
+}
+
+.carousel-arrows.slide1 .prev {
+  display: none;
+}
+
+.carousel-arrows.slide1 .next {
+  right: 20px;
+  display: flex;
+}
+
+/* 두 번째 슬라이드일 때 이전, 다음 버튼 모두 표시 */
+.md-carousel input:nth-child(2):checked ~ .carousel-arrows.slide2 {
+  display: block;
+}
+
+.carousel-arrows.slide2 .prev {
+  left: 20px;
+  display: flex;
+}
+
+.carousel-arrows.slide2 .next {
+  right: 20px;
+  display: flex;
+}
+
+/* 세 번째 슬라이드일 때 이전 버튼만 표시 */
+.md-carousel input:nth-child(3):checked ~ .carousel-arrows.slide3 {
+  display: block;
+}
+
+.carousel-arrows.slide3 .prev {
+  left: 20px;
+  display: flex;
+}
+
+.carousel-arrows.slide3 .next {
+  display: none;
+}
