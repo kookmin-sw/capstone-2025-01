@@ -103,7 +103,6 @@
     
         &:hover {
             background: rgba(0, 0, 0, 0.03);
-            border-color: color_variables.$border-inverse-color !important;
         }
     }
 }
@@ -183,7 +182,7 @@
     &:before {
         position: absolute;
         content: "";
-        background-color: white;
+        background-color: color_variables.$background-primary-color;
         transition: .4s;
         border-radius: 50%;
 

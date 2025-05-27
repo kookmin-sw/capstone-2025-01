@@ -5,8 +5,6 @@
 @use "../../layouts/responsive" as *;
 
 $indicator_color: color_variables.$button-system-danger-color;
-$kakao_brand_color: #fee500;
-$naver_brand_color: #1ec800;
 
 // 로그인 페이지 스타일
 .login-container {
@@ -87,7 +85,8 @@ $naver_brand_color: #1ec800;
 // 카카오 로그인 스타일
 .kakao-login-btn {
   @include login-btns;
-  background-color: $kakao_brand_color;
+  background-color: color_variables.$kakao-brand-color;
+  color: color_variables.$kakao-logo-color;
 }
 
 .kakao-btn-logo {
@@ -99,8 +98,8 @@ $naver_brand_color: #1ec800;
 // 네이버 로그인 스타일
 .naver-login-btn {
   @include login-btns;
-  background-color: $naver_brand_color;
-  color: color_variables.$text-inverse-color;
+  background-color: color_variables.$naver-brand-color;
+  color: color_variables.$naver-logo-color;
 }
 
 .naver-btn-logo {
