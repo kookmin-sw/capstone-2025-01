@@ -53,7 +53,7 @@ module BillViewHelper
   # 법안 목록페이지: 법안 카드 내용(ai 요약 제목 / 법안 요약)
   def bill_summary_content(bill)
     if bill.current_bill_summary.present?
-      extract_h2_section(bill.current_bill_summary.content)
+      bill.current_bill_summary.parse_heading_section
     else
       summary_text(bill.summary)
     end
@@ -61,16 +61,9 @@ module BillViewHelper
 
   private
 
-  def extract_h2_section(content)
-    return "" if content.blank?
-
-    h2_section = content.split(/^###/).first
-    h2_section&.gsub(/^##\s*/, "")&.strip || ""
-  end
-
   def summary_text(summary)
     return "" if summary.blank?
 
-    summary.gsub(/\A(?:제안이유 및 주요내용|제안이유)[:\s]*/, "")
+    summary.gsub(/\A(?:제안이유 및 주요내용|제안이유|대안의 제안이유)[:\s]*/, "")
   end
 end
