@@ -1,6 +1,7 @@
 module BillViewHelper
   include TabParamsParser
 
+  # 법안 목록페이지: 법안 카테고리 버튼 생성
   def law_category_button(tab, options = {})
     disabled      = options[:disabled] || false
     context       = options[:context] || :search
@@ -41,11 +42,28 @@ module BillViewHelper
     "people-power" => "국민의 힘",
     "rebuilding-korea" => "조국혁신당"
   }.freeze
-
+  # 법안 목록페이지: 정당 카테고리 버튼 생성
   def political_party_tab(party)
     party_name = PARTY_CATEGORIES[party]
     content_tag(:div, class: "#{party}-shape") do
       content_tag(:div, party_name, class: "#{party}-text")
     end
+  end
+
+  # 법안 목록페이지: 법안 카드 내용(ai 요약 제목 / 법안 요약)
+  def bill_summary_content(bill)
+    if bill.current_bill_summary.present?
+      bill.current_bill_summary.parse_heading_section
+    else
+      summary_text(bill.summary)
+    end
+  end
+
+  private
+
+  def summary_text(summary)
+    return "" if summary.blank?
+
+    summary.gsub(/\A(?:제안이유 및 주요내용|제안이유|대안의 제안이유)[:\s]*/, "")
   end
 end

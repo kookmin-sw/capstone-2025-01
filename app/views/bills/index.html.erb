@@ -47,19 +47,19 @@
         </div>
       </div>
       <div class="bill-description">
-        <%# TODO: AI 요약 지원 추가 필요 %>
-        <span class="mobile-only">
-          <%= truncate(
-            (bill.summary || "").gsub(/\A(?:제안이유 및 주요내용|제안이유)[:\s]*/, ""),
-            length: 80
-          ) %>
-        </span>
-        <span class="desktop-only">
-          <%= truncate(
-            (bill.summary || "").gsub(/\A(?:제안이유 및 주요내용|제안이유)[:\s]*/, ""),
-            length: 120
-          ) %>
-        </span>
+        <% if bill.summary.present? %>
+          <!-- 법안 카드 내용(ai 요약 제목 / 법안 요약) -->
+          <% if bill.current_bill_summary.present? %>
+            <%= simple_format(bill_summary_content(bill)) %>
+          <% else %>
+            <span class="mobile-only">
+              <%= truncate(bill_summary_content(bill), length: 80) %>
+            </span>
+            <span class="desktop-only">
+              <%= truncate(bill_summary_content(bill), length: 120) %>
+            </span>
+          <% end %>
+        <% end %>
       </div>
     <% end %>
   <% end %>
