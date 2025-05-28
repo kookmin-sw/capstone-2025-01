@@ -16,6 +16,12 @@
   }
 }
 
+// 법안 카테고리 레이어
+.bills-category-container {
+  display: flex;
+  justify-content: center;
+}
+
 // 법안 카드 컨테이너 스타일
 .bill-card-container {
     @include mobile {
@@ -29,12 +35,12 @@
 
 // 법안 데이터 주의 텍스트 스타일
 .bill-data-alert {
-  @include body-small;
   color: color_variables.$text-tertiary-color;
   align-items: center;
   display: flex;
   gap: 5px;
   margin: 30px 30px 0px 30px; 
+  @include body-small;
 }
 
 // 관심법안이 없는 경우 스타일
@@ -52,10 +58,10 @@
 }
 
 .add-starred-bill-button {
-  @include title-small;
   color: color_variables.$text-inverse-color;
   background: color_variables.$button-primary-color;
   border-radius: 20px;
+  @include title-small;
 
   @include mobile {
     padding: 8px 15px;

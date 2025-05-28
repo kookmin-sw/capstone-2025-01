@@ -23,7 +23,9 @@
   <% end %>
 
   <!-- 법안 카테고리 -->
-  <%= render "shared/law_categories", 
-            active_tabs: (params[:starred] == 'true' ? ["starred"] : parsed_active_tabs.presence || ["all"]),
-            context: :search %>
+  <div class="bills-category-container">
+    <%= render "shared/law_categories", 
+              active_tabs: (params[:starred] == 'true' ? ["starred"] : parsed_active_tabs.presence || ["all"]),
+              context: :search %>
+  </div>
 </form>
