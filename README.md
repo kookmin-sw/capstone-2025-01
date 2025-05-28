@@ -177,5 +177,5 @@ LawNow는 3월 4일에 배포되어 현재 서비스 운영중입니다. 지금 
 ### - [Github 소개 페이지](https://kookmin-sw.github.io/capstone-2025-01/)<br>
 ### - [사업 계획서](https://drive.google.com/file/d/1Ed9N4Td7XA0rQxf8Lewg0aFkMcHjZZQ8/view?usp=drive_link)<br>
 ### - [결과 보고서](https://drive.google.com/file/d/1fqzS1QQMKOCk5w2TgKFvm9wfaLGGVKi-/view?usp=drive_link)<br>
-### - [최종 발표 자료](https://drive.google.com/file/d/1msj22dZi4qHvOD1bQ_akEQTdc1QPVh0-/view?usp=drive_link)<br>
+### - [최종 발표 자료](https://drive.google.com/file/d/12NFVT5RseuJa7JjTXrcwqQY97TnUYu8-/view)<br>
 ### - [프로젝트 노션](https://greenstar.notion.site/2025-01-capstone-lawnow)
