@@ -29,6 +29,12 @@
 <br><br>
 
 ## 🎬 소개 영상
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=18GNZh68emE">
+    <img src="https://github.com/user-attachments/assets/38a0f0f9-5567-4b31-b573-71cf0581d5cd" width="600">
+  </a>
+  <br>
+</div>
 <br><br>
 
 ## ✨ 주요 기능

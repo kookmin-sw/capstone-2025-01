@@ -49,6 +49,21 @@ permalink: /
 ---
 
 ## 소개 영상
+<table align="center">
+  <tr>
+    <td align="center">
+      <a href="https://www.youtube.com/watch?v=18GNZh68emE">
+        <img src="./assets/images/intro_video.png" width="600">
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <h3>🎬 2025 Capstone Project - Team 01</h3>
+      <p><strong>LawNow - 한눈에 보는 법률 개정, 우리 사회의 이슈, LawNow와 함께 공유하세요!</strong></p>
+    </td>
+  </tr>
+</table>
 
 ---
 
