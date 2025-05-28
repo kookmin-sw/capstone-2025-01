@@ -10,6 +10,14 @@ class BillSummary < ApplicationRecord
   after_create :set_as_current_if_needed
   after_destroy :unset_current_if_needed
 
+  def parse_heading_section
+    return "" if content.blank?
+
+    index = (content =~ /^###/)
+    h2_section = index ? content[0...index] : content
+    h2_section.gsub(/^##\s*/, "").strip
+  end
+
   private
 
   def set_as_current_if_needed
