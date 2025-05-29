@@ -53,8 +53,8 @@
 }
 
 .empty-starred-bills-text {
-  @include headline-medium;
   color: color_variables.$text-primary-color;
+  @include headline-medium;
 }
 
 .add-starred-bill-button {
@@ -148,11 +148,11 @@
 
 // 법안 헤더 제목 스타일
 .bill-title {
-    @include title-small; 
     color: color_variables.$text-primary-color;
     flex: 1;
     display: flex;
     align-items: center;
+    @include title-small; 
 }
 
 // 법안 헤더 태그 스타일
@@ -171,12 +171,12 @@
 
 // 법안 태그(정당, 상태) 공통 스타일
 @mixin bill-tags {
-  @include button-small;
   display: flex;
   align-items: center;
   justify-content: center;
   width: auto;
   background-color: color_variables.$background-primary-color;
+  @include button-small;
 
   @include mobile{
     height: 20px;
@@ -198,8 +198,8 @@
  
 // 법안 태그 상태 스타일
 .bill-tag-status {
-    @include bill-tags;
     gap: 5px;
+    @include bill-tags;
 
     @each $status, $color in (
         received: color_variables.$emoji-received-color,
@@ -216,7 +216,8 @@
 
 // 법안 상세정보 스타일
 .bill-description {
-    @include body-medium;
+  width: 100%;
+  @include body-medium;
 }
 
 // pagination 스타일 
@@ -227,9 +228,9 @@
   padding: 30px 0px;
 
   .page-num {
-    @include button-large;
     padding: 0px 11px;
     color: color_variables.$text-secondary-color;
+    @include button-large;
 
     @include mobile {
       height: 19px; 
