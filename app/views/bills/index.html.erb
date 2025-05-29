@@ -50,14 +50,14 @@
         <% if bill.summary.present? %>
           <!-- 법안 카드 내용(ai 요약 제목 / 법안 요약) -->
           <% if bill.current_bill_summary.present? %>
-            <%= simple_format(bill_summary_content(bill)) %>
+            <%= bill_summary_content(bill)%>
           <% else %>
-            <span class="mobile-only">
+            <div class="mobile-only">
               <%= truncate(bill_summary_content(bill), length: 80) %>
-            </span>
-            <span class="desktop-only">
+            </div>
+            <div class="desktop-only">
               <%= truncate(bill_summary_content(bill), length: 120) %>
-            </span>
+            </div>
           <% end %>
         <% end %>
       </div>

@@ -49,6 +49,21 @@ permalink: /
 ---
 
 ## 소개 영상
+<table align="center">
+  <tr>
+    <td align="center">
+      <a href="https://www.youtube.com/watch?v=18GNZh68emE">
+        <img src="./assets/images/intro_video.png" width="600">
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <h3>🎬 2025 Capstone Project - Team 01</h3>
+      <p><strong>LawNow - 한눈에 보는 법률 개정, 우리 사회의 이슈, LawNow와 함께 공유하세요!</strong></p>
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -209,5 +224,5 @@ LawNow는 3월 4일에 배포되어 현재 서비스 운영중입니다. 지금 
 ### [🌐 프로젝트 페이지](https://lawnow.kr/)<br>
 ### [📄 사업 계획서](https://drive.google.com/file/d/1Ed9N4Td7XA0rQxf8Lewg0aFkMcHjZZQ8/view?usp=drive_link)<br>
 ### [📄 결과 보고서](https://drive.google.com/file/d/1fqzS1QQMKOCk5w2TgKFvm9wfaLGGVKi-/view?usp=drive_link)<br>
-### [📄 최종 발표 자료](https://drive.google.com/file/d/1msj22dZi4qHvOD1bQ_akEQTdc1QPVh0-/view?usp=drive_link)<br>
+### [📄 최종 발표 자료](https://drive.google.com/file/d/12NFVT5RseuJa7JjTXrcwqQY97TnUYu8-/view)<br>
 ### [📚 프로젝트 노션](https://greenstar.notion.site/2025-01-capstone-lawnow)
