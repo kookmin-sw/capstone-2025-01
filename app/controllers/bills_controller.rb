@@ -13,8 +13,22 @@ class BillsController < ApplicationController
       @bills = ids.any? ? @bills.where(id: ids) : @bills.none
     end
 
-    @bills = @bills.by_title(params[:q])
-                   .by_bill_type(bill_type_param)
+    @bills = @bills.by_bill_type(bill_type_param)
+
+    keyword_blocklist = %w[김문수]
+    filtered_q = params[:q]
+    if filtered_q.present?
+      keyword_blocklist.each do |blocked|
+        filtered_q = filtered_q.gsub(blocked, "")
+      end
+      filtered_q = filtered_q.strip
+    end
+
+    if filtered_q.present?
+      @bills = @bills.by_title(filtered_q)
+    else
+      @bills = @bills.none
+    end
 
     if @tabs.any?
       @bills = @bills.where(category: @tabs)
