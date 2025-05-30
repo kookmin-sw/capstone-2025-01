@@ -16,19 +16,22 @@ class BillsController < ApplicationController
     @bills = @bills.by_bill_type(bill_type_param)
 
     keyword_blocklist = %w[김문수]
-    filtered_q = params[:q]
-    if filtered_q.present?
+    q = params[:q]
+
+    if q.present?
+      filtered_q = q.dup
       keyword_blocklist.each do |blocked|
         filtered_q = filtered_q.gsub(blocked, "")
       end
       filtered_q = filtered_q.strip
-    end
 
-    if filtered_q.present?
-      @bills = @bills.by_title(filtered_q)
-    else
-      @bills = @bills.none
+      if filtered_q.present?
+        @bills = @bills.by_title(filtered_q)
+      else
+        @bills = @bills.none
+      end
     end
+    # q가 없거나 비어있으면 @bills는 전체 목록(by_bill_type만 적용된 상태) 그대로 유지됨
 
     if @tabs.any?
       @bills = @bills.where(category: @tabs)
